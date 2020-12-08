@@ -1,0 +1,3 @@
+# (PART) Introduction to Statistics {-}
+
+# What is Statistics? {#whatisstats}

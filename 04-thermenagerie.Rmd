@@ -1,0 +1,514 @@
+# The R Menagerie {#thermenagerie}
+
+```{r r-menagerie, echo = FALSE, out.width = '100%', fig.link = 'https://en.wikipedia.org/wiki/Menagerie'}
+
+knitr::include_graphics("images/r-menagerie.png")
+
+```
+
+<br><br><br>
+
+```{r, echo = FALSE}
+
+fn <- here::here("R/insert_intro.R")
+
+source(fn)
+
+```
+
+
+
+## Overview
+
+```{r, echo = FALSE, results = 'asis'}
+
+insert_intro(goal = "To familiarize students with the _ontology_ of the R Programming Environment.",
+             tldr = "The beings of R are objects.",
+             outcomes = c("R objects, specifically vectors,",
+                          "how to create them,",
+                          "what kinds there are, and",
+                          "how to index them."),
+             datasets = list(),
+             requirements = list(),
+             readings = list(c(name = "An Introduction to R",
+                               url = "https://cran.r-project.org/doc/manuals/r-release/R-intro.html",
+                               ref = "[@rcoreteam2020introduction]"),
+                             c(name = "Advanced R",
+                               url = "https://adv-r.hadley.nz/",
+                               ref = "[@Wickham2015advanced]")))
+
+```
+
+<br>
+
+R contains a variety of _objects_, the most notable being _functions_ and _vectors_. These live in the R _environment_ (environments, actually). While there is a lot to say about functions and environments, those are mostly super-class 'A' R programming topics, verboten for an introductory text, so we discuss them only briefly to help dispel some of the mystery surrounding R. The majority of this chapter will, thus, be devoted to vectors. 
+
+Vectors can take a number of different forms, for example, scalars and lists (see Fig. \@ref(fig:r-objects)). In a sense (a slightly misleading sense), these objects are vessels that hold different _data types_, the four primary ones being integer, double (i.e., fractions), logical, and character. Putting effort into understanding these vector forms and data types might at first blush feel like a foolhardy pursuit of the inconsequential and esoteric, a task best relegated to crusty philosophers. It is, however, of the utmost importance, for the different statistical questions you might want to ask will require data in one or the other form and type to answer. If, for example, you want to get the mean of some distribution, say the average height of actors who auditioned for the part of Aragorn in the timeless cinematic classic _Lord of the Rings_, you will only need a simple vector of double values. If, however, you want to know whether height varies as a function of diet, you will want a more complex object, specifically a data.frame. And, if you prefer order to chaos, you will surely enjoy lists.  
+
+```{r r-objects, echo = FALSE, out.width = '75%', fig.cap = "One possible phylogeny of R objects."}
+
+knitr::include_graphics("images/r-objects.png")
+
+```
+
+<br>
+
+Fig. \@ref(fig:r-objects) might seem a little overwhelming at first, but don't let it intimidate you. Its meaning will become clear as we proceed. First, however, let's try to figure out how to make one of these objects in R.
+
+
+
+## Creating objects
+
+Without further ado, 
+
+```{r}
+
+bob <- 5.137
+
+```
+
+It's that simple! Or, maybe not. Let's take a moment to unpack this black magic. First, we note that it is made-up of three things:  
+
+(1) a name, in this case, `bob`; 
+(2) an arrow, `<-`, the essential ingredient in this incantation; and  
+(3) an object, specifically the number `5.137`, which is being created.  
+
+Basically, what is happening here is that the statement creates an object (`5.137`) in the R environment, specifically the _global_ environment, and then assigns that object to the name `bob`. This is why it is sometimes referred to as an _assignment_ statement [@rcoreteam2020introduction]. It is not just creating an object, but assigning it to a name.
+
+Why assign a name? Well, if we just typed
+
+```{r, eval = FALSE}
+
+5.137
+
+```
+
+the resulting object would live a fleeting life, shorter than a fruit fly's, being quickly created and just as quickly destroyed. But, when we give an object a _name_, we also give it some permanence, and can literally _call_ it back whenever we like. We just say, "`bob`, come here!" but in the language of R:
+
+```{r}
+
+print(bob)
+
+```
+
+or even just
+
+```{r}
+
+bob
+
+```
+
+And then R summons `bob` for us and tells us who `bob` is. `bob` is `5.137`. Obviously!  
+
+Now, you may think, "I could just create `5.137` any time I wanted, let it die, and just create it again. It's not _that_ hard to type five characters, after all." In response to this flirtation with anarchy, two arguments are recommended. First, it is certainly true that one number is not hard to type, but it is rare that you will need just one. Suppose you had an object consisting of ten thousand numbers, would you care to type _that_ each time you needed it? Second, when you make an object with a name, R has your back. If you type `6.137` instead of `5.137`, for example, R will not protest, but if you type `boo` instead of `bob`, R will say, "nope."
+
+```{r, error = TRUE}
+
+6.137
+
+boo
+
+```
+
+So, giving objects names in R is a good way to avoid errors.
+
+
+```{block, type = 'rmdimportant'}
+In sum, we create objects in R and give them names, so that it is easier to call them up and work with them.
+```
+
+
+## Data types
+
+There are four primary data types in R: integer, double, logical, and character. The first two are probably more important for statistics, the latter two for data processing (or 'wrangling', as it is often called). We will not discuss any of these in great detail here, pausing only to mention very briefly what each is, how to make them, how to catch one in the wild, and what they are for.  
+
+As an honorable mention, we will also discuss _factors_ here. These are not strictly their own data type. They are actually just integers (mostly for historical reasons), though they are typically represented as character strings when printed to the console. That said, only Socrates would be so fastidious as to insist on the distinction, regardless of whatever damage that might do to communicating their intent. So, let's not be like Socrates. Let's treat factors as an honorary data type in their own right, on a level with the others (even if they aren't, technically).
+
+<br>
+
+### Integer
+
+_What is it?_ A whole number or a number without a fractional component (like 1 as opposed to 1.3).  
+
+_What is it for?_ Counting things! For example, how many students are in this class? One would hope the answer to that is an integer.
+
+_How do you make one?_ By appending an `L` to a number.  
+
+```{r}
+
+my_integer <- 3L
+
+```
+
+<br>
+
+_How to catch one in the wild?_ By asking "Is this an integer?"
+
+```{r}
+
+is.integer(4.2)
+
+is.integer(my_integer)
+
+```
+
+<br>
+
+### Double
+
+_What is it?_ A number with a fractional component (like 1.3 as opposed to 1).  
+
+_What is it for?_ Measuring things! For example, how much coffee did I have this morning? Or, how much did it rain last year in Pasquotank County, North Carolina?
+
+_How do you make one?_ By typing a number (with or without a fraction, but no `L`).  
+
+```{r}
+
+my_double <- 3.2
+
+```
+
+<br>
+
+_How to catch one in the wild?_ By asking "Is this a double?"
+
+```{r}
+
+is.double(3L)
+
+is.double(my_double)
+
+```
+
+<br>
+
+### Character
+
+_What is it?_ A string of symbols used to construct words in a natural language (by default, English letters).  
+
+_What is it for?_ Saying things! For example, how many students are in this class? One would hope the answer to that is an integer.
+
+_How do you make one?_ By quoting it, i.e., surrounding a string with double `"` or single `'` apostrophes.  
+
+```{r}
+
+my_character <- 'quotidian'
+
+```
+
+A quick warning: if you do not surround the character with apostrophes, R will think you are trying to call an object with that name. If that object does not exist, R will protest. 
+
+```{r, error = TRUE}
+
+quotidian
+
+```
+
+Similarly, if you use quote marks around a named object, R treats it as a character string, rather than a call to the object.
+
+```{r}
+
+"bob"
+
+bob
+
+```
+
+<br>
+
+_How to catch one in the wild?_ By asking "Is this a character?"
+
+```{r}
+
+is.character(4.2)
+
+is.character(my_character)
+
+```
+
+<br>
+
+### Logical
+
+_What is it?_ A truth condition, i.e., TRUE or FALSE. Also known as a _boolean_.  
+
+_What is it for?_ Implying things! Specifically, making conditional or hypothetical claims. For example, if it rains today, I will take my umbrella. Or, closer to home, "Hi R, if this is an integer, please add one to it." 
+
+_How do you make one?_ By typing `TRUE`, `FALSE`, `T`, or `F`.  
+
+```{r}
+
+my_logical <- TRUE
+
+```
+
+You can also create logicals in R using statements that R can evaluate for their truth or falsity. For example,
+
+```{r}
+
+# is 2 greater than 5?
+2 > 5
+
+# is 7 greater than or equal to itself?
+7 >= 7
+
+# is 'cat' the same string as 'hat'
+'cat' == 'hat'
+
+```
+
+And the truth conditions of these statements can, of course, be assigned to names.
+
+```{r}
+
+jim_bob <- 'cat' == 'hat'
+
+```
+
+<br>
+
+_How to catch one in the wild?_ By asking "Is this _a_ logical?"
+
+```{r}
+
+is.logical(bob) #sad
+
+is.logical(my_logical)
+
+```
+
+Did you notice that our `is.*` functions all return a `logical`?
+
+<br>
+
+### Factors
+
+_What is it?_ Categories, typically represented in R as character strings with "levels."
+
+_What is it for?_ Categorizing things! For example, "Bob is a _Quebecois_" or "Xie is a _Homo sapien_."
+
+_How do you make one?_ With the function `factor()`.
+
+```{r}
+
+my_factor <- factor("Australian")
+
+```
+
+```{r}
+
+my_factor
+
+```
+
+Notice that unlike a simple character, a factor has "levels." These levels are the categories of the factor variable. A good example is nationality. Nationality is a factor, with the specific levels or categories of that factor including, for instance, _American_, _Australian_, _Chinese_, and _French_.  
+
+_How to catch one in the wild?_ By asking "Is this _a_ factor?"
+
+```{r}
+
+is.factor("quotidian")
+
+is.factor(my_factor)
+
+```
+
+## Vector types
+
+Vectors come in two general flavors, atomic and complex, which differ in one crucial respect. While atomic vectors are limited to one data type, complex vectors can contain many data types. As shown in Fig. \@ref(fig:r-objects), atomic vectors include scalars, vectors, and matrices. Complex vectors include lists and data.frames. 
+
+<br>
+
+### Scalar
+
+A scalar-vector is an atomic vector that contains only one element. Hence, by definition, it can include only one data type. Here, we represent this with a square, which includes a value and is color-coded by its data type.
+
+```{r r-objects_scalar, echo = FALSE, out.width = '30%'}
+
+knitr::include_graphics("images/r-objects_scalar.png")
+
+```
+
+Note that all the examples we have used so far have been scalar vectors. You can check this using the `length()` function.
+
+```{r}
+
+length(my_integer)
+
+```
+
+<br>
+
+### Vector
+
+A vector-vector is an atomic vector that contains multiple elements. These multi-scalar atomic vectors do not really have a name like "list" or "scalar," but in common R parlance the word 'vector' is often used as a synonym, which is a tad confusing, like "Are you going to New York (the state) or New York (the city)?" In what follows, we'll just cross our fingers and hope the context is sufficient to tell the difference.
+
+```{r r-objects_vector, echo = FALSE, out.width = '30%'}
+
+knitr::include_graphics("images/r-objects_vector.png")
+
+```
+
+The standard way to create one of these is to use the concatenate function on scalars `c()`.
+
+```{r}
+
+my_vector <- c(1, 2, 3, 4, 5)
+
+length(my_vector)
+
+```
+
+Of course, you can have a vector of any data type, it just cannot be the case that any vector contains multiple data types.
+
+```{r}
+
+integer_vector <- c(1L, 2L, 3L, 4L, 5L)
+
+double_vector <- c(1.1, 0.2, 3.1, 4, 5.2)
+
+character_vector <- c('a', 'b', 'c', 'd', 'e')
+
+logical_vector <- c(TRUE, TRUE, FALSE, FALSE, TRUE)
+
+```
+
+What happens if you try to create a vector with different data types?
+
+```{r}
+
+c(1, 'a', TRUE)
+
+```
+
+It converted them all to character strings! This is known as _implicit coercion_. It is a way of ensuring that all vector-vectors are atomic.
+
+<br>
+
+### Matrix
+
+A matrix-vector is an atomic vector with _dimensions_, meaning the vector is "folded," so to speak, into rows and columns. As you can see, a matrix has the shape of a data table, like what you would find in an Excel spreadsheet, which is sometimes referred to as "rectangular" data.
+
+```{r r-objects_matrix, echo = FALSE, out.width = '30%'}
+
+knitr::include_graphics("images/r-objects_matrix.png")
+
+```
+
+To create a matrix, you use the `matrix()` function by providing it with a vector and then specifying the number of rows and columns it should have.
+
+```{r}
+
+my_matrix <- matrix(my_vector, nrow = 2, ncol = 3)
+
+# nrow = number of rows
+# ncol = number of columns
+
+my_matrix
+
+```
+
+The odd, bracketed numbers printed above and to the left of the matrix are known as _subscripts_. They are like numeric names for columns and rows that can be used to reference specific locations in the matrix. For example, row one is `[1,]`, and column two is `[,2]`. So, if I want to refer to the cell containing the value `3`, I use `[1,2]`. 
+
+If you want to know how many rows and columns a matrix has, you can use `nrow` and `ncol`.
+
+```{r}
+
+ncol(my_matrix)
+
+```
+
+
+<br>
+
+### List
+
+A list-vector is a complex vector that may include other vectors of any data type and length. The gray box around each vector in the figure below is meant to suggest that the list is a single complex vector made up of other vectors, and the space between each vector is meant to show that they are still separate components of the list, unconstrained by the other components. So, yeah, a list...
+
+```{r r-objects_lists, echo = FALSE, out.width = '30%'}
+
+knitr::include_graphics("images/r-objects_lists.png")
+
+```
+
+To create a list, use the `list()` function and supply it with vectors. Be sure to assign list-names using the `name = vector` syntax.
+
+```{r}
+
+my_list <- list('c1' = c(1L, 2L, 3L, 4L),
+                'c2' = double_vector,
+                'c3' = c('a', 'b', 'c'),
+                'c4' = c(TRUE, TRUE))
+
+my_list
+
+```
+
+Each vector in the list is called a component. You can find out what list-names these components have using the `names()` function, which returns a character vector.
+
+```{r}
+
+names(my_list)
+
+```
+
+Now, we said above that lists can contain any vector type, and this is true. Lists can even contain other lists!
+
+```{r}
+
+my_super_list <- list('e' = my_list,
+                      'f' = my_logical)
+
+```
+
+In this sense, you will sometimes hear people refer to lists as _recursive_ vectors [@rcoreteam2020introduction].  
+
+<br>
+
+### Data.frame
+
+A data.frame-vector is a special sort of list with a super-restriction on it: all the vectors it includes must be of the same length. It is also not recursive.
+
+```{r r-objects_df, echo = FALSE, out.width = '30%'}
+
+knitr::include_graphics("images/r-objects_df.png")
+
+```
+
+<br>
+
+To create a data.frame, use the `data.frame()` function, supplying it with `name = vector` arguments as you would with `list()`.
+
+```{r}
+
+my_dataframe <- data.frame('c1' = integer_vector,
+                           'c2' = double_vector,
+                           'c3' = character_vector,
+                           'c4' = logical_vector)
+
+my_dataframe
+
+```
+
+Notice that when you create the data.frame, the vectors become named columns. To extract those names, we can again use the `names()` function.
+
+```{r}
+
+names(my_dataframe)
+
+```
+
+As with a matrix, you can also get the number of columns and rows with `nrow` and `ncol`.
+
+```{r}
+
+nrow(my_dataframe)
+
+```
+
+## Environments
+
+
+## References
+

@@ -1,0 +1,205 @@
+# Data Visualization {#datavisualization}
+
+```{r piechart, echo = FALSE, out.width = '70%', fig.link = 'https://xkcd.com/'}
+
+knitr::include_graphics("images/r-xkcd_piechart.png")
+
+```
+
+<br><br><br>
+
+```{r, echo = FALSE}
+
+fn <- here::here("R/insert_intro.R")
+
+source(fn)
+
+```
+
+## Overview
+
+```{r, echo = FALSE, results = 'asis'}
+
+insert_intro(goal = "To introduce students to the fundamentals of data visualization using the base R plotting system.",
+             tldr = "Let the data speak. Let the data speak pretty.",
+             outcomes = c("plot anatomy", 
+                          "plot types,",
+                          "plot parameters,",
+                          "plot annotation, and",
+                          "plot layouts."),
+             datasets = list(c(name = "Palmer Penguins", 
+                               url = "https://allisonhorst.github.io/palmerpenguins/",
+                               ref = "[@horst2020palmer]"),
+                             c(name = "General Social Survey", 
+                               url = "https://infer.tidymodels.org/reference/gss.html",
+                               ref = "[@bray2020infer]")),
+             requirements = list(),
+             readings = list(c(name = "An Introduction to R",
+                               url = "https://cran.r-project.org/doc/manuals/r-release/R-intro.html",
+                               ref = "[@rcoreteam2020introduction]"),
+                             c(name = "R Graphics (2nd Ed)",
+                               url = "https://www.stat.auckland.ac.nz/~paul/RG2e/",
+                               ref = "[@murrell2018r]"),
+                             c(name = "R Graphics Cookbook (2nd Ed)",
+                               url = "https://r-graphics.org",
+                               ref = "[@chang2019graphics]"))
+             )
+
+```
+
+<br>
+
+In statistics, graphics provide visual representations of data, but why might we want to visualize data? To answer this question, we might consider a common distinction between three modes of data visualization: _exploration_, _analysis_, and _presentation_.
+
+* __Visual exploration__ is part and parcel of what John @tukey1977exploratory referred to as "exploratory data analysis" [cf @peng2016exploratory; @tufte2006beautiful]. With it, we can (i) investigate the distribution of observations around some measure of central tendency (like the mean or median) or evaluate relationships between variables; (ii) detect problems with our data, like outliers, missing values, or other anomalies; and (iii) generate questions we may not have considered otherwise.
+* __Visual analysis__, as its name suggests, is largely concerned with the statistical analyses we are conducting to answer our primary research questions. It involves such things as direct hypothesis testing, as well as evaluation of the results of statistical analyses, usually to see if the results are actually meaningful, even sometimes finding patterns that may have been missed or over-interpreted.   
+* __Visual presentation__ is largely aimed at reporting findings to others, whether about the data itself or the results of analyses conducted with the data. Of course, the intended audience is often other scientists and researchers, but it does not have to be. Informing the public about your research is also important, and having nice graphics is a really good way of doing that.
+
+Here we are focusing on the basics of visual exploration using R's native `graphics` tools, though much of what you learn here will apply more generally to visual presentation too.  
+
+
+## Plot Anatomy
+
+When it comes to R graphics tutorials, authors have a proclivity for launching right away into the use of the `plot()` function with nary a care for the why or the what of it. Here, however, we will come at the `plot()` function from a different angle, first stepping back to, as it were, dissect a base R plot, getting a feel for its general structure or anatomy. This will hopefully provide you a better sense of what you are doing when, for example, you feed your plot this parameter `xlim = c(0, 1)`. As you will soon discover, virtually everything about a plot is customizable.
+
+```{r r-anatomy, echo = FALSE, out.width = '60%', fig.cap = "Base R plot anatomy"}
+
+knitr::include_graphics("images/r-plot_anatomy.png")
+
+```
+
+<br>
+
+__Region__. 
+At its core, an R plot - like any plot really - has a plot region. This is the area in which symbols or geometries (like points and lines) visually represent relationships between two vectors of data, by convention denoted 'x' and 'y'. Around the plot region, R defaults to including a plot box (represented by the light gray square in Fig. \@ref(fig:r-anatomy)).
+
+__Axes__. 
+The scope of the plot region is defined by the x and y axes (represented by the thick orange lines), which specify the upper and lower limits of the observations to include in the plot. In Fig. \@ref(fig:r-anatomy), the limits are (0, 1) for both x and y. You may notice that the axes do not meet at the origin (0, 0). This is because R by default includes some padding above and below the specified limits. The most important elements of plot axes are breaks, tick marks, and tick labels. Tick marks provide a visual reference for how observations are arrayed within the plot region and are represented by short dashes emanating from each axis line. Breaks are specific values within the limits of an axis at which tick marks are displayed (you might also think of these as an axis *scale*, like the scale on a measuring tape). By default, the breaks include the limits themselves. Ideally, break values are used as tick labels, though if you really wanted to confuse someone, including yourself, you can give them other labels as well.
+
+__Titles__. 
+Every R plot includes four titles, the main title, the subtitle, and a title for each axis. One somewhat strange design choice on the part of the R Core Team was to place the subtitle below the x-axis title. It appears they meant the 'sub' in 'subtitle' quite literally...
+
+__Margins__. 
+One of the more complicated features of the base R anatomy is margins. For every plot, there are two sets of these: the inner (or figure) margins and the outer margins. The inner margin (represented by the dark red box) is the area immediately surrounding the plot region, which typically involves plot titles and axis labels. The outer margin (represented by the dark blue box) is an area of additional space around the inner margin. Fiddling with the outer margin is not particularly useful in most contexts, unless you want to have multiple plot regions in one figure (discussed below in the [Plot Layout](#layout) section). The area of the margins is defined by "Lines," named starting with 0. By default, the inner margin is four lines in width (Line 0 to Line 3) and the outer margin is three lines in width. These lines may be used to position other plot elements, including, more often than not, plot titles.
+
+__Legend__. 
+A legend or key provides a list of additional variables represented by symbols or colors in the plot region, along with the symbols or colors used. By default, R includes the legend within the plot region, but it is possible to move it to the inner or outer margin.
+
+## The `plot()` Function
+
+The simplest and perhaps fastest way to generate a basic plot in R is to use the generic `plot()` function. Crucially, this requires that you specify the x-coordinates and the y-coordinates to be plotted. Well, strictly speaking, if you only supply one vector of values, `plot()` assumes you mean to recycle that vector for both x and y, though that is a detail tucked deep in the weeds, and really one you should never take advantage of as it obscures the intent of your code.
+
+There are two ways to do this: you can either specify x and y (i) as separate vectors or (ii) as a combined formula.
+
+```{r}
+
+x <- c(0.0, 0.1, 0.2, 0.3, 0.5, 0.6, 0.8, 1.0)
+
+y <- c(0.9, 0.7, 0.3, 0.5, 0.6, 0.4, 0.2, 0.1)
+
+```
+
+<br>
+
+### As separate vectors
+
+```{r, fig.width = 5, fig.height = 5.3}
+
+plot(x = x,
+     y = y,
+     xlab = "X",
+     ylab = "Y",
+     xlim = c(0, 1), 
+     ylim = c(0, 1),
+     pch = 19)
+
+```
+
+<br>
+
+### As a combined formula
+
+```{r, fig.width = 5, fig.height = 5.3}
+
+plot(y ~ x,
+     xlab = "X",
+     ylab = "Y",
+     xlim = c(0, 1), 
+     ylim = c(0, 1),
+     pch = 19)
+
+```
+
+Notice the tilde, `~`. This may be read as "... is a function of ...", in this case "y is a function of x." Personally, I recommend you use this formula notation whenever plotting a _relationship_ between two variables, as it makes it explicit in your code that you are plotting that relationship.  
+
+## Plot Types
+
+Here, we will brief outline some different plot types along with their definitions and standard use-cases.  
+
+### Data
+
+Here are the data sets we will use for these plots.  
+
+```{r}
+
+penguins <- read.csv("penguins.csv")
+
+gss <- read.csv("gss.csv")
+
+cars <- read.csv("cars.csv")
+
+```
+
+### Scatter Plot
+
+A scatter plot represents the relationship between two variables (x and y) as points projected onto a Cartesian coordinate grid. Each point represents two observations: one of the value of x and one of the value of y *at that value of x*.
+
+```{r}
+
+plot(dist ~ speed,
+     data = cars,
+     type = "p", # p for point
+     xlab = "Speed (mph)",
+     ylab = "Stopping Distance (ft)",
+     main = "Cars Data")
+
+```
+
+### Line Plot
+
+A line plot is similar to a scatter plot, conveying a relationship between two variables. However, as its name suggests, it also joins points with straight lines.
+
+```{r}
+
+x <- seq(0, 2*pi, length.out = 50)
+y <- sin(x) # define y as a sinosoidal function of x
+
+plot(y ~ x,
+     type = "l",
+     xlab = "X",
+     ylab = "Y")
+
+```
+
+### Bar Plot
+
+A bar plot represents counts or proportions of categories (called "factors" in R).
+
+### Histogram
+
+### Density Plot
+
+### Box Plot
+
+<https://www.r-graph-gallery.com/index.html>\
+<https://bookdown.org/rdpeng/exdata/>
+
+## Plot Parameters
+
+## Plot Annotations
+
+## Plot Layouts {#layout}
+
+## But, where does it go?
+
+## References

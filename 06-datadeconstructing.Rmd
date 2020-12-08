@@ -1,0 +1,160 @@
+# Data Deconstructing {#datadeconstructing}
+
+```{r, echo = FALSE, out.width = '70%', fig.link = 'https://xkcd.com/'}
+
+knitr::include_graphics("images/r-xkcd_piechart.png")
+
+```
+
+<br><br><br>
+
+```{r, echo = FALSE}
+
+fn <- here::here("R/insert_intro.R")
+
+source(fn)
+
+```
+
+## Overview
+
+```{r, echo = FALSE, results = 'asis'}
+
+insert_intro(goal = "To introduce students to the fundamentals of data visualization using the base R plotting system.",
+             tldr = "Let the data speak. Let the data speak pretty.",
+             outcomes = c("plot anatomy", 
+                          "plot types,",
+                          "plot parameters,",
+                          "plot annotation, and",
+                          "plot layouts."),
+             datasets = list(c(name = "Palmer Penguins", 
+                               url = "https://allisonhorst.github.io/palmerpenguins/",
+                               ref = "[@horst2020palmer]"),
+                             c(name = "General Social Survey", 
+                               url = "https://infer.tidymodels.org/reference/gss.html",
+                               ref = "[@bray2020infer]")),
+             requirements = list(),
+             readings = list(c(name = "An Introduction to R",
+                               url = "https://cran.r-project.org/doc/manuals/r-release/R-intro.html",
+                               ref = "[@rcoreteam2020introduction]"),
+                             c(name = "R Graphics (2nd Ed)",
+                               url = "https://www.stat.auckland.ac.nz/~paul/RG2e/",
+                               ref = "[@murrell2018r]"),
+                             c(name = "R Graphics Cookbook (2nd Ed)",
+                               url = "https://r-graphics.org",
+                               ref = "[@chang2019graphics]"))
+             )
+
+```
+
+<br>
+
+
+## Indexing vectors {#indexing-vectors}
+
+Suppose we want some portion of a vector, but not the whole thing. In that case, we need some way of referring to its constituent parts. This is known as _indexing_, which we hinted at above with our discussion of subscripts in matrices. R provides a number of functions for indexing, the three most widely used ones are the dollar operator `$`, single-brackets `[`, and double-brackets `[[`. Here we will walk through each of these, starting with what is perhaps the simplest case first, the single-bracket applied to a vector-vector.
+
+
+### Vector
+
+Take our `character_vector`, for example. It contains five scalars, with the position of each just being a numbered location, starting with one for the first scalar and increasing by one for each additional scalar.
+
+```{r r-objects_vector_position, echo = FALSE, out.width = '30%'}
+
+knitr::include_graphics("images/r-objects_vector_position.png")
+
+```
+
+With this information, we can use `[` to index one or more of the scalars in `character_vector`.
+
+```{r}
+
+character_vector[3]
+
+character_vector[c(1, 3, 4)]
+
+```
+
+
+### Matrix
+
+Because a matrix has "dimensions," a unique index requires a little more work. As noted above, we need to specify both the row and column subscripts. Well, actually, if you specify no row, but just a column, R will return _all_ rows. Similarly, if you specify one row, but no columns, R will return _all_ columns. Some examples,
+
+```{r}
+
+# just a reminder
+my_matrix
+
+my_matrix[1, 2]
+
+my_matrix[1, ]
+
+my_matrix[, 3]
+
+```
+
+Note that indexing a matrix in this way returns a vector. In fact, when you index a matrix, you are, in effect, unfolding its vector.
+
+
+### List
+
+List _components_ have positions like scalars in a vector, so you can access them with `[` in the same way.
+
+```{r}
+
+my_list[c(1, 2, 3)]
+
+```
+
+Note that this simply returns a smaller list. What if we wanted just a vector back? This is the purpose of the double-brackets `[[`.
+
+```{r}
+
+my_list[[2]]
+
+```
+
+The dollar `$` does the same thing. Returning one of the vectors initially used to create the list. Here, however, instead of providing the numeric position of the component, you supply the name of the desired component in the list.  
+
+```{r}
+
+my_list$c2
+
+```
+
+Now, because these return a vector, we can also subset that with `[`!
+
+```{r}
+
+my_list[[2]][3]
+
+```
+
+This is R reminding you that a list has "depth," that it is a vector of vectors (of vectors of vectors...).
+
+### Data.frame
+
+A data.frame is indexed like a matrix, with subscripts for rows and columns.
+
+```{r}
+
+my_dataframe[2, 4]
+
+my_dataframe[1, ]
+
+my_dataframe[, 3]
+
+```
+
+Notice that when you index a row, it returns a data.frame with just that row, but when you index a column, it returns the vector that column contains.
+
+```{r}
+
+# my_dataframe[, 3] is equivalent to
+
+my_dataframe$c3
+
+```
+
+
+## References

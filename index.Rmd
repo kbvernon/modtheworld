@@ -1,0 +1,33 @@
+--- 
+title: "Modeling the World: or Doing Statistics with R"
+author: "Kenneth Blake Vernon"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [references.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "This book provides a gentle yet comprehensive introduction to doing basic statistics in R."
+---
+
+```{r setup, include = FALSE}
+
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE,
+                      fig.align = "center")
+
+```
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+# Welcome {-}
+
+# Forward {-}
+
+# Preface {-}
