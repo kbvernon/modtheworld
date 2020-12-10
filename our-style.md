@@ -1,10 +1,13 @@
+
+_Modified from the [style guide](https://github.com/Robinlovelace/geocompr/blob/master/our-style.md) provided by Lovelace et al for Geocomputation With R_
+
 # Code
 
 Code lives in the `code` directory in files named according to the chapter they are in, e.g. `01-venn.R`.
 The code does not have to be self-standing: it can depend on code run previously in the chapter.
         
 - `library(package)` - library without quotes
-- `=` - assignment operator (instead of `<-`)
+- `<-` = assignment operator; it's less ambiguous than `=`
 - ` = ` , ` > `, etc. - spaces around operators
 - `"text"` - double quotes for character values
 - `for(i in 1:9) {print(i)}` - use space separation for curly brackets
@@ -12,7 +15,7 @@ The code does not have to be self-standing: it can depend on code run previously
 - When using pipes, pipe the first object (`x %>% fun() %>% ...` not `fun(x) %>% ...`)
 - Scripts should (see example below): 
   - state their aim and (if appropriate) a date and a table of contents
-  - be sectioned with the help of `---`, `===`, and `###` e.g. as acheived by pressing `Ctl-Shift-R`
+  - be sectioned with the help of `---`, `===`, and `###` e.g. as achieved by pressing `Ctl-Shift-R`
 
 ```
 # Filename: filename.R (2018-02-06)
@@ -59,7 +62,6 @@ y = x^2 # square of x
 
 # Text
 
-- Use one line per sentence during development for ease of tracking changes.
 - Leave a single empty line space before and after each code chunk.
 - Format content as follows: 
     - **package_name**
@@ -75,16 +77,16 @@ References in captions also should be avoided.
 
 # Figures
 
-Names of the figures should contain a chapter number, e.g. `04-world-map.png` or `11-population-animation.gif`.
+- Names of the figures should contain a chapter number, e.g. `04-world-map.png` or `11-population-animation.gif`.
 
 # File names
 
 - Minimize capitalization: use `file-name.rds` not `file-name.Rds`
-- `-` not `_`: use `file-name.rds` not `file_name.rds`
+
 
 # References
 
-References are added using the markdown syntax [@refname] from the .bib files in this repo.
-The package **citr** can be used to automate citation search and entry.
-Use Zotero to add references to the geocompr at [zotero.org](https://www.zotero.org/groups/418217/energy-and-transport/items/collectionKey/9K6FRP6N/) rather than changing .bib files directly.
-The citation key format used is `[auth:lower]_[veryshorttitle:lower]_[year]` using [zotero-better-bibtex](https://github.com/retorquere/zotero-better-bibtex).
+- References are added using the markdown syntax [@refname] from the .bib files in this repo.
+- The package **citr** can be used to automate citation search and entry.
+- Use Zotero rather than changing .bib files directly.
+- The citation key format used is `[auth][year][veryshorttitle:lower]` using [zotero-better-bibtex](https://github.com/retorquere/zotero-better-bibtex).
