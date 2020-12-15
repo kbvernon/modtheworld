@@ -1,5 +1,7 @@
 book_filename: "modtheworld"
 delete_merged_file: true
+new_session: yes
+before_chapter_script: ["R/before_script.R"]
 language:
   ui:
     chapter_name: "Chapter "

@@ -1,5 +1,5 @@
 --- 
-title: "Modeling the World: or Doing Statistics with R"
+title: "Modeling the World with R"
 author: "Kenneth Blake Vernon"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -10,15 +10,6 @@ link-citations: yes
 description: "This book provides a gentle yet comprehensive introduction to doing basic statistics in R."
 ---
 
-```{r setup, include = FALSE}
-
-knitr::opts_chunk$set(echo = TRUE,
-                      warning = FALSE,
-                      message = FALSE,
-                      fig.align = "center")
-
-```
-
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
@@ -28,6 +19,10 @@ knitr::write_bib(c(
 
 # Welcome {-}
 
-# Forward {-}
+This is the website for __"Modeling the World with R"__, a book that introduces readers to the fundamentals of statistics and statistical programming in R. While this book is geared toward practical applications, like analyzing and visualizing data, it aims to promote higher-order understanding of statistical concepts and theory too - not just the _how_, in other words, but the _why_. The reader will, thus, come away with a better sense of statistical _relevance_, or the ability to say why one statistical tool rather than another is appropriate for answering a particular question.  
 
-# Preface {-}
+The book is also free and open source, licensed under the Creative Commons ... 
+
+By contributing to _Mod the World_, you agree to follow its Contributor Code of Conduct. 
+
+# Acknowledgments {-}
