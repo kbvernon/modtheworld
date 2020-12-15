@@ -1,0 +1,644 @@
+# Statistical Graphics {#statistical-graphics}
+
+```{r piechart, echo = FALSE, out.width = '70%', fig.link = 'https://xkcd.com/'}
+
+knitr::include_graphics("images/r-xkcd_piechart.png")
+
+```
+
+<br>
+
+## Overview
+
+```{r, echo = FALSE, results = 'asis'}
+
+insert_intro(goal = "To introduce students to the fundamentals of data visualization using the base R plotting system.",
+             tldr = "Let the data speak. Let the data speak pretty.",
+             outcomes = c("the anatomy of a base R plot", 
+                          "the `plot()` function,",
+                          "layering,",
+                          "annotation,",
+                          "graphical parameters, and",
+                          "multi-plot layouts."),
+             datasets = list(c(name = "Palmer Penguins", 
+                               url = "https://allisonhorst.github.io/palmerpenguins/",
+                               ref = "[@horst2020palmer]"),
+                             c(name = "General Social Survey", 
+                               url = "https://infer.tidymodels.org/reference/gss.html",
+                               ref = "[@bray2020infer]")),
+             requirements = list(),
+             readings = list(c(name = "An Introduction to R",
+                               url = "https://cran.r-project.org/doc/manuals/r-release/R-intro.html",
+                               ref = "[@rcoreteam2020introduction]"),
+                             c(name = "R Graphics (2nd Ed)",
+                               url = "https://www.stat.auckland.ac.nz/~paul/RG2e/",
+                               ref = "[@murrell2018r]"),
+                             c(name = "R Graphics Cookbook (2nd Ed)",
+                               url = "https://r-graphics.org",
+                               ref = "[@chang2019graphics]"))
+             )
+
+```
+
+<br>
+
+In statistics, graphics provide visual representations of data, but why might we want to visualize data? To answer this question, we might consider a common distinction between three modes of data visualization: _exploration_, _analysis_, and _presentation_.
+
+* __Visual exploration__ is part and parcel of what John @tukey1977exploratory referred to as "exploratory data analysis" [cf @peng2016exploratory; @tufte2006beautiful]. With it, we can (i) investigate the distribution of observations around some measure of central tendency (like the mean or median) or evaluate relationships between variables; (ii) detect problems with our data, like outliers, missing values, or other anomalies; and (iii) generate questions we may not have considered otherwise.
+* __Visual analysis__, as its name suggests, is largely concerned with the statistical analyses we are conducting to answer our primary research questions. It involves such things as direct hypothesis testing, as well as evaluation of the results of statistical analyses, usually to see if the results are actually meaningful, even sometimes finding patterns that may have been missed or over-interpreted.   
+* __Visual presentation__ is largely aimed at reporting findings to others, whether about the data itself or the results of analyses conducted with the data. Of course, the intended audience is often other scientists and researchers, but it does not have to be. Informing the public about your research is also important, and having nice graphics is a really good way of doing that.
+
+Here we are focusing on the basics of visual exploration using R's native `graphics` tools, though much of what you learn here will apply more generally to visual presentation too.  
+
+
+## Plot Anatomy
+
+Producing statistical graphics in R is a lot like adding layers to a canvas. To setup a canvas and to add some default layering, we use the `plot()` function. This is a programming workhorse in R, used routinely and repeatedly during R sessions. Before diving into its use, though, let's first step back to, as it were, dissect a base R plot, getting a feel for its general structure or anatomy (Fig. \@ref(fig:r-anatomy)). In effect, this means getting a feel for the hidden layout of a plot canvas. Hopefully, this will provide you a better sense of what you are doing when, for example, you feed your plot this parameter `xlim = c(0, 1)`. 
+
+```{r r-anatomy, echo = FALSE, out.width = '75%', fig.cap = "Base R plot anatomy"}
+
+knitr::include_graphics("images/r-plot_anatomy.png")
+
+```
+
+<br>
+
+### Region
+
+The plot _region_ is the area in which _geometries_ (like points, lines, and polygons) provide visual representations of data. Particular locations within the plot region are specified using a two-dimensional coordinate grid, the coordinates being denoted by convention as 'x' and 'y'. Around the plot region, R defaults to including a plot box (represented by the light gray square in Fig. \@ref(fig:r-anatomy)). 
+
+### Axes
+
+The scope of the plot region is defined by the x and y axes (represented by the thick orange lines), which specify the upper and lower limits of the observations to include in the plot. In Fig. \@ref(fig:r-anatomy), the limits are (0, 1) for both x and y. You may notice that the axes do not meet at the origin (0, 0). This is because R by default includes some padding above and below the specified limits. The most important elements of plot axes are breaks, tick marks, and tick labels. Tick marks provide a visual reference for how observations are arrayed within the plot region and are represented by short dashes emanating from each axis line. Breaks are specific values within the limits of an axis at which tick marks are displayed. By default, the breaks include the limits themselves. Ideally, break values are used as tick labels, though if you really wanted to confuse someone, including yourself, you can give them other labels as well.
+
+### Titles
+
+Every R plot includes four titles, the main title, the subtitle, and a title for each axis. One somewhat strange design choice on the part of the R Core Team was to place the subtitle below the x-axis title. It appears they meant the 'sub' in 'subtitle' quite literally... 
+
+### Margins
+
+One of the more complicated features of the base R anatomy is margins. For every plot, there are two sets of these: the inner (or figure) margins and the outer margins. The inner margin (represented by the dark red box) is the area immediately surrounding the plot region, which typically involves plot titles and axis labels. The outer margin (represented by the dark blue box) is an area of additional space around the inner margin. Fiddling with the outer margin is not particularly useful in most contexts, unless you want to have multiple plot regions in one figure (discussed below in the [Plot Layout](#layout) section). The area of the margins is defined by "Lines," named starting with 0. By default, the inner margin is four lines in width (Line 0 to Line 3) and the outer margin is three lines in width. These lines may be used to position other plot elements, including, more often than not, plot titles.
+
+### Legend
+
+A legend or key provides a list of additional variables represented by symbols or colors in the plot region, along with the symbols or colors used. By default, R includes the legend within the plot region, but it is possible to move it to the inner or outer margin.
+
+## The `plot()` Function {#plot-function}
+
+The base `plot()` function is a _generic_ function, meaning it will produce different results depending on what kind of R object you are asking it to draw. At its core, though, the `plot()` function is simply a tool for mapping data onto a grid (the plot _region_ in Fig. \@ref(fig:r-anatomy)). Consider, for example, these values of x and y. 
+
+```{r}
+
+x <- c(0.0, 0.2, 0.3, 0.5, 0.6, 0.8)
+y <- c(0.9, 0.8, 0.6, 0.5, 0.3, 0.1)
+
+``` 
+
+When you supply `plot()` with these values, it maps them to a grid like so.
+
+```{r 05-data-mapping, echo = FALSE, animation.hook = "gifski", fig.cap = "Mapping data onto a grid."}
+
+par(pty = "s")
+
+for(i in 1:length(x)){
+    
+    a <- x[1:i]
+    
+    b <- y[1:i]
+    
+    plot(0,
+         type = "n",
+         xlab = "X",
+         ylab = "Y",
+         xlim = c(0, 1),
+         ylim = c(0, 1))
+    
+    grid(lty = 1, col = "#ebebeb")
+    
+    box()
+    
+    points(b ~ a, pch = 19)
+    
+    text(b ~ a,
+         pos = 4,
+         offset = 0.3,
+         labels = paste0("(", a, ", ", b, ")"),
+         cex = 0.8)
+    
+}
+
+```
+
+There are two ways to supply the `plot()` function with these x and y values: (i) as separate vectors or (ii) as a combined formula. 
+
+__As separate vectors__
+
+```{r, eval = FALSE}
+
+plot(x, y)
+
+```
+
+__As a combined formula__
+
+```{r, eval = FALSE}
+
+plot(y ~ x)
+
+```
+
+Notice the tilde, `~`. This may be read as "... is a function of ...", in this case "y is a function of x."
+
+```{block2 05-datavisualizing-formula, type = "rmdnote"}
+You should use the formula notation whenever plotting a _relationship_ between two variables, as it makes it explicit in your code that you are plotting that relationship.  
+```
+
+By default, `plot()` provides for nine different types of plot. These are specified using the argument `type`. Options include all of the following: `"p"` (points), `"l"` (lines), `"b"` (both points and lines), `"c"` (lines with missing points), `"o"` (points plotted over lines), `"s"` (stair steps), `"S"` (stair steps inverted), `"h"` (histogram-like vertical lines), `"n"` (nothing). So, if you want to plot points, for instance, you would type
+
+```{r, eval = FALSE}
+
+plot(y ~ x, type = "p")
+
+```
+
+And just so you can see the result, here are examples of each:
+
+```{r 05-plot-types, echo = FALSE, animation.hook = "gifski", fig.cap = "Default plot types."}
+
+par(pty = "s")
+
+plot_types <- c("p", "l", "b", "c", "o", "s", "S", "h", "n")
+
+for(i in seq_along(plot_types)) {
+  
+  plot_type <- plot_types[i]
+  
+  plot(x, y,
+       type = plot_type,
+       xlab = "X",
+       ylab = "Y",
+       xlim = c(0, 1),
+       ylim = c(0, 1), 
+       panel.first = {grid(lty = 1, col = "#ebebeb")})
+  
+  box()
+  
+  title(main = paste0("type = \"", plot_type, "\""),
+        adj = 0,
+        font.main = 1,
+        line = 0.3)
+  
+}
+
+```
+
+One of the most important features of a plot is its limits. By default, `plot()` uses the range of the x and y vectors. In this case, the range of x is [0, 0.8] and the range of y is [0.1, 0.9]. You will perhaps have noticed, however, that the limits in Figures \@ref(fig:05-data-mapping) and \@ref(fig:05-plot-types) are [0, 1]. That is because we supplied `plot()` with these values using the arguments `xlim` and `ylim`.
+
+```{r, eval = FALSE}
+
+plot(y ~ x, 
+     xlim = c(0, 1),
+     ylim = c(0, 1),
+     xlab = "X",
+     ylab = "Y")
+
+```
+
+```{block 2 05-datavisualizing-limits, type = "rmdcaution"}
+Individuals (especially those with a chaotic-evil alignment) may abuse plot limits to obscure or exaggerate features of their data. You see, for example, in our toy data that the points have a certain _trend_ starting in the upper left corner of the plot and falling to the lower right corner. What do you think would happen to the look of that trend, though, if we were to specify new limits for y, say [0, 100]?
+```
+
+
+
+## Layering
+
+Whenever you use `plot()`, it establishes a new "canvas" and provides some default plot elements (specifically x and y axis titles, a box around the plot region, and tick marks and labels). These can all be "turned off," so that `plot()` simply establishes an empty canvas.
+
+```{r, fig.cap = "'A blizzard' by M. Duchamp"}
+
+plot(y ~ x,
+     type = "n",
+     xaxt = "n", # remove the x-axis 
+     yaxt = "n", # remove the y-axis
+     xlab = "",  # remove x-axis title
+     ylab = "",  # remove y-axis title
+     frame.plot = FALSE) # remove the box around the plot region
+
+```
+
+Now, let's add the defaults back incrementally. 
+
+```{r 05-layering-plot, echo = FALSE, animation.hook = "gifski", fig.cap = "Layering. The plot title explains what function is being used to add each layer."}
+
+par(pty = "s")
+
+for(i in 1:12) {
+  
+  plot(y ~ x,
+       type = "n",
+       xaxt = "n", 
+       yaxt = "n",
+       xlab = i,
+       ylab = "",
+       col.lab = "white",
+       frame.plot = FALSE,
+       xlim = c(0, 1),
+       ylim = c(0, 1))
+  
+  if(i >= 3) box()
+
+  if(i >= 5) axis(1)
+  if(i >= 7) axis(2)
+
+  if(i >= 9) title(xlab = "X", ylab = "Y")
+
+  if(i >= 11) points(y ~ x)
+  
+  i_is_even <- i %% 2 == 0 # modulo division gives the remainder of regular division
+  
+  switch_operator <- ifelse(i_is_even, i/2, (i+1)/2)
+  
+  switch(switch_operator,
+         title(),
+         title(main = "box()", adj = 0, font.main = 1, line = 0.3),
+         title(main = "axis(1)", adj = 0, font.main = 1, line = 0.3),
+         title(main = "axis(2)", adj = 0, font.main = 1, line = 0.3),
+         title(main = 'title(xlab = "X", ylab = "Y")', adj = 0, font.main = 1, line = 0.3),
+         title(main = "points(y ~ x)", adj = 0, font.main = 1, line = 0.3)
+  )
+  
+}
+
+```
+
+This is what we mean by "layering." As you can see, `plot()` not only establishes an empty canvas, but adds some default layers. And to those defaults, we can add _even_ more! In fact, here is a list of really, really useful layering functions.
+
+```{r, echo = FALSE}
+
+fun <- c("`abline()`",
+         "`axis()`",
+         "`box()`",
+         "`curve()`",
+         "`grid()`",
+         "`lines()`",
+         "`mtext()`",
+         "`points()`",
+         "`segments()`",
+         "`text()`",
+         "`title()`")
+
+desc <- c("Adds one or more straight lines through the current plot.",
+          "Adds an axis to the current plot, allowing the specification of the side, position, labels, and other options.",
+          "Draws a box around the current plot in the given color and linetype.",
+          "Draws a curve corresponding to a function over the interval [from, to].",
+          "Adds rectangular grid to an existing plot.",
+          "A generic function taking coordinates given in various ways and joining the corresponding points with line segments.",
+          "Writes text in one of the four margins of the current figure region or one of the outer margins of the device region.",
+          "A generic function to draw a sequence of points at the specified coordinates.",
+          "Draw line segments between pairs of points.",
+          "Draws the strings given in the vector `labels` at the coordinates given by `x` and `y`.",
+          "Add labels to a plot.")
+
+df <- data.frame('Function' = fun,
+                 'Description' = desc)
+
+df %>% 
+  kable() %>% 
+  kable_styling()
+
+```
+
+Figure \@ref(fig:05-layering-plot) shows how many of these functions work, but let's go over them in a little more detail by working through another example.
+
+```{r}
+
+plot(y ~ x,
+     type = "n",
+     xlab = "X",
+     ylab = "Y",
+     xlim = c(0, 1),
+     ylim = c(0, 1))
+
+grid(lty = 1, col = "#ebebeb")
+
+points(y ~ x)
+
+abline(a = 0.95, b = -1, col = "red3")
+
+box()
+
+```
+
+
+
+## Annotation
+
+Annotation refers to the addition of natural language elements (i.e., characters, words, and numerals) to a plot. These include plot titles (the main title, the subtitle, and the axis titles), as well as the legend title, axes labels (i.e., the tick labels, usually numerals), and any other text comments, either within the plot region or in the margins. Much of this may be specified within the `plot()` function itself. 
+
+```{r}
+
+plot(y ~ x,
+     xlab = "X-axis Label",
+     ylab = "Y-axis Label",
+     main = "Main Plot Title",
+     sub  = "Literally, below the plot title")
+
+```
+
+Specifying these title annotations within `plot()` should be sufficient for simple plots, but for more fine grained control, you will want to use the `title()` function.
+
+```{r}
+
+plot(y ~ x,
+     xlab = "X-axis Label",
+     ylab = "Y-axis Label")
+
+title(main = "Main Plot Title", 
+      col.main = "red3",
+      line = 0.3, # margin line location
+      adj = 0) # text alignment left
+
+title(sub = "")
+
+```
+
+
+
+
+
+
+## Graphical Parameters {#graphical-parameters}
+
+Graphical parameters control aesthetic aspects of a plot, for example, color and size. R provides two ways to set these parameters. If you want to make changes to a single plot, you can supply graphical parameters to the `plot()` call directly. For instance,
+
+```{r, eval = FALSE}
+
+plot(y ~ x, pch = 19)
+
+```
+
+supplies the `plot()` function with the graphical parameter `pch = 19`, which specifies the type of point symbol to use (in this case a filled circle).  
+
+You can also define graphical parameters globally, which means they will affect all plots the same way (well, more or less the same way). You do this by calling the `par()` function and supplying graphical parameters to it. For example,
+
+```{r, eval = FALSE}
+
+par(pch = 19)
+
+```
+
+sets the point symbol to the filled circle for all plots.  
+
+Sometimes you will want to set graphical parameters for several plots then revert to the original parameters for subsequent plotting. To do this, you simply assign the parameters to an object, like so:
+
+```{r, eval = FALSE}
+
+original_parameters <- par()
+
+# new parameter specifications
+par(pch = 19)
+
+### <do some plotting here>
+
+# revert to original parameters
+par(original_parameters)
+
+```
+
+Now, let's go over just a few of the many, many graphical parameters and how they affect your plot aesthetics.  
+
+```{block2 05-datavisualizing-parameter-examples, type = 'rmdnote'}
+For an exhaustive list of graphical parameters and examples of their effect, see Porra (2017) ["Graphical parameters of R {graphics} package"](http://rstudio-pubs-static.s3.amazonaws.com/315576_85cccd774c29428ba46969316cbc76c0.html) at RStudio Pubs.
+```
+
+
+### Geometry Type
+
+R allows you to specify graphical parameters for points and lines (and by extension, polygons), for example, the type of symbol used to display the geometry. For points, this is controlled by `pch`. For lines, by `lty`. `pch` can take any value from 0 to 25, `lty` any value from 0 to 6. `lty` can also be specified with the words `"blank"`, `"solid"`, `"dashed"`, `"dotted"`, `"dotdash"`, `"longdash"`, and `"twodash"`. Here is what these look like.
+
+```{r 05-point-line, echo = FALSE, fig.cap = "Styling for point and line geometries."}
+
+windowsFonts(A = windowsFont("Arial"))
+
+par(family = "A",
+    mfrow = c(1, 2),
+    mar = rep(0.2, 4),
+    oma = rep(0.1, 4),
+    cex.main = 1.5,
+    font.main = 1)
+
+### POINT TYPES ###
+pch <- 0:25
+
+k <- 7
+
+dd <- c(-1,1)/2
+
+ix <- pch %/% k
+iy <- iy <- 3 + (k-1) - pch %% k
+
+rx <- dd + range(ix)
+ry <- dd + range(iy)
+
+ix <- ix - 0.25
+
+par(pty = "s")
+
+plot(ry ~ rx, 
+     type = "n", 
+     xaxt = "n",
+     yaxt = "n",
+     xlab = "", 
+     ylab = "")
+
+title(main = "Point Symbols (pch = 0:25)", 
+      line = 0.4, 
+      adj = 0)
+
+points(iy ~ ix, 
+       pch = pch, 
+       col = "red3", 
+       bg = "gold", 
+       cex = 2.5)
+
+text(iy ~ ix,
+     pos = 4,
+     offset = 0.8,
+     labels = pch, 
+     cex = 1.5)
+
+
+### LINE TYPES ###
+lty <- 0:6
+
+names <- c("blank", "solid", "dashed", "dotted", "dotdash", "longdash", "twodash")
+
+line_labels <- paste0(lty, " (", names, ")")
+
+plot(ry ~ rx, 
+     type = "n", 
+     xaxt = "n",
+     yaxt = "n",
+     xlab = "", 
+     ylab = "")
+
+min_x <- min(ix) - 0.2
+mid_x <- max(ix)/2.3
+
+y <- unique(iy)
+
+title(main = "Line Types (lty = 0:6)", 
+      line = 0.4, 
+      adj = 0)
+
+segments(x0 = min_x,
+         y0 = y,
+         x1 = mid_x,
+         y1 = y,
+         lty = lty,
+         lwd = 2)
+
+text(y ~ rep(mid_x, length(y)),
+     pos = 4,
+     offset = 0.8,
+     labels = line_labels, 
+     cex = 1.5)
+
+```
+
+Notice that point symbols 0-14 are unfilled, 15-20 are filled and a single color, and 21-25 are filled and different colors, one for the line and one for the fill.    
+
+Here is an example of changing the point symbol, using our x and y vectors from above:
+
+```{r, echo = FALSE}
+
+x <- c(0.0, 0.1, 0.2, 0.3, 0.5, 0.6, 0.8, 0.7)
+y <- c(1.0, 0.7, 0.3, 0.5, 0.6, 0.4, 0.2, 0.0)
+
+```
+
+```{r}
+
+plot(y ~ x,
+     pch  = 17, # set point type here
+     type = "p", # 'p' for "point"
+     xlab = "X",
+     ylab = "Y",
+     main = "Strange Points")
+
+```
+
+And here is an example of changing the line type: 
+
+```{r}
+
+x <- seq(0, 2*pi, length.out = 50)
+
+y <- sin(x)
+
+plot(y ~ x,
+     lty  = 4, # set line type here
+     type = "l", # 'l' for "line"
+     xlab = "X",
+     ylab = "Y",
+     main = "Sine Wave")
+
+```
+
+### Text
+
+There are several ways to modify text output in a plot. Here we will focus on font type (meaning, normal, __bold__, or _italic_) and justification (or alignment, for example, centered text). These are controlled by `font` and `adj`, respectively. `font` can take any value from 1 to 4, `adj` any continuous value from 0 for left aligned to 1 for right aligned, with 0.5 being the value for centered text. 
+
+```{r, echo = FALSE}
+
+par(family = "A",
+    pty = "s",
+    mfrow = c(1, 2),
+    mar = rep(0.2, 4),
+    oma = rep(0.1, 4),
+    cex.main = 1.5,
+    font.main = 1)
+
+### FONT ###
+fonts <- 1:4
+
+font_labels <- c("plain", "bold", "italic", "bold italic")
+
+font_labels <- paste0(fonts, ". ", font_labels)
+
+plot(0,
+     type = "n",
+     xlab = "",
+     ylab = "",
+     xaxt = "n",
+     yaxt = "n",
+     xlim = c(0, 1),
+     ylim = c(0, 1))
+
+title(main = "Fonts (font = 1:4)", 
+      line = 0.4, 
+      adj = 0)
+
+x <- rep(0, 4)
+y <- rev(seq(0.1, 0.9, length.out = 5)[2:5])
+
+text(y ~ x, 
+     font = fonts,
+     labels = font_labels,
+     adj = 0, 
+     cex = 1.5)
+
+### ADJUSTMENT ###
+adj <- seq(0, 1, length.out = 5)
+
+plot(0,
+     type = "n",
+     xlab = "",
+     ylab = "",
+     xaxt = "n",
+     yaxt = "n",
+     xlim = c(0, 1),
+     ylim = c(0, 1))
+
+title(main = "Adjustment to Red Line", 
+      line = 0.4, 
+      adj = 0)
+
+x <- 0.5
+y <- rev(seq(0.1, 0.9, length.out = 5))
+
+abline(v = 0.5, lty = 2, col = "red3")
+
+for(i in 1:length(adj)) {
+    
+    y1 <- y[i]
+    
+    a <- adj[i]
+    
+    adj_label <- paste0("adj = ", formatC(a, digits = 2, format = "f"))
+    
+    text(y1 ~ x, 
+         labels = adj_label,
+         adj = a, 
+         cex = 1.5)
+}
+
+```
+
+
+### Color
+
+### Size
+
+### Axes
+
+### Margins
+
+### Miscellaneous
+
+
+
+## Multi-lot Layouts
+
+
+

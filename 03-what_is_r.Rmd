@@ -1,6 +1,6 @@
 # (PART) Introduction to R {-}
 
-# What is R? {#whatisr}
+# What is R? {#what-is-r}
 
 ```{r r-foot, echo = FALSE, out.width = '100%', fig.link = 'https://en.wikipedia.org/wiki/Patterson%E2%80%93Gimlin_film'}
 
@@ -9,23 +9,6 @@ knitr::include_graphics("images/r-foot.jpg")
 ```
 
 <br>
-
-```{r, include = FALSE}
-
-library(dplyr)
-library(ggplot2)
-library(knitr)
-library(kableExtra)
-
-```
-
-```{r, echo = FALSE}
-
-fn <- here::here("R/insert_intro.R")
-
-source(fn)
-
-```
 
 ## Overview
 
@@ -57,7 +40,7 @@ R is variously described as a programming *language* for statistical computing a
 
 > Statistical analysis was performed in `r gsub("\\s*\\([^\\)]+\\)", replacement = "", sessionInfo()$R.version$version.string)` [@rcoreteam2020language].
 
-And the full citation you can now see in the [References](#my-bib).
+And the full citation you can now see in the References below.
 
 ### The R Environment
 
@@ -125,7 +108,7 @@ glm(formula = y ~ x1 + x2 + x3 + x4 + x5,
 
 One of the most powerful features of R is its ability to produce publication-quality plots. R's native graphics engine allows you to, for example, plot this pretty normal distribution:
 
-```{r, echo = FALSE, fig.width = 5, fig.height = 5}
+```{r, echo = FALSE, fig.width = 5, fig.height = 5.2}
 
 x <- seq(from = -5, 
          to = 5, 
@@ -133,13 +116,18 @@ x <- seq(from = -5,
 
 y <- dnorm(x)
 
-# windowsFonts(A = windowsFont("Arial"))
+windowsFonts(A = windowsFont("Arial"))
 
-# par(family = "A")
+par(family = "A")
 
-plot(y ~ x, type = "l")
+plot(y ~ x, 
+     type = "l",
+     xlab = "X",
+     ylab = "Y")
 
 grid(lty = 1)
+
+box()
 
 dark_red <- rgb(red = 0.52, 
                 green = 0, 
@@ -198,6 +186,12 @@ ggplot(bob, aes(x = month, y = count)) +
   labs(title = "R Downloads From RStudio CRAN Mirror")
 
 ```
+
+## Some R Basics
+
+### A Glorified Calculator?
+
+### Console v Scripts
 
 ## The Whole Shebang {#example}
 
@@ -297,7 +291,10 @@ How is bill length distributed across species?
 
 ```{r, fig.width = 5}
 
-boxplot(bill_length_mm ~ species, data = penguins)
+boxplot(bill_length_mm ~ species, 
+        data = penguins,
+        xlab = "Species",
+        ylab = "Bill Length (mm)")
 
 ```
 
@@ -334,10 +331,6 @@ obs_bill_length <- penguins$bill_length_mm
 Plot the estimated trend against the observed values:
 
 ```{r, fig.width = 5, fig.height = 5}
-
-# windowsFonts(A = windowsFont("Arial"))
-
-# par(family = "A")
 
 plot(obs_flipper_length ~ obs_bill_length,
      pch = 19,
@@ -377,5 +370,3 @@ save(penguin_model, file = "penguin_model.Rdata")
 And that's it!
 
 [Note: saving a figure in base R is a bit tricky, so we will leave that lesson for another time.]
-
-## References {#my-bib}

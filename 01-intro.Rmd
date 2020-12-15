@@ -1,2 +1,43 @@
 # Introduction {#intro}
 
+This book provides an introduction to doing statistics, here understood as a way of modeling the world. It also introduces readers to the R programming language and environment [@rcoreteam2020language], providing them with the programming skills necessary to do statistics cheaply, efficiently - and perhaps most importantly - in a reproducible fashion.
+
+## Why this book?
+
+Lots of really good books on R and statistics exist, for example, 
+
+- Cetinkaya-Rundel and Hardin (2020) "[Introduction to Modern Statistics](https://openintro-ims.netlify.app/)"
+- Ismay and Kim (2020) "[Statistical Inference via Data Science](https://moderndive.com/index.html)"
+- Wickham and Grolemund (2017) "[R for Data Science](https://r4ds.had.co.nz/index.html)"
+
+So, why write another one? Well, basically, it fills a niche. 
+
+R philosophy
+
+Statistics philosophy
+
+Teaching philosophy
+
+
+## Book Layout
+
+part i - An Introduction to R
+part ii - An Introduction to Statistics
+
+chapter overviews
+
+## How To Read This Book
+
+code highlighting
+comments
+
+code chunks
+
+in text:
+functions
+objects
+packages in bold
+
+
+## Exercises and Data
+

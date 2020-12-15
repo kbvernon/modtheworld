@@ -1,0 +1,122 @@
+# R Style Guide {#rstyleguide}
+
+> "Good coding style is like correct punctuation: you can manage without it, butitsuremakesthingseasiertoread." -Hadley Wickham 
+
+When writing code, you should always have an eye to ensuring that it is both clear and intelligible for anyone who might come along and read it, which includes future-you! This will ensure that your code is _reproducible_, which is especially important if what you are doing with R is scientific analysis. It is also just of practical value, for you will most assuredly want to reuse your code at some point in the future, or apply it to a different data set. If you can't make heads or tails of it, well...
+
+## Be Verbose...
+
+One way to make your code clearer is to make it more verbose. Don't shy away from just typing everything out explicitly, even if - horror of horrors! - it takes you an extra second or two to do. Verbosity can be applied to three aspects of R code: i) object names, ii) function parameters (or arguments), and iii) coding comments.  
+
+### Object names
+
+An old-school coding norm encouraged programmers to write highly compact code with loads of abbreviations. In general, however, you should avoid this, at least when it's reasonable to do so. 
+
+```{r, eval = FALSE}
+
+# Good
+mean_height <- mean(height)
+
+# Bad
+mh <- mean(height)
+
+# But,
+mean_height_of_actors_who_auditioned_for_aragorn <- mean(height) # is overkill
+
+```
+
+If the abbreviation is something obvious, though, like "USA" or "IHOP," you should feel free to use it.  
+
+### Function Parameters
+
+When you call a function, you typically supply it with a data object, which the function is going to do something with, and then a list of arguments, which specify how exactly the function will work with the data. You can avoid specifying the argument name for the data object, but you should strive to use the names of any arguments you override.  
+
+```{r, eval = FALSE}
+
+# Good
+bob <- glm(y ~ x, 
+           family = binomial,
+           data = my_ten_thousand_observations)
+
+# Bad
+bob <- glm(y ~ x, binomial, my_ten_thousand_observations)
+
+```
+
+### Code Commenting
+
+Looks like some people get really worked up about this one, but just keep this in mind. Anyone reading your code should be able to understand what it is doing without comments, but this frankly is not always possible (for example, for students who are first learning R!). This means you should typically keep comments to a minimum and only use them when you think it would help someone to understand not just _what_ you are doing, but _why_ you are doing it.
+
+
+## But, Don't Repeat Yourself (DRY)
+
+Also known as the DRY Principle. If you find yourself copying the same code multiple times - say, three or more times a session, this is a good indication that you should write a function instead.
+
+## Assignment First
+
+For assignment, use only the left-pointing arrow, `<-`. Do _not_ use right-facing assignment, `->`. You should also avoid using the equal sign, `=`. Even though these are allowed by R, they make your code harder to read and - at least in the latter case - ambiguous.
+
+```{r, eval = FALSE}
+
+# Good
+bob <- 5.137
+
+# Bad
+5.137 -> bob
+
+# Ambiguous
+bob = 5.137
+
+```
+
+
+## The Cratylus Rule
+
+This rule requires that a name reflect the nature of the thing named.^[Does not apply to natural languages!] Because objects _are_ things and functions _do_ things, the Cratylus Rule suggests that you should use nouns as names for R objects and verbs as names for R functions. 
+
+```{r, eval = FALSE}
+
+numbers <- 1:10
+
+add_one <- function(x) x + 1
+
+```
+
+
+
+
+## Be Open!
+
+In general, lots of white space makes it easier to read and comprehend just about any string of text, whether in books, articles, or R scripts! 
+
+### Spacing
+
+Consider,forexample,howharditistoreadanaturallanguagewithoutanyspacing. It's the same with coding!
+
+```{r, eval = FALSE}
+
+# Good
+bob <- mean(1:5, na.rm = TRUE)
+
+# Bad
+bob<-mean(1:5,na.rm=TRUE)
+
+```
+
+### Line Length
+
+Think of your R script as having a giant cliff somewhere in the middle, right around 80 characters. Your job is to NOT _Wiley E. Coyote_ your code. Instead, return and start a new line. 
+
+```{r, eval = FALSE}
+
+# Good
+bob <- glm(y ~ x,
+           family = gaussian,
+           data = my_ten_thousand_observations)
+
+# Bad
+bob <- glm(y ~ x, family = gaussian, data = my_ten_thousand_observations)
+
+```
+
+

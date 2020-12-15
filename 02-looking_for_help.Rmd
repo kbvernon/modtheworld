@@ -1,4 +1,4 @@
-# Looking for Help {#lookingforhelp}
+# Looking for Help {#looking-for-help}
 
 ```{r, echo = FALSE, fig.cap = "Wisdom of the Ancients (xkcd 979).", fig.link = "https://xkcd.com/"}
 
@@ -8,23 +8,21 @@ knitr::include_graphics("https://imgs.xkcd.com/comics/wisdom_of_the_ancients.png
 
 <br>
 
-As you make your first hesitant forays into the R programming environment - and even when you have become sufficiently familiar with the place to know your way around, you will on occasion experience the jarring dislocation of an R error, a typically dark red eruption of your R console, perhaps symbolic of your code exploding before your eyes. Here is one of the more infamous errors you are likely to encounter:
+As you make your first tentative forays into the R programming environment, you will on occasion experience the jarring dislocation of an R error, a typically dark red eruption of your R console, perhaps symbolic of your code exploding before your eyes. Here is one of the more infamous errors you are likely to encounter:
 
 <p style='color:red'>object of type 'closure' is not subsettable</p>  
 
-Nevermind what this particular error means.^[Though check out Jenny Bryan's talk at the 2020 RStudio Conference: https://rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/] The point is that it can be terribly frustrating when you encounter it or something like it. Worse still, you will sometimes have so much trouble finding a solution, you start to think maybe all this programming and statistics we are using to learn about nature and the world isn't worth it. This difficulty, at least early on in your R programming career, will often boil down to the fact that you haven't learned enough R yet to even know how to ask the right question. 
+Nevermind what this particular error means.^[Though check out Jenny Bryan's talk at the 2020 RStudio Conference: https://rstudio.com/resources/rstudioconf-2020/object-of-type-closure-is-not-subsettable/] The point is that it can be terribly frustrating when you encounter it or one of its kin. 
 
-I like to refer to this unhappy circumstance as the _Google Search Paradox_. It goes something like this: 
+Often troubleshooting these errors can be an additional source of anxiety and frustration, especially early on, as you simply lack the words required to describe your problem accurately and, thus, to formulate the question whose answer you so desperately need. I like to refer to this unhappy circumstance as the _Google Search Paradox_ because you will inevitably find yourself staring at that cursed blinking cursor in the search bar, wondering what words to give to Google. It's also a bit like [Meno's Paradox](https://plato.stanford.edu/entries/epistemic-paradoxes/#MenParInqPuzAboGaiKno), or the Paradox of Inquiry. For if you could properly frame your question, it's probably the case that you already know the answer. So, you either know and thus don't need to ask, or need to ask, but don't know how.   
 
-> You have a problem with your code, so you go online to find a solution. However, you do not know the right technical words to describe your problem, so your Google searching gets you no where. And if you did have the right words, you probably wouldn't need to do the Google searching anyway! So, it turns out, getting an answer with Google's help is either unnecessary or impossible!
-
-Of course, the situation is not nearly so dire as this. In truth, you always know at least a little about the problem and can thus Google your way through to an answer - eventually, anyway. Life is fleeting, however, and time is short, so you should probably avoid the brute force approach, relying instead on searching _efficiently_. To help you with that (and to help you get _better_ with that), this chapter provides a brief annotated list of where to look for answers, starting from within R itself!  
+Of course, the situation is not nearly so dire as this. In truth, you always know at least a little about your problem - you do have the error itself after all! - and can thus Google your way through to an answer - eventually, anyway. But life is fleeting, as they say, and time is short, so you should probably avoid the brute force approach, relying instead on searching _efficiently_. To help you with that (and to help you get _better_ with that), this chapter provides a brief annotated list of where to look for answers, starting from within R itself!  
 
 ## R
 
 Typically, though not always, R code will have lots of supporting documentation. These come in two varieties. We'll call them short-form and long-form documentation. The former is typically geared toward specific functions and object classes, with definitions of code components and examples of how to use them. Long-form documentation (also referred to as "vignettes") goes over code usage and examples in greater detail. If you are having trouble specifying some particular component of your code and you know what that component is, you may find the short-form documentation more helpful. If you are having trouble getting through some analysis and you cannot pinpoint the exact reason for your trouble, the vignettes are probably where you should look. In general, though, you should think of these two forms of R documentation as the first stop along the way to troubleshooting your code. There are a couple of ways to access this documentation.
 
-1. From within R, you can use the `help()` and `?...` functions to access short-form documentation. Examples include `help("plot")`, `?plot`. This will call up the function's documentation page and display it in your computer's graphical device. All R functions have a similar page, which provides a brief description of the function, the parameters that it takes and how these change the way it works. It is also worth scrolling down - at the bottom of the help page will be some examples of usage which you can run to get a feel for how the function works. 
+1. From within R, you can use the `help()` and `?...` functions to access short-form documentation. Examples include `help("plot")` and `?plot`. This will call up the function's documentation page and display it in your computer's graphical device. All R functions have a similar page, which provides a brief description of the function, the parameters that it takes and how these change the way it works. It is also worth scrolling down - at the bottom of the help page will be some examples of usage which you can run to get a feel for how the function works. 
 
 2. `help.search(...)` and `??...` both provide means of searching through help pages to find multiple functions with the same name (and potentially the same or similar uses). Simply replace the ellipses (three dots) with a character string and these functions will return all help pages with that string. So if you want to carry out a cluster analysis, typing `??cluster` will search for any functions that use the word cluster; hopefully, including some that are relevant to cluster analysis.  
 
@@ -39,7 +37,7 @@ Typically, though not always, R code will have lots of supporting documentation.
 
 6. Finally, you can access all available documentation (short- and long-form) for official R packages by navigating the Comprehensive R Archive Network (CRAN) website, here: [https://cran.r-project.org/](https://cran.r-project.org/).  
 
-## RStudio
+## RStudio {#rstudio-help}
 
 [RStudio](https://rstudio.com/) is an open-source software development company that provides tools for working with a number of programming languages; though, as its name suggests, it is primarily geared toward R. Far and away the most useful tool RStudio offers is Rstudio Desktop, which is part of RStudio's Integrated Development Environment (or, IDE)). If you wanted to boil it down to a simple description, it's just a user-friendly interface to the R environment - though big emphasis on the "user-friendly" (for more information, see [Chapter 9. R and RStudio](#randrstudio)).  
 

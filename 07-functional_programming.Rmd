@@ -1,0 +1,9 @@
+# Functional Programming {#functionalprogramming}
+
+## What `if()`?
+
+## Tales from the `for()` loop
+
+## The `apply()` family
+
+## Name day for a function
