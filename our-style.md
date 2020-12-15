@@ -46,15 +46,15 @@ nc = st_read(system.file("shape/nc.shp", package = "sf"))
 
 # Comments
 
-Comment your code unless obvious because the aim is teaching.
-Use capital first letter for full-line comment.
+- Comment your code unless obvious because the aim is teaching.
+- Use capital first letter for full-line comment.
 
 ```r
 # Create object x
 x = 1:9
 ```
 
-Do not capitalise comment for end-of-line comment
+- Do not capitalize comment for end-of-line comment
 
 ```r
 y = x^2 # square of x
@@ -72,8 +72,8 @@ y = x^2 # square of x
 
 # Captions
 
-Captions should not contain any markdown characters, e.g. `*` or `*`. 
-References in captions also should be avoided.
+- Captions should not contain any markdown characters, e.g. `*` or `*`. 
+- References in captions also should be avoided.
 
 # Figures
 
