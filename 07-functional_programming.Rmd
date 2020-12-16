@@ -1,4 +1,4 @@
-# Functional Programming {#functionalprogramming}
+# Functional Programming {#functional-programming}
 
 ## What `if()`?
 

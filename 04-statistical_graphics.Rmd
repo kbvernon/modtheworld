@@ -204,21 +204,20 @@ plot(y ~ x,
 
 ```
 
-```{block 2 05-datavisualizing-limits, type = "rmdcaution"}
+```{block2 05-datavisualizing-limits, type = "rmdcaution"}
 Individuals (especially those with a chaotic-evil alignment) may abuse plot limits to obscure or exaggerate features of their data. You see, for example, in our toy data that the points have a certain _trend_ starting in the upper left corner of the plot and falling to the lower right corner. What do you think would happen to the look of that trend, though, if we were to specify new limits for y, say [0, 100]?
 ```
 
-
-
+ 
 ## Layering
 
-Whenever you use `plot()`, it establishes a new "canvas" and provides some default plot elements (specifically x and y axis titles, a box around the plot region, and tick marks and labels). These can all be "turned off," so that `plot()` simply establishes an empty canvas.
+Whenever you use `plot()`, it establishes a new "canvas" and provides some default plot elements (specifically x and y axis titles, a box around the plot region, and tick marks and labels). These can all be "turned off," so that `plot()` simply establishes an empty canvas.  
 
 ```{r, fig.cap = "'A blizzard' by M. Duchamp"}
 
 plot(y ~ x,
      type = "n",
-     xaxt = "n", # remove the x-axis 
+     xaxt = "n", # remove the x-axis
      yaxt = "n", # remove the y-axis
      xlab = "",  # remove x-axis title
      ylab = "",  # remove y-axis title

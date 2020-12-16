@@ -317,7 +317,7 @@ my_dataframe$c3
 ### Select [`subset()`]
 
 ### Reshape [`reshape()`]
-
+ 
 
 ## What `if()`?
 

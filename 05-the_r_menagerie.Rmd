@@ -28,7 +28,7 @@ insert_intro(goal = "To familiarize students with the _ontology_ of the R Progra
                                ref = "[@Wickham2015advanced]")))
 
 ```
-
+ 
 <br>
 
 R contains a variety of _objects_, the most notable being _functions_ and _vectors_. These live in the R _environment_ (environments, actually). While there is a lot to say about functions and environments, those are mostly super-class 'A' R programming topics, verboten for an introductory text, so we discuss them only briefly to help dispel some of the mystery surrounding R. The majority of this chapter will, thus, be devoted to vectors. 

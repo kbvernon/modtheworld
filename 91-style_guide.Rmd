@@ -63,7 +63,7 @@ Also known as the DRY Principle. If you find yourself copying the same code mult
 
 ## Assignment First
 
-For assignment, use only the left-pointing arrow, `<-`. Do _not_ use right-facing assignment, `->`. You should also avoid using the equal sign, `=`. Even though these are allowed by R, they make your code harder to read and - at least in the latter case - ambiguous.
+Technically, R allows you to use a right-facing arrow, `->`, for assignment. You can also use the equal sign, `=`. However, even though these are allowed by R, they make your code harder to read and - at least in the latter case - ambiguous. So, you should always use the left-facing arrow, `<-`, for assignment
 
 ```{r}
 
