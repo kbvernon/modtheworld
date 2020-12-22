@@ -1,0 +1,55 @@
+# Data Wrangling {#data-wrangling}
+
+```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
+```
+
+```{r, echo = FALSE, out.width = '70%', fig.link = 'https://github.com/allisonhorst/stats-illustrations', fig.cap = "Artwork by Allison Horst"}
+
+knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/data_cowboy.png")
+
+```
+
+<br>
+
+## Overview
+
+```{r, echo = FALSE, results = 'asis'}
+
+insert_intro(goal = "To teach students how to manipulate and massage raw data into a format suitable for statistical analysis.",
+             tldr = "Managing data is challenging in any context, but at least it's reproducible in R.",
+             outcomes = c("importing and exporting data", 
+                          "indexing R objects,",
+                          "data wrangling,",
+                          "conditionals, and",
+                          "handling missing values."),
+             datasets = list(c(name = "Palmer Penguins", 
+                               url = "https://allisonhorst.github.io/palmerpenguins/",
+                               ref = "[@horst2020palmer]")),
+             requirements = list(),
+             readings = list(c(name = "An Introduction to R",
+                               url = "https://cran.r-project.org/doc/manuals/r-release/R-intro.html",
+                               ref = "[@rcoreteam2020introduction]"))
+             )
+
+```
+
+<br>
+
+
+### Arrange [`sort()`, `order()`]
+
+### Combine [`c()`, `rbind()`, `cbind()`, `merge()`]
+
+### Change [`transform()`]
+
+### Filter [`subset()`]
+
+### Select [`subset()`]
+
+### Reshape [`reshape()`]
+ 
+
+## Handling Missing Data
+
+
+

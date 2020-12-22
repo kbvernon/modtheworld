@@ -1,5 +1,8 @@
 # Statistical Graphics {#statistical-graphics}
 
+```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
+```
+
 ```{r piechart, echo = FALSE, out.width = '70%', fig.link = 'https://xkcd.com/'}
 
 knitr::include_graphics("images/r-xkcd_piechart.png")
@@ -67,6 +70,17 @@ knitr::include_graphics("images/r-plot_anatomy.png")
 
 The plot _region_ is the area in which _geometries_ (like points, lines, and polygons) provide visual representations of data. Particular locations within the plot region are specified using a two-dimensional coordinate grid, the coordinates being denoted by convention as 'x' and 'y'. Around the plot region, R defaults to including a plot box (represented by the light gray square in Fig. \@ref(fig:r-anatomy)). 
 
+### Sides
+
+The plot region is rectangular, so, naturally, it has four sides. R uses a number to refer to each side.
+
+- `1` = bottom
+- `2` = left
+- `3` = top
+- `4` = right
+
+Knowing how to refer to sides will allow you to control the position of other plot elements, like axes, for example.  
+
 ### Axes
 
 The scope of the plot region is defined by the x and y axes (represented by the thick orange lines), which specify the upper and lower limits of the observations to include in the plot. In Fig. \@ref(fig:r-anatomy), the limits are (0, 1) for both x and y. You may notice that the axes do not meet at the origin (0, 0). This is because R by default includes some padding above and below the specified limits. The most important elements of plot axes are breaks, tick marks, and tick labels. Tick marks provide a visual reference for how observations are arrayed within the plot region and are represented by short dashes emanating from each axis line. Breaks are specific values within the limits of an axis at which tick marks are displayed. By default, the breaks include the limits themselves. Ideally, break values are used as tick labels, though if you really wanted to confuse someone, including yourself, you can give them other labels as well.
@@ -77,7 +91,7 @@ Every R plot includes four titles, the main title, the subtitle, and a title for
 
 ### Margins
 
-One of the more complicated features of the base R anatomy is margins. For every plot, there are two sets of these: the inner (or figure) margins and the outer margins. The inner margin (represented by the dark red box) is the area immediately surrounding the plot region, which typically involves plot titles and axis labels. The outer margin (represented by the dark blue box) is an area of additional space around the inner margin. Fiddling with the outer margin is not particularly useful in most contexts, unless you want to have multiple plot regions in one figure (discussed below in the [Plot Layout](#layout) section). The area of the margins is defined by "Lines," named starting with 0. By default, the inner margin is four lines in width (Line 0 to Line 3) and the outer margin is three lines in width. These lines may be used to position other plot elements, including, more often than not, plot titles.
+One of the more complicated features of the base R anatomy is margins. For every plot, there are two sets of these: the inner (or figure) margins and the outer margins. The inner margin (represented by the dark red box) is the area immediately surrounding the plot region, which typically involves plot titles and axis labels. The outer margin (represented by the dark blue box) is an area of additional space around the inner margin. Fiddling with the outer margin is not particularly useful in most contexts, unless you want to have multiple plot regions in one figure (discussed below in the [Plot Layout](#layout) section). The area of the margins is defined by "Lines," named starting with 0. By default, the inner margin is four lines in width (Line 0 to Line 3) and the outer margin is three lines in width. These lines may be used to position other plot elements, including, more often than not, plot titles. Note that R does not include the outer margin by default. It must be added explicitly using [Graphical Parameters](#graphical-parameters) (see below). 
 
 ### Legend
 
@@ -227,7 +241,7 @@ plot(y ~ x,
 
 Now, let's add the defaults back incrementally. 
 
-```{r 05-layering-plot, echo = FALSE, animation.hook = "gifski", fig.cap = "Layering. The plot title explains what function is being used to add each layer."}
+```{r 05-layering-plot, echo = FALSE, animation.hook = "gifski", interval = 0.75, fig.cap = "Layering. The plot title explains what function is being used to add each layer."}
 
 par(pty = "s")
 
@@ -260,8 +274,8 @@ for(i in 1:12) {
   switch(switch_operator,
          title(),
          title(main = "box()", adj = 0, font.main = 1, line = 0.3),
-         title(main = "axis(1)", adj = 0, font.main = 1, line = 0.3),
-         title(main = "axis(2)", adj = 0, font.main = 1, line = 0.3),
+         title(main = "axis(side = 1)", adj = 0, font.main = 1, line = 0.3),
+         title(main = "axis(side = 2)", adj = 0, font.main = 1, line = 0.3),
          title(main = 'title(xlab = "X", ylab = "Y")', adj = 0, font.main = 1, line = 0.3),
          title(main = "points(y ~ x)", adj = 0, font.main = 1, line = 0.3)
   )
@@ -282,6 +296,7 @@ fun <- c("`abline()`",
          "`lines()`",
          "`mtext()`",
          "`points()`",
+         "`rect()`",
          "`segments()`",
          "`text()`",
          "`title()`")
@@ -294,6 +309,7 @@ desc <- c("Adds one or more straight lines through the current plot.",
           "A generic function taking coordinates given in various ways and joining the corresponding points with line segments.",
           "Writes text in one of the four margins of the current figure region or one of the outer margins of the device region.",
           "A generic function to draw a sequence of points at the specified coordinates.",
+          "Draws a rectangle (or sequence of rectangles) with the given coordinates, fill and border colors.",
           "Draw line segments between pairs of points.",
           "Draws the strings given in the vector `labels` at the coordinates given by `x` and `y`.",
           "Add labels to a plot.")
@@ -307,24 +323,33 @@ df %>%
 
 ```
 
-Figure \@ref(fig:05-layering-plot) shows how many of these functions work, but let's go over them in a little more detail by working through another example.
+Figure \@ref(fig:05-layering-plot) shows how some of these functions work. Here is the code used to generate that plot.
 
-```{r}
+```{r, eval = FALSE}
 
 plot(y ~ x,
      type = "n",
-     xlab = "X",
-     ylab = "Y",
+     xaxt = "n", 
+     yaxt = "n",
+     xlab = i,
+     ylab = "",
+     col.lab = "white",
+     frame.plot = FALSE,
      xlim = c(0, 1),
      ylim = c(0, 1))
 
-grid(lty = 1, col = "#ebebeb")
-
-points(y ~ x)
-
-abline(a = 0.95, b = -1, col = "red3")
-
+# add box around plot region
 box()
+
+# add axes
+axis(side = 1) # x-axis to bottom
+axis(side = 2) # y-axis to left
+
+# add axis lables
+title(xlab = "X", ylab = "Y")
+
+# add points
+points(y ~ x)
 
 ```
 
@@ -344,7 +369,7 @@ plot(y ~ x,
 
 ```
 
-Specifying these title annotations within `plot()` should be sufficient for simple plots, but for more fine grained control, you will want to use the `title()` function.
+Specifying these title annotations within `plot()` should be sufficient for simple plots, but for more fine grained control, you will want to use the `title()` function. 
 
 ```{r}
 
@@ -353,17 +378,59 @@ plot(y ~ x,
      ylab = "Y-axis Label")
 
 title(main = "Main Plot Title", 
-      col.main = "red3",
-      line = 0.3, # margin line location
-      adj = 0) # text alignment left
+      col.main = "red3", # color of main title
+      line = 0.3,        # inner margin line location
+      adj = 0)           # text alignment left
 
-title(sub = "")
+title(sub = "Literally, below the plot title",
+      col.sub = "orange3")
 
 ```
 
+Sometimes it is useful to label points or other geometries in the plot region. For this, R provides the `text()` function. As with the geometries themselves, the key here is to provide coordinates for where to locate the text. In this case, we use the point coordinates, since we are labeling them.
 
+```{r}
 
+plot(y ~ x,
+     xlab = "X",
+     ylab = "Y",
+     xlim = c(0, 1),
+     ylim = c(0, 1))
 
+# create point labels having the form "(x, y)"
+point_labels <- paste0("(", x, ", ", y, ")")
+
+text(y ~ x,
+     pos = 4,      # place text on the right side of the coordinate location
+     offset = 0.3, # add this much space between coordinate and text
+     labels = point_labels,
+     cex = 0.8)
+
+```
+
+You can also add text to the inner or outer margins with `mtext()` (though, bear in mind that you will have to add outer margins before you can add text to them). Since you are plotting outside the plot region, you specify the location of text in the margin using the side, line, and adjustment (or alignment), rather than coordinates.  
+
+```{r}
+
+plot(y ~ x,
+     xlab = "X",
+     ylab = "Y",
+     xlim = c(0, 1),
+     ylim = c(0, 1))
+
+mtext(text  = "(side = 3, line = 1, adj = 1)",
+      side  = 3,
+      line  = 1,
+      col   = "red3",
+      adj   = 1)
+
+mtext(text  = "(side = 1, line = 4, adj = 0)",
+      side  = 1,
+      line  = 4,
+      col   = "darkblue",
+      adj   = 0)
+
+```
 
 
 ## Graphical Parameters {#graphical-parameters}
@@ -376,7 +443,7 @@ plot(y ~ x, pch = 19)
 
 ```
 
-supplies the `plot()` function with the graphical parameter `pch = 19`, which specifies the type of point symbol to use (in this case a filled circle).  
+supplies the `plot()` function with the graphical parameter `pch = 19`, which specifies the type of point symbol to use (in this case a filled circle). The layering functions mentioned above will also take graphical parameters in this way.   
 
 You can also define graphical parameters globally, which means they will affect all plots the same way (well, more or less the same way). You do this by calling the `par()` function and supplying graphical parameters to it. For example,
 
@@ -415,7 +482,7 @@ For an exhaustive list of graphical parameters and examples of their effect, see
 
 R allows you to specify graphical parameters for points and lines (and by extension, polygons), for example, the type of symbol used to display the geometry. For points, this is controlled by `pch`. For lines, by `lty`. `pch` can take any value from 0 to 25, `lty` any value from 0 to 6. `lty` can also be specified with the words `"blank"`, `"solid"`, `"dashed"`, `"dotted"`, `"dotdash"`, `"longdash"`, and `"twodash"`. Here is what these look like.
 
-```{r 05-point-line, echo = FALSE, fig.cap = "Styling for point and line geometries."}
+```{r 05-point-line, echo = FALSE}
 
 windowsFonts(A = windowsFont("Arial"))
 
@@ -484,20 +551,20 @@ plot(ry ~ rx,
 min_x <- min(ix) - 0.2
 mid_x <- max(ix)/2.3
 
-y <- unique(iy)
+uy <- unique(iy)
 
 title(main = "Line Types (lty = 0:6)", 
       line = 0.4, 
       adj = 0)
 
 segments(x0 = min_x,
-         y0 = y,
+         y0 = uy,
          x1 = mid_x,
-         y1 = y,
+         y1 = uy,
          lty = lty,
          lwd = 2)
 
-text(y ~ rep(mid_x, length(y)),
+text(uy ~ rep(mid_x, length(uy)),
      pos = 4,
      offset = 0.8,
      labels = line_labels, 
@@ -505,22 +572,13 @@ text(y ~ rep(mid_x, length(y)),
 
 ```
 
-Notice that point symbols 0-14 are unfilled, 15-20 are filled and a single color, and 21-25 are filled and different colors, one for the line and one for the fill.    
-
-Here is an example of changing the point symbol, using our x and y vectors from above:
-
-```{r, echo = FALSE}
-
-x <- c(0.0, 0.1, 0.2, 0.3, 0.5, 0.6, 0.8, 0.7)
-y <- c(1.0, 0.7, 0.3, 0.5, 0.6, 0.4, 0.2, 0.0)
-
-```
+Notice that point symbols 0-14 are unfilled, 15-20 are filled and a single color, and 21-25 are filled and different colors, one for the line and one for the fill. Here is an example of changing the point symbol using our x and y vectors from above:
 
 ```{r}
 
 plot(y ~ x,
-     pch  = 17, # set point type here
      type = "p", # 'p' for "point"
+     pch  = 17, # set point type here
      xlab = "X",
      ylab = "Y",
      main = "Strange Points")
@@ -531,16 +589,12 @@ And here is an example of changing the line type:
 
 ```{r}
 
-x <- seq(0, 2*pi, length.out = 50)
-
-y <- sin(x)
-
 plot(y ~ x,
-     lty  = 4, # set line type here
      type = "l", # 'l' for "line"
+     lty  = 4, # set line type here
      xlab = "X",
      ylab = "Y",
-     main = "Sine Wave")
+     main = "Strange Line")
 
 ```
 
@@ -578,10 +632,10 @@ title(main = "Fonts (font = 1:4)",
       line = 0.4, 
       adj = 0)
 
-x <- rep(0, 4)
-y <- rev(seq(0.1, 0.9, length.out = 5)[2:5])
+tx <- rep(0, 4)
+ty <- rev(seq(0.1, 0.9, length.out = 5)[2:5])
 
-text(y ~ x, 
+text(ty ~ tx, 
      font = fonts,
      labels = font_labels,
      adj = 0, 
@@ -603,20 +657,20 @@ title(main = "Adjustment to Red Line",
       line = 0.4, 
       adj = 0)
 
-x <- 0.5
-y <- rev(seq(0.1, 0.9, length.out = 5))
+tx <- 0.5
+ty <- rev(seq(0.1, 0.9, length.out = 5))
 
 abline(v = 0.5, lty = 2, col = "red3")
 
 for(i in 1:length(adj)) {
     
-    y1 <- y[i]
+    y1 <- ty[i]
     
     a <- adj[i]
     
     adj_label <- paste0("adj = ", formatC(a, digits = 2, format = "f"))
     
-    text(y1 ~ x, 
+    text(y1 ~ tx, 
          labels = adj_label,
          adj = a, 
          cex = 1.5)
@@ -624,8 +678,122 @@ for(i in 1:length(adj)) {
 
 ```
 
-
 ### Color
+
+Color is an enormous topic in its own right and rightly so. For it's one of the most important aspects of a good plot. Here, however, we can only touch on some of the issues. To begin with, R provides five graphical parameters to control the color of different plot elements. Those are the following: 
+
+```{r, echo = FALSE, results = 'asis'}
+
+df <- data.frame("Parameter" = c("`col`", "`col.axis`", "`col.lab`", "`col.main`", "`col.sub`"),
+                 "Description" = c("Color of geometries in the plot region.",
+                                   "Color of axis tick labels.",
+                                   "Color of axis labels.",
+                                   "Color of main title.",
+                                   "Color of subtitle."))
+
+df %>% 
+  kable(escape = FALSE) %>% 
+  kable_styling(full_width = FALSE)
+
+```
+
+Now, we just need a way of providing the color we want to those parameters. For this, R offers a number of tools. The two most intuitive ones are perhaps the name of the color and its R number identifier. For a complete list of R color names, you can use the `colors()` function.  
+
+```{r}
+
+all_R_colors <- colors()
+
+all_R_colors[1:3]
+
+```
+
+```{r, echo = FALSE}
+
+par(family = "A",
+    cex.main = 1.5,
+    font.main = 1)
+
+plot(0, 
+     type = "n",
+     xlab = "",
+     ylab = "",
+     xaxt = "n",
+     yaxt = "n",
+     xlim = c(0, 1),
+     ylim = c(0, 1))
+
+bar_height <- 0.073
+n_colors <- 30
+my_colors <- colors()[1:n_colors]
+
+xleft <- rep(0.05, n_colors/3)
+xleft <- c(xleft, xleft + 0.33, xleft + 0.66)
+
+ybottom <- seq(0, 1 - bar_height, length.out = n_colors/3)
+ybottom <- rep(ybottom, 3) %>% rev()
+
+xright <- xleft + (bar_height * 0.5)
+ytop <- ybottom + bar_height
+
+rect(xleft, ybottom, xright, ytop,
+     col = my_colors)
+
+y_text <- ybottom + (bar_height/2)
+
+text(y_text ~ xright,
+     labels = my_colors,
+     pos = 4, 
+     adj = 0,
+     offset = 0.4)
+
+text(y_text ~ xleft,
+     labels = paste0(1:n_colors, "-"),
+     pos = 2,
+     adj = c(1, 0.5),
+     offset = 0.2,
+     cex = 0.8)
+
+title(main = "First Thirty Colors in R",
+      line = 0.3,
+      adj  = 0)
+
+```
+
+Now we can combine these color specifications with the graphical parameters and do this:
+
+```{r}
+
+plot(y ~ x,
+     type = "n",
+     xaxt = "n",
+     yaxt = "n",
+     xlab = "", 
+     ylab = "",
+     xlim = c(0, 1),
+     ylim = c(0, 1))
+
+axis(side = 1, col.axis = "blue4") # who comes up with these names?
+axis(side = 2, col.axis = "blue4")
+
+points(y ~ x, 
+       pch = 19, 
+       col = "darkgoldenrod")
+
+title(main = "Weird Colors",
+      line = 0.3,
+      adj = 0,
+      col.main = "aquamarine4")
+
+title(xlab = "X",
+      ylab = "Y",
+      col.lab = "darkorchid")
+
+title(sub = "Can't unsee this plot.",
+      col.sub = "deeppink4")
+
+```
+
+
 
 ### Size
 
@@ -637,7 +805,7 @@ for(i in 1:length(adj)) {
 
 
 
-## Multi-lot Layouts
+## Multi-plot Layouts
 
 
 

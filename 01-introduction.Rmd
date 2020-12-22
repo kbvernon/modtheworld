@@ -1,6 +1,10 @@
 # Introduction {#intro}
 
+```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
+```
+
 This book provides an introduction to doing statistics, here understood as a way of modeling the world. It also introduces readers to the R programming language and environment [@rcoreteam2020language], providing them with the programming skills necessary to do statistics cheaply, efficiently - and perhaps most importantly - in a reproducible fashion.
+
 
 ## Why this book?
 
@@ -8,11 +12,12 @@ Lots of really good books on R and statistics exist, for example,
 
 - Cetinkaya-Rundel and Hardin (2020) "[Introduction to Modern Statistics](https://openintro-ims.netlify.app/)"
 - Ismay and Kim (2020) "[Statistical Inference via Data Science](https://moderndive.com/index.html)"
+- Phillips (2018) "[YaRrr! The Pirate's Guide to R](https://bookdown.org/ndphillips/YaRrr/)"
 - Wickham and Grolemund (2017) "[R for Data Science](https://r4ds.had.co.nz/index.html)"
 
 So, why write another one? Well, basically, it fills a niche. 
 
-R philosophy
+R philosophy = tidy-light
 
 Statistics philosophy
 

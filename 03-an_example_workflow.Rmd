@@ -1,0 +1,180 @@
+# An Example Workflow {#example-workflow}
+
+```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
+```
+
+To give you a feel for what all can be done with R, let's walk through an example workflow (see Fig. \@ref(fig:r-workflow)). This typically involves importing data, reshaping and/or subsetting the data to get it into a format necessary for analysis, doing some preliminary descriptive statistics to explore general properties of the data, doing some inferential statistics to investigate trends in the data, and summarizing the results of the analysis. At various stages, visualizing will be help, either to explore the data further or to help communicate the results to others. A lot of the output of this process, we will also want to save for later, perhaps to include in a publication (like a figure or model summary), but maybe also to avoid repetition of difficult and time-consuming tasks (where we would, for example, save our cleaned up dataset).
+
+<br>
+
+```{r r-workflow, echo = FALSE, out.width = '60%', fig.cap = "Standard workflow in R"}
+
+knitr::include_graphics("images/r-workflow.png")
+
+```
+
+<br>
+
+Of course, this is only an idealized workflow and not necessarily one that will ever be realized in practice. It should, however, provide some indication of the general make-up of a complete statistical analysis in R.
+
+### Load Data
+
+```{r}
+
+penguins <- read.csv("penguins.csv")
+
+head(penguins)
+
+```
+
+### Do Grunt Work
+
+Are observations of bill length missing for any penguins in this dataset? To answer this question, we can check for NA values.
+
+```{r}
+
+any(is.na(penguins$bill_length_mm))
+
+```
+
+<br>
+
+And if we really need that information, we can exclude those penguins from our analysis.
+
+```{r}
+
+penguins <- subset(penguins, !is.na(bill_length_mm))
+
+```
+
+<br>
+
+How many penguins are on each island?
+
+```{r}
+
+counts <- table(penguins$island)
+
+counts
+
+```
+
+<br>
+
+What does this distribution look like?
+
+```{r, fig.width = 5}
+
+barplot(counts)
+
+```
+
+<br>
+
+What is the mean bill length for each species?
+
+```{r}
+
+aggregate(bill_length_mm ~ species, 
+          FUN = mean,
+          data = penguins)
+
+```
+
+<br>
+
+And the standard deviation?
+
+```{r}
+
+aggregate(bill_length_mm ~ species, 
+          FUN = sd,
+          data = penguins)
+
+```
+
+<br>
+
+How is bill length distributed across species?
+
+```{r, fig.width = 5}
+
+boxplot(bill_length_mm ~ species, 
+        data = penguins,
+        xlab = "Species",
+        ylab = "Bill Length (mm)")
+
+```
+
+### Do Fun Stuff
+
+```{r}
+
+penguin_model <- lm(flipper_length_mm ~ bill_length_mm, data = penguins)
+
+summary(penguin_model)
+
+```
+
+<br>
+
+Estimate flipper length using `penguin_model`.
+
+```{r}
+
+est_flipper_length <- predict(penguin_model)
+
+```
+
+```{r}
+
+obs_flipper_length <- penguins$flipper_length_mm
+
+obs_bill_length <- penguins$bill_length_mm
+
+```
+
+<br>
+
+Plot the estimated trend against the observed values:
+
+```{r, fig.width = 5, fig.height = 5}
+
+plot(obs_flipper_length ~ obs_bill_length,
+     pch = 19,
+     cex = 1.3,
+     col = alpha("#949494", 0.4),
+     xlab = "Bill Length (mm)",
+     ylab = "Flipper Length (mm)")
+
+lines(est_flipper_length ~ obs_bill_length, col = "#850000")
+
+mtext(text = "Palmer Penguin Model",
+      side = 3, 
+      line = 0.3, 
+      adj = 0, 
+      cex = 1.5)
+
+```
+
+### Export Results
+
+Save the cleaned data.
+
+```{r, eval = FALSE}
+
+write.csv(penguins, "penguins.csv", row.names = FALSE)
+
+```
+
+Save the linear model.
+
+```{r, eval = FALSE}
+
+save(penguin_model, file = "penguin_model.Rdata")
+
+```
+
+And that's it!
+
+[Note: saving a figure in base R is a bit tricky, so we will leave that lesson for another time.]

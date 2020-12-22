@@ -1,12 +1,13 @@
-# The R Menagerie {#thermenagerie}
+# Vector Types {#vector-types}
 
-```{r r-menagerie, echo = FALSE, out.width = '100%', fig.link = 'https://en.wikipedia.org/wiki/Menagerie'}
+```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
+```
+
+```{r r-menagerie, echo = FALSE, out.width = '100%', fig.link = 'https://en.wikipedia.org/wiki/Menagerie', fig.cap = "The R Menagerie"}
 
 knitr::include_graphics("images/r-menagerie.png")
 
 ```
-
-<br>
 
 ## Overview
 
@@ -29,9 +30,7 @@ insert_intro(goal = "To familiarize students with the _ontology_ of the R Progra
 
 ```
  
-<br>
-
-R contains a variety of _objects_, the most notable being _functions_ and _vectors_. These live in the R _environment_ (environments, actually). While there is a lot to say about functions and environments, those are mostly super-class 'A' R programming topics, verboten for an introductory text, so we discuss them only briefly to help dispel some of the mystery surrounding R. The majority of this chapter will, thus, be devoted to vectors. 
+R contains a variety of _objects_, the most notable being _functions_ and _vectors_. These live in the R _environment_ (environments, actually). While there is a lot to say about functions and environments, those are mostly super-class 'A' R programming topics, verboten for an introductory text. The bulk of this chapter will, thus, be devoted to vectors. 
 
 Vectors can take a number of different forms, for example, scalars and lists (see Fig. \@ref(fig:r-objects)). In a sense (a slightly misleading sense), these objects are vessels that hold different _data types_, the four primary ones being integer, double (i.e., fractions), logical, and character. Putting effort into understanding these vector forms and data types might at first blush feel like a foolhardy pursuit of the inconsequential and esoteric, a task best relegated to crusty old philosophers. It is, however, of the utmost importance, for the different statistical questions you might want to ask will require data in one or the other form and type to answer. If, for example, you want to get the mean of some distribution, say the average height of actors who auditioned for the part of Aragorn in the timeless cinematic classic _Lord of the Rings_, you will only need a simple vector of double values. If, however, you want to know whether height varies as a function of diet, you will want a more complex object, specifically a data.frame. And, if you prefer order to chaos, you will surely enjoy lists.  
 
@@ -43,65 +42,7 @@ knitr::include_graphics("images/r-objects.png")
 
 <br>
 
-Fig. \@ref(fig:r-objects) might seem a little overwhelming at first, but don't let it intimidate you. Its meaning will become clear as we proceed. First, however, let's try to figure out how to make one of these objects in R.
-
-
-
-## Creating objects
-
-So, how do we create objects? Well, you just... 
-
-```{r}
-
-bob <- 5.137
-
-```
-
-It's that simple! Or, maybe not. Let's take a moment to unpack this black magic. First, we note that it is made-up of three things:  
-
-(1) a name, in this case, `bob`; 
-(2) an arrow, `<-`, the essential ingredient in this incantation; and  
-(3) an object, specifically the number `5.137`, which is being created.  
-
-Basically, what is happening here is that the statement creates an object (`5.137`) in the R environment, specifically the _global_ environment, and then assigns that object to the name `bob`. This is why it is sometimes referred to as an _assignment_ statement [@rcoreteam2020introduction]. It is not just creating an object, but assigning it to a name.
-
-Why assign a name? Well, if we just typed
-
-```{r, eval = FALSE}
-
-5.137
-
-```
-
-the resulting object would live a fleeting life, shorter than a fruit fly's, being quickly created and just as quickly destroyed. But, when we give an object a _name_, we also give it some permanence, and can literally _call_ it back whenever we like. We just say, "`bob`, come here!" but in the language of R:
-
-```{r}
-
-print(bob)
-
-```
-
-or even just
-
-```{r}
-
-bob
-
-```
-
-And then R summons `bob` for us and tells us who `bob` is. `bob` is `5.137`. Obviously!  
-
-Now, you may think, "I could just create `5.137` any time I wanted, let it die, and just create it again. It's not _that_ hard to type five characters, after all." In response to this flirtation with anarchy, two arguments are recommended. First, it is certainly true that one number is not hard to type, but it is rare that you will need just one. Suppose you had an object consisting of ten thousand numbers, would you care to type _that_ each time you needed it? Second, when you make an object with a name, R has your back. If you type `6.137` instead of `5.137`, for example, R will not protest, but if you type `boo` instead of `bob`, R will say, "nope."
-
-```{r, error = TRUE}
-
-6.137
-
-boo
-
-```
-
-So, giving objects names in R is a good way to avoid errors.
+Fig. \@ref(fig:r-objects) might seem a little overwhelming at first, but don't let it intimidate you. Its meaning will become clear as we proceed. 
 
 
 ## Data types
@@ -194,9 +135,9 @@ Similarly, if you use quote marks around a named object, R treats it as a charac
 
 ```{r}
 
-"bob"
+"my_integer"
 
-bob
+my_integer
 
 ```
 
@@ -257,7 +198,7 @@ _How to catch one in the wild?_ By asking "Is this _a_ logical?"
 
 ```{r}
 
-is.logical(bob) #sad
+is.logical(my_double) 
 
 is.logical(my_logical)
 

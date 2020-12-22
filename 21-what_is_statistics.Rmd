@@ -1,3 +1,6 @@
 # (PART) Introduction to Statistics {-}
 
 # What is Statistics? {#whatisstats}
+
+```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
+```
