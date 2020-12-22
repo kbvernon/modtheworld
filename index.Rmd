@@ -3,6 +3,7 @@ title: "Modeling the World with R"
 author: "Kenneth Blake Vernon"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
+output: bookdown::gitbook
 documentclass: book
 bibliography: [references.bib, packages.bib]
 biblio-style: apalike
@@ -26,3 +27,5 @@ The book is also free and open source, licensed under the Creative Commons ...
 By contributing to _Mod the World_, you agree to follow its Contributor Code of Conduct. 
 
 # Acknowledgments {-}
+
+I'd like to think Jim Beam.
