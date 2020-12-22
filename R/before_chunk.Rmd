@@ -1,15 +1,23 @@
 
+<!-- include libraries -->
+
+```{r, include = FALSE, echo = FALSE}
+
 library(dplyr)
 library(ggplot2)
 library(here)
 library(knitr)
 library(kableExtra)
 
+```
+
+<!-- knit_hook: collapse and strip white 
+this is a Blake hack -->
+
+```{r, include = FALSE, echo = FALSE}
 
 local({
   
-  # force knitr to strip white space at begin and end of code block
-  # even when collapse = TRUE
   hook_source <- knitr::knit_hooks$get('source')
   knitr::knit_hooks$set(source = function(x, options) {
     
@@ -34,14 +42,44 @@ local({
     x <- strip_white2(x)
     x <- paste(x, sep = '', collapse = '\n')
     hook_source(x, options)
-  },
-  
-  # change error styling in output
-  error = function(x, options) {
-    paste0("<pre style=\"color: red;\"><code>", x, "</code></pre>")
   })
   
 })
+
+```
+
+<!-- knit_hook: collapse and print error red
+super hacky, see here: https://stackoverflow.com/a/54985678/7705429
+we'll need to be careful to not string four # together anywhere
+--->
+
+<script>
+$(document).ready(function() {
+  window.setTimeout(function() {
+    $(".co:contains('####')").css("color", "red");
+    var tmp = $(".co:contains('####')").text();
+    $(".co:contains('####')").text(tmp.replace("####", "##"));
+  }, 15);
+});
+</script>
+
+```{r, include = FALSE, echo = FALSE}
+
+local({
+  
+  hook_error <- knitr::knit_hooks$get("error")
+  knitr::knit_hooks$set(error = function(x, options) {
+    x <- paste0("##", x)
+    hook_error(x, options)
+  })
+  
+})
+
+```
+
+<!-- chunk options -->
+
+```{r}
 
 knitr::opts_chunk$set(echo = TRUE,
                       warning = FALSE,
@@ -50,6 +88,18 @@ knitr::opts_chunk$set(echo = TRUE,
                       collapse = TRUE, # code and output in same block
                       fig.align = "center")
 
+```
+
+
+
+<!-- miscellaneous -->
+
+```{r, include = FALSE, echo = FALSE}
+
 set.seed(2020)
 
 source(here("R/insert_intro.R"))
+
+```
+
+
