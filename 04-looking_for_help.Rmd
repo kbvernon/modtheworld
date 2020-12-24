@@ -42,8 +42,6 @@ Typically, though not always, R code will have lots of supporting documentation.
 
 ## RStudio {#rstudio-help}
 
-[RStudio](https://rstudio.com/) is an open-source software development company that provides tools for working with a number of programming languages; though, as its name suggests, it is primarily geared toward R. Far and away the most useful tool RStudio offers is Rstudio Desktop, which is part of RStudio's Integrated Development Environment (or, IDE)). If you wanted to boil it down to a simple description, it's just a user-friendly interface to the R environment - though big emphasis on the "user-friendly" (for more information, see [Chapter 9. R and RStudio](#randrstudio)).  
-
 While RStudio provides loads of support to R users, here we mention some of the more important ones.  
 
 1. [RStudio How To Articles](https://support.rstudio.com/hc/en-us/categories/200035113-Documentation) provide loads of how-to guides for working with R and RStudio. This is a very comprehensive suite of useful documentation.  

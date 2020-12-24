@@ -64,7 +64,7 @@ In this section, we'll go over some basic considerations of where to _write_ you
 
 ### R Console
 
-Perhaps this is obvious, but you can write R code basically anywhere - on a napkin at a restaurant, for instance, on your hand in a pinch, or even in a fever dream - but if you want to get your R code to actually _run_, you will have to send it to the R console, so it can be _interpreted_. In this sense, at least, the R console is just the R _environment_ itself, the place where R code comes to life. Here is what typing R code in the actual R console looks like:
+Perhaps this is obvious, but you can write R code basically anywhere - on a napkin at a restaurant, for instance, on your hand in a pinch, or even in a fever dream - but if you want to get your R code to actually _run_, you will have to send it to the R console, so it can be _interpreted_. In this sense, at least, the R console is like R's central nervous system. Signals (your code) get sent to the console to get interpreted and generate some behavioral output (like a plot or a linear model). Here is what typing R code in the actual R console looks like:
 
 ```{r, echo = FALSE, animation.hook = "gifski", interval = 0.15, fig.align = "left", fig.height = 3, out.width = "100%"}
 
