@@ -3,6 +3,13 @@
 ```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
 ```
 
+```{r r-stuff, echo = FALSE, out.width = '80%', fig.link = 'https://en.wikipedia.org/wiki/R'}
+
+knitr::include_graphics("images/r_stuff.png")
+
+```
+
+
 ## What is R? 
 
 R is variously described as a programming *language* for statistical computing and as a programming *environment* [@hornik2020faq]. In fact, if you use R to conduct any statistical analysis that will likely end up in a scientific publication, you will want to refer to it as such -- to say something like "All analyses were conducted in the R Programming Environment" or "All analyses were conducted with the R Programming Language" -- and then to cite it! For example,
