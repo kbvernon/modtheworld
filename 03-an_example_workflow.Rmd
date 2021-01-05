@@ -147,7 +147,7 @@ plot(obs_flipper_length ~ obs_bill_length,
      xlab = "Bill Length (mm)",
      ylab = "Flipper Length (mm)")
 
-lines(est_flipper_length ~ obs_bill_length, col = "#850000")
+abline(penguin_model, col = "#850000")
 
 mtext(text = "Palmer Penguin Model",
       side = 3, 
