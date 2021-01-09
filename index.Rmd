@@ -20,7 +20,11 @@ knitr::write_bib(c(
 
 # Welcome {-}
 
-This is the website for __"Modeling the World with R"__, a book that introduces readers to the fundamentals of statistics and statistical programming in R. While this book is geared toward practical applications, like analyzing and visualizing data, it aims to promote higher-order understanding of statistical concepts and theory too - not just the _how_, in other words, but the _why_. The reader will, thus, come away with a better sense of statistical _relevance_, or the ability to say why one statistical tool rather than another is appropriate for answering a particular question.  
+This is the website for __"Modeling the World with R"__, a book that introduces readers to the fundamentals of statistics and statistical programming in R.  
+
+<img src="images/book_cover.png" width="315" height="315" align="right" style="margin: 0 1em 0 1em" />
+
+While geared toward practical applications, like analyzing and visualizing data, this book aims to promote higher-order understanding of statistical concepts and theory too - not just the _how_, but the _why_. The reader will, thus, come away with a better sense of statistical _relevance_; meaning, they will be able to start with a scientific question, translate it into a more precise statistical form, identify the _appropriate_ statistical methods, and then use the statistical programming tools offered by R to implement those methods efficiently. In a word, then, the book aims to make the reader a more efficient and more thoughtful empirical _modeler_.  
 
 The book is also free and open source, licensed under the Creative Commons ... 
 
