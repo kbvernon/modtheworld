@@ -1,13 +1,23 @@
 # R Style Guide {#r-style-guide}
 
+```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
+```
+
+```{r 05-style, echo = FALSE, out.width = '80%', fig.cap = "O.P.C. (Abstruse Goose 432)", fig.link = 'https://abstrusegoose.com/432'}
+
+knitr::include_graphics("https://abstrusegoose.com/strips/you_down_wit_OPC-yeah_you_know_me.png")
+
+```
+
 ```{r, echo = FALSE}
 
 knitr::opts_chunk$set(eval = FALSE)
 
 ```
 
-
+<!--
 > "Good coding style is like correct punctuation: you can manage without it, butitsuremakesthingseasiertoread." -Hadley Wickham 
+-->
 
 When writing code, you should always have an eye to ensuring that it is both clear and intelligible for anyone who might come along and read it, which includes future-you! This will ensure that your code is _reproducible_, which is especially important if what you are doing with R is scientific analysis. It is also just of practical value, for you will most assuredly want to reuse your code at some point in the future, or apply it to a different data set, but if you can't make heads or tails of it, well...
 
@@ -81,7 +91,7 @@ bob = 5.137
 
 ## The Cratylus Rule
 
-This rule requires that a name reflect the nature of the thing named.^[Does not apply to natural languages!] Because objects _are_ things and functions _do_ things, the Cratylus Rule suggests that you should use nouns as names for R objects and verbs as names for R functions. 
+This rule requires that a name reflect the nature of the thing named. Because objects _are_ things and functions _do_ things, the Cratylus Rule suggests that you should use nouns as names for R objects and verbs as names for R functions. 
 
 ```{r}
 
