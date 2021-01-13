@@ -1,17 +1,29 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# modtheworld
+# Modeling the World with R
 
 <!-- badges: start -->
 
 <!-- badges: end -->
 
-The goal of modtheworld is to …
+This repository hosts the source code for **“Modeling the World with
+R”**, a book that introduces readers to the fundamentals of statistics
+and statistical programming in R.
+
+Couple things to note:
+
+1.  This book is still being written.  
+2.  It is designed for a classroom setting, not for the casual reader.
+    In fact, I am hesitant to call it a “book” at all.  
+3.  And, it is primarily geared toward students who have some
+    proficiency with basic statistical concepts. In the United States,
+    that would be advanced undergraduates and beginning graduate
+    students.
 
 ## Code of Conduct
 
-Please note that the modtheworld project is released with a [Contributor
+Please note that *Modeling the World* is released with a [Contributor
 Code of
 Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
