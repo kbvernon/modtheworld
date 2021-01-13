@@ -28,7 +28,7 @@ While geared toward practical applications, like analyzing and visualizing data,
 
 The book is also free and open source, licensed under the Creative Commons ... 
 
-By contributing to _Mod the World_, you agree to follow its Contributor Code of Conduct. 
+By contributing to _Modeling the World_, you agree to follow its [Contributor Code of Conduct](https://github.com/kbvernon/modtheworld/blob/main/CODE_OF_CONDUCT.md). 
 
 # Acknowledgments {-}
 
