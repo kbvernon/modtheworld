@@ -26,7 +26,7 @@ This is the website for __"Modeling the World with R"__, a book that introduces 
 
 While geared toward practical applications, like analyzing and visualizing data, this book aims to promote higher-order understanding of statistical concepts and theory too - not just the _how_, but the _why_. The reader will, thus, come away with a better sense of statistical _relevance_; meaning, they will be able to start with a scientific question, translate it into a more precise statistical form, identify the _appropriate_ statistical methods, and then use the statistical programming tools offered by R to implement those methods efficiently. In a word, then, the book aims to make the reader a more efficient and more thoughtful empirical _modeler_.  
 
-The book is also free and open source, licensed under the Creative Commons ... 
+<!-- book is also free and open source, licensed under the Creative Commons ... -->
 
 By contributing to _Modeling the World_, you agree to follow its [Contributor Code of Conduct](https://github.com/kbvernon/modtheworld/blob/main/CODE_OF_CONDUCT.md). 
 

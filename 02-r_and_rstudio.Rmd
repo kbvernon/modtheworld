@@ -22,7 +22,7 @@ And the full citation you can now see in the References below.
 
 According to the R Core Team [-@rcoreteam2020introduction], referring to R as an environment "is intended to characterize it as a fully planned and coherent system, rather than an incremental accretion of very specific and inflexible tools." Now, on its face, this is a somewhat strange claim, as the word 'environment' would seem to suggest a physical surrounding composed of *unplanned* and *incremental* accretions. What is more, the R Programming Environment is not immune, as the quote would suggest, to constraints imposed by its history and evolution. Nowhere is this more apparent than in the myriad syntactic inconsistencies that have proliferated over the last 25 years of R's development [@Wickham2015advanced].
 
-Still, the word 'environment' is a good one, for R really is an environment that one can *enter into*, so to speak, and there do lots of very fun, very interesting, and very meaningful things, like complex data manipulations, fancy statistics, and data visualization (see [The Whole Shebang](#example) for an example workflow!). In this sense, you can think of it as a literal terminal or console on your computer that you type commands into. You can also think of the R environment as the place where the objects you make _live and breath and have their being_. In this sense, it is like a digital zoo or menagerie because the environment has (or _should_ have, anyway) a lot more order to it than, say, a natural landscape unadulterated by human action. For more on the R environment, see [Chapter 9: Workspace Management](#workspace-management).  
+Still, the word 'environment' is a good one, for R really is an environment that one can *enter into*, so to speak, and there do lots of very fun, very interesting, and very meaningful things, like complex data manipulations, fancy statistics, and data visualization (see [Chapter 3](#example-workflow) for an example workflow!). In this sense, you can think of it as a literal terminal or console on your computer that you type commands into. You can also think of the R environment as the place where the objects you make _live and breath and have their being_. In this sense, it is like a digital zoo or menagerie because the environment has (or _should_ have, anyway) a lot more order to it than, say, a natural landscape unadulterated by human action. For more on the R environment, see [Chapter 9: Workspace Management](#workspace-management).  
 
 ### The R Language
 
@@ -50,11 +50,11 @@ Actually, 'R' is a play on 'S', the name of the language R is based on, which Jo
 
 But, maybe you want to know why you should *use* R. Well...
 
-### It's Free!
+### It's free!
 
 R is free software under the terms of the [Free Software Foundation's](http://www.gnu.org/) GNU General Public License.
 
-### It's Statistics Made Easy, or Easier
+### It's statistics made easy
 
 Using R lets you exploit the awesome computing powers of the modern world. Just try to do maximum likelihood estimation on, say, 10,000 observations of a half-dozen variables by hand. It is *NOT* worth it. But it is with R! And, what is more, R provides an elegant and concise syntax for writing these complex statistical operations.
 
@@ -67,7 +67,7 @@ glm(formula = y ~ x1 + x2 + x3 + x4 + x5,
 
 ```
 
-### It's Pretty Figures
+### It's pretty figures
 
 One of the most powerful features of R is its ability to produce publication-quality plots. For instance, R's native graphics engine allows you to plot this normal distribution:
 
@@ -116,7 +116,7 @@ mtext(text = "A Pretty Gaussian!",
 
 ```
 
-### It's Reproducible
+### It's reproducible
 
 R also facilitates reproducible research. It does this in two ways. First, it forces you to declare explicitly each step in your analysis.
 
@@ -136,7 +136,7 @@ We see here that someone has set the seed for R's random number generator, sampl
 
 The second way that R promotes reproducible research is by making R code like this _shareable_. In the simplest case, we use R _scripts_, which are text-based files containing R code that you or someone else with an R installation can run. Alternatively, we can use [R Markdown](https://rmarkdown.rstudio.com/), a much more flexible tool for not only writing and saving R code, but for explaining in detail what you are doing alongside the code itself.
 
-### It's an Active Community
+### It's an active community
 
 R is also an incredibly active and growing community, with lots of rich and informative documentation, and forums where one can go to get help trouble-shooting problems. There are a lot of ways to visualize this idea, but here is one, the number of downloads of R from the online RStudio CRAN mirror (not necessary to know what that is) from 2015 to the present.
 
@@ -155,7 +155,7 @@ ggplot(bob, aes(x = month, y = count)) +
 
 If you are going to do anything with R, [RStudio](https://rstudio.com/) is hands-down the best place to do it. RStudio is an open-source integrated development environment (or IDE) that makes programming in R simpler, more efficient, and most importantly, more reproducible. Some of its more user-friendly features are syntax highlighting (it displays code in different colors depending on what it is or does, which makes it easier for you to navigate the code that you've written), code completion (it will try to guess what code you are attempting to write and write it for you), and keyboard shortcuts for the more repetitive tasks. By far, though, the best feature RStudio offers is a customizable workbench or visual interface for R programming (described in the next section).  
 
-### Pane Layout
+### Pane layout
 
 When you first open RStudio, you should see three window panes: the Console, the Environment, and the Viewer. If you open an R script, a fourth Source pane will also open. The default layout of these panes is shown in Figure \@ref(fig:02-rstudio-layout).  
 

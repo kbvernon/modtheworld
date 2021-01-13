@@ -18,30 +18,37 @@ The code does not have to be self-standing: it can depend on code run previously
   - be sectioned with the help of `---`, `===`, and `###` e.g. as achieved by pressing `Ctl-Shift-R`
 
 ```
-# Filename: filename.R (2018-02-06)
 # Aim: What should the script achieve
-#
-# Author(s): Robin Lovelace, Jakub Nowosad, Jannes Muenchow
-#
-#**********************************************************
-# CONTENTS-------------------------------------------------
-#**********************************************************
-#
-# 1. ATTACH PACKAGES AND DATA
-# 2. DATA EXPLORATION
-#
-#**********************************************************
-# 1 ATTACH PACKAGES AND DATA-------------------------------
-#**********************************************************
+# Date: 2020-01-13
+
+# Author(s): Blake, Thor, Spiderman
+
+# OUTLINE -----------------------------------------------
+
+# 1. R PREAMBLE 
+# 2. IMPORT DATA
+# 3. EXPLORE DATA
+# 4. ...
+
+# 1 R PREAMBLE ------------------------------------------
 
 # attach packages
+library(dplyr)
 library(sf)
-# attach data
+
+# define global options
+proj_crs <- st_crs(26912)
+
+# source functions
+sosurce("plot_helpers.R")
+
+
+# 2 IMPORT DATA -----------------------------------------
+
 nc = st_read(system.file("shape/nc.shp", package = "sf"))
 
-#**********************************************************
-# 2 DATA EXPLORATION---------------------------------------
-#**********************************************************
+# 3 EXPLORE DATA ----------------------------------------
+
 ```
 
 # Comments
