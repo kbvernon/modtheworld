@@ -11,6 +11,17 @@ library(kableExtra)
 
 ```
 
+<!-- kableExtra bootstrap css 
+https://haozhu233.github.io/kableExtra/bookdown/use-bootstrap-tables-in-gitbooks-epub.html
+-->
+
+```{r}
+
+options(kableExtra.html.bsTable = TRUE)
+
+```
+
+
 <!-- knit_hook: collapse and strip white 
 this is a Blake hack -->
 

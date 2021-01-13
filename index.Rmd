@@ -3,7 +3,9 @@ title: "Modeling the World with R"
 author: "Kenneth Blake Vernon"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-output: bookdown::gitbook
+output: 
+  bookdown::gitbook:
+    table_css: FALSE
 documentclass: book
 bibliography: [references.bib, packages.bib]
 biblio-style: apalike
