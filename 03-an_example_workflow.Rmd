@@ -3,6 +3,14 @@
 ```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
 ```
 
+```{r 04-rmaze, echo = FALSE, out.width = '80%', fig.cap = "The often circuitous and sometimes painful maze of statistical analysis in R."}
+
+knitr::include_graphics("images/rat_race.png") 
+
+```
+
+## In fits and starts
+
 To give you a feel for what all can be done with R, let's walk through an example workflow (see Fig. \@ref(fig:r-workflow)). This typically involves importing data, reshaping and/or subsetting the data to get it into a format necessary for analysis, doing some preliminary descriptive statistics to explore general properties of the data, doing some inferential statistics to investigate trends in the data, and summarizing the results of the analysis. At various stages, visualizing will be help, either to explore the data further or to help communicate the results to others. A lot of the output of this process, we will also want to save for later, perhaps to include in a publication (like a figure or model summary), but maybe also to avoid repetition of difficult and time-consuming tasks (where we would, for example, save our cleaned up dataset).
 
 <br>

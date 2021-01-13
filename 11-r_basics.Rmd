@@ -5,11 +5,12 @@
 ```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
 ```
 
-```{r r-foot, echo = FALSE, out.width = '100%', fig.link = 'https://en.wikipedia.org/wiki/Patterson%E2%80%93Gimlin_film'}
+```{r 11-r_stuff, echo = FALSE, out.width = '80%', fig.link = 'https://en.wikipedia.org/wiki/R'}
 
-knitr::include_graphics("images/r-foot.jpg")
+knitr::include_graphics("images/r_stuff.png")
 
 ```
+
 
 ## Overview
 

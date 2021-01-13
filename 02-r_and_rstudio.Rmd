@@ -3,9 +3,9 @@
 ```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
 ```
 
-```{r r-stuff, echo = FALSE, out.width = '80%', fig.link = 'https://en.wikipedia.org/wiki/R'}
+```{r 03-rfoot, echo = FALSE, out.width = '100%', fig.cap = "R in the wild.", fig.link = 'https://en.wikipedia.org/wiki/Patterson%E2%80%93Gimlin_film'}
 
-knitr::include_graphics("images/r_stuff.png")
+knitr::include_graphics("images/r-foot.jpg")
 
 ```
 
