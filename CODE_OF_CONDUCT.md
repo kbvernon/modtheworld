@@ -46,9 +46,6 @@ Project maintainers have the right and responsibility to remove, edit, or reject
 
 ## Attribution
 
-This Code of Conduct is adapted from the [Contributor Covenant][homepage],
-version 2.0,
-available at https://www.contributor-covenant.org/version/2/0/
-code_of_conduct.html. 
+This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 2.0, available at https://www.contributor-covenant.org/version/2/0/code_of_conduct.html. 
 
 Some modifications adopted from the [_geocompr_ Code of Conduct](https://github.com/Robinlovelace/geocompr/blob/master/CODE_OF_CONDUCT.md).
