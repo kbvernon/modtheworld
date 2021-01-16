@@ -3,11 +3,11 @@
 ```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
 ```
 
-This book provides an advanced introduction to doing statistics using the R programming language and environment [@rcoreteam2020language], equipping the reader with the programming skills necessary to do statistics cheaply, efficiently - and perhaps most importantly - in a reproducible fashion.
+This book provides an advanced introduction to doing statistics with R [@rcoreteam2020language], equipping the reader with the programming skills necessary to do statistics cheaply, efficiently - and perhaps most importantly - in a reproducible fashion.
 
 ## Who is this book for?
 
-It is primarily geared toward students who have some proficiency with basic statistical concepts. In the United States, that would be advanced undergraduates and beginning graduate students. While it does cover much of the same ground as an introductory course, it covers those topics in greater detail and with an eye toward expressing and exploring those statistical concepts within the R programming language and environment. The hope is that being a better R programmer will make you a better statistician and that being a better statistician will make you a better R programmer.    
+It is primarily geared toward students who have some familiarity with basic statistical concepts. In the United States, that would be advanced undergraduates and beginning graduate students. While it does cover much of the same ground as an introductory course, it covers those topics in greater detail and with an eye toward exploring those statistical concepts within R. The hope is that being a better R programmer will make you a better statistician and that being a better statistician will make you a better R programmer.    
 
 ## Why this book?
 
@@ -18,7 +18,7 @@ Lots of really good books on R and statistics exist, for example,
 - Phillips (2018) "[YaRrr! The Pirate's Guide to R](https://bookdown.org/ndphillips/YaRrr/)"
 - Wickham and Grolemund (2017) "[R for Data Science](https://r4ds.had.co.nz/index.html)"
 
-So, why write another one? The best way to answer that question is probably with the big idea motivating the book, specifically the intuition that _all_ of statistics may be thought of as a framework for not only building models of the world, but evaluating them. This idea guides the book's layout and content, providing a fresh approach to statistics and statistical programming.
+So, why write another one? The best way to answer that question is probably with the big idea motivating the book, specifically the intuition that statistics is, in the first place, a framework for building and evaluating _models_ of the world. This idea guides the book's layout and content, providing a fresh approach to statistics and statistical programming.
 
 It may be juxtaposed with a common strategy for teaching introductory statistics, which goes something like this. First, you introduce students to some _descriptive_ statistics, beginning with properties of a single variable, including measures of its central tendency, its variability, and its shape and skew. From there, you move on to discussing various significance tests, like Student's T. Finally, you reach the topic of modeling, covering such things as ordinary least squares and perhaps generalized linear modeling. If you had to give it a name, you might call this breezy strategy the _Describe-Test-Model_ (DTM) paradigm of statistics pedagogy.  
 
