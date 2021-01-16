@@ -14,8 +14,8 @@ and statistical programming in R.
 Couple things to note:
 
 1.  This book is still being written.  
-2.  It is designed for a classroom setting, not for the casual reader.
-    In fact, I am hesitant to call it a “book” at all.  
+2.  It is designed for a classroom setting and is very experimental at
+    this point.  
 3.  It is primarily geared toward students who have some proficiency
     with basic statistical concepts. In the United States, that would be
     advanced undergraduates and beginning graduate students.
