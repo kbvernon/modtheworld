@@ -1,0 +1,28 @@
+rmd_files: 
+    - "index.Rmd"
+    - "01-introduction.Rmd"
+    - "02-r_and_rstudio.Rmd"
+    - "03-an_example_workflow.Rmd"
+    - "04-looking_for_help.Rmd"  
+    - "05-style_guide.Rmd"
+    - "11-r_basics.Rmd"
+    - "12-statistical_graphics.Rmd"
+    - "13-vector_types.Rmd"
+    - "14-workspace_management.Rmd"
+    - "15-vector_indexing.Rmd"
+    - "16-data_wrangling.Rmd"
+    - "21-what_is_statistics.Rmd"
+    - "22-univariate_description.Rmd"
+    - "23-probability_distributions.Rmd"
+    - "24-inference_tests.Rmd"
+    - "25-multivariate_description.Rmd"
+    - "26-linear_models.Rmd"
+    - "27-model_diagnostics.Rmd"
+    - "28-generalized_linear_models.Rmd"
+    - "references.Rmd"
+book_filename: "modtheworld"
+delete_merged_file: true
+new_session: yes
+language:
+  ui:
+    chapter_name: "Chapter "
