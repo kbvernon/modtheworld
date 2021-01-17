@@ -1,7 +1,0 @@
-# Workspace Management {#workspace-management}
-
-```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
-```
-
-## The Working Directory
-
