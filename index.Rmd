@@ -34,4 +34,3 @@ By contributing to _Modeling the World_, you agree to follow its [Contributor Co
 
 # Acknowledgments {-}
 
-test
