@@ -2,9 +2,7 @@ on:
   push:
      branches:
        - main
-
-  
-
+       
 name: renderbook
 
 jobs:
@@ -32,7 +30,7 @@ jobs:
    needs: bookdown
    steps:
      - name: Checkout
-       uses: actions/checkout@master
+       uses: actions/checkout@v2
      - name: Download artifact
        uses: actions/download-artifact@v1.0.0
        with:
@@ -43,7 +41,7 @@ jobs:
      - name: Deploy to GitHub Pages
        uses: Cecilapp/GitHub-Pages-deploy@v3
        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}      # https://github.com/settings/tokens
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}    # https://github.com/settings/tokens
        with:
           email: ${{ secrets.EMAIL }}          # must be a verified email
           build_dir: _book/                    # "_site/" by default
