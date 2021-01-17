@@ -71,7 +71,7 @@ The book itself consists of three parts: an introduction to the book, an introdu
 1. __Introduction to book__. This section covers the core software (R and RStudio), provides an example workflow to give the reader a general sense of what the book is about, explains how to find help with R, and introduces our style guide.    
 2. __Introduction to R__. This section provides a broad outline of core R programming skills and syntax, including statistical graphics, data types, importing and exporting, indexing, and wrangling. 
 3. __Introduction to Statistics__. This section offers a narrow but deep dive into fundamental statistical concepts. It is divided roughly into statistical description and inference for (i) univariate and (ii) multivariate data.   
--->
+--> 
 
 
 ### Chapter overviews  
