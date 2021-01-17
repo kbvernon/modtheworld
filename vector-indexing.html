@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 10 Vector Indexing | Modeling the World with R</title>
+  <meta name="description" content="This book provides a gentle yet comprehensive introduction to doing basic statistics in R." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 10 Vector Indexing | Modeling the World with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book provides a gentle yet comprehensive introduction to doing basic statistics in R." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 10 Vector Indexing | Modeling the World with R" />
+  
+  <meta name="twitter:description" content="This book provides a gentle yet comprehensive introduction to doing basic statistics in R." />
+  
+
+<meta name="author" content="Kenneth Blake Vernon" />
+
+
+<meta name="date" content="2021-01-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="workspace-management.html"/>
+<link rel="next" href="data-wrangling.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Modeling the World with R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i>Acknowledgments</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#who-is-this-book-for"><i class="fa fa-check"></i><b>1.1</b> Who is this book for?</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#why-this-book"><i class="fa fa-check"></i><b>1.2</b> Why this book?</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#pedagogy"><i class="fa fa-check"></i><b>1.3</b> Pedagogy</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#the-abelson-principle"><i class="fa fa-check"></i><b>1.4</b> The Abelson Principle</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#book-layout"><i class="fa fa-check"></i><b>1.5</b> Book layout</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="intro.html"><a href="intro.html#chapter-overviews"><i class="fa fa-check"></i><b>1.5.1</b> Chapter overviews</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#r-code-formatting"><i class="fa fa-check"></i><b>1.6</b> R code formatting</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#exercises-and-data"><i class="fa fa-check"></i><b>1.7</b> Exercises and data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html"><i class="fa fa-check"></i><b>2</b> R and RStudio</a><ul>
+<li class="chapter" data-level="2.1" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#what-is-r"><i class="fa fa-check"></i><b>2.1</b> What is R?</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#the-r-environment"><i class="fa fa-check"></i><b>2.1.1</b> The R Environment</a></li>
+<li class="chapter" data-level="2.1.2" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#the-r-language"><i class="fa fa-check"></i><b>2.1.2</b> The R Language</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#why-r"><i class="fa fa-check"></i><b>2.2</b> Why R?</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#its-free"><i class="fa fa-check"></i><b>2.2.1</b> It’s free!</a></li>
+<li class="chapter" data-level="2.2.2" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#its-statistics-made-easy"><i class="fa fa-check"></i><b>2.2.2</b> It’s statistics made easy</a></li>
+<li class="chapter" data-level="2.2.3" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#its-pretty-figures"><i class="fa fa-check"></i><b>2.2.3</b> It’s pretty figures</a></li>
+<li class="chapter" data-level="2.2.4" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#its-reproducible"><i class="fa fa-check"></i><b>2.2.4</b> It’s reproducible</a></li>
+<li class="chapter" data-level="2.2.5" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#its-an-active-community"><i class="fa fa-check"></i><b>2.2.5</b> It’s an active community</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#rstudio"><i class="fa fa-check"></i><b>2.3</b> RStudio</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html#pane-layout"><i class="fa fa-check"></i><b>2.3.1</b> Pane layout</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="example-workflow.html"><a href="example-workflow.html"><i class="fa fa-check"></i><b>3</b> An Example Workflow</a><ul>
+<li class="chapter" data-level="3.1" data-path="example-workflow.html"><a href="example-workflow.html#in-fits-and-starts"><i class="fa fa-check"></i><b>3.1</b> In fits and starts</a></li>
+<li class="chapter" data-level="3.2" data-path="example-workflow.html"><a href="example-workflow.html#the-whole-shebang"><i class="fa fa-check"></i><b>3.2</b> The whole shebang</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="example-workflow.html"><a href="example-workflow.html#load-data"><i class="fa fa-check"></i><b>3.2.1</b> Load data</a></li>
+<li class="chapter" data-level="3.2.2" data-path="example-workflow.html"><a href="example-workflow.html#do-grunt-work"><i class="fa fa-check"></i><b>3.2.2</b> Do grunt work</a></li>
+<li class="chapter" data-level="3.2.3" data-path="example-workflow.html"><a href="example-workflow.html#do-fun-stuff"><i class="fa fa-check"></i><b>3.2.3</b> Do fun stuff</a></li>
+<li class="chapter" data-level="3.2.4" data-path="example-workflow.html"><a href="example-workflow.html#export-results"><i class="fa fa-check"></i><b>3.2.4</b> Export results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="looking-for-help.html"><a href="looking-for-help.html"><i class="fa fa-check"></i><b>4</b> Looking for Help</a><ul>
+<li class="chapter" data-level="4.1" data-path="looking-for-help.html"><a href="looking-for-help.html#the-google-search-paradox"><i class="fa fa-check"></i><b>4.1</b> The Google Search Paradox</a></li>
+<li class="chapter" data-level="4.2" data-path="looking-for-help.html"><a href="looking-for-help.html#helpful-helpers"><i class="fa fa-check"></i><b>4.2</b> Helpful helpers</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="looking-for-help.html"><a href="looking-for-help.html#r"><i class="fa fa-check"></i><b>4.2.1</b> R</a></li>
+<li class="chapter" data-level="4.2.2" data-path="looking-for-help.html"><a href="looking-for-help.html#rstudio-help"><i class="fa fa-check"></i><b>4.2.2</b> RStudio</a></li>
+<li class="chapter" data-level="4.2.3" data-path="looking-for-help.html"><a href="looking-for-help.html#r-community"><i class="fa fa-check"></i><b>4.2.3</b> R Community</a></li>
+<li class="chapter" data-level="4.2.4" data-path="looking-for-help.html"><a href="looking-for-help.html#other-resources"><i class="fa fa-check"></i><b>4.2.4</b> Other Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="looking-for-help.html"><a href="looking-for-help.html#reproducible-examples"><i class="fa fa-check"></i><b>4.3</b> Reproducible examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-style-guide.html"><a href="r-style-guide.html"><i class="fa fa-check"></i><b>5</b> R Style Guide</a><ul>
+<li class="chapter" data-level="5.1" data-path="r-style-guide.html"><a href="r-style-guide.html#abelson-again"><i class="fa fa-check"></i><b>5.1</b> Abelson again</a></li>
+<li class="chapter" data-level="5.2" data-path="r-style-guide.html"><a href="r-style-guide.html#be-verbose"><i class="fa fa-check"></i><b>5.2</b> Be verbose!</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="r-style-guide.html"><a href="r-style-guide.html#object-names"><i class="fa fa-check"></i><b>5.2.1</b> Object names</a></li>
+<li class="chapter" data-level="5.2.2" data-path="r-style-guide.html"><a href="r-style-guide.html#function-parameters"><i class="fa fa-check"></i><b>5.2.2</b> Function parameters</a></li>
+<li class="chapter" data-level="5.2.3" data-path="r-style-guide.html"><a href="r-style-guide.html#code-commenting"><i class="fa fa-check"></i><b>5.2.3</b> Code commenting</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="r-style-guide.html"><a href="r-style-guide.html#dont-repeat-yourself-dry"><i class="fa fa-check"></i><b>5.3</b> Don’t Repeat Yourself (DRY)</a></li>
+<li class="chapter" data-level="5.4" data-path="r-style-guide.html"><a href="r-style-guide.html#assignment-first"><i class="fa fa-check"></i><b>5.4</b> Assignment first</a></li>
+<li class="chapter" data-level="5.5" data-path="r-style-guide.html"><a href="r-style-guide.html#the-cratylus-rule"><i class="fa fa-check"></i><b>5.5</b> The Cratylus Rule</a></li>
+<li class="chapter" data-level="5.6" data-path="r-style-guide.html"><a href="r-style-guide.html#empty-nests"><i class="fa fa-check"></i><b>5.6</b> Empty nests!</a></li>
+<li class="chapter" data-level="5.7" data-path="r-style-guide.html"><a href="r-style-guide.html#be-open"><i class="fa fa-check"></i><b>5.7</b> Be open</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="r-style-guide.html"><a href="r-style-guide.html#spacing"><i class="fa fa-check"></i><b>5.7.1</b> Spacing</a></li>
+<li class="chapter" data-level="5.7.2" data-path="r-style-guide.html"><a href="r-style-guide.html#line-length"><i class="fa fa-check"></i><b>5.7.2</b> Line Length</a></li>
+</ul></li>
+<li class="chapter" data-level="5.8" data-path="r-style-guide.html"><a href="r-style-guide.html#be-organized"><i class="fa fa-check"></i><b>5.8</b> Be organized</a></li>
+</ul></li>
+<li class="part"><span><b>I Introduction to R</b></span></li>
+<li class="chapter" data-level="6" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>6</b> R Basics</a><ul>
+<li class="chapter" data-level="6.1" data-path="r-basics.html"><a href="r-basics.html#overview"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="r-basics.html"><a href="r-basics.html#a-glorified-calculator"><i class="fa fa-check"></i><b>6.2</b> A Glorified Calculator?</a></li>
+<li class="chapter" data-level="6.3" data-path="r-basics.html"><a href="r-basics.html#console-and-scripts"><i class="fa fa-check"></i><b>6.3</b> Console and Scripts</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="r-basics.html"><a href="r-basics.html#r-console"><i class="fa fa-check"></i><b>6.3.1</b> R Console</a></li>
+<li class="chapter" data-level="6.3.2" data-path="r-basics.html"><a href="r-basics.html#r-scripts"><i class="fa fa-check"></i><b>6.3.2</b> R Scripts</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="r-basics.html"><a href="r-basics.html#objects-and-functions"><i class="fa fa-check"></i><b>6.4</b> Objects and Functions</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="r-basics.html"><a href="r-basics.html#creating-objects-with-assignment"><i class="fa fa-check"></i><b>6.4.1</b> Creating objects with assignment</a></li>
+<li class="chapter" data-level="6.4.2" data-path="r-basics.html"><a href="r-basics.html#doing-things-with-functions"><i class="fa fa-check"></i><b>6.4.2</b> Doing things with functions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="r-basics.html"><a href="r-basics.html#packages-in-the-r-library"><i class="fa fa-check"></i><b>6.5</b> Packages in the R Library</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="statistical-graphics.html"><a href="statistical-graphics.html"><i class="fa fa-check"></i><b>7</b> Statistical Graphics</a><ul>
+<li class="chapter" data-level="7.1" data-path="statistical-graphics.html"><a href="statistical-graphics.html#overview-1"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
+<li class="chapter" data-level="7.2" data-path="statistical-graphics.html"><a href="statistical-graphics.html#plot-anatomy"><i class="fa fa-check"></i><b>7.2</b> Plot Anatomy</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="statistical-graphics.html"><a href="statistical-graphics.html#region"><i class="fa fa-check"></i><b>7.2.1</b> Region</a></li>
+<li class="chapter" data-level="7.2.2" data-path="statistical-graphics.html"><a href="statistical-graphics.html#sides"><i class="fa fa-check"></i><b>7.2.2</b> Sides</a></li>
+<li class="chapter" data-level="7.2.3" data-path="statistical-graphics.html"><a href="statistical-graphics.html#axes"><i class="fa fa-check"></i><b>7.2.3</b> Axes</a></li>
+<li class="chapter" data-level="7.2.4" data-path="statistical-graphics.html"><a href="statistical-graphics.html#titles"><i class="fa fa-check"></i><b>7.2.4</b> Titles</a></li>
+<li class="chapter" data-level="7.2.5" data-path="statistical-graphics.html"><a href="statistical-graphics.html#margins"><i class="fa fa-check"></i><b>7.2.5</b> Margins</a></li>
+<li class="chapter" data-level="7.2.6" data-path="statistical-graphics.html"><a href="statistical-graphics.html#legend"><i class="fa fa-check"></i><b>7.2.6</b> Legend</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="statistical-graphics.html"><a href="statistical-graphics.html#plot-function"><i class="fa fa-check"></i><b>7.3</b> The <code>plot()</code> Function</a></li>
+<li class="chapter" data-level="7.4" data-path="statistical-graphics.html"><a href="statistical-graphics.html#layering"><i class="fa fa-check"></i><b>7.4</b> Layering</a></li>
+<li class="chapter" data-level="7.5" data-path="statistical-graphics.html"><a href="statistical-graphics.html#annotation"><i class="fa fa-check"></i><b>7.5</b> Annotation</a></li>
+<li class="chapter" data-level="7.6" data-path="statistical-graphics.html"><a href="statistical-graphics.html#graphical-parameters"><i class="fa fa-check"></i><b>7.6</b> Graphical Parameters</a><ul>
+<li class="chapter" data-level="7.6.1" data-path="statistical-graphics.html"><a href="statistical-graphics.html#geometry-type"><i class="fa fa-check"></i><b>7.6.1</b> Geometry Type</a></li>
+<li class="chapter" data-level="7.6.2" data-path="statistical-graphics.html"><a href="statistical-graphics.html#text"><i class="fa fa-check"></i><b>7.6.2</b> Text</a></li>
+<li class="chapter" data-level="7.6.3" data-path="statistical-graphics.html"><a href="statistical-graphics.html#color"><i class="fa fa-check"></i><b>7.6.3</b> Color</a></li>
+<li class="chapter" data-level="7.6.4" data-path="statistical-graphics.html"><a href="statistical-graphics.html#size"><i class="fa fa-check"></i><b>7.6.4</b> Size</a></li>
+<li class="chapter" data-level="7.6.5" data-path="statistical-graphics.html"><a href="statistical-graphics.html#axes-1"><i class="fa fa-check"></i><b>7.6.5</b> Axes</a></li>
+<li class="chapter" data-level="7.6.6" data-path="statistical-graphics.html"><a href="statistical-graphics.html#margins-1"><i class="fa fa-check"></i><b>7.6.6</b> Margins</a></li>
+<li class="chapter" data-level="7.6.7" data-path="statistical-graphics.html"><a href="statistical-graphics.html#miscellaneous"><i class="fa fa-check"></i><b>7.6.7</b> Miscellaneous</a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="statistical-graphics.html"><a href="statistical-graphics.html#multi-plot-layouts"><i class="fa fa-check"></i><b>7.7</b> Multi-plot Layouts</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="vector-types.html"><a href="vector-types.html"><i class="fa fa-check"></i><b>8</b> Vector Types</a><ul>
+<li class="chapter" data-level="8.1" data-path="vector-types.html"><a href="vector-types.html#overview-2"><i class="fa fa-check"></i><b>8.1</b> Overview</a></li>
+<li class="chapter" data-level="8.2" data-path="vector-types.html"><a href="vector-types.html#data-types"><i class="fa fa-check"></i><b>8.2</b> Data types</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="vector-types.html"><a href="vector-types.html#integer"><i class="fa fa-check"></i><b>8.2.1</b> Integer</a></li>
+<li class="chapter" data-level="8.2.2" data-path="vector-types.html"><a href="vector-types.html#double"><i class="fa fa-check"></i><b>8.2.2</b> Double</a></li>
+<li class="chapter" data-level="8.2.3" data-path="vector-types.html"><a href="vector-types.html#character"><i class="fa fa-check"></i><b>8.2.3</b> Character</a></li>
+<li class="chapter" data-level="8.2.4" data-path="vector-types.html"><a href="vector-types.html#logical"><i class="fa fa-check"></i><b>8.2.4</b> Logical</a></li>
+<li class="chapter" data-level="8.2.5" data-path="vector-types.html"><a href="vector-types.html#factors"><i class="fa fa-check"></i><b>8.2.5</b> Factors</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="vector-types.html"><a href="vector-types.html#vector-types-1"><i class="fa fa-check"></i><b>8.3</b> Vector types</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="vector-types.html"><a href="vector-types.html#scalar"><i class="fa fa-check"></i><b>8.3.1</b> Scalar</a></li>
+<li class="chapter" data-level="8.3.2" data-path="vector-types.html"><a href="vector-types.html#vector"><i class="fa fa-check"></i><b>8.3.2</b> Vector</a></li>
+<li class="chapter" data-level="8.3.3" data-path="vector-types.html"><a href="vector-types.html#matrix"><i class="fa fa-check"></i><b>8.3.3</b> Matrix</a></li>
+<li class="chapter" data-level="8.3.4" data-path="vector-types.html"><a href="vector-types.html#list"><i class="fa fa-check"></i><b>8.3.4</b> List</a></li>
+<li class="chapter" data-level="8.3.5" data-path="vector-types.html"><a href="vector-types.html#data.frame"><i class="fa fa-check"></i><b>8.3.5</b> Data.frame</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="vector-types.html"><a href="vector-types.html#coercion"><i class="fa fa-check"></i><b>8.4</b> Coercion</a></li>
+<li class="chapter" data-level="8.5" data-path="vector-types.html"><a href="vector-types.html#environments"><i class="fa fa-check"></i><b>8.5</b> Environments</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="workspace-management.html"><a href="workspace-management.html"><i class="fa fa-check"></i><b>9</b> Workspace Management</a><ul>
+<li class="chapter" data-level="9.1" data-path="workspace-management.html"><a href="workspace-management.html#the-working-directory"><i class="fa fa-check"></i><b>9.1</b> The Working Directory</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="vector-indexing.html"><a href="vector-indexing.html"><i class="fa fa-check"></i><b>10</b> Vector Indexing</a><ul>
+<li class="chapter" data-level="10.1" data-path="vector-indexing.html"><a href="vector-indexing.html#exploring-your-data"><i class="fa fa-check"></i><b>10.1</b> Exploring your data</a></li>
+<li class="chapter" data-level="10.2" data-path="vector-indexing.html"><a href="vector-indexing.html#indexing-your-data"><i class="fa fa-check"></i><b>10.2</b> Indexing your data</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="vector-indexing.html"><a href="vector-indexing.html#integer-indexing"><i class="fa fa-check"></i><b>10.2.1</b> Integer Indexing</a></li>
+<li class="chapter" data-level="10.2.2" data-path="vector-indexing.html"><a href="vector-indexing.html#logical-indexing"><i class="fa fa-check"></i><b>10.2.2</b> Logical Indexing</a></li>
+<li class="chapter" data-level="10.2.3" data-path="vector-indexing.html"><a href="vector-indexing.html#character-indexing"><i class="fa fa-check"></i><b>10.2.3</b> Character Indexing</a></li>
+<li class="chapter" data-level="10.2.4" data-path="vector-indexing.html"><a href="vector-indexing.html#assignment-and-replacement"><i class="fa fa-check"></i><b>10.2.4</b> Assignment and Replacement</a></li>
+<li class="chapter" data-level="10.2.5" data-path="vector-indexing.html"><a href="vector-indexing.html#complex-indexing"><i class="fa fa-check"></i><b>10.2.5</b> Complex Indexing</a></li>
+<li class="chapter" data-level="10.2.6" data-path="vector-indexing.html"><a href="vector-indexing.html#matrix-1"><i class="fa fa-check"></i><b>10.2.6</b> Matrix</a></li>
+<li class="chapter" data-level="10.2.7" data-path="vector-indexing.html"><a href="vector-indexing.html#list-1"><i class="fa fa-check"></i><b>10.2.7</b> List</a></li>
+<li class="chapter" data-level="10.2.8" data-path="vector-indexing.html"><a href="vector-indexing.html#data.frame-1"><i class="fa fa-check"></i><b>10.2.8</b> Data.frame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>11</b> Data Wrangling</a><ul>
+<li class="chapter" data-level="11.1" data-path="data-wrangling.html"><a href="data-wrangling.html#overview-3"><i class="fa fa-check"></i><b>11.1</b> Overview</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="data-wrangling.html"><a href="data-wrangling.html#arrange-sort-order"><i class="fa fa-check"></i><b>11.1.1</b> Arrange [<code>sort()</code>, <code>order()</code>]</a></li>
+<li class="chapter" data-level="11.1.2" data-path="data-wrangling.html"><a href="data-wrangling.html#combine-c-rbind-cbind-merge"><i class="fa fa-check"></i><b>11.1.2</b> Combine [<code>c()</code>, <code>rbind()</code>, <code>cbind()</code>, <code>merge()</code>]</a></li>
+<li class="chapter" data-level="11.1.3" data-path="data-wrangling.html"><a href="data-wrangling.html#change-transform"><i class="fa fa-check"></i><b>11.1.3</b> Change [<code>transform()</code>]</a></li>
+<li class="chapter" data-level="11.1.4" data-path="data-wrangling.html"><a href="data-wrangling.html#filter-subset"><i class="fa fa-check"></i><b>11.1.4</b> Filter [<code>subset()</code>]</a></li>
+<li class="chapter" data-level="11.1.5" data-path="data-wrangling.html"><a href="data-wrangling.html#select-subset"><i class="fa fa-check"></i><b>11.1.5</b> Select [<code>subset()</code>]</a></li>
+<li class="chapter" data-level="11.1.6" data-path="data-wrangling.html"><a href="data-wrangling.html#reshape-reshape"><i class="fa fa-check"></i><b>11.1.6</b> Reshape [<code>reshape()</code>]</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="data-wrangling.html"><a href="data-wrangling.html#handling-missing-data"><i class="fa fa-check"></i><b>11.2</b> Handling Missing Data</a></li>
+</ul></li>
+<li class="part"><span><b>II Introduction to Statistics</b></span></li>
+<li class="chapter" data-level="12" data-path="whatisstats.html"><a href="whatisstats.html"><i class="fa fa-check"></i><b>12</b> What is Statistics?</a></li>
+<li class="chapter" data-level="13" data-path="univariate-description.html"><a href="univariate-description.html"><i class="fa fa-check"></i><b>13</b> Univariate Description</a></li>
+<li class="chapter" data-level="14" data-path="probability-distributions.html"><a href="probability-distributions.html"><i class="fa fa-check"></i><b>14</b> Probability Distributions</a></li>
+<li class="chapter" data-level="15" data-path="inference-tests.html"><a href="inference-tests.html"><i class="fa fa-check"></i><b>15</b> Inference Tests</a></li>
+<li class="chapter" data-level="16" data-path="multivariate-description.html"><a href="multivariate-description.html"><i class="fa fa-check"></i><b>16</b> Multivariate Description</a></li>
+<li class="chapter" data-level="17" data-path="ols.html"><a href="ols.html"><i class="fa fa-check"></i><b>17</b> Linear Models</a></li>
+<li class="chapter" data-level="18" data-path="model-diagnostics.html"><a href="model-diagnostics.html"><i class="fa fa-check"></i><b>18</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="19" data-path="glm.html"><a href="glm.html"><i class="fa fa-check"></i><b>19</b> Generalized Linear Models</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modeling the World with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="vector-indexing" class="section level1">
+<h1><span class="header-section-number">Chapter 10</span> Vector Indexing</h1>
+<!-- include libraries -->
+<!-- kableExtra bootstrap css 
+https://haozhu233.github.io/kableExtra/bookdown/use-bootstrap-tables-in-gitbooks-epub.html
+-->
+<!-- knit_hook: collapse and strip white 
+this is a Blake hack -->
+<!-- knit_hook: collapse and print error red
+super hacky, see here: https://stackoverflow.com/a/54985678/7705429
+we'll need to be careful to not string four # together anywhere
+--->
+<script>
+$(document).ready(function() {
+  window.setTimeout(function() {
+    $(".co:contains('####')").css("color", "red");
+    var tmp = $(".co:contains('####')").text();
+    $(".co:contains('####')").text(tmp.replace("####", "##"));
+  }, 15);
+});
+</script>
+<!-- chunk options -->
+<!-- miscellaneous -->
+<div id="exploring-your-data" class="section level2">
+<h2><span class="header-section-number">10.1</span> Exploring your data</h2>
+</div>
+<div id="indexing-your-data" class="section level2">
+<h2><span class="header-section-number">10.2</span> Indexing your data</h2>
+<p>You will often need to access specific elements of a vector you have created, rather than use the whole vector itself. To do access those elements, however, we need some way of referring to or <em>indexing</em> them. That’s where <em>indexing vectors</em> come in, which we supply to the object we want to index using the single brackets operator <code>[</code>. Strictly speaking you can use any data type to define an indexing vector, but the three that are most useful (and really the only three you should ever use) are:</p>
+<ul>
+<li><strong>Integer</strong>. This indexes by <em>position</em>.<br />
+</li>
+<li><strong>Logical</strong>. This indexes by <em>condition</em>.<br />
+</li>
+<li><strong>Character</strong>. This indexes by <em>name</em>.</li>
+</ul>
+<div id="integer-indexing" class="section level3">
+<h3><span class="header-section-number">10.2.1</span> Integer Indexing</h3>
+<p>With integer indexing, you select elements by their literal position in a vector (see @ref(fig:r-objects_vector_position)).</p>
+<p><img src="images/r-objects_vector_position.png" width="30%" style="display: block; margin: auto;" /></p>
+<p>As you see, this contains five scalars (the letters ‘a’ through ‘b’), with the position of each just being a numbered location, starting with one for the first scalar and increasing by one for each additional scalar. We can create this vector in the usual way.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="vector-indexing.html#cb90-1"></a>a_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>)</span></code></pre></div>
+<p>Now, we can create an integer index, <code>i</code>, and apply it to our vector like so.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="vector-indexing.html#cb91-1"></a>i &lt;-<span class="st"> </span><span class="dv">3</span></span>
+<span id="cb91-2"><a href="vector-indexing.html#cb91-2"></a></span>
+<span id="cb91-3"><a href="vector-indexing.html#cb91-3"></a>a_vector[i]</span>
+<span id="cb91-4"><a href="vector-indexing.html#cb91-4"></a><span class="co">## [1] &quot;c&quot;</span></span></code></pre></div>
+<p>We can also provide multiple integers as an index.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="vector-indexing.html#cb92-1"></a>i &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb92-2"><a href="vector-indexing.html#cb92-2"></a></span>
+<span id="cb92-3"><a href="vector-indexing.html#cb92-3"></a>a_vector[i]</span>
+<span id="cb92-4"><a href="vector-indexing.html#cb92-4"></a><span class="co">## [1] &quot;a&quot; &quot;c&quot; &quot;e&quot;</span></span></code></pre></div>
+<p>For brevity, we can also supply the vector directly.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="vector-indexing.html#cb93-1"></a>a_vector[<span class="dv">3</span>]</span>
+<span id="cb93-2"><a href="vector-indexing.html#cb93-2"></a></span>
+<span id="cb93-3"><a href="vector-indexing.html#cb93-3"></a>a_vector[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)]</span></code></pre></div>
+<p>Finally, we can also supply <em>negative</em> integers to identify positions we do <em>not</em> want to return.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="vector-indexing.html#cb94-1"></a>a_vector[<span class="op">-</span>i]</span>
+<span id="cb94-2"><a href="vector-indexing.html#cb94-2"></a><span class="co">## [1] &quot;b&quot; &quot;d&quot;</span></span></code></pre></div>
+</div>
+<div id="logical-indexing" class="section level3">
+<h3><span class="header-section-number">10.2.2</span> Logical Indexing</h3>
+<p>With logical indexing, you are indexing a vector according to a condition, such that each element in the vector that satisfies that condition is returned and each element that fails is discarded. How do we evaluate elements in a vector according to a condition? By including the vector in a statement that R can evaluate for its truth or falsity. The result is a logical vector, which can be used as our logical index.</p>
+<p>Consider this numeric vector:</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="vector-indexing.html#cb95-1"></a>a_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">0.2</span>, <span class="fl">3.1</span>, <span class="dv">4</span>, <span class="fl">5.2</span>)</span></code></pre></div>
+<p>Now, perhaps, we want to return only those elements that are, say, greater than 3.</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="vector-indexing.html#cb96-1"></a>i &lt;-<span class="st"> </span>a_vector <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span></span>
+<span id="cb96-2"><a href="vector-indexing.html#cb96-2"></a></span>
+<span id="cb96-3"><a href="vector-indexing.html#cb96-3"></a>i</span>
+<span id="cb96-4"><a href="vector-indexing.html#cb96-4"></a><span class="co">## [1] FALSE FALSE  TRUE  TRUE  TRUE</span></span>
+<span id="cb96-5"><a href="vector-indexing.html#cb96-5"></a>a_vector[i]</span>
+<span id="cb96-6"><a href="vector-indexing.html#cb96-6"></a><span class="co">## [1] 3.1 4.0 5.2</span></span></code></pre></div>
+<p>As before, we can supply the logical condition directly with <code>a_vector[a_vector &gt; 3]</code>. And we can invert our logical condition using the negation operator, <code>!</code> (sometimes pronounced “bang”).</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="vector-indexing.html#cb97-1"></a><span class="op">!</span>i</span>
+<span id="cb97-2"><a href="vector-indexing.html#cb97-2"></a><span class="co">## [1]  TRUE  TRUE FALSE FALSE FALSE</span></span>
+<span id="cb97-3"><a href="vector-indexing.html#cb97-3"></a>a_vector[<span class="op">!</span>i]</span>
+<span id="cb97-4"><a href="vector-indexing.html#cb97-4"></a><span class="co">## [1] 1.1 0.2</span></span></code></pre></div>
+
+<div class="rmdnote">
+Logical indexing offers an important advantage over integer indexing, namely, that you do not have to know the exact position of elements beforehand. This is especially true when your vectors are quite large. I mean, just try and appreciate the difficulty that would surely accompany specifying the position of more than ten elements, more than one hundred elements, or even a thousand! No thanks.
+</div>
+
+</div>
+<div id="character-indexing" class="section level3">
+<h3><span class="header-section-number">10.2.3</span> Character Indexing</h3>
+<p>With character indexing, you reference objects in a vector by their given name. Suppose, for example, that our toy vector came with these names:</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="vector-indexing.html#cb98-1"></a>avengers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;spiderman&quot;</span>, <span class="st">&quot;blackwidow&quot;</span>, <span class="st">&quot;hulk&quot;</span>, <span class="st">&quot;ironman&quot;</span>, <span class="st">&quot;scarlet_witch&quot;</span>)</span>
+<span id="cb98-2"><a href="vector-indexing.html#cb98-2"></a></span>
+<span id="cb98-3"><a href="vector-indexing.html#cb98-3"></a><span class="kw">names</span>(a_vector) &lt;-<span class="st"> </span>avengers</span></code></pre></div>
+<p>We could then assemble a subset of our vector by defining a character index.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="vector-indexing.html#cb99-1"></a>i &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;spiderman&quot;</span>, <span class="st">&quot;blackwidow&quot;</span>, <span class="st">&quot;ironman&quot;</span>) </span>
+<span id="cb99-2"><a href="vector-indexing.html#cb99-2"></a></span>
+<span id="cb99-3"><a href="vector-indexing.html#cb99-3"></a>a_vector[i] <span class="co"># Natasha Lives</span></span>
+<span id="cb99-4"><a href="vector-indexing.html#cb99-4"></a><span class="co">##  spiderman blackwidow    ironman </span></span>
+<span id="cb99-5"><a href="vector-indexing.html#cb99-5"></a><span class="co">##        1.1        0.2        4.0</span></span></code></pre></div>
+
+<div class="rmdnote">
+For completeness, it is perhaps worth noting that indexing with a blank space " ", as in <code>a_vector[ ]</code>, indexes <em>every</em> element in the vector.
+</div>
+
+</div>
+<div id="assignment-and-replacement" class="section level3">
+<h3><span class="header-section-number">10.2.4</span> Assignment and Replacement</h3>
+<p>Now that we know how to index into a vector, it’s worth pausing briefly to think about what we can do with our index. For one, we can use them to assign the indexed elements to a new object.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="vector-indexing.html#cb100-1"></a>new_object &lt;-<span class="st"> </span>a_vector[i]</span></code></pre></div>
+<p>But, less obviously, we can replace the indexed elements with new ones.</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="vector-indexing.html#cb101-1"></a>a_vector[i] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.3</span>, <span class="fl">4.1</span>, <span class="fl">3.8</span>)</span></code></pre></div>
+</div>
+<div id="complex-indexing" class="section level3">
+<h3><span class="header-section-number">10.2.5</span> Complex Indexing</h3>
+<p>What about complex vectors, like matrices, lists, and data.frames?</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="vector-indexing.html#cb102-1"></a>integer_vector &lt;-<span class="st"> </span><span class="kw">c</span>(1L, 2L, 3L, 4L, 5L)</span>
+<span id="cb102-2"><a href="vector-indexing.html#cb102-2"></a></span>
+<span id="cb102-3"><a href="vector-indexing.html#cb102-3"></a>double_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>, <span class="fl">0.2</span>, <span class="fl">3.1</span>, <span class="dv">4</span>, <span class="fl">5.2</span>)</span>
+<span id="cb102-4"><a href="vector-indexing.html#cb102-4"></a></span>
+<span id="cb102-5"><a href="vector-indexing.html#cb102-5"></a>character_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>)</span>
+<span id="cb102-6"><a href="vector-indexing.html#cb102-6"></a></span>
+<span id="cb102-7"><a href="vector-indexing.html#cb102-7"></a>logical_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>)</span>
+<span id="cb102-8"><a href="vector-indexing.html#cb102-8"></a></span>
+<span id="cb102-9"><a href="vector-indexing.html#cb102-9"></a>my_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb102-10"><a href="vector-indexing.html#cb102-10"></a></span>
+<span id="cb102-11"><a href="vector-indexing.html#cb102-11"></a>my_matrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(my_vector, <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb102-12"><a href="vector-indexing.html#cb102-12"></a></span>
+<span id="cb102-13"><a href="vector-indexing.html#cb102-13"></a>my_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&#39;c1&#39;</span> =<span class="st"> </span><span class="kw">c</span>(1L, 2L, 3L, 4L),</span>
+<span id="cb102-14"><a href="vector-indexing.html#cb102-14"></a>                <span class="st">&#39;c2&#39;</span> =<span class="st"> </span>double_vector,</span>
+<span id="cb102-15"><a href="vector-indexing.html#cb102-15"></a>                <span class="st">&#39;c3&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>),</span>
+<span id="cb102-16"><a href="vector-indexing.html#cb102-16"></a>                <span class="st">&#39;c4&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>))</span>
+<span id="cb102-17"><a href="vector-indexing.html#cb102-17"></a></span>
+<span id="cb102-18"><a href="vector-indexing.html#cb102-18"></a>my_dataframe &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="st">&#39;c1&#39;</span> =<span class="st"> </span>integer_vector,</span>
+<span id="cb102-19"><a href="vector-indexing.html#cb102-19"></a>                           <span class="st">&#39;c2&#39;</span> =<span class="st"> </span>double_vector,</span>
+<span id="cb102-20"><a href="vector-indexing.html#cb102-20"></a>                           <span class="st">&#39;c3&#39;</span> =<span class="st"> </span>character_vector,</span>
+<span id="cb102-21"><a href="vector-indexing.html#cb102-21"></a>                           <span class="st">&#39;c4&#39;</span> =<span class="st"> </span>logical_vector)</span></code></pre></div>
+</div>
+<div id="matrix-1" class="section level3">
+<h3><span class="header-section-number">10.2.6</span> Matrix</h3>
+<p>Because a matrix has “dimensions,” a unique index requires a little more work. As noted above, we need to specify both the row and column subscripts. Well, actually, if you specify no row, but just a column, R will return <em>all</em> rows. Similarly, if you specify one row, but no columns, R will return <em>all</em> columns. Some examples,</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="vector-indexing.html#cb103-1"></a><span class="co"># just a reminder</span></span>
+<span id="cb103-2"><a href="vector-indexing.html#cb103-2"></a>my_matrix</span>
+<span id="cb103-3"><a href="vector-indexing.html#cb103-3"></a><span class="co">##      [,1] [,2] [,3]</span></span>
+<span id="cb103-4"><a href="vector-indexing.html#cb103-4"></a><span class="co">## [1,]    1    3    5</span></span>
+<span id="cb103-5"><a href="vector-indexing.html#cb103-5"></a><span class="co">## [2,]    2    4    1</span></span>
+<span id="cb103-6"><a href="vector-indexing.html#cb103-6"></a>my_matrix[<span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb103-7"><a href="vector-indexing.html#cb103-7"></a><span class="co">## [1] 3</span></span>
+<span id="cb103-8"><a href="vector-indexing.html#cb103-8"></a>my_matrix[<span class="dv">1</span>, ]</span>
+<span id="cb103-9"><a href="vector-indexing.html#cb103-9"></a><span class="co">## [1] 1 3 5</span></span>
+<span id="cb103-10"><a href="vector-indexing.html#cb103-10"></a>my_matrix[, <span class="dv">3</span>]</span>
+<span id="cb103-11"><a href="vector-indexing.html#cb103-11"></a><span class="co">## [1] 5 1</span></span></code></pre></div>
+<p>Note that indexing a matrix in this way returns a vector. In fact, when you index a matrix, you are, in effect, unfolding its vector.</p>
+</div>
+<div id="list-1" class="section level3">
+<h3><span class="header-section-number">10.2.7</span> List</h3>
+<p>List <em>components</em> have positions like scalars in a vector, so you can access them with <code>[</code> in the same way.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="vector-indexing.html#cb104-1"></a>my_list[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)]</span>
+<span id="cb104-2"><a href="vector-indexing.html#cb104-2"></a><span class="co">## $c1</span></span>
+<span id="cb104-3"><a href="vector-indexing.html#cb104-3"></a><span class="co">## [1] 1 2 3 4</span></span>
+<span id="cb104-4"><a href="vector-indexing.html#cb104-4"></a><span class="co">## </span></span>
+<span id="cb104-5"><a href="vector-indexing.html#cb104-5"></a><span class="co">## $c2</span></span>
+<span id="cb104-6"><a href="vector-indexing.html#cb104-6"></a><span class="co">## [1] 1.1 0.2 3.1 4.0 5.2</span></span>
+<span id="cb104-7"><a href="vector-indexing.html#cb104-7"></a><span class="co">## </span></span>
+<span id="cb104-8"><a href="vector-indexing.html#cb104-8"></a><span class="co">## $c3</span></span>
+<span id="cb104-9"><a href="vector-indexing.html#cb104-9"></a><span class="co">## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</span></span></code></pre></div>
+<p>Note that this simply returns a smaller list. What if we wanted just a vector back? This is the purpose of the double-brackets <code>[[</code>.</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="vector-indexing.html#cb105-1"></a>my_list[[<span class="dv">2</span>]]</span>
+<span id="cb105-2"><a href="vector-indexing.html#cb105-2"></a><span class="co">## [1] 1.1 0.2 3.1 4.0 5.2</span></span></code></pre></div>
+<p>The dollar <code>$</code> does the same thing. Returning one of the vectors initially used to create the list. Here, however, instead of providing the numeric position of the component, you supply the name of the desired component in the list.</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="vector-indexing.html#cb106-1"></a>my_list<span class="op">$</span>c2</span>
+<span id="cb106-2"><a href="vector-indexing.html#cb106-2"></a><span class="co">## [1] 1.1 0.2 3.1 4.0 5.2</span></span></code></pre></div>
+<p>Now, because these return a vector, we can also subset that with <code>[</code>!</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="vector-indexing.html#cb107-1"></a>my_list[[<span class="dv">2</span>]][<span class="dv">3</span>]</span>
+<span id="cb107-2"><a href="vector-indexing.html#cb107-2"></a><span class="co">## [1] 3.1</span></span></code></pre></div>
+<p>This is R reminding you that a list has “depth,” that it is a vector of vectors (of vectors of vectors…).</p>
+</div>
+<div id="data.frame-1" class="section level3">
+<h3><span class="header-section-number">10.2.8</span> Data.frame</h3>
+<p>A data.frame is indexed like a matrix, with subscripts for rows and columns.</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="vector-indexing.html#cb108-1"></a>my_dataframe[<span class="dv">2</span>, <span class="dv">4</span>]</span>
+<span id="cb108-2"><a href="vector-indexing.html#cb108-2"></a><span class="co">## [1] TRUE</span></span>
+<span id="cb108-3"><a href="vector-indexing.html#cb108-3"></a>my_dataframe[<span class="dv">1</span>, ]</span>
+<span id="cb108-4"><a href="vector-indexing.html#cb108-4"></a><span class="co">##   c1  c2 c3   c4</span></span>
+<span id="cb108-5"><a href="vector-indexing.html#cb108-5"></a><span class="co">## 1  1 1.1  a TRUE</span></span>
+<span id="cb108-6"><a href="vector-indexing.html#cb108-6"></a>my_dataframe[, <span class="dv">3</span>]</span>
+<span id="cb108-7"><a href="vector-indexing.html#cb108-7"></a><span class="co">## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;</span></span></code></pre></div>
+<p>Notice that when you index a row, it returns a data.frame with just that row, but when you index a column, it returns the vector that column contains.</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="vector-indexing.html#cb109-1"></a><span class="co"># my_dataframe[, 3] is equivalent to</span></span>
+<span id="cb109-2"><a href="vector-indexing.html#cb109-2"></a></span>
+<span id="cb109-3"><a href="vector-indexing.html#cb109-3"></a>my_dataframe<span class="op">$</span>c3</span>
+<span id="cb109-4"><a href="vector-indexing.html#cb109-4"></a><span class="co">## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;</span></span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="workspace-management.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-wrangling.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["modtheworld.pdf", "modtheworld.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
