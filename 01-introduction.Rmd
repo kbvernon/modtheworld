@@ -59,7 +59,7 @@ i. __Clear__ code wears its meaning on its sleeve. While code can and often does
 i. __Concisde__ code sticks to the main purpose of the analysis and does not include extraneous operations.  
 i. __Organized__ code has a clear order and direction. An outline is provided, and sections of the outline are clearly identified within the script.  
 
-Throughout this book, we have tried, as far as possible, to satisfy this Abelson Principle. We also encourage the reader to do so as well.   
+Throughout this book, we have tried, as far as possible, to satisfy this Abelson Principle. We also encourage the reader to do so as well.  
 
 
 ## Book layout
