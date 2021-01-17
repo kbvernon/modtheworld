@@ -5,20 +5,20 @@
 
 This book provides an advanced introduction to doing statistics with R [@rcoreteam2020language], equipping the reader with the programming skills necessary to do statistics cheaply, efficiently - and perhaps most importantly - in a reproducible fashion.
 
-## Who is this book for?
+## Who is this bookdown for?
 
 It is primarily geared toward students who have some familiarity with basic statistical concepts. In the United States, that would be advanced undergraduates and beginning graduate students. While it does cover much of the same ground as an introductory course, it covers those topics in greater detail and with an eye toward exploring those statistical concepts within R. The hope is that being a better R programmer will make you a better statistician and that being a better statistician will make you a better R programmer.    
  
-## Why this book?
+## Why this bookdown project?
 
-Lots of really good books on R and statistics exist, for example, 
+Lots of really good resources for learning R and/or statistics exist, for example, 
 
 - Cetinkaya-Rundel and Hardin (2020) "[Introduction to Modern Statistics](https://openintro-ims.netlify.app/)"
 - Ismay and Kim (2020) "[Statistical Inference via Data Science](https://moderndive.com/index.html)"
 - Phillips (2018) "[YaRrr! The Pirate's Guide to R](https://bookdown.org/ndphillips/YaRrr/)"
 - Wickham and Grolemund (2017) "[R for Data Science](https://r4ds.had.co.nz/index.html)"
 
-So, why write another one? The best way to answer that question is probably with the big idea motivating the book, specifically the intuition that statistics is, in the first place, a framework for building and evaluating _models_ of the world. This idea guides the book's layout and content, providing a fresh approach to statistics and statistical programming.
+So, why write another one? The best way to answer that question is probably with the big idea motivating this material, specifically the intuition that statistics is, in the first place, a framework for building and evaluating _models_ of the world. This idea guides the book's layout and content, providing a fresh approach to statistics and statistical programming.
 
 It may be juxtaposed with a common strategy for teaching introductory statistics, which goes something like this. First, you introduce students to some _descriptive_ statistics, beginning with properties of a single variable, including measures of its central tendency, its variability, and its shape and skew. From there, you move on to discussing various significance tests, like Student's T. Finally, you reach the topic of modeling, covering such things as ordinary least squares and perhaps generalized linear modeling. If you had to give it a name, you might call this breezy strategy the _Describe-Test-Model_ (DTM) paradigm of statistics pedagogy.  
 
@@ -27,6 +27,8 @@ As an alternative to DTM, this book adopts an _Everything-is-a-Model_ (EM) appro
 1. __It is more intuitive__. It starts from the idea that when we use statistics, our primary goal is to understand an empirical (or _data generating_) process, be it the efficacy of a medical treatment, the causes of ocean fishery collapse, or simply differences in the height of actors who auditioned for the roles of Aragorn and Gimli in the timeless cinematic classic, _The Lord of the Rings_. We do that by first proposing a model of the target process (this is statistical description) and then to ask if our proposed model is better at describing that process than alternatives (this is statistical inference).  
 2. __It emphasizes critical thinking__. A fundamental weakness of the DTM approach is its emphasis on rote learning. Students are trained to be, as it were, statistical _parrots_, able to reliably squawk "aark! t-test!" in the correct circumstances without ever understanding that test's _meaning_. By emphasizing statistical inference as a method for choosing between models, the EM approach invites the student to move beyond this simple statistical parroting, to actively think about what it is they are doing when they apply a statistical test.  
 3. And, for the statistical purists out there, EM _ruthlessly_ enforces the distinction between statistical description and statistical inference.   
+
+For details about this perspective, have a look at [Chapter 12 What is statistics?](#whatisstats).  
 
 ```{block2 01-everything_is_a_model, type = "rmdnote"}
 

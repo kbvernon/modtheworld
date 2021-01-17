@@ -4,9 +4,6 @@
 .Ruserdata
 _book
 _bookdown_files
-penguins.csv
-gss.csv
-cars.csv
 zmisc
 data-raw
 README.html
