@@ -76,9 +76,15 @@ The path traversed through the maze in this figure has a disorienting, almost ch
 
 ```r
 penguins <- read.csv("penguins.csv")
-#### Error in file(file, "rt"): cannot open the connection
+
 head(penguins)
-#### Error in head(penguins): object 'penguins' not found
+##   species    island bill_length_mm flipper_length_mm body_mass_g    sex year
+## 1  Adelie Torgersen           39.1               181        3750   male 2007
+## 2  Adelie Torgersen           39.5               186        3800 female 2007
+## 3  Adelie Torgersen           40.3               195        3250 female 2007
+## 4  Adelie Torgersen             NA                NA          NA   <NA> 2007
+## 5  Adelie Torgersen           36.7               193        3450 female 2007
+## 6  Adelie Torgersen           39.3               190        3650   male 2007
 ```
 
 ### Do grunt work
@@ -88,9 +94,8 @@ Are observations of bill length missing for any penguins in this dataset? To ans
 
 ```r
 any(is.na(penguins$bill_length_mm))
-#### Error in eval(expr, envir, enclos): object 'penguins' not found
+## [1] TRUE
 penguins <- subset(penguins, !is.na(bill_length_mm))
-#### Error in subset(penguins, !is.na(bill_length_mm)): object 'penguins' not found
 ```
 
 The exclamation point `!` (often called "bang") means "not," so you can read that second line as "subset the penguins table and give me the rows that do _not_ have NA values for bill length."  
@@ -102,9 +107,11 @@ _How many penguins are on each island?_
 
 ```r
 counts <- table(penguins$island)
-#### Error in table(penguins$island): object 'penguins' not found
+
 counts
-#### Error in eval(expr, envir, enclos): object 'counts' not found
+## 
+##    Biscoe     Dream Torgersen 
+##       167       124        51
 ```
 
 _What does this distribution look like?_
@@ -112,8 +119,9 @@ _What does this distribution look like?_
 
 ```r
 barplot(counts)
-#### Error in barplot(counts): object 'counts' not found
 ```
+
+<img src="03-an_example_workflow_files/figure-html/unnamed-chunk-5-1.png" width="480" style="display: block; margin: auto;" />
 
 _What is the mean bill length for each species?_
 
@@ -122,7 +130,10 @@ _What is the mean bill length for each species?_
 aggregate(bill_length_mm ~ species, 
           FUN = mean,
           data = penguins)
-#### Error in eval(m$data, parent.frame()): object 'penguins' not found
+##     species bill_length_mm
+## 1    Adelie       38.79139
+## 2 Chinstrap       48.83382
+## 3    Gentoo       47.50488
 ```
 
 _And the standard deviation?_
@@ -132,7 +143,10 @@ _And the standard deviation?_
 aggregate(bill_length_mm ~ species, 
           FUN = sd,
           data = penguins)
-#### Error in eval(m$data, parent.frame()): object 'penguins' not found
+##     species bill_length_mm
+## 1    Adelie       2.663405
+## 2 Chinstrap       3.339256
+## 3    Gentoo       3.081857
 ```
 
 _How is bill length distributed across species?_
@@ -143,17 +157,35 @@ boxplot(bill_length_mm ~ species,
         data = penguins,
         xlab = "Species",
         ylab = "Bill Length (mm)")
-#### Error in eval(m$data, parent.frame()): object 'penguins' not found
 ```
+
+<img src="03-an_example_workflow_files/figure-html/unnamed-chunk-8-1.png" width="480" style="display: block; margin: auto;" />
 
 ### Do fun stuff
 
 
 ```r
 penguin_model <- lm(flipper_length_mm ~ bill_length_mm, data = penguins)
-#### Error in is.data.frame(data): object 'penguins' not found
+
 summary(penguin_model)
-#### Error in summary(penguin_model): object 'penguin_model' not found
+## 
+## Call:
+## lm(formula = flipper_length_mm ~ bill_length_mm, data = penguins)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -43.708  -7.896   0.664   8.650  21.179 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)    126.6844     4.6651   27.16   <2e-16 ***
+## bill_length_mm   1.6901     0.1054   16.03   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 10.63 on 340 degrees of freedom
+## Multiple R-squared:  0.4306,	Adjusted R-squared:  0.4289 
+## F-statistic: 257.1 on 1 and 340 DF,  p-value: < 2.2e-16
 ```
 
 Estimate flipper length using `penguin_model`.
@@ -161,11 +193,10 @@ Estimate flipper length using `penguin_model`.
 
 ```r
 est_flipper_length <- predict(penguin_model)
-#### Error in predict(penguin_model): object 'penguin_model' not found
+
 obs_flipper_length <- penguins$flipper_length_mm
-#### Error in eval(expr, envir, enclos): object 'penguins' not found
+
 obs_bill_length <- penguins$bill_length_mm
-#### Error in eval(expr, envir, enclos): object 'penguins' not found
 ```
 
 Plot the estimated trend against the observed values:
@@ -178,16 +209,17 @@ plot(obs_flipper_length ~ obs_bill_length,
      col = alpha("#949494", 0.4),
      xlab = "Bill Length (mm)",
      ylab = "Flipper Length (mm)")
-#### Error in eval(predvars, data, env): object 'obs_flipper_length' not found
+
 abline(penguin_model, col = "#850000")
-#### Error in abline(penguin_model, col = "#850000"): object 'penguin_model' not found
+
 mtext(text = "Palmer Penguin Model",
       side = 3, 
       line = 0.3, 
       adj = 0, 
       cex = 1.5)
-#### Error in mtext(text = "Palmer Penguin Model", side = 3, line = 0.3, adj = 0, : plot.new has not been called yet
 ```
+
+<img src="03-an_example_workflow_files/figure-html/unnamed-chunk-11-1.png" width="480" style="display: block; margin: auto;" />
 
 ### Export results
 

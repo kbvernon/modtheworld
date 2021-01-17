@@ -17,7 +17,7 @@ description: "This book provides a gentle yet comprehensive introduction to doin
 
 # Welcome {-}
 
-This is the website for __"Modeling the World with R"__, a book that introduces readers to the fundamentals of statistics and statistical programming in R.  
+This is the website for __"Modeling the World with R"__, a [bookdown](https://bookdown.org/) project for a university course that introduces students to the fundamentals of statistics and statistical programming in R.  
 
 <img src="images/book_cover.png" width="315" height="315" align="right" style="margin: 0 1em 0 1em" />
 

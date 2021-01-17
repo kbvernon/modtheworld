@@ -140,8 +140,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
 <li class="chapter" data-level="" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i>Acknowledgments</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#who-is-this-book-for"><i class="fa fa-check"></i><b>1.1</b> Who is this book for?</a></li>
-<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#why-this-book"><i class="fa fa-check"></i><b>1.2</b> Why this book?</a></li>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#who-is-this-bookdown-for"><i class="fa fa-check"></i><b>1.1</b> Who is this bookdown for?</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#why-this-bookdown-project"><i class="fa fa-check"></i><b>1.2</b> Why this bookdown project?</a></li>
 <li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#pedagogy"><i class="fa fa-check"></i><b>1.3</b> Pedagogy</a></li>
 <li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#the-abelson-principle"><i class="fa fa-check"></i><b>1.4</b> The Abelson Principle</a></li>
 <li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#book-layout"><i class="fa fa-check"></i><b>1.5</b> Book layout</a><ul>
@@ -340,20 +340,20 @@ $(document).ready(function() {
 <!-- chunk options -->
 <!-- miscellaneous -->
 <p>This book provides an advanced introduction to doing statistics with R <span class="citation">(R Core Team <a href="#ref-rcoreteam2020language" role="doc-biblioref">2020</a><a href="#ref-rcoreteam2020language" role="doc-biblioref">b</a>)</span>, equipping the reader with the programming skills necessary to do statistics cheaply, efficiently - and perhaps most importantly - in a reproducible fashion.</p>
-<div id="who-is-this-book-for" class="section level2">
-<h2><span class="header-section-number">1.1</span> Who is this book for?</h2>
+<div id="who-is-this-bookdown-for" class="section level2">
+<h2><span class="header-section-number">1.1</span> Who is this bookdown for?</h2>
 <p>It is primarily geared toward students who have some familiarity with basic statistical concepts. In the United States, that would be advanced undergraduates and beginning graduate students. While it does cover much of the same ground as an introductory course, it covers those topics in greater detail and with an eye toward exploring those statistical concepts within R. The hope is that being a better R programmer will make you a better statistician and that being a better statistician will make you a better R programmer.</p>
 </div>
-<div id="why-this-book" class="section level2">
-<h2><span class="header-section-number">1.2</span> Why this book?</h2>
-<p>Lots of really good books on R and statistics exist, for example,</p>
+<div id="why-this-bookdown-project" class="section level2">
+<h2><span class="header-section-number">1.2</span> Why this bookdown project?</h2>
+<p>Lots of really good resources for learning R and/or statistics exist, for example,</p>
 <ul>
 <li>Cetinkaya-Rundel and Hardin (2020) “<a href="https://openintro-ims.netlify.app/">Introduction to Modern Statistics</a>”</li>
 <li>Ismay and Kim (2020) “<a href="https://moderndive.com/index.html">Statistical Inference via Data Science</a>”</li>
 <li>Phillips (2018) “<a href="https://bookdown.org/ndphillips/YaRrr/">YaRrr! The Pirate’s Guide to R</a>”</li>
 <li>Wickham and Grolemund (2017) “<a href="https://r4ds.had.co.nz/index.html">R for Data Science</a>”</li>
 </ul>
-<p>So, why write another one? The best way to answer that question is probably with the big idea motivating the book, specifically the intuition that statistics is, in the first place, a framework for building and evaluating <em>models</em> of the world. This idea guides the book’s layout and content, providing a fresh approach to statistics and statistical programming.</p>
+<p>So, why write another one? The best way to answer that question is probably with the big idea motivating this material, specifically the intuition that statistics is, in the first place, a framework for building and evaluating <em>models</em> of the world. This idea guides the book’s layout and content, providing a fresh approach to statistics and statistical programming.</p>
 <p>It may be juxtaposed with a common strategy for teaching introductory statistics, which goes something like this. First, you introduce students to some <em>descriptive</em> statistics, beginning with properties of a single variable, including measures of its central tendency, its variability, and its shape and skew. From there, you move on to discussing various significance tests, like Student’s T. Finally, you reach the topic of modeling, covering such things as ordinary least squares and perhaps generalized linear modeling. If you had to give it a name, you might call this breezy strategy the <em>Describe-Test-Model</em> (DTM) paradigm of statistics pedagogy.</p>
 <p>As an alternative to DTM, this book adopts an <em>Everything-is-a-Model</em> (EM) approach. EM has many advantages over DTM, but perhaps the two most important are these:</p>
 <ol style="list-style-type: decimal">
@@ -363,6 +363,7 @@ $(document).ready(function() {
 </li>
 <li>And, for the statistical purists out there, EM <em>ruthlessly</em> enforces the distinction between statistical description and statistical inference.</li>
 </ol>
+<p>For details about this perspective, have a look at <a href="whatisstats.html#whatisstats">Chapter 12 What is statistics?</a>.</p>
 
 <div class="rmdnote">
 <p>To see how someone might take the EM approach and run off a cliff with it, have a look at Jonas Kristoffer Lindelov’s very insightful and very enjoyable article <a href="https://lindeloev.github.io/tests-as-linear/">Common statistical tests are linear models (or: how to teach stats)</a>.</p>

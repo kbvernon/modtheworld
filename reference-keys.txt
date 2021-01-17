@@ -12,8 +12,8 @@ fig:05-layering-plot
 fig:r-menagerie
 fig:r-objects
 intro
-who-is-this-book-for
-why-this-book
+who-is-this-bookdown-for
+why-this-bookdown-project
 pedagogy
 the-abelson-principle
 book-layout
