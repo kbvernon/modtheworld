@@ -8,7 +8,7 @@ This book provides an advanced introduction to doing statistics with R [@rcorete
 ## Who is this book for?
 
 It is primarily geared toward students who have some familiarity with basic statistical concepts. In the United States, that would be advanced undergraduates and beginning graduate students. While it does cover much of the same ground as an introductory course, it covers those topics in greater detail and with an eye toward exploring those statistical concepts within R. The hope is that being a better R programmer will make you a better statistician and that being a better statistician will make you a better R programmer.    
-
+ 
 ## Why this book?
 
 Lots of really good books on R and statistics exist, for example, 
