@@ -79,9 +79,7 @@ x <- seq(from = -5,
 
 y <- dnorm(x)
 
-windowsFonts(A = windowsFont("Arial"))
-
-par(family = "A",
+par(family = "Arial",
     pty = "s")
 
 plot(y ~ x, 
