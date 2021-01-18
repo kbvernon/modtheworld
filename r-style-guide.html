@@ -24,7 +24,7 @@
 <meta name="author" content="Kenneth Blake Vernon" />
 
 
-<meta name="date" content="2021-01-17" />
+<meta name="date" content="2021-01-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -360,24 +360,24 @@ Figure 5.1: O.P.C. (Abstruse Goose 432)
 <div id="object-names" class="section level3">
 <h3><span class="header-section-number">5.2.1</span> Object names</h3>
 <p>An old-school coding norm encouraged programmers to write highly compact code with loads of abbreviations. In general, however, you should avoid this, at least when it’s reasonable to do so.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="r-style-guide.html#cb20-1"></a><span class="co"># Good</span></span>
-<span id="cb20-2"><a href="r-style-guide.html#cb20-2"></a>mean_height &lt;-<span class="st"> </span><span class="kw">mean</span>(height)</span>
-<span id="cb20-3"><a href="r-style-guide.html#cb20-3"></a></span>
-<span id="cb20-4"><a href="r-style-guide.html#cb20-4"></a><span class="co"># Bad</span></span>
-<span id="cb20-5"><a href="r-style-guide.html#cb20-5"></a>mh &lt;-<span class="st"> </span><span class="kw">mean</span>(height)</span>
-<span id="cb20-6"><a href="r-style-guide.html#cb20-6"></a></span>
-<span id="cb20-7"><a href="r-style-guide.html#cb20-7"></a><span class="co"># But,</span></span>
-<span id="cb20-8"><a href="r-style-guide.html#cb20-8"></a>mean_height_of_actors_who_auditioned_for_aragorn &lt;-<span class="st"> </span><span class="kw">mean</span>(height) <span class="co"># is overkill</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="r-style-guide.html#cb19-1"></a><span class="co"># Good</span></span>
+<span id="cb19-2"><a href="r-style-guide.html#cb19-2"></a>mean_height &lt;-<span class="st"> </span><span class="kw">mean</span>(height)</span>
+<span id="cb19-3"><a href="r-style-guide.html#cb19-3"></a></span>
+<span id="cb19-4"><a href="r-style-guide.html#cb19-4"></a><span class="co"># Bad</span></span>
+<span id="cb19-5"><a href="r-style-guide.html#cb19-5"></a>mh &lt;-<span class="st"> </span><span class="kw">mean</span>(height)</span>
+<span id="cb19-6"><a href="r-style-guide.html#cb19-6"></a></span>
+<span id="cb19-7"><a href="r-style-guide.html#cb19-7"></a><span class="co"># But,</span></span>
+<span id="cb19-8"><a href="r-style-guide.html#cb19-8"></a>mean_height_of_actors_who_auditioned_for_aragorn &lt;-<span class="st"> </span><span class="kw">mean</span>(height) <span class="co"># is overkill</span></span></code></pre></div>
 <p>If the abbreviation is something obvious, though, like “USA” or “IHOP,” you should feel free to use it.</p>
 </div>
 <div id="function-parameters" class="section level3">
 <h3><span class="header-section-number">5.2.2</span> Function parameters</h3>
 <p>When you call a function, you typically supply it with i) a data object, which the function is going to do something with, and then ii) a list of arguments, which specify how exactly the function will work with the data. You can avoid specifying the argument name for the data object, but you should strive to use the names of any arguments you override.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="r-style-guide.html#cb21-1"></a><span class="co"># Good</span></span>
-<span id="cb21-2"><a href="r-style-guide.html#cb21-2"></a>bob &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb21-3"><a href="r-style-guide.html#cb21-3"></a></span>
-<span id="cb21-4"><a href="r-style-guide.html#cb21-4"></a><span class="co"># Bad</span></span>
-<span id="cb21-5"><a href="r-style-guide.html#cb21-5"></a>bob &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="r-style-guide.html#cb20-1"></a><span class="co"># Good</span></span>
+<span id="cb20-2"><a href="r-style-guide.html#cb20-2"></a>bob &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb20-3"><a href="r-style-guide.html#cb20-3"></a></span>
+<span id="cb20-4"><a href="r-style-guide.html#cb20-4"></a><span class="co"># Bad</span></span>
+<span id="cb20-5"><a href="r-style-guide.html#cb20-5"></a>bob &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="ot">TRUE</span>)</span></code></pre></div>
 </div>
 <div id="code-commenting" class="section level3">
 <h3><span class="header-section-number">5.2.3</span> Code commenting</h3>
@@ -391,34 +391,34 @@ Figure 5.1: O.P.C. (Abstruse Goose 432)
 <div id="assignment-first" class="section level2">
 <h2><span class="header-section-number">5.4</span> Assignment first</h2>
 <p>Technically, R allows you to use a right-facing arrow, <code>-&gt;</code>, for assignment. You can also use the equal sign, <code>=</code>. However, even though these are allowed by R, they make your code harder to read and - at least in the latter case - ambiguous. So, you should always use the left-facing arrow, <code>&lt;-</code>, for assignment</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="r-style-guide.html#cb22-1"></a><span class="co"># Good</span></span>
-<span id="cb22-2"><a href="r-style-guide.html#cb22-2"></a>bob &lt;-<span class="st"> </span><span class="fl">5.137</span></span>
-<span id="cb22-3"><a href="r-style-guide.html#cb22-3"></a></span>
-<span id="cb22-4"><a href="r-style-guide.html#cb22-4"></a><span class="co"># Bad</span></span>
-<span id="cb22-5"><a href="r-style-guide.html#cb22-5"></a><span class="fl">5.137</span> -&gt;<span class="st"> </span>bob</span>
-<span id="cb22-6"><a href="r-style-guide.html#cb22-6"></a></span>
-<span id="cb22-7"><a href="r-style-guide.html#cb22-7"></a><span class="co"># Ambiguous</span></span>
-<span id="cb22-8"><a href="r-style-guide.html#cb22-8"></a>bob =<span class="st"> </span><span class="fl">5.137</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="r-style-guide.html#cb21-1"></a><span class="co"># Good</span></span>
+<span id="cb21-2"><a href="r-style-guide.html#cb21-2"></a>bob &lt;-<span class="st"> </span><span class="fl">5.137</span></span>
+<span id="cb21-3"><a href="r-style-guide.html#cb21-3"></a></span>
+<span id="cb21-4"><a href="r-style-guide.html#cb21-4"></a><span class="co"># Bad</span></span>
+<span id="cb21-5"><a href="r-style-guide.html#cb21-5"></a><span class="fl">5.137</span> -&gt;<span class="st"> </span>bob</span>
+<span id="cb21-6"><a href="r-style-guide.html#cb21-6"></a></span>
+<span id="cb21-7"><a href="r-style-guide.html#cb21-7"></a><span class="co"># Ambiguous</span></span>
+<span id="cb21-8"><a href="r-style-guide.html#cb21-8"></a>bob =<span class="st"> </span><span class="fl">5.137</span></span></code></pre></div>
 </div>
 <div id="the-cratylus-rule" class="section level2">
 <h2><span class="header-section-number">5.5</span> The Cratylus Rule</h2>
 <p>This rule requires that a name reflect the nature of the thing named. Because objects <em>are</em> things and functions <em>do</em> things, the Cratylus Rule suggests that you should use nouns as names for R objects and verbs as names for R functions.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="r-style-guide.html#cb23-1"></a>numbers &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span>
-<span id="cb23-2"><a href="r-style-guide.html#cb23-2"></a></span>
-<span id="cb23-3"><a href="r-style-guide.html#cb23-3"></a>add_one &lt;-<span class="st"> </span><span class="cf">function</span>(x) x <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="r-style-guide.html#cb22-1"></a>numbers &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></span>
+<span id="cb22-2"><a href="r-style-guide.html#cb22-2"></a></span>
+<span id="cb22-3"><a href="r-style-guide.html#cb22-3"></a>add_one &lt;-<span class="st"> </span><span class="cf">function</span>(x) x <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
 </div>
 <div id="empty-nests" class="section level2">
 <h2><span class="header-section-number">5.6</span> Empty nests!</h2>
 <p>Nesting in R is the act of calling one function inside the call to another function, like <code>rnorm(sample(seq(1, 1000, 2)+3))</code>. This is OK for <em>shallow</em> nests, meaning a function call in a function call, at least when used sparingly, but you should avoid <em>deep</em> nests, or a function call in a function call in a function call in…, you get the idea. In general, deep nests make your code really, really hard to read, so instead, you should assign the results of the <em>inner</em> functions to intermediate objects and then use those objects in the <em>outer</em> functions.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="r-style-guide.html#cb24-1"></a><span class="co"># Bad</span></span>
-<span id="cb24-2"><a href="r-style-guide.html#cb24-2"></a><span class="kw">sort</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dt">mean =</span> <span class="kw">mean</span>(<span class="kw">sample</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">1000</span>, <span class="dv">2</span>), <span class="dv">50</span>))))</span>
-<span id="cb24-3"><a href="r-style-guide.html#cb24-3"></a></span>
-<span id="cb24-4"><a href="r-style-guide.html#cb24-4"></a><span class="co"># Good</span></span>
-<span id="cb24-5"><a href="r-style-guide.html#cb24-5"></a>samples &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">1000</span>, <span class="dv">2</span>), <span class="dv">50</span>)</span>
-<span id="cb24-6"><a href="r-style-guide.html#cb24-6"></a></span>
-<span id="cb24-7"><a href="r-style-guide.html#cb24-7"></a>randos &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dt">mean =</span> <span class="kw">mean</span>(samples))</span>
-<span id="cb24-8"><a href="r-style-guide.html#cb24-8"></a></span>
-<span id="cb24-9"><a href="r-style-guide.html#cb24-9"></a>result &lt;-<span class="st"> </span><span class="kw">sort</span>(randos)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="r-style-guide.html#cb23-1"></a><span class="co"># Bad</span></span>
+<span id="cb23-2"><a href="r-style-guide.html#cb23-2"></a><span class="kw">sort</span>(<span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dt">mean =</span> <span class="kw">mean</span>(<span class="kw">sample</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">1000</span>, <span class="dv">2</span>), <span class="dv">50</span>))))</span>
+<span id="cb23-3"><a href="r-style-guide.html#cb23-3"></a></span>
+<span id="cb23-4"><a href="r-style-guide.html#cb23-4"></a><span class="co"># Good</span></span>
+<span id="cb23-5"><a href="r-style-guide.html#cb23-5"></a>samples &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">1000</span>, <span class="dv">2</span>), <span class="dv">50</span>)</span>
+<span id="cb23-6"><a href="r-style-guide.html#cb23-6"></a></span>
+<span id="cb23-7"><a href="r-style-guide.html#cb23-7"></a>randos &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dt">mean =</span> <span class="kw">mean</span>(samples))</span>
+<span id="cb23-8"><a href="r-style-guide.html#cb23-8"></a></span>
+<span id="cb23-9"><a href="r-style-guide.html#cb23-9"></a>result &lt;-<span class="st"> </span><span class="kw">sort</span>(randos)</span></code></pre></div>
 </div>
 <div id="be-open" class="section level2">
 <h2><span class="header-section-number">5.7</span> Be open</h2>
@@ -426,22 +426,22 @@ Figure 5.1: O.P.C. (Abstruse Goose 432)
 <div id="spacing" class="section level3">
 <h3><span class="header-section-number">5.7.1</span> Spacing</h3>
 <p>Use lots of spaces in your code, just as you would with regular texts. That means spaces after commas, spaces around the assignment operator <code>&lt;-</code>, and spaces around the equal sign <code>=</code> in your function call.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="r-style-guide.html#cb25-1"></a><span class="co"># Good</span></span>
-<span id="cb25-2"><a href="r-style-guide.html#cb25-2"></a>bob &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb25-3"><a href="r-style-guide.html#cb25-3"></a></span>
-<span id="cb25-4"><a href="r-style-guide.html#cb25-4"></a><span class="co"># Bad</span></span>
-<span id="cb25-5"><a href="r-style-guide.html#cb25-5"></a>bob&lt;-<span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dt">na.rm=</span><span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="r-style-guide.html#cb24-1"></a><span class="co"># Good</span></span>
+<span id="cb24-2"><a href="r-style-guide.html#cb24-2"></a>bob &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb24-3"><a href="r-style-guide.html#cb24-3"></a></span>
+<span id="cb24-4"><a href="r-style-guide.html#cb24-4"></a><span class="co"># Bad</span></span>
+<span id="cb24-5"><a href="r-style-guide.html#cb24-5"></a>bob&lt;-<span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,<span class="dt">na.rm=</span><span class="ot">TRUE</span>)</span></code></pre></div>
 </div>
 <div id="line-length" class="section level3">
 <h3><span class="header-section-number">5.7.2</span> Line Length</h3>
 <p>Think of your R script as having a giant cliff somewhere in the middle, right around 80 characters. And your job is to never go full <em>Wiley E. Coyote</em> with your code! Instead, return and start a new line.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="r-style-guide.html#cb26-1"></a><span class="co"># Good</span></span>
-<span id="cb26-2"><a href="r-style-guide.html#cb26-2"></a>bob &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x,</span>
-<span id="cb26-3"><a href="r-style-guide.html#cb26-3"></a>           <span class="dt">family =</span> gaussian,</span>
-<span id="cb26-4"><a href="r-style-guide.html#cb26-4"></a>           <span class="dt">data =</span> my_ten_thousand_observations)</span>
-<span id="cb26-5"><a href="r-style-guide.html#cb26-5"></a></span>
-<span id="cb26-6"><a href="r-style-guide.html#cb26-6"></a><span class="co"># Bad</span></span>
-<span id="cb26-7"><a href="r-style-guide.html#cb26-7"></a>bob &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> gaussian, <span class="dt">data =</span> my_ten_thousand_observations)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="r-style-guide.html#cb25-1"></a><span class="co"># Good</span></span>
+<span id="cb25-2"><a href="r-style-guide.html#cb25-2"></a>bob &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x,</span>
+<span id="cb25-3"><a href="r-style-guide.html#cb25-3"></a>           <span class="dt">family =</span> gaussian,</span>
+<span id="cb25-4"><a href="r-style-guide.html#cb25-4"></a>           <span class="dt">data =</span> my_ten_thousand_observations)</span>
+<span id="cb25-5"><a href="r-style-guide.html#cb25-5"></a></span>
+<span id="cb25-6"><a href="r-style-guide.html#cb25-6"></a><span class="co"># Bad</span></span>
+<span id="cb25-7"><a href="r-style-guide.html#cb25-7"></a>bob &lt;-<span class="st"> </span><span class="kw">glm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> gaussian, <span class="dt">data =</span> my_ten_thousand_observations)</span></code></pre></div>
 </div>
 </div>
 <div id="be-organized" class="section level2">
@@ -453,39 +453,39 @@ Figure 5.1: O.P.C. (Abstruse Goose 432)
 <li><strong>Outline</strong>. If you have a lot of those sections, you might also consider adding an outline section at the beginning.</li>
 <li><strong>Preamble</strong>. Very importantly, make sure to include an R “preamble” section where you attach all the R packages you are using, define any global options you might want to recycle throughout the script, and then source any helper functions you might want to use.</li>
 </ul>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="r-style-guide.html#cb27-1"></a><span class="co"># Aim: What should the script achieve</span></span>
-<span id="cb27-2"><a href="r-style-guide.html#cb27-2"></a><span class="co"># Date: 2020-01-13</span></span>
-<span id="cb27-3"><a href="r-style-guide.html#cb27-3"></a></span>
-<span id="cb27-4"><a href="r-style-guide.html#cb27-4"></a><span class="co"># Author(s): Blake, Thor, Spiderman</span></span>
-<span id="cb27-5"><a href="r-style-guide.html#cb27-5"></a></span>
-<span id="cb27-6"><a href="r-style-guide.html#cb27-6"></a><span class="co"># Note(s): </span></span>
-<span id="cb27-7"><a href="r-style-guide.html#cb27-7"></a><span class="co"># 1. Make sure to pick up more toothpaste at the store.</span></span>
-<span id="cb27-8"><a href="r-style-guide.html#cb27-8"></a></span>
-<span id="cb27-9"><a href="r-style-guide.html#cb27-9"></a><span class="co"># OUTLINE -----------------------------------------------</span></span>
-<span id="cb27-10"><a href="r-style-guide.html#cb27-10"></a></span>
-<span id="cb27-11"><a href="r-style-guide.html#cb27-11"></a><span class="co"># 1. R PREAMBLE </span></span>
-<span id="cb27-12"><a href="r-style-guide.html#cb27-12"></a><span class="co"># 2. IMPORT DATA</span></span>
-<span id="cb27-13"><a href="r-style-guide.html#cb27-13"></a><span class="co"># 3. EXPLORE DATA</span></span>
-<span id="cb27-14"><a href="r-style-guide.html#cb27-14"></a><span class="co"># 4. ...</span></span>
-<span id="cb27-15"><a href="r-style-guide.html#cb27-15"></a></span>
-<span id="cb27-16"><a href="r-style-guide.html#cb27-16"></a><span class="co"># 1 R PREAMBLE ------------------------------------------</span></span>
-<span id="cb27-17"><a href="r-style-guide.html#cb27-17"></a></span>
-<span id="cb27-18"><a href="r-style-guide.html#cb27-18"></a><span class="co"># attach packages</span></span>
-<span id="cb27-19"><a href="r-style-guide.html#cb27-19"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb27-20"><a href="r-style-guide.html#cb27-20"></a><span class="kw">library</span>(sf)</span>
-<span id="cb27-21"><a href="r-style-guide.html#cb27-21"></a></span>
-<span id="cb27-22"><a href="r-style-guide.html#cb27-22"></a><span class="co"># define global options</span></span>
-<span id="cb27-23"><a href="r-style-guide.html#cb27-23"></a>proj_crs &lt;-<span class="st"> </span><span class="kw">st_crs</span>(<span class="dv">26912</span>)</span>
-<span id="cb27-24"><a href="r-style-guide.html#cb27-24"></a></span>
-<span id="cb27-25"><a href="r-style-guide.html#cb27-25"></a><span class="co"># source functions</span></span>
-<span id="cb27-26"><a href="r-style-guide.html#cb27-26"></a><span class="kw">source</span>(<span class="st">&quot;plot_helpers.R&quot;</span>)</span>
-<span id="cb27-27"><a href="r-style-guide.html#cb27-27"></a></span>
-<span id="cb27-28"><a href="r-style-guide.html#cb27-28"></a></span>
-<span id="cb27-29"><a href="r-style-guide.html#cb27-29"></a><span class="co"># 2 IMPORT DATA -----------------------------------------</span></span>
-<span id="cb27-30"><a href="r-style-guide.html#cb27-30"></a></span>
-<span id="cb27-31"><a href="r-style-guide.html#cb27-31"></a>nc &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="kw">system.file</span>(<span class="st">&quot;shape/nc.shp&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;sf&quot;</span>))</span>
-<span id="cb27-32"><a href="r-style-guide.html#cb27-32"></a></span>
-<span id="cb27-33"><a href="r-style-guide.html#cb27-33"></a><span class="co"># 3 EXPLORE DATA ----------------------------------------</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="r-style-guide.html#cb26-1"></a><span class="co"># Aim: What should the script achieve</span></span>
+<span id="cb26-2"><a href="r-style-guide.html#cb26-2"></a><span class="co"># Date: 2020-01-13</span></span>
+<span id="cb26-3"><a href="r-style-guide.html#cb26-3"></a></span>
+<span id="cb26-4"><a href="r-style-guide.html#cb26-4"></a><span class="co"># Author(s): Blake, Thor, Spiderman</span></span>
+<span id="cb26-5"><a href="r-style-guide.html#cb26-5"></a></span>
+<span id="cb26-6"><a href="r-style-guide.html#cb26-6"></a><span class="co"># Note(s): </span></span>
+<span id="cb26-7"><a href="r-style-guide.html#cb26-7"></a><span class="co"># 1. Make sure to pick up more toothpaste at the store.</span></span>
+<span id="cb26-8"><a href="r-style-guide.html#cb26-8"></a></span>
+<span id="cb26-9"><a href="r-style-guide.html#cb26-9"></a><span class="co"># OUTLINE -----------------------------------------------</span></span>
+<span id="cb26-10"><a href="r-style-guide.html#cb26-10"></a></span>
+<span id="cb26-11"><a href="r-style-guide.html#cb26-11"></a><span class="co"># 1. R PREAMBLE </span></span>
+<span id="cb26-12"><a href="r-style-guide.html#cb26-12"></a><span class="co"># 2. IMPORT DATA</span></span>
+<span id="cb26-13"><a href="r-style-guide.html#cb26-13"></a><span class="co"># 3. EXPLORE DATA</span></span>
+<span id="cb26-14"><a href="r-style-guide.html#cb26-14"></a><span class="co"># 4. ...</span></span>
+<span id="cb26-15"><a href="r-style-guide.html#cb26-15"></a></span>
+<span id="cb26-16"><a href="r-style-guide.html#cb26-16"></a><span class="co"># 1 R PREAMBLE ------------------------------------------</span></span>
+<span id="cb26-17"><a href="r-style-guide.html#cb26-17"></a></span>
+<span id="cb26-18"><a href="r-style-guide.html#cb26-18"></a><span class="co"># attach packages</span></span>
+<span id="cb26-19"><a href="r-style-guide.html#cb26-19"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb26-20"><a href="r-style-guide.html#cb26-20"></a><span class="kw">library</span>(sf)</span>
+<span id="cb26-21"><a href="r-style-guide.html#cb26-21"></a></span>
+<span id="cb26-22"><a href="r-style-guide.html#cb26-22"></a><span class="co"># define global options</span></span>
+<span id="cb26-23"><a href="r-style-guide.html#cb26-23"></a>proj_crs &lt;-<span class="st"> </span><span class="kw">st_crs</span>(<span class="dv">26912</span>)</span>
+<span id="cb26-24"><a href="r-style-guide.html#cb26-24"></a></span>
+<span id="cb26-25"><a href="r-style-guide.html#cb26-25"></a><span class="co"># source functions</span></span>
+<span id="cb26-26"><a href="r-style-guide.html#cb26-26"></a><span class="kw">source</span>(<span class="st">&quot;plot_helpers.R&quot;</span>)</span>
+<span id="cb26-27"><a href="r-style-guide.html#cb26-27"></a></span>
+<span id="cb26-28"><a href="r-style-guide.html#cb26-28"></a></span>
+<span id="cb26-29"><a href="r-style-guide.html#cb26-29"></a><span class="co"># 2 IMPORT DATA -----------------------------------------</span></span>
+<span id="cb26-30"><a href="r-style-guide.html#cb26-30"></a></span>
+<span id="cb26-31"><a href="r-style-guide.html#cb26-31"></a>nc &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="kw">system.file</span>(<span class="st">&quot;shape/nc.shp&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;sf&quot;</span>))</span>
+<span id="cb26-32"><a href="r-style-guide.html#cb26-32"></a></span>
+<span id="cb26-33"><a href="r-style-guide.html#cb26-33"></a><span class="co"># 3 EXPLORE DATA ----------------------------------------</span></span></code></pre></div>
 
 </div>
 </div>

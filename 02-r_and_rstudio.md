@@ -113,11 +113,6 @@ glm(formula = y ~ x1 + x2 + x3 + x4 + x5,
 
 One of the most powerful features of R is its ability to produce publication-quality plots. For instance, R's native graphics engine allows you to plot this normal distribution:
 
-
-```
-#### Error in windowsFonts(A = windowsFont("Arial")): could not find function "windowsFonts"
-```
-
 <img src="02-r_and_rstudio_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" />
 
 ### It's reproducible

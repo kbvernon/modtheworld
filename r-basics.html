@@ -24,7 +24,7 @@
 <meta name="author" content="Kenneth Blake Vernon" />
 
 
-<meta name="date" content="2021-01-17" />
+<meta name="date" content="2021-01-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -416,16 +416,16 @@ NONE
 <li><code>/</code> division, and</li>
 <li><code>^</code> exponentiation.</li>
 </ul>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="r-basics.html#cb28-1"></a><span class="dv">3</span><span class="op">+</span><span class="dv">2</span></span>
-<span id="cb28-2"><a href="r-basics.html#cb28-2"></a><span class="co">## [1] 5</span></span>
-<span id="cb28-3"><a href="r-basics.html#cb28-3"></a><span class="dv">3-2</span></span>
-<span id="cb28-4"><a href="r-basics.html#cb28-4"></a><span class="co">## [1] 1</span></span>
-<span id="cb28-5"><a href="r-basics.html#cb28-5"></a><span class="dv">3</span><span class="op">*</span><span class="dv">2</span></span>
-<span id="cb28-6"><a href="r-basics.html#cb28-6"></a><span class="co">## [1] 6</span></span>
-<span id="cb28-7"><a href="r-basics.html#cb28-7"></a><span class="dv">3</span><span class="op">/</span><span class="dv">2</span></span>
-<span id="cb28-8"><a href="r-basics.html#cb28-8"></a><span class="co">## [1] 1.5</span></span>
-<span id="cb28-9"><a href="r-basics.html#cb28-9"></a><span class="dv">3</span><span class="op">^</span><span class="dv">2</span></span>
-<span id="cb28-10"><a href="r-basics.html#cb28-10"></a><span class="co">## [1] 9</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="r-basics.html#cb27-1"></a><span class="dv">3</span><span class="op">+</span><span class="dv">2</span></span>
+<span id="cb27-2"><a href="r-basics.html#cb27-2"></a><span class="co">## [1] 5</span></span>
+<span id="cb27-3"><a href="r-basics.html#cb27-3"></a><span class="dv">3-2</span></span>
+<span id="cb27-4"><a href="r-basics.html#cb27-4"></a><span class="co">## [1] 1</span></span>
+<span id="cb27-5"><a href="r-basics.html#cb27-5"></a><span class="dv">3</span><span class="op">*</span><span class="dv">2</span></span>
+<span id="cb27-6"><a href="r-basics.html#cb27-6"></a><span class="co">## [1] 6</span></span>
+<span id="cb27-7"><a href="r-basics.html#cb27-7"></a><span class="dv">3</span><span class="op">/</span><span class="dv">2</span></span>
+<span id="cb27-8"><a href="r-basics.html#cb27-8"></a><span class="co">## [1] 1.5</span></span>
+<span id="cb27-9"><a href="r-basics.html#cb27-9"></a><span class="dv">3</span><span class="op">^</span><span class="dv">2</span></span>
+<span id="cb27-10"><a href="r-basics.html#cb27-10"></a><span class="co">## [1] 9</span></span></code></pre></div>
 </div>
 <div id="console-and-scripts" class="section level2">
 <h2><span class="header-section-number">6.3</span> Console and Scripts</h2>
@@ -453,7 +453,7 @@ NONE
 <div id="creating-objects-with-assignment" class="section level3">
 <h3><span class="header-section-number">6.4.1</span> Creating objects with assignment</h3>
 <p>How do you make an object in R? Well, you just…</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="r-basics.html#cb29-1"></a>bob &lt;-<span class="st"> </span><span class="fl">5.137</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="r-basics.html#cb28-1"></a>bob &lt;-<span class="st"> </span><span class="fl">5.137</span></span></code></pre></div>
 <p>It’s that simple! Or, maybe not. Let’s take a moment to unpack this black magic. First, we note that it is made-up of three things:</p>
 <ol style="list-style-type: decimal">
 <li>a name, in this case, <code>bob</code>;</li>
@@ -463,49 +463,49 @@ NONE
 </ol>
 <p>Basically, what is happening here is that the statement adds an object (<code>5.137</code>) to the R environment and then assigns that object to the name <code>bob</code>. This is why it is sometimes referred to as an <em>assignment</em> statement <span class="citation">(R Core Team <a href="#ref-rcoreteam2020introduction" role="doc-biblioref">2020</a><a href="#ref-rcoreteam2020introduction" role="doc-biblioref">a</a>)</span>. It is not just creating an object, but assigning it to a name.</p>
 <p>R has a few syntactic requirements for object names. They can only contain letters, numbers, underscores <code>_</code>, and periods <code>.</code> (or dots). And they cannot start with numbers.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="r-basics.html#cb30-1"></a><span class="co"># Good</span></span>
-<span id="cb30-2"><a href="r-basics.html#cb30-2"></a>winter_solder &lt;-<span class="st"> &quot;Buckey&quot;</span></span>
-<span id="cb30-3"><a href="r-basics.html#cb30-3"></a>object4 &lt;-<span class="st"> </span><span class="fl">23.2</span></span>
-<span id="cb30-4"><a href="r-basics.html#cb30-4"></a></span>
-<span id="cb30-5"><a href="r-basics.html#cb30-5"></a><span class="co"># Bad</span></span>
-<span id="cb30-6"><a href="r-basics.html#cb30-6"></a>winter soldier &lt;-<span class="st"> &quot;Buckey&quot;</span> <span class="co"># spaces not allowed</span></span>
-<span id="cb30-7"><a href="r-basics.html#cb30-7"></a>4object &lt;-<span class="st"> </span><span class="fl">23.2</span>            <span class="co"># cannot start with a number</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="r-basics.html#cb29-1"></a><span class="co"># Good</span></span>
+<span id="cb29-2"><a href="r-basics.html#cb29-2"></a>winter_solder &lt;-<span class="st"> &quot;Buckey&quot;</span></span>
+<span id="cb29-3"><a href="r-basics.html#cb29-3"></a>object4 &lt;-<span class="st"> </span><span class="fl">23.2</span></span>
+<span id="cb29-4"><a href="r-basics.html#cb29-4"></a></span>
+<span id="cb29-5"><a href="r-basics.html#cb29-5"></a><span class="co"># Bad</span></span>
+<span id="cb29-6"><a href="r-basics.html#cb29-6"></a>winter soldier &lt;-<span class="st"> &quot;Buckey&quot;</span> <span class="co"># spaces not allowed</span></span>
+<span id="cb29-7"><a href="r-basics.html#cb29-7"></a>4object &lt;-<span class="st"> </span><span class="fl">23.2</span>            <span class="co"># cannot start with a number</span></span></code></pre></div>
 
 <div class="rmdcaution">
 R is case sensitive! So, R will not treat <code>My_naME</code> and <code>my_name</code> the same.
 </div>
 
 <p>But enough of that, why assign a name at all? Well, if we just typed</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="r-basics.html#cb31-1"></a><span class="fl">5.137</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="r-basics.html#cb30-1"></a><span class="fl">5.137</span></span></code></pre></div>
 <p>the resulting object would live a fleeting life, shorter than a fruit fly’s, being quickly created and just as quickly destroyed. But, when we give an object a <em>name</em>, we also give it some permanence, and can literally <em>call</em> it back whenever we like. We just say, “<code>bob</code>, come here!” but in the language of R:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="r-basics.html#cb32-1"></a><span class="kw">print</span>(bob)</span>
-<span id="cb32-2"><a href="r-basics.html#cb32-2"></a><span class="co">## [1] 5.137</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="r-basics.html#cb31-1"></a><span class="kw">print</span>(bob)</span>
+<span id="cb31-2"><a href="r-basics.html#cb31-2"></a><span class="co">## [1] 5.137</span></span></code></pre></div>
 <p>or even just</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="r-basics.html#cb33-1"></a>bob</span>
-<span id="cb33-2"><a href="r-basics.html#cb33-2"></a><span class="co">## [1] 5.137</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="r-basics.html#cb32-1"></a>bob</span>
+<span id="cb32-2"><a href="r-basics.html#cb32-2"></a><span class="co">## [1] 5.137</span></span></code></pre></div>
 <p>And then R summons <code>bob</code> for us and tells us who <code>bob</code> is. <code>bob</code> is <code>5.137</code>. Obviously!</p>
 <p>Now, you may think, “I could just create <code>5.137</code> any time I wanted, let it die, and just create it again. It’s not <em>that</em> hard to type five characters, after all.” If you want to flirt with anarchy in this way, by all means, but let me offer two good reasons why you shouldn’t. First, it is certainly true that one number is not hard to type, but it is rare that you will need just one. Suppose you had an object consisting of ten thousand numbers, would you care to type <em>that</em> each time you needed it? For that matter, it would be nigh impossible to ensure you were typing the <em>same</em> numbers each time. Plus, when you make an object with a name, R has your back. If you type <code>6.137</code> instead of <code>5.137</code>, for example, R will not protest, but if you type <code>boo</code> instead of <code>bob</code>, R will say, “nope.”</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="r-basics.html#cb34-1"></a><span class="fl">6.137</span></span>
-<span id="cb34-2"><a href="r-basics.html#cb34-2"></a><span class="co">## [1] 6.137</span></span>
-<span id="cb34-3"><a href="r-basics.html#cb34-3"></a>boo</span>
-<span id="cb34-4"><a href="r-basics.html#cb34-4"></a><span class="co">#### Error in eval(expr, envir, enclos): object &#39;boo&#39; not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="r-basics.html#cb33-1"></a><span class="fl">6.137</span></span>
+<span id="cb33-2"><a href="r-basics.html#cb33-2"></a><span class="co">## [1] 6.137</span></span>
+<span id="cb33-3"><a href="r-basics.html#cb33-3"></a>boo</span>
+<span id="cb33-4"><a href="r-basics.html#cb33-4"></a><span class="co">#### Error in eval(expr, envir, enclos): object &#39;boo&#39; not found</span></span></code></pre></div>
 <p>So, giving objects names in R is a good way to avoid errors.</p>
 </div>
 <div id="doing-things-with-functions" class="section level3">
 <h3><span class="header-section-number">6.4.2</span> Doing things with functions</h3>
 <p>To use a function, we <em>call</em> it just as we would any other object, by typing its name. Unlike simple objects, though, we must also take care to append closed parentheses <code>()</code> to the end of the function name. Within those parentheses, we can go on to supply <em>arguments</em> that control how the function behaves.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="r-basics.html#cb35-1"></a><span class="kw">function_name</span>(<span class="dt">arg1 =</span> value1, <span class="dt">arg2 =</span> value2, ...)</span>
-<span id="cb35-2"><a href="r-basics.html#cb35-2"></a></span>
-<span id="cb35-3"><a href="r-basics.html#cb35-3"></a><span class="co"># for example</span></span>
-<span id="cb35-4"><a href="r-basics.html#cb35-4"></a><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dt">length.out =</span> <span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="r-basics.html#cb34-1"></a><span class="kw">function_name</span>(<span class="dt">arg1 =</span> value1, <span class="dt">arg2 =</span> value2, ...)</span>
+<span id="cb34-2"><a href="r-basics.html#cb34-2"></a></span>
+<span id="cb34-3"><a href="r-basics.html#cb34-3"></a><span class="co"># for example</span></span>
+<span id="cb34-4"><a href="r-basics.html#cb34-4"></a><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dt">length.out =</span> <span class="dv">100</span>)</span></code></pre></div>
 <p>If you cast your mind back to the algebra you learned in high school, this syntax should be familiar to you. Consider this algebraic expression:</p>
 <p><span class="math display">\[ f(x) = 2x + 3 \]</span></p>
 <p>The name of this function is <span class="math inline">\(f\)</span>. Its arguments include <span class="math inline">\(x\)</span>. And the object it returns is the result of multiplying <span class="math inline">\(x\)</span> by 2 and adding 3. So, if you supply this function with the value 4 (as in, <span class="math inline">\(f(x=4)\)</span>), it will return 11 as a result. R functions work in precisely the same way.</p>
 <p>Sometimes you just want to see the result of a function call, as it may suggest the next steps in your analysis. Other times, however - for instance, if you believe that you will need the result of your function call to feed as input to some other function, you should probably assign the result to a new name.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="r-basics.html#cb36-1"></a>mu &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span>
-<span id="cb36-2"><a href="r-basics.html#cb36-2"></a></span>
-<span id="cb36-3"><a href="r-basics.html#cb36-3"></a><span class="kw">seq</span>(<span class="dv">1</span>, mu, <span class="dt">length.out =</span> <span class="dv">5</span>)</span>
-<span id="cb36-4"><a href="r-basics.html#cb36-4"></a><span class="co">## [1] 1.0 1.5 2.0 2.5 3.0</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="r-basics.html#cb35-1"></a>mu &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span>
+<span id="cb35-2"><a href="r-basics.html#cb35-2"></a></span>
+<span id="cb35-3"><a href="r-basics.html#cb35-3"></a><span class="kw">seq</span>(<span class="dv">1</span>, mu, <span class="dt">length.out =</span> <span class="dv">5</span>)</span>
+<span id="cb35-4"><a href="r-basics.html#cb35-4"></a><span class="co">## [1] 1.0 1.5 2.0 2.5 3.0</span></span></code></pre></div>
 </div>
 </div>
 <div id="packages-in-the-r-library" class="section level2">

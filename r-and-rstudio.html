@@ -24,7 +24,7 @@
 <meta name="author" content="Kenneth Blake Vernon" />
 
 
-<meta name="date" content="2021-01-17" />
+<meta name="date" content="2021-01-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -387,19 +387,18 @@ Figure 2.1: R in the wild.
 <div id="its-pretty-figures" class="section level3">
 <h3><span class="header-section-number">2.2.3</span> It’s pretty figures</h3>
 <p>One of the most powerful features of R is its ability to produce publication-quality plots. For instance, R’s native graphics engine allows you to plot this normal distribution:</p>
-<pre><code>#### Error in windowsFonts(A = windowsFont(&quot;Arial&quot;)): could not find function &quot;windowsFonts&quot;</code></pre>
 <p><img src="02-r_and_rstudio_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="its-reproducible" class="section level3">
 <h3><span class="header-section-number">2.2.4</span> It’s reproducible</h3>
 <p>R also facilitates reproducible research. It does this in two ways. First, it forces you to declare explicitly each step in your analysis.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="r-and-rstudio.html#cb8-1"></a><span class="kw">set.seed</span>(<span class="dv">12345</span>)</span>
-<span id="cb8-2"><a href="r-and-rstudio.html#cb8-2"></a></span>
-<span id="cb8-3"><a href="r-and-rstudio.html#cb8-3"></a>my_data &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, <span class="dt">size =</span> <span class="dv">100</span>)</span>
-<span id="cb8-4"><a href="r-and-rstudio.html#cb8-4"></a></span>
-<span id="cb8-5"><a href="r-and-rstudio.html#cb8-5"></a>mu &lt;-<span class="st"> </span><span class="kw">mean</span>(my_data)</span>
-<span id="cb8-6"><a href="r-and-rstudio.html#cb8-6"></a></span>
-<span id="cb8-7"><a href="r-and-rstudio.html#cb8-7"></a>std_dev &lt;-<span class="st"> </span><span class="kw">sd</span>(my_data)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="r-and-rstudio.html#cb7-1"></a><span class="kw">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb7-2"><a href="r-and-rstudio.html#cb7-2"></a></span>
+<span id="cb7-3"><a href="r-and-rstudio.html#cb7-3"></a>my_data &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, <span class="dt">size =</span> <span class="dv">100</span>)</span>
+<span id="cb7-4"><a href="r-and-rstudio.html#cb7-4"></a></span>
+<span id="cb7-5"><a href="r-and-rstudio.html#cb7-5"></a>mu &lt;-<span class="st"> </span><span class="kw">mean</span>(my_data)</span>
+<span id="cb7-6"><a href="r-and-rstudio.html#cb7-6"></a></span>
+<span id="cb7-7"><a href="r-and-rstudio.html#cb7-7"></a>std_dev &lt;-<span class="st"> </span><span class="kw">sd</span>(my_data)</span></code></pre></div>
 <p>We see here that someone has set the seed for R’s random number generator, sampled one hundred numbers between 1 and 1000, then taken the mean of that sample and its standard deviation. Everyone can now see this process and repeat it verbatim for themselves. Crucially, <em>everyone</em> also includes future-you, that stranger who might one day look back and wonder, “How did I do this?”</p>
 <p>The second way that R promotes reproducible research is by making R code like this <em>shareable</em>. In the simplest case, we use R <em>scripts</em>, which are text-based files containing R code that you or someone else with an R installation can run. Alternatively, we can use <a href="https://rmarkdown.rstudio.com/">R Markdown</a>, a much more flexible tool for not only writing and saving R code, but for explaining in detail what you are doing alongside the code itself.</p>
 </div>
