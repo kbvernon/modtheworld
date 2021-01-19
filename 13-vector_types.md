@@ -546,42 +546,36 @@ is.data.frame(a_new_list)
 
 
 
+## Vectorized Functions
 
-
-
-
-
-## Environments
-
-So, we now know how to create an object in R, but when we do, _where does it go_?!!! This is a question that a lot of smart people find themselves asking when first learning about R. While the answer is a tad on the esoteric side, it is perhaps useful to peel back the curtain ever so slightly, so you can see what is happening when you create an object in R. To do that, we need to talk about environments, in particular, the "global" environment or "workspace." You can think of an environment like the workspace as a special sort of named list. 
+A vectorized function is a function $f()$ that takes a [vector](#vector-types) `c(x1, x2, x3, ..., xn)` as input and returns the vector `c(f(x1), f(x2), f(x3), ..., f(xn))` as output. Meaning, in other words, a vectorized function is one that gets applied separately to each element of an input vector. A consequence, or requirement perhaps, is that the input and output vectors have the same length (or number of elements). To make this more concrete, consider the vectorized function `sqrt()` which takes the __sq__ uare __r__ oo __t__ of a number or numbers.  
 
 
 ```r
-bob <- list(a = 1:5,
-            b = LETTERS[1:10],
-            c = "quotidian",
-            d = TRUE)
+sqrt(4)
+## [1] 2
+a_vector <- c(4, 9, 16, 25, 36)
 
-# coerce list to environment object
-digital_zoo <- as.environment(bob)
+sqrt(a_vector) # read: "take the square root of a vector"
+## [1] 2 3 4 5 6
 ```
 
-When you create an object, you do not have to go through these steps explicitly for R adds objects assigned to names to your global environment by default. The key here is just to recognize that when you use `<-`, you are in effect adding an element to a list, the environment list. 
 
-If you want to know what all lives in your R environment, you can try `ls()`, which works like `names()` does for lists, printing the names of its denizens.
+Some ambiguities
 
 
 ```r
-ls(digital_zoo)
-## [1] "a" "b" "c" "d"
+c(1, 2, 3) + c(4, 5, 6)
+## [1] 5 7 9
 ```
 
-As a general rule, you should keep your environments clean and orderly. This will help prevent you from making careless mistakes (like running operations on the wrong objects) and also make it easier to manage your workflow. One way to do this is to let go of objects that you will not re-use - meaning, you should banish them from your environment. This is achieved with the `rm()` function.
+
+Recycling
 
 
 ```r
-rm(a, envir = digital_zoo) # read this as: remove object a from the digital zoo environment
+c(1, 3) + c(1, 1, 1, 1)
+## [1] 2 4 2 4
 ```
 
-When you're removing objects from your global environment or workspace (and not the toy environment that I just created as an example), it is sufficient simply to type `rm(<object>)` without specifying the environment, since it defaults to the global environment anyway.  
 

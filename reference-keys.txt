@@ -107,9 +107,11 @@ matrix
 list
 data.frame
 coercion
-environments
+vectorized-functions
 workspace-management
+environments
 the-working-directory
+data-import-and-export
 vector-indexing
 exploring-your-data
 indexing-your-data
