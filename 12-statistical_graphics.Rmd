@@ -484,9 +484,7 @@ R allows you to specify graphical parameters for points and lines (and by extens
 
 ```{r 05-point-line, echo = FALSE}
 
-windowsFonts(A = windowsFont("Arial"))
-
-par(family = "A",
+par(family = "Arial",
     mfrow = c(1, 2),
     mar = rep(0.2, 4),
     oma = rep(0.1, 4),
@@ -604,7 +602,7 @@ There are several ways to modify text output in a plot. Here we will focus on fo
 
 ```{r, echo = FALSE}
 
-par(family = "A",
+par(family = "Arial",
     pty = "s",
     mfrow = c(1, 2),
     mar = rep(0.2, 4),
@@ -709,7 +707,7 @@ all_R_colors[1:3]
 
 ```{r, echo = FALSE}
 
-par(family = "A",
+par(family = "Arial",
     cex.main = 1.5,
     font.main = 1)
 
