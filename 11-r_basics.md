@@ -248,7 +248,6 @@ Note, however, that even with R scripts, you cannot just open one in a text edit
 3. To run multiple lines of code, highlight those lines and hit `CTRL+Enter` (`CMD+Enter`).
 
 
-
 ## Packages in the R Library
 
 R is a highly _extensible_ programming language. Being extensible is just a fancy way of saying that individuals can write R code (more often than not, this involves writing functions) that others can later incorporate into their own workflow. These functions can be shared as simple scripts, but they can also be bundled into _packages_, which you can think of as being sort of like an R "app." The basic motivation for a package is to save you from having to recreate the wheel every time you open R. That is, it saves you from having to type the same code over and over again. It's also a powerful tool for reproducibility, as it ensures that the _exact same code_ is run each time.  
@@ -271,7 +270,7 @@ Once you have done this, the functions provided by the package are now available
 
 Some packages that I use in virtually all of my analyses include the following:
 
-<table class="table table-hover table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<table class="table table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <tbody>
   <tr>
    <td style="text-align:left;"> `dplyr` </td>
@@ -284,12 +283,12 @@ Some packages that I use in virtually all of my analyses include the following:
    <td style="text-align:left;"> [LINK](https://ggplot2.tidyverse.org/) </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> here </td>
+   <td style="text-align:left;"> `here` </td>
    <td style="text-align:left;"> Enables easy file referencing in project-oriented workflows. </td>
    <td style="text-align:left;"> [LINK](https://here.r-lib.org/) </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> sf </td>
+   <td style="text-align:left;"> `sf` </td>
    <td style="text-align:left;"> A package that provides simple feature access for R. </td>
    <td style="text-align:left;"> [LINK](https://r-spatial.github.io/sf/) </td>
   </tr>

@@ -130,19 +130,22 @@ At the beginning of each chapter, you will find a table with a chapter overview.
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __tl;dr__ </td>
-   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> It's a calculator. </td>
+   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> It's not _just_ a calculator. </td>
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Outcomes__ </td>
    <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> Here, you will learn about<br><ol>
-<li>what R is,</li>
-<li>why you should use it, and</li>
-<li>what a stereotypical workflow with it looks like.</li>
+<li>doing arithmetic with R,</li>
+<li>creating objects with assignment,</li>
+<li>doing things with functions</li>
+<li>running code in the console,</li>
+<li>writing scripts, and</li>
+<li>using R packages.</li>
 </ol> </td>
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Datasets__ </td>
-   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/) [@horst2020palmer] </td>
+   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> NONE </td>
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Requirements__ </td>
