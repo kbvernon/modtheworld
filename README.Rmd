@@ -14,6 +14,7 @@ knitr::opts_chunk$set(
 # Modeling the World with R
 
 <!-- badges: start -->
+[![renderbook](https://github.com/kbvernon/modtheworld/workflows/renderbook/badge.svg)](https://github.com/kbvernon/modtheworld/actions)
 <!-- badges: end -->
 
 This repository hosts the source code for __"Modeling the World with R"__, a book that introduces readers to the fundamentals of statistics and statistical programming in R.

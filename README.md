@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![renderbook](https://github.com/kbvernon/modtheworld/workflows/renderbook/badge.svg)](https://github.com/kbvernon/modtheworld/actions)
 <!-- badges: end -->
 
 This repository hosts the source code for **“Modeling the World with
