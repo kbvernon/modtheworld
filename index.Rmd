@@ -34,9 +34,7 @@ The R source code for for this bookdown website may be found at [github.com/kbve
 
 [![renderbook](https://github.com/kbvernon/modtheworld/workflows/renderbook/badge.svg)](https://github.com/kbvernon/modtheworld/actions)  
 
-__How to contribute__  
-
-The easiest way to contribute is to submit an issue or pull request to the Github pagee. Please note, however, that by contributing to _Modeling the World_, you agree to follow its [Contributor Code of Conduct](https://github.com/kbvernon/modtheworld/blob/main/CODE_OF_CONDUCT.md). 
+__How to contribute?__ Probably the easiest way to contribute is to submit an issue or pull request to the Github page. Please note, however, that by contributing to _Modeling the World_, you agree to follow its [Contributor Code of Conduct](https://github.com/kbvernon/modtheworld/blob/main/CODE_OF_CONDUCT.md). 
 
 # Acknowledgments {-}
 
