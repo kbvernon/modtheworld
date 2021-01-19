@@ -452,11 +452,6 @@ Now, let's go over just a few of the many, many graphical parameters and how the
 
 R allows you to specify graphical parameters for points and lines (and by extension, polygons), for example, the type of symbol used to display the geometry. For points, this is controlled by `pch`. For lines, by `lty`. `pch` can take any value from 0 to 25, `lty` any value from 0 to 6. `lty` can also be specified with the words `"blank"`, `"solid"`, `"dashed"`, `"dotted"`, `"dotdash"`, `"longdash"`, and `"twodash"`. Here is what these look like.
 
-
-```
-#### Error in windowsFonts(A = windowsFont("Arial")): could not find function "windowsFonts"
-```
-
 <img src="12-statistical_graphics_files/figure-html/05-point-line-1.png" width="672" style="display: block; margin: auto;" />
 
 Notice that point symbols 0-14 are unfilled, 15-20 are filled and a single color, and 21-25 are filled and different colors, one for the line and one for the fill. Here is an example of changing the point symbol using our x and y vectors from above:

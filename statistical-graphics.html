@@ -24,7 +24,7 @@
 <meta name="author" content="Kenneth Blake Vernon" />
 
 
-<meta name="date" content="2021-01-18" />
+<meta name="date" content="2021-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -755,23 +755,22 @@ For an exhaustive list of graphical parameters and examples of their effect, see
 <div id="geometry-type" class="section level3">
 <h3><span class="header-section-number">7.6.1</span> Geometry Type</h3>
 <p>R allows you to specify graphical parameters for points and lines (and by extension, polygons), for example, the type of symbol used to display the geometry. For points, this is controlled by <code>pch</code>. For lines, by <code>lty</code>. <code>pch</code> can take any value from 0 to 25, <code>lty</code> any value from 0 to 6. <code>lty</code> can also be specified with the words <code>"blank"</code>, <code>"solid"</code>, <code>"dashed"</code>, <code>"dotted"</code>, <code>"dotdash"</code>, <code>"longdash"</code>, and <code>"twodash"</code>. Here is what these look like.</p>
-<pre><code>#### Error in windowsFonts(A = windowsFont(&quot;Arial&quot;)): could not find function &quot;windowsFonts&quot;</code></pre>
 <p><img src="12-statistical_graphics_files/figure-html/05-point-line-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Notice that point symbols 0-14 are unfilled, 15-20 are filled and a single color, and 21-25 are filled and different colors, one for the line and one for the fill. Here is an example of changing the point symbol using our x and y vectors from above:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="statistical-graphics.html#cb51-1"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x,</span>
-<span id="cb51-2"><a href="statistical-graphics.html#cb51-2"></a>     <span class="dt">type =</span> <span class="st">&quot;p&quot;</span>, <span class="co"># &#39;p&#39; for &quot;point&quot;</span></span>
-<span id="cb51-3"><a href="statistical-graphics.html#cb51-3"></a>     <span class="dt">pch  =</span> <span class="dv">17</span>, <span class="co"># set point type here</span></span>
-<span id="cb51-4"><a href="statistical-graphics.html#cb51-4"></a>     <span class="dt">xlab =</span> <span class="st">&quot;X&quot;</span>,</span>
-<span id="cb51-5"><a href="statistical-graphics.html#cb51-5"></a>     <span class="dt">ylab =</span> <span class="st">&quot;Y&quot;</span>,</span>
-<span id="cb51-6"><a href="statistical-graphics.html#cb51-6"></a>     <span class="dt">main =</span> <span class="st">&quot;Strange Points&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="statistical-graphics.html#cb50-1"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x,</span>
+<span id="cb50-2"><a href="statistical-graphics.html#cb50-2"></a>     <span class="dt">type =</span> <span class="st">&quot;p&quot;</span>, <span class="co"># &#39;p&#39; for &quot;point&quot;</span></span>
+<span id="cb50-3"><a href="statistical-graphics.html#cb50-3"></a>     <span class="dt">pch  =</span> <span class="dv">17</span>, <span class="co"># set point type here</span></span>
+<span id="cb50-4"><a href="statistical-graphics.html#cb50-4"></a>     <span class="dt">xlab =</span> <span class="st">&quot;X&quot;</span>,</span>
+<span id="cb50-5"><a href="statistical-graphics.html#cb50-5"></a>     <span class="dt">ylab =</span> <span class="st">&quot;Y&quot;</span>,</span>
+<span id="cb50-6"><a href="statistical-graphics.html#cb50-6"></a>     <span class="dt">main =</span> <span class="st">&quot;Strange Points&quot;</span>)</span></code></pre></div>
 <p><img src="12-statistical_graphics_files/figure-html/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>And here is an example of changing the line type:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="statistical-graphics.html#cb52-1"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x,</span>
-<span id="cb52-2"><a href="statistical-graphics.html#cb52-2"></a>     <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="co"># &#39;l&#39; for &quot;line&quot;</span></span>
-<span id="cb52-3"><a href="statistical-graphics.html#cb52-3"></a>     <span class="dt">lty  =</span> <span class="dv">4</span>, <span class="co"># set line type here</span></span>
-<span id="cb52-4"><a href="statistical-graphics.html#cb52-4"></a>     <span class="dt">xlab =</span> <span class="st">&quot;X&quot;</span>,</span>
-<span id="cb52-5"><a href="statistical-graphics.html#cb52-5"></a>     <span class="dt">ylab =</span> <span class="st">&quot;Y&quot;</span>,</span>
-<span id="cb52-6"><a href="statistical-graphics.html#cb52-6"></a>     <span class="dt">main =</span> <span class="st">&quot;Strange Line&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="statistical-graphics.html#cb51-1"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x,</span>
+<span id="cb51-2"><a href="statistical-graphics.html#cb51-2"></a>     <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="co"># &#39;l&#39; for &quot;line&quot;</span></span>
+<span id="cb51-3"><a href="statistical-graphics.html#cb51-3"></a>     <span class="dt">lty  =</span> <span class="dv">4</span>, <span class="co"># set line type here</span></span>
+<span id="cb51-4"><a href="statistical-graphics.html#cb51-4"></a>     <span class="dt">xlab =</span> <span class="st">&quot;X&quot;</span>,</span>
+<span id="cb51-5"><a href="statistical-graphics.html#cb51-5"></a>     <span class="dt">ylab =</span> <span class="st">&quot;Y&quot;</span>,</span>
+<span id="cb51-6"><a href="statistical-graphics.html#cb51-6"></a>     <span class="dt">main =</span> <span class="st">&quot;Strange Line&quot;</span>)</span></code></pre></div>
 <p><img src="12-statistical_graphics_files/figure-html/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="text" class="section level3">
@@ -837,39 +836,39 @@ Color of subtitle.
 </tbody>
 </table>
 <p>Now, we just need a way of providing the color we want to those parameters. For this, R offers a number of tools. The two most intuitive ones are perhaps the name of the color and its R number identifier. For a complete list of R color names, you can use the <code>colors()</code> function.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="statistical-graphics.html#cb53-1"></a>all_R_colors &lt;-<span class="st"> </span><span class="kw">colors</span>()</span>
-<span id="cb53-2"><a href="statistical-graphics.html#cb53-2"></a></span>
-<span id="cb53-3"><a href="statistical-graphics.html#cb53-3"></a>all_R_colors[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</span>
-<span id="cb53-4"><a href="statistical-graphics.html#cb53-4"></a><span class="co">## [1] &quot;white&quot;        &quot;aliceblue&quot;    &quot;antiquewhite&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="statistical-graphics.html#cb52-1"></a>all_R_colors &lt;-<span class="st"> </span><span class="kw">colors</span>()</span>
+<span id="cb52-2"><a href="statistical-graphics.html#cb52-2"></a></span>
+<span id="cb52-3"><a href="statistical-graphics.html#cb52-3"></a>all_R_colors[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</span>
+<span id="cb52-4"><a href="statistical-graphics.html#cb52-4"></a><span class="co">## [1] &quot;white&quot;        &quot;aliceblue&quot;    &quot;antiquewhite&quot;</span></span></code></pre></div>
 <p><img src="12-statistical_graphics_files/figure-html/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Now we can combine these color specifications with the graphical parameters and do this:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="statistical-graphics.html#cb54-1"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x,</span>
-<span id="cb54-2"><a href="statistical-graphics.html#cb54-2"></a>     <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>,</span>
-<span id="cb54-3"><a href="statistical-graphics.html#cb54-3"></a>     <span class="dt">xaxt =</span> <span class="st">&quot;n&quot;</span>,</span>
-<span id="cb54-4"><a href="statistical-graphics.html#cb54-4"></a>     <span class="dt">yaxt =</span> <span class="st">&quot;n&quot;</span>,</span>
-<span id="cb54-5"><a href="statistical-graphics.html#cb54-5"></a>     <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, </span>
-<span id="cb54-6"><a href="statistical-graphics.html#cb54-6"></a>     <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb54-7"><a href="statistical-graphics.html#cb54-7"></a>     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb54-8"><a href="statistical-graphics.html#cb54-8"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb54-9"><a href="statistical-graphics.html#cb54-9"></a></span>
-<span id="cb54-10"><a href="statistical-graphics.html#cb54-10"></a><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">col.axis =</span> <span class="st">&quot;blue4&quot;</span>) <span class="co"># who comes up with these names?</span></span>
-<span id="cb54-11"><a href="statistical-graphics.html#cb54-11"></a><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">col.axis =</span> <span class="st">&quot;blue4&quot;</span>)</span>
-<span id="cb54-12"><a href="statistical-graphics.html#cb54-12"></a></span>
-<span id="cb54-13"><a href="statistical-graphics.html#cb54-13"></a><span class="kw">points</span>(y <span class="op">~</span><span class="st"> </span>x, </span>
-<span id="cb54-14"><a href="statistical-graphics.html#cb54-14"></a>       <span class="dt">pch =</span> <span class="dv">19</span>, </span>
-<span id="cb54-15"><a href="statistical-graphics.html#cb54-15"></a>       <span class="dt">col =</span> <span class="st">&quot;darkgoldenrod&quot;</span>)</span>
-<span id="cb54-16"><a href="statistical-graphics.html#cb54-16"></a></span>
-<span id="cb54-17"><a href="statistical-graphics.html#cb54-17"></a><span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Weird Colors&quot;</span>,</span>
-<span id="cb54-18"><a href="statistical-graphics.html#cb54-18"></a>      <span class="dt">line =</span> <span class="fl">0.3</span>,</span>
-<span id="cb54-19"><a href="statistical-graphics.html#cb54-19"></a>      <span class="dt">adj =</span> <span class="dv">0</span>,</span>
-<span id="cb54-20"><a href="statistical-graphics.html#cb54-20"></a>      <span class="dt">col.main =</span> <span class="st">&quot;aquamarine4&quot;</span>)</span>
-<span id="cb54-21"><a href="statistical-graphics.html#cb54-21"></a></span>
-<span id="cb54-22"><a href="statistical-graphics.html#cb54-22"></a><span class="kw">title</span>(<span class="dt">xlab =</span> <span class="st">&quot;X&quot;</span>,</span>
-<span id="cb54-23"><a href="statistical-graphics.html#cb54-23"></a>      <span class="dt">ylab =</span> <span class="st">&quot;Y&quot;</span>,</span>
-<span id="cb54-24"><a href="statistical-graphics.html#cb54-24"></a>      <span class="dt">col.lab =</span> <span class="st">&quot;darkorchid&quot;</span>)</span>
-<span id="cb54-25"><a href="statistical-graphics.html#cb54-25"></a></span>
-<span id="cb54-26"><a href="statistical-graphics.html#cb54-26"></a><span class="kw">title</span>(<span class="dt">sub =</span> <span class="st">&quot;Can&#39;t unsee this plot.&quot;</span>,</span>
-<span id="cb54-27"><a href="statistical-graphics.html#cb54-27"></a>      <span class="dt">col.sub =</span> <span class="st">&quot;deeppink4&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="statistical-graphics.html#cb53-1"></a><span class="kw">plot</span>(y <span class="op">~</span><span class="st"> </span>x,</span>
+<span id="cb53-2"><a href="statistical-graphics.html#cb53-2"></a>     <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb53-3"><a href="statistical-graphics.html#cb53-3"></a>     <span class="dt">xaxt =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb53-4"><a href="statistical-graphics.html#cb53-4"></a>     <span class="dt">yaxt =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb53-5"><a href="statistical-graphics.html#cb53-5"></a>     <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb53-6"><a href="statistical-graphics.html#cb53-6"></a>     <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb53-7"><a href="statistical-graphics.html#cb53-7"></a>     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb53-8"><a href="statistical-graphics.html#cb53-8"></a>     <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb53-9"><a href="statistical-graphics.html#cb53-9"></a></span>
+<span id="cb53-10"><a href="statistical-graphics.html#cb53-10"></a><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">col.axis =</span> <span class="st">&quot;blue4&quot;</span>) <span class="co"># who comes up with these names?</span></span>
+<span id="cb53-11"><a href="statistical-graphics.html#cb53-11"></a><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">col.axis =</span> <span class="st">&quot;blue4&quot;</span>)</span>
+<span id="cb53-12"><a href="statistical-graphics.html#cb53-12"></a></span>
+<span id="cb53-13"><a href="statistical-graphics.html#cb53-13"></a><span class="kw">points</span>(y <span class="op">~</span><span class="st"> </span>x, </span>
+<span id="cb53-14"><a href="statistical-graphics.html#cb53-14"></a>       <span class="dt">pch =</span> <span class="dv">19</span>, </span>
+<span id="cb53-15"><a href="statistical-graphics.html#cb53-15"></a>       <span class="dt">col =</span> <span class="st">&quot;darkgoldenrod&quot;</span>)</span>
+<span id="cb53-16"><a href="statistical-graphics.html#cb53-16"></a></span>
+<span id="cb53-17"><a href="statistical-graphics.html#cb53-17"></a><span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Weird Colors&quot;</span>,</span>
+<span id="cb53-18"><a href="statistical-graphics.html#cb53-18"></a>      <span class="dt">line =</span> <span class="fl">0.3</span>,</span>
+<span id="cb53-19"><a href="statistical-graphics.html#cb53-19"></a>      <span class="dt">adj =</span> <span class="dv">0</span>,</span>
+<span id="cb53-20"><a href="statistical-graphics.html#cb53-20"></a>      <span class="dt">col.main =</span> <span class="st">&quot;aquamarine4&quot;</span>)</span>
+<span id="cb53-21"><a href="statistical-graphics.html#cb53-21"></a></span>
+<span id="cb53-22"><a href="statistical-graphics.html#cb53-22"></a><span class="kw">title</span>(<span class="dt">xlab =</span> <span class="st">&quot;X&quot;</span>,</span>
+<span id="cb53-23"><a href="statistical-graphics.html#cb53-23"></a>      <span class="dt">ylab =</span> <span class="st">&quot;Y&quot;</span>,</span>
+<span id="cb53-24"><a href="statistical-graphics.html#cb53-24"></a>      <span class="dt">col.lab =</span> <span class="st">&quot;darkorchid&quot;</span>)</span>
+<span id="cb53-25"><a href="statistical-graphics.html#cb53-25"></a></span>
+<span id="cb53-26"><a href="statistical-graphics.html#cb53-26"></a><span class="kw">title</span>(<span class="dt">sub =</span> <span class="st">&quot;Can&#39;t unsee this plot.&quot;</span>,</span>
+<span id="cb53-27"><a href="statistical-graphics.html#cb53-27"></a>      <span class="dt">col.sub =</span> <span class="st">&quot;deeppink4&quot;</span>)</span></code></pre></div>
 <p><img src="12-statistical_graphics_files/figure-html/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="size" class="section level3">
