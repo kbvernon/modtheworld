@@ -25,7 +25,13 @@ While geared toward practical applications, like analyzing and visualizing data,
 
 <!-- book is also free and open source, licensed under the Creative Commons ... -->
 
-By contributing to _Modeling the World_, you agree to follow its [Contributor Code of Conduct](https://github.com/kbvernon/modtheworld/blob/main/CODE_OF_CONDUCT.md). 
+The R source code for for this bookdown website may be found at [github.com/kbvernon/modtheworld](https://github.com/kbvernon/modtheworld). Continuous integration and rendering is maintained with [Github Actions](https://github.com/kbvernon/modtheworld/actions). You can see its current 'build status' with the following Github badge:  
+
+[![renderbook](https://github.com/kbvernon/modtheworld/workflows/renderbook/badge.svg)](https://github.com/kbvernon/modtheworld/actions)  
+
+__How to contribute__  
+
+The easiest way to contribute is to submit an issue or pull request to the Github pagee. Please note, however, that by contributing to _Modeling the World_, you agree to follow its [Contributor Code of Conduct](https://github.com/kbvernon/modtheworld/blob/main/CODE_OF_CONDUCT.md). 
 
 # Acknowledgments {-}
 
