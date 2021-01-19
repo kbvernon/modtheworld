@@ -64,12 +64,12 @@ be-organized
 r-basics
 overview
 a-glorified-calculator
-console-and-scripts
-r-console
-r-scripts
 objects-and-functions
 creating-objects-with-assignment
 doing-things-with-functions
+console-and-scripts
+r-console
+r-scripts
 packages-in-the-r-library
 statistical-graphics
 overview-1

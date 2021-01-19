@@ -62,19 +62,22 @@ $(document).ready(function() {
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __tl;dr__ </td>
-   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> It's a calculator. </td>
+   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> It's not _just_ a calculator. </td>
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Outcomes__ </td>
    <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> Here, you will learn about<br><ol>
-<li>what R is,</li>
-<li>why you should use it, and</li>
-<li>what a stereotypical workflow with it looks like.</li>
+<li>doing arithmetic with R,</li>
+<li>creating objects with assignment,</li>
+<li>doing things with functions</li>
+<li>running code in the console,</li>
+<li>writing scripts, and</li>
+<li>using R packages.</li>
 </ol> </td>
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Datasets__ </td>
-   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/) [@horst2020palmer] </td>
+   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> NONE </td>
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Requirements__ </td>
@@ -111,31 +114,6 @@ R has functionality for basic arithmetic operations, including
 ## [1] 9
 ```
 
-
-## Console and Scripts
-
-In this section, we'll go over some basic considerations of where to _write_ your R code and where to _run_ it. 
-
-### R Console
-
-Perhaps this is obvious, but you can write R code basically anywhere - on a napkin at a restaurant, for instance, on your hand in a pinch, or even in a fever dream - but if you want to get your R code to actually _run_, you will have to send it to the R console, so it can be _interpreted_. In this sense, at least, the R console is like R's central nervous system. Signals (your code) get sent to the console to get interpreted and generate some behavioral output (like a plot or a linear model). Here is what typing R code in the actual R console looks like:
-
-<img src="11-r_basics_files/figure-html/unnamed-chunk-4-.gif" width="100%" style="display: block; margin: auto auto auto 0;" />
-
-Please note that in this book, the greater-than symbol `>` preceding R code is suppressed, and that the result is preceded by `##`.
-
-
-### R Scripts
-
-One important downside of writing R code directly into the console is that it is more like writing R in a dream than on a restaurant napkin. When you write code into it, you cannot get it back once you "wake up" from your R session.^[This is not strictly true, as R provides _.Rhistory_ files, but you have little control over the formatting of those documents.] This means that working in the console subjects the reproducibility of your analysis to the sometimes (often?) unreliable testimony of your own memory - like trying to remember what happened in your dream. To overcome this limitation of the console, the authors of R have also provided a specially designed text file, called an R "script," that you can write R code into and save to disc. A dead giveaway that you have one on your computer is the _.R_ file extension. 
-
-Note, however, that even with R scripts, you cannot just open one in a text editor and expect the code it contains to run. You would be just as well off wadding up your napkin of code and hurling it defiantly at your monitor. No, to get your code to run, wherever it resides, you must always pass it to the console to get interpreted. There are a number of ways to do this, the most basic being these:
-
-1. Copy and paste the code from your script into the console. This strategy, of course, makes an R script only slightly more advantageous than a napkin...
-2. To run a single line of code, place the cursor on that line and hit `CTRL+Enter` on PC or `CMD+Enter` on Mac. 
-3. To run multiple lines of code, highlight those lines and hit `CTRL+Enter` (`CMD+Enter`).
-
-
 ## Objects and Functions
 
 In R, you can _make_ things and you can _do_ things. The things that you make are called _objects_ and the things that you do things with are called _functions_. The most common kind of R object is a `vector`. You can learn more about the different types of vectors in [Chapter 6 The R Menagerie](#the-r-menagerie). Other kinds of objects include `formula`, `raster`, `grob`, `hist`, and `density`. What about functions? These are actually a special class of object that take other objects as input and typically (though not always) return other objects as output.^[A frustrating exception to this is the base R `plot()` function. This function results only in side-effects.] They are thus "functions" in the sense of input-output devices. Any complex statistical operation you want to conduct in R will almost certainly involve the use of one or more functions.  
@@ -156,7 +134,7 @@ It's that simple! Or, maybe not. Let's take a moment to unpack this black magic.
 (2) an arrow, `<-`, the essential ingredient in this incantation; and  
 (3) an object, specifically the number `5.137`, which is being created.  
 
-Basically, what is happening here is that the statement adds an object (`5.137`) to the R environment and then assigns that object to the name `bob`. This is why it is sometimes referred to as an _assignment_ statement [@rcoreteam2020introduction]. It is not just creating an object, but assigning it to a name.
+The statement adds an object (`5.137`) to the R environment and then assigns that object to the name `bob`. This is why it is sometimes referred to as an _assignment_ statement [@rcoreteam2020introduction]. It is not just creating an object, but assigning it to a name.
 
 R has a few syntactic requirements for object names. They can only contain letters, numbers, underscores `_`, and periods `.` (or dots). And they cannot start with numbers.  
 
@@ -173,7 +151,7 @@ winter soldier <- "Buckey" # spaces not allowed
 
 \BeginKnitrBlock{rmdcaution}<div class="rmdcaution">R is case sensitive! So, R will not treat `My_naME` and `my_name` the same. </div>\EndKnitrBlock{rmdcaution}
 
-But enough of that, why assign a name at all? Well, if we just typed
+But, why assign a name at all? Well, if we just typed
 
 
 ```r
@@ -241,6 +219,80 @@ seq(1, mu, length.out = 5)
 
 
 
+
+
+
+
+
+## Console and Scripts
+
+In this section, we'll go over some basic considerations of where to _write_ your R code and where to _run_ it. 
+
+### R Console
+
+Perhaps this is obvious, but you can write R code basically anywhere - on a napkin at a restaurant, for instance, on your hand in a pinch, or even in a fever dream - but if you want to get your R code to actually _run_, you will have to send it to the R console, so it can be _interpreted_. In this sense, at least, the R console is like R's central nervous system. Signals (your code) get sent to the console to get interpreted and generate some behavioral output (like a plot or a linear model). Here is what typing R code in the actual R console looks like:
+
+<img src="11-r_basics_files/figure-html/unnamed-chunk-12-.gif" width="100%" style="display: block; margin: auto auto auto 0;" />
+
+Please note that in this book, the greater-than symbol `>` preceding R code is suppressed, and that the result is preceded by `##`.
+
+
+### R Scripts
+
+One important downside of writing R code directly into the console is that it is more like writing R in a dream than on a restaurant napkin. When you write code into it, you cannot get it back once you "wake up" from your R session.^[This is not strictly true, as R provides _.Rhistory_ files, but you have little control over the formatting of those documents.] This means that working in the console subjects the reproducibility of your analysis to the sometimes (often?) unreliable testimony of your own memory - like trying to remember what happened in your dream. To overcome this limitation of the console, the authors of R have also provided a specially designed text file, called an R "script," that you can write R code into and save to disc. A dead giveaway that you have one on your computer is the _.R_ file extension. 
+
+Note, however, that even with R scripts, you cannot just open one in a text editor and expect the code it contains to run. You would be just as well off wadding up your napkin of code and hurling it defiantly at your monitor. No, to get your code to run, wherever it resides, you must always pass it to the console to get interpreted. There are a number of ways to do this, the most basic being these:
+
+1. Copy and paste the code from your script into the console. This strategy, of course, makes an R script only slightly more advantageous than a napkin...
+2. To run a single line of code, place the cursor on that line and hit `CTRL+Enter` on PC or `CMD+Enter` on Mac. 
+3. To run multiple lines of code, highlight those lines and hit `CTRL+Enter` (`CMD+Enter`).
+
+
+
 ## Packages in the R Library
 
+R is a highly _extensible_ programming language. Being extensible is just a fancy way of saying that individuals can write R code (more often than not, this involves writing functions) that others can later incorporate into their own workflow. These functions can be shared as simple scripts, but they can also be bundled into _packages_, which you can think of as being sort of like an R "app." The basic motivation for a package is to save you from having to recreate the wheel every time you open R. That is, it saves you from having to type the same code over and over again. It's also a powerful tool for reproducibility, as it ensures that the _exact same code_ is run each time.  
+
+To install a package, you use the `install.packages()` function.
+
+
+```r
+install.packages("dplyr")
+```
+
+This function simply adds the package to your R _library_, which is more or less just a folder on your computer. To actually use the functions provided by an R package, you have to "check out" the package from the library. The way to do this in R is with the `library()` function.
+
+
+```r
+library(dplyr)
+```
+
+Once you have done this, the functions provided by the package are now available to use.
+
+Some packages that I use in virtually all of my analyses include the following:
+
+<table class="table table-hover table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<tbody>
+  <tr>
+   <td style="text-align:left;"> `dplyr` </td>
+   <td style="text-align:left;"> A grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges. </td>
+   <td style="text-align:left;"> [LINK](https://dplyr.tidyverse.org/) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `ggplot2` </td>
+   <td style="text-align:left;"> A system for declaratively creating graphics, based on The Grammar of Graphics. </td>
+   <td style="text-align:left;"> [LINK](https://ggplot2.tidyverse.org/) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> here </td>
+   <td style="text-align:left;"> Enables easy file referencing in project-oriented workflows. </td>
+   <td style="text-align:left;"> [LINK](https://here.r-lib.org/) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> sf </td>
+   <td style="text-align:left;"> A package that provides simple feature access for R. </td>
+   <td style="text-align:left;"> [LINK](https://r-spatial.github.io/sf/) </td>
+  </tr>
+</tbody>
+</table>
 
