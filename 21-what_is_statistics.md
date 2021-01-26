@@ -49,6 +49,8 @@ $(document).ready(function() {
 
 
 
+<img src="21-what_is_statistics_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" />
+
 $$
 \begin{aligned}
   y &= E(y) + \epsilon \\

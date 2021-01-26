@@ -57,11 +57,11 @@ $(document).ready(function() {
 <tbody>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Goal__ </td>
-   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> To introduce students to the fundamentals of data visualization using the base R plotting system. </td>
+   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> To introduce students to the programming fundamentals of data visualization using the base R plotting system. </td>
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __tl;dr__ </td>
-   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> Let the data speak. Let the data speak pretty. </td>
+   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> It's got layers to it, like tiramisu. </td>
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Outcomes__ </td>
@@ -70,17 +70,18 @@ $(document).ready(function() {
 <li>the `plot()` function,</li>
 <li>layering,</li>
 <li>annotation,</li>
-<li>graphical parameters, and</li>
-<li>multi-plot layouts.</li>
+<li>graphical parameters (including font, color, and size),</li>
+<li>multi-plot layouts, and</li>
+<li>saving figures (with graphical devices).</li>
 </ol> </td>
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Datasets__ </td>
-   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/) [@horst2020palmer]<br>[General Social Survey](https://infer.tidymodels.org/reference/gss.html) [@bray2020infer] </td>
+   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> NONE </td>
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Requirements__ </td>
-   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> NONE </td>
+   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> [Chapter 6: R Basics](#r-basics) </td>
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Further Reading__ </td>
@@ -99,8 +100,10 @@ In statistics, graphics provide visual representations of data, but why might we
 
 Here we are focusing on the basics of visual exploration using R's native `graphics` tools, though much of what you learn here will apply more generally to visual presentation too.  
 
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">Highly recommend that you have a look at the [R Graph Gallery](https://www.r-graph-gallery.com/), which provides code and examples for lots of different plot types, along with helpful explanations of those plot types, specifically what they are and when to use them.  </div>\EndKnitrBlock{rmdnote}
 
-## Plot Anatomy
+
+## Plot anatomy
 
 Producing statistical graphics in R is a lot like adding layers to a canvas. To setup a canvas and to add some default layering, we use the `plot()` function. This is a programming workhorse in R, used routinely and repeatedly during R sessions. Before diving into its use, though, let's first step back to, as it were, dissect a base R plot, getting a feel for its general structure or anatomy (Fig. \@ref(fig:r-anatomy)). In effect, this means getting a feel for the hidden layout of a plot canvas. Hopefully, this will provide you a better sense of what you are doing when, for example, you feed your plot this parameter `xlim = c(0, 1)`. 
 
@@ -144,7 +147,7 @@ A legend or key provides a list of additional variables represented by symbols o
 
 ## The `plot()` Function {#plot-function}
 
-The base `plot()` function is a _generic_ function, meaning it will produce different results depending on what kind of R object you are asking it to draw. At its core, though, the `plot()` function is simply a tool for mapping data onto a grid (the plot _region_ in Fig. \@ref(fig:r-anatomy)). Consider, for example, these values of x and y. 
+At its core, the `plot()` function is simply a tool for mapping data onto a grid (the plot _region_ in Fig. \@ref(fig:r-anatomy)). Consider, for example, these values of x and y. 
 
 
 ```r
@@ -177,7 +180,13 @@ plot(y ~ x)
 
 Notice the tilde, `~`. This may be read as "... is a function of ...", in this case "y is a function of x."
 
-\BeginKnitrBlock{rmdnote}<div class="rmdnote">You should use the formula notation whenever plotting a _relationship_ between two variables, as it makes it explicit in your code that you are plotting that relationship.  </div>\EndKnitrBlock{rmdnote}
+I go back and forth about which style is more preferable, or I should say, more _reproducible_. The formula notation is better for conveying that you are plotting a _relationship_. However, providing the x and y vectors separately to `plot()` is more suggestive of what the function is actually doing, which is to map coordinates onto a grid. So, for now, I think I would recommend that you simply choose the style that feels more comfortable to you.  
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">RStudio displays the result of calling `plot()` in the [Viewer pane](#pane-layout), by default the bottom right window pane. </div>\EndKnitrBlock{rmdnote}
+
+\BeginKnitrBlock{rmdwarning}<div class="rmdwarning">The `plot()` function is a tad more complicated than this simple introduction would suggest, for it will produce different types of plot depending on what kind of object x is. In the technical idiom of R, this makes `plot()` a _generic_ function.  </div>\EndKnitrBlock{rmdwarning}
+
+### Plot type
 
 By default, `plot()` provides for nine different types of plot. These are specified using the argument `type`. Options include all of the following: `"p"` (points), `"l"` (lines), `"b"` (both points and lines), `"c"` (lines with missing points), `"o"` (points plotted over lines), `"s"` (stair steps), `"S"` (stair steps inverted), `"h"` (histogram-like vertical lines), `"n"` (nothing). So, if you want to plot points, for instance, you would type
 
@@ -193,6 +202,8 @@ And just so you can see the result, here are examples of each:
 <p class="caption">(\#fig:05-plot-types)Default plot types.</p>
 </div>
 
+### Plot limits
+
 One of the most important features of a plot is its limits. By default, `plot()` uses the range of the x and y vectors. In this case, the range of x is [0, 0.8] and the range of y is [0.1, 0.9]. You will perhaps have noticed, however, that the limits in Figures \@ref(fig:05-data-mapping) and \@ref(fig:05-plot-types) are [0, 1]. That is because we supplied `plot()` with these values using the arguments `xlim` and `ylim`.
 
 
@@ -204,7 +215,7 @@ plot(y ~ x,
      ylab = "Y")
 ```
 
-\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Individuals (especially those with a chaotic-evil alignment) may abuse plot limits to obscure or exaggerate features of their data. You see, for example, in our toy data that the points have a certain _trend_ starting in the upper left corner of the plot and falling to the lower right corner. What do you think would happen to the look of that trend, though, if we were to specify new limits for y, say [0, 100]?</div>\EndKnitrBlock{rmdcaution}
+\BeginKnitrBlock{rmdcaution}<div class="rmdcaution">Individuals with a chaotic-evil alignment will feel tempted to abuse plot limits to obscure or exaggerate features of their data. You see, for example, in our toy data that the points have a certain _trend_ starting in the upper left corner of the plot and falling to the lower right. What do you think would happen to the look of that trend, though, if we were to specify new limits for y, say [0, 100]?</div>\EndKnitrBlock{rmdcaution}
 
  
 ## Layering
@@ -223,8 +234,8 @@ plot(y ~ x,
 ```
 
 <div class="figure" style="text-align: center">
-<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-8-1.png" alt="'A blizzard' by M. Duchamp" width="672" />
-<p class="caption">(\#fig:unnamed-chunk-8)'A blizzard' by M. Duchamp</p>
+<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-10-1.png" alt="'A blizzard' by M. Duchamp" width="672" />
+<p class="caption">(\#fig:unnamed-chunk-10)'A blizzard' by M. Duchamp</p>
 </div>
 
 Now, let's add the defaults back incrementally. 
@@ -277,6 +288,10 @@ This is what we mean by "layering." As you can see, `plot()` not only establishe
    <td style="text-align:left;"> A generic function to draw a sequence of points at the specified coordinates. </td>
   </tr>
   <tr>
+   <td style="text-align:left;"> `polygon()` </td>
+   <td style="text-align:left;"> Draws a polygon whose vertices are given by `x` and `y`. </td>
+  </tr>
+  <tr>
    <td style="text-align:left;"> `rect()` </td>
    <td style="text-align:left;"> Draws a rectangle (or sequence of rectangles) with the given coordinates, fill and border colors. </td>
   </tr>
@@ -310,14 +325,14 @@ plot(y ~ x,
      xlim = c(0, 1),
      ylim = c(0, 1))
 
-# add box around plot region
-box()
-
 # add axes
 axis(side = 1) # x-axis to bottom
 axis(side = 2) # y-axis to left
 
-# add axis lables
+# add box around plot region
+box()
+
+# add axis labels
 title(xlab = "X", ylab = "Y")
 
 # add points
@@ -328,7 +343,7 @@ points(y ~ x)
 
 ## Annotation
 
-Annotation refers to the addition of natural language elements (i.e., characters, words, and numerals) to a plot. These include plot titles (the main title, the subtitle, and the axis titles), as well as the legend title, axes labels (i.e., the tick labels, usually numerals), and any other text comments, either within the plot region or in the margins. Much of this may be specified within the `plot()` function itself. 
+Generally speaking, annotation refers to the addition of natural language elements (i.e., characters, words, and numerals) to a plot. These include plot titles (the main title, the subtitle, and the axis titles), as well as the legend title, axes labels (i.e., the tick labels, usually numerals), and any other text comments, either within the plot region or in the margins. Much of this may be specified within the `plot()` function itself. 
 
 
 ```r
@@ -339,7 +354,7 @@ plot(y ~ x,
      sub  = "Literally, below the plot title")
 ```
 
-<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" />
+<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" />
 
 Specifying these title annotations within `plot()` should be sufficient for simple plots, but for more fine grained control, you will want to use the `title()` function. 
 
@@ -358,7 +373,7 @@ title(sub = "Literally, below the plot title",
       col.sub = "orange3")
 ```
 
-<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" />
+<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" />
 
 Sometimes it is useful to label points or other geometries in the plot region. For this, R provides the `text()` function. As with the geometries themselves, the key here is to provide coordinates for where to locate the text. In this case, we use the point coordinates, since we are labeling them.
 
@@ -375,14 +390,14 @@ point_labels <- paste0("(", x, ", ", y, ")")
 
 text(y ~ x,
      pos = 4,      # place text on the right side of the coordinate location
-     offset = 0.3, # add this much space between coordinate and text
+     offset = 0.4, # add this much space between coordinate and text
      labels = point_labels,
      cex = 0.8)
 ```
 
-<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" />
+<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" />
 
-You can also add text to the inner or outer margins with `mtext()` (though, bear in mind that you will have to add outer margins before you can add text to them). Since you are plotting outside the plot region, you specify the location of text in the margin using the side, line, and adjustment (or alignment), rather than coordinates.  
+You can also add text to the inner or outer margins with `mtext()`. Since you are plotting outside the plot region, you specify the location of text in the margin using the side, line, and adjustment (or alignment), rather than coordinates.  
 
 
 ```r
@@ -405,10 +420,10 @@ mtext(text  = "(side = 1, line = 4, adj = 0)",
       adj   = 0)
 ```
 
-<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" />
+<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" />
 
 
-## Graphical Parameters {#graphical-parameters}
+## Graphical parameters {#graphical-parameters}
 
 Graphical parameters control aesthetic aspects of a plot, for example, color and size. R provides two ways to set these parameters. If you want to make changes to a single plot, you can supply graphical parameters to the `plot()` call directly. For instance,
 
@@ -417,7 +432,7 @@ Graphical parameters control aesthetic aspects of a plot, for example, color and
 plot(y ~ x, pch = 19)
 ```
 
-supplies the `plot()` function with the graphical parameter `pch = 19`, which specifies the type of point symbol to use (in this case a filled circle). The layering functions mentioned above will also take graphical parameters in this way.   
+supplies the `plot()` function with the graphical parameter `pch = 19`, which specifies the type of point symbol to use (in this case a filled circle). Note that the layering functions mentioned above will also take graphical parameters in this way.   
 
 You can also define graphical parameters globally, which means they will affect all plots the same way (well, more or less the same way). You do this by calling the `par()` function and supplying graphical parameters to it. For example,
 
@@ -426,7 +441,7 @@ You can also define graphical parameters globally, which means they will affect 
 par(pch = 19)
 ```
 
-sets the point symbol to the filled circle for all plots.  
+sets the point symbol to the filled circle _for all plots_. Note, however, that `par()` does not actually plot anything itself. It merely changes the properties of the plots that come after, which you will see only when you explicitly call the `plot()` function (or one of its ilk).
 
 Sometimes you will want to set graphical parameters for several plots then revert to the original parameters for subsequent plotting. To do this, you simply assign the parameters to an object, like so:
 
@@ -447,8 +462,31 @@ Now, let's go over just a few of the many, many graphical parameters and how the
 
 \BeginKnitrBlock{rmdnote}<div class="rmdnote">For an exhaustive list of graphical parameters and examples of their effect, see Porra (2017) ["Graphical parameters of R {graphics} package"](http://rstudio-pubs-static.s3.amazonaws.com/315576_85cccd774c29428ba46969316cbc76c0.html) at RStudio Pubs.</div>\EndKnitrBlock{rmdnote}
 
+### Region
 
-### Geometry Type
+Whenever working with base R graphics, one graphical parameter I turn to compulsively is `pty`. This controls the type of plot region, of which there are two, a _square_ plot region (with value `s`) and a _maximal_ plot region (with value `m`, this is the default). In almost all cases, I find the square plot region to be, well, more _aesthetically_ preferable. Does it have any relevance at all to reproducible code? Doubtful, but come on, nobody's perfect! Plus, now I can make the remaining plots in this chapter perfectly square, as I wanted to do all along!
+
+An example:
+
+
+```r
+par(pty = "s")
+
+plot(y ~ x,
+     type = "p",
+     xlab = "X",
+     ylab = "Y",
+     xlim = c(0, 1),
+     ylim = c(0, 1))
+```
+
+<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" />
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">`pty` is actually one of those graphical parameters that can be set _only_ with `par()`.</div>\EndKnitrBlock{rmdnote}
+
+
+
+### Geometry
 
 R allows you to specify graphical parameters for points and lines (and by extension, polygons), for example, the type of symbol used to display the geometry. For points, this is controlled by `pch`. For lines, by `lty`. `pch` can take any value from 0 to 25, `lty` any value from 0 to 6. `lty` can also be specified with the words `"blank"`, `"solid"`, `"dashed"`, `"dotted"`, `"dotdash"`, `"longdash"`, and `"twodash"`. Here is what these look like.
 
@@ -458,6 +496,8 @@ Notice that point symbols 0-14 are unfilled, 15-20 are filled and a single color
 
 
 ```r
+par(pty = "s")
+
 plot(y ~ x,
      type = "p", # 'p' for "point"
      pch  = 17, # set point type here
@@ -466,12 +506,14 @@ plot(y ~ x,
      main = "Strange Points")
 ```
 
-<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" />
+<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" />
 
 And here is an example of changing the line type: 
 
 
 ```r
+par(pty = "s")
+
 plot(y ~ x,
      type = "l", # 'l' for "line"
      lty  = 4, # set line type here
@@ -480,17 +522,86 @@ plot(y ~ x,
      main = "Strange Line")
 ```
 
-<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" />
+<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" />
 
 ### Text
 
 There are several ways to modify text output in a plot. Here we will focus on font type (meaning, normal, __bold__, or _italic_) and justification (or alignment, for example, centered text). These are controlled by `font` and `adj`, respectively. `font` can take any value from 1 to 4, `adj` any continuous value from 0 for left aligned to 1 for right aligned, with 0.5 being the value for centered text. 
 
-<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" />
+<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" />
+
+Note that R provides multiple `font` parameters that allow you to control the font of specific plot elements. Those include: 
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Parameter </th>
+   <th style="text-align:left;"> Description </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> `font` </td>
+   <td style="text-align:left;"> Font of text and symbols in the plot region. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `font.axis` </td>
+   <td style="text-align:left;"> Font of axis tick labels. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `font.lab` </td>
+   <td style="text-align:left;"> Font of axis labels. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `font.main` </td>
+   <td style="text-align:left;"> Font of main title. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `font.sub` </td>
+   <td style="text-align:left;"> Font of subtitle. </td>
+  </tr>
+</tbody>
+</table>
+
+Here is an example:
+
+
+```r
+par(pty = "s")
+
+plot(y ~ x,
+     type = "n",
+     xaxt = "n",
+     yaxt = "n",
+     xlab = "", 
+     ylab = "",
+     xlim = c(0, 1),
+     ylim = c(0, 1))
+
+axis(side = 1, font.axis = 3) # who comes up with these names?
+axis(side = 2, font.axis = 2)
+
+points(y ~ x, pch = 19)
+
+title(main = "Strange Fonts",
+      line = 0.3,
+      adj = 0,
+      font.main = 4)
+
+title(xlab = "X",
+      ylab = "Y",
+      font.lab = 2)
+
+title(sub = "Italics are for emphasis.",
+      font.sub = 3)
+```
+
+<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" />
+
 
 ### Color
 
-Color is an enormous topic in its own right and rightly so. For it's one of the most important aspects of a good plot. Here, however, we can only touch on some of the issues. To begin with, R provides five graphical parameters to control the color of different plot elements. Those are the following: 
+The graphical parameters controlling color all begin - somewhat intuitively - with `col`. Each allows you to modify the color of a specific plot element. They include: 
 
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
  <thead>
@@ -502,7 +613,7 @@ Color is an enormous topic in its own right and rightly so. For it's one of the 
 <tbody>
   <tr>
    <td style="text-align:left;"> `col` </td>
-   <td style="text-align:left;"> Color of geometries in the plot region. </td>
+   <td style="text-align:left;"> Color of text and symbols in the plot region. </td>
   </tr>
   <tr>
    <td style="text-align:left;"> `col.axis` </td>
@@ -523,7 +634,7 @@ Color is an enormous topic in its own right and rightly so. For it's one of the 
 </tbody>
 </table>
 
-Now, we just need a way of providing the color we want to those parameters. For this, R offers a number of tools. The two most intuitive ones are perhaps the name of the color and its R number identifier. For a complete list of R color names, you can use the `colors()` function.  
+Now, we just need a way of telling those parameters what colors we want to use. For this, R offers a number of tools, the two most commonly used being the name of the color and the number R has assigned to it. For a complete list of R color names, you can use the `colors()` function.  
 
 
 ```r
@@ -533,12 +644,14 @@ all_R_colors[1:3]
 ## [1] "white"        "aliceblue"    "antiquewhite"
 ```
 
-<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" />
+<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" />
 
-Now we can combine these color specifications with the graphical parameters and do this:
+Combining these color specifications with the listed graphical parameters allows us to create this monstrosity:
 
 
 ```r
+par(pty = "s")
+
 plot(y ~ x,
      type = "n",
      xaxt = "n",
@@ -555,7 +668,7 @@ points(y ~ x,
        pch = 19, 
        col = "darkgoldenrod")
 
-title(main = "Weird Colors",
+title(main = "Strange Colors",
       line = 0.3,
       adj = 0,
       col.main = "aquamarine4")
@@ -568,21 +681,295 @@ title(sub = "Can't unsee this plot.",
       col.sub = "deeppink4")
 ```
 
-<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" />
-
+<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" />
 
 
 ### Size
 
-### Axes
+The graphical parameters controlling size all begin - somewhat confusingly - with `cex`. Each allows you to modify the size of a specific plot element. They include: 
 
-### Margins
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Parameter </th>
+   <th style="text-align:left;"> Description </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> `cex` </td>
+   <td style="text-align:left;"> Size of text and symbols in the plot region. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `cex.axis` </td>
+   <td style="text-align:left;"> Size of axis tick labels. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `cex.lab` </td>
+   <td style="text-align:left;"> Size of axis labels. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `cex.main` </td>
+   <td style="text-align:left;"> Size of main title. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `cex.sub` </td>
+   <td style="text-align:left;"> Size of subtitle. </td>
+  </tr>
+</tbody>
+</table>
 
-### Miscellaneous
+Here is an example:
+
+
+```r
+par(pty = "s")
+
+plot(y ~ x,
+     type = "n",
+     xaxt = "n",
+     yaxt = "n",
+     xlab = "", 
+     ylab = "",
+     xlim = c(0, 1),
+     ylim = c(0, 1))
+
+axis(side = 1, cex.axis = 1.3)
+axis(side = 2, cex.axis = 1.3)
+
+points(y ~ x, 
+       pch = 19, 
+       cex = 3)
+
+title(main = "Strange Sizes",
+      line = 0.3,
+      adj = 0,
+      cex.main = 3.5)
+
+title(xlab = "X",
+      ylab = "Y",
+      cex.lab = 2)
+
+title(sub = "This is the literal sub-title. Also, the fine print.",
+      cex.sub = 0.5)
+```
+
+<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" />
+
+Note that the graphical parameter `lwd` works for lines and segments the same as `cex` does for all the rest.
+
+
+```r
+par(pty = "s")
+
+plot(y ~ x,
+     type = "l",
+     lwd  = 5,
+     xlab = "X", 
+     ylab = "Y",
+     xlim = c(0, 1),
+     ylim = c(0, 1))
+```
+
+<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-32-1.png" width="672" style="display: block; margin: auto;" />
+
+That all seems easy enough. But, what exactly do the numbers mean? This is not obvious, for they are not tied to a specific unit of measure (like centimeters or inches). What are they tied to? Well, a graphical device! We'll go over what that means exactly in a minute, but for now just keep in mind that the same number can look different depending on which device you use.  
+
+### Margin
+
+The thing to keep in mind about plot margins is that you should mess with them in maybe one circumstance and otherwise just leave them alone. What is that circumstance? Multi-plot layouts! But, that's for the next section. Let's just get a feel for how to manipulate the margins. Recall that there are actually _two_ sets of margins, the inner and outer margins (Fig. \@ref(fig:r-anatomy)). The graphical parameters that control these are `mar` for the inner margins and `oma` for the outer margins. To specify these, you need to pass each a vector having precisely four numerical values. Don't worry, you'll learn what a vector is in the next chapter. The important thing for now is that the order of the values matters. Why? Well, because the first value you pass specifies the width of the bottom margin (that's side 1 if you recall). The second value specifies the width of the left margin, the third the width of the top margin, and the fourth the width of the right margin. So, your vector of margin widths should look like this:
+
+```r
+par(mar = c(bottom, left, top, right))
+```
+
+Note: this is not proper R syntax as `bottom`, `left`, `top`, and `right` are undefined. It is merely meant to illustrate the idea. A real example would look like this:
+
+```r
+par(mar = c(5, 4, 4, 2))
+```
+
+In fact, these are the default settings (well, more or less). Now, here's what changing the margins looks like:
+
+<div class="figure" style="text-align: center">
+<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-33-.gif" alt="Changing inner margin." width="480" />
+<p class="caption">(\#fig:unnamed-chunk-33)Changing inner margin.</p>
+</div>
 
 
 
-## Multi-plot Layouts
+### Layout
+
+On occasion, you will want to include multiple plots side-by-side or above-and-below each other. The graphical parameters `mfrow` and `mfcol` provide the simplest way to do this. Each of these requires a vector of two values, the number of rows and the number of columns. So, your vector of rows and columns should look like this: 
+
+```r
+par(mfrow = c(number of rows, number of columns))
+```
+
+Again, this is not proper R syntax. It's just illustrative of the idea. A real example would look like this:
+
+```r
+par(mfrow = c(3, 3))
+```
+
+As mentioned above, this does _not_ plot anything. It simply tells R to do two things: first, prepare a plot layout having three rows and three columns, and second, to add plots to that layout _by row_. In the case of a 3x3 plot layout, that means the first plot you add will appear in the top left, the second in the top middle, the third in the top right, and so on. It will look something like this:  
+
+<div class="figure" style="text-align: center">
+<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-34-1.png" alt="`par(mfrow = c(3, 3))`" width="768" />
+<p class="caption">(\#fig:unnamed-chunk-34)`par(mfrow = c(3, 3))`</p>
+</div>
+
+If we had used `mfcol` instead, plots would have been added _by column_, meaning the first plot would be top left, the second middle left, the third bottom left, and so on. Here is an actual example:
 
 
+```r
+par(pty = "s",
+    mar = rep(2, 4),
+    mfrow = c(2, 2))
+
+# add first plot -- top left
+plot(y ~ x, 
+     type = "p",
+     xlim = c(0, 1),
+     ylim = c(0, 1))
+
+title(main = "Add first plot", 
+      adj = 0, 
+      line = 0.3, 
+      cex = 0.75)
+
+# add second plot -- top right
+plot(y ~ x,
+     type = "l", 
+     xlim = c(0, 1),
+     ylim = c(0, 1))
+
+title(main = "Add second plot", 
+      adj = 0, 
+      line = 0.3, 
+      cex = 0.75)
+
+# add third plot -- bottom left
+plot(y ~ x,
+     type = "s",
+     xlim = c(0, 1),
+     ylim = c(0, 1))
+
+title(main = "Add third plot", 
+      adj = 0, 
+      line = 0.3, 
+      cex = 0.75)
+
+# add fourth plot -- bottom right
+plot(y ~ x,
+     type = "S",
+     xlim = c(0, 1),
+     ylim = c(0, 1))
+
+title(main = "Add fourth plot", 
+      adj = 0, 
+      line = 0.3, 
+      cex = 0.75)
+```
+
+<img src="12-statistical_graphics_files/figure-html/unnamed-chunk-35-1.png" width="576" style="display: block; margin: auto;" />
+
+
+## Saving figures
+
+Alright, let's talk about how to save figures. There are two ways to do this, one simple (this is the point-and-click approach with RStudio), the other, let's say, less intuitive (this is the explicit code approach with R). 
+
+I'm only going to outline the easy way very, very briefly because saving figures this way is inherently unreproducible, which is fine in some cases, but not when you are generating figures for scientific publications. The basic idea should be familiar enough. It's just point-and-click. If you have a look in RStudio's Viewer pane - this is the pane where plots are displayed by default, you'll see a drop down menu labeled "Export." When you click that, you'll have the option to _Save as Image..._ or _Save as PDF..._. From there, you can select the width and height of the figure, the directory to save in, the filename, and, in the case of image files, the file type (e.g., PNG, JPEG, or SVG). Click save, and you're done!      
+
+OK, so that wasn't too bad, but now let's talk about the reproducible way of doing the same thing, which is to declare with R code each step explicitly. First, however, we need to introduce the concept of a _graphical device_. In R, the phrase 'graphical device' refers somewhat confusingly to three different things: 
+
+* the __software__ an operating system uses to display graphics on a screen or monitor, 
+* the __file types__ used to store graphical information, and 
+* the __R functions__ used to translate R code into the language of either the graphical software or the graphical file types.  
+
+To help differentiate these, let's refer to the latter as "graphical device _functions_."  
+
+There are two basic types of graphical device functions: _screen_ and _file_. The first you might also call a _direct_ device function, as it translates right away into the language your operating system uses to display graphics, for example `windows()` (for the Windows OS) and `quartz()` (for the MacOS). As suggested above, RStudio captures the results of these functions and displays them in the Viewer pane. This is helpful for getting a sense of what your figure looks like before saving to file. Importantly, you don't have to call these functions explicitly when plotting in R. Why? Because when you first open an R session, R talks to your computer and figures out what OS you are using, so it knows implicitly what screen device function to use. 
+
+The other graphical device function you might call an _indirect_ device function, as it translate R code into an image file that you can then go on to open with whatever graphical software you have on your computer. R provides a number of file device functions, the ones you are more likely to use being `pdf()`, `png()`, `jpeg()` and perhaps `tiff()`. The procedure for using these is not obvious, but you can boil it down to these three steps:
+
+1. Open the graphical device.  
+2. Run all your plotting code.  
+3. Close the graphical device.  
+
+This is more or less what the RStudio point-and-click approach is doing, though again, not in a reproducible  manner. Here is how it actually looks as R code:
+
+
+```r
+# 1) open the graphical device
+png()
+
+# 2) run all your plotting code
+plot(y ~ x, 
+     xlim = c(0, 1),
+     ylim = c(0, 1),
+     xlab = "X",
+     ylab = "Y")
+
+title(main = "Saving a plot is weird.")
+
+# 3) close the graphical device
+dev.off()
+```
+
+With the function `dev.off()`, 'dev.off' is short for "turn device off."
+
+These graphical device functions (both screen and file) come with specific parameters you will find helpful, including all of the following:
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Parameter </th>
+   <th style="text-align:left;"> Description </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> `filename` </td>
+   <td style="text-align:left;"> the output file path </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `width` </td>
+   <td style="text-align:left;"> the width of the image </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `height` </td>
+   <td style="text-align:left;"> the height of the image </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> `units` </td>
+   <td style="text-align:left;"> the units in which `height` and `width` are given </td>
+  </tr>
+</tbody>
+</table>
+
+Applying these to our example above:
+
+
+```r
+# 1) open the graphical device
+png(filename = "some_folder/my_r_plot.png", # the ".png" is not strictly necessary
+    width = 5,
+    height = 5,
+    units = "in") # in = inches
+
+# 2) run all your plotting code
+plot(y ~ x, 
+     xlim = c(0, 1),
+     ylim = c(0, 1),
+     xlab = "X",
+     ylab = "Y")
+
+title(main = "Saving a plot is weird.")
+
+# 3) close the graphical device
+dev.off()
+```
+
+Shew! That was a lot! How about we call it a day?  
 
