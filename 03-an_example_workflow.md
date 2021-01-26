@@ -206,7 +206,7 @@ Plot the estimated trend against the observed values:
 plot(obs_flipper_length ~ obs_bill_length,
      pch = 19,
      cex = 1.3,
-     col = alpha("#949494", 0.4),
+     col = adjustcolor("#949494", alpha.f = 0.4),
      xlab = "Bill Length (mm)",
      ylab = "Flipper Length (mm)")
 
