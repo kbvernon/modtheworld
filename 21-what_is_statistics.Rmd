@@ -5,6 +5,125 @@
 ```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
 ```
 
+```{r, echo = FALSE}
+
+today <- 20201228
+
+set.seed(today)
+
+intercept <- 0
+
+slope <- 1
+
+n <- 15
+
+x <- runif(n, min = 0.25, max = 5)
+x <- sort(x)
+
+# error -- normally distributed
+error <- rnorm(n, mean = 0, sd = 1.3)
+
+y <- intercept + (slope * x) + error 
+
+observations <- data.frame(x, y)
+
+base_lm <- lm(y ~ x, data = observations)
+
+base_df <- base_lm %>% 
+  coef() %>% 
+  t() %>% 
+  as.data.frame() %>% 
+  rename("intercept" = "(Intercept)",
+         "slope" = "x")
+
+rss_segments <- cbind(observations, 
+                      "xend" = x, 
+                      "yend" = predict(base_lm, data = x))
+
+limits <- c(min(floor(c(x, y))), 
+            max(ceiling(c(x, y))))
+
+wee_gray <- "#c7c7c7"
+
+# base plot
+lm_plot <- ggplot() +
+  geom_hline(yintercept = 0, color = "#5c5c5c", size = 0.8) +
+  geom_vline(xintercept = 0, color = "#5c5c5c", size = 0.8) +
+  labs(x = "X", y = "Y") +
+  theme_bw() + 
+  theme(legend.position = "none",
+        panel.grid = element_blank(),
+        panel.border = element_rect(color = wee_gray, fill = NA)) +
+  coord_fixed(xlim = limits, ylim = limits)
+
+# add observations, model, and rss
+lm_plot <- 
+  lm_plot +
+  geom_segment(data = rss_segments, 
+               aes(x = x, y = y, xend = xend, yend = yend), 
+               color = "gray", 
+               alpha = 0.75) +
+  geom_abline(data = base_df,
+              aes(intercept = intercept, slope = slope),
+              size = 0.8,
+              color = "darkred") +
+  geom_point(data = observations, aes(x, y), 
+             size = 2.75,
+             color = "#5c5c5c")
+
+# add text and arrows
+arrow_spec <- arrow(length = unit(0.015, "npc"), type = "closed")
+
+y_seg <- observations[7, ]
+y_seg <- data.frame("x" = y_seg[["x"]] - 1,
+                    "y" = y_seg[["y"]],
+                    "xend" = y_seg[["x"]] - 0.2,
+                    "yend" = y_seg[["y"]])
+
+ey_seg <- predict(base_lm, newdata = data.frame(x = 6))
+ey_seg <- data.frame("xend" = 6,
+                     "yend" = ey_seg - 0.2,
+                     "x" = 6,
+                     "y" = ey_seg - 1.3)
+
+er_seg <- observations[3, "x"]
+er_seg <- data.frame("xend" = er_seg + 0.1,
+                     "yend" = 1,
+                     "x" = er_seg + 1.2,
+                     "y" = 1)
+
+lm_plot +
+  geom_segment(data = y_seg, 
+             aes(x, y, xend = xend, yend = yend),
+             arrow = arrow_spec) +
+  annotate(geom = "text", 
+           x = y_seg$x - 0.1, 
+           y = y_seg$y, 
+           label = "y", 
+           hjust = 1, 
+           size = 7) +
+  geom_segment(data = ey_seg, 
+               aes(x, y, xend = xend, yend = yend),
+               arrow = arrow_spec) +
+  annotate(geom = "text",
+           x = ey_seg$x, 
+           y = ey_seg$y - 0.35, 
+           label = "E(y)", 
+           hjust = 0.5, 
+           size = 7) +
+  geom_segment(data = er_seg, 
+               aes(x, y, xend = xend, yend = yend),
+               arrow = arrow_spec) +
+  annotate(geom = "text",
+           x = er_seg$x + 0.1, 
+           y = er_seg$y, 
+           label = "epsilon", 
+           parse = TRUE,
+           hjust = 0, 
+           size = 7)
+
+```
+
 $$
 \begin{aligned}
   y &= E(y) + \epsilon \\
