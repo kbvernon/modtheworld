@@ -178,7 +178,7 @@ Notice that just as we did with regular object assignment above, we have created
 
 ## Vectorized Functions
 
-Not all functions in R are vectorized, but many are, and they are an invaluable tool for statistical programming. What is a vectorized function? In a nutshell, it's a function $f()$ that takes a [vector](#vector-types) `c(x1, x2, x3, ..., xn)` as input and returns the vector `c(f(x1), f(x2), f(x3), ..., f(xn))` as output. Meaning, in other words, its an action that gets applied separately to each element of a set of values. A consequence, or requirement perhaps, is that the input and output vectors have the same length (or number of elements). To make this more concrete, consider this simple function `add_one()`.  
+Not all functions in R are vectorized, but many are, and they provide an invaluable tool for statistical programming. What is a vectorized function? In a nutshell, it's a function $f()$ that takes a [vector](#vector-types) `c(x1, x2, x3, ..., xn)` as input and returns the vector `c(f(x1), f(x2), f(x3), ..., f(xn))` as output. Meaning, in other words, its an action that gets applied separately to each element of a set of values. A consequence, or requirement perhaps, is that the input and output vectors have the same length (or number of elements). To make this more concrete, consider this simple function `add_one()`.  
 
 ```{r}
 
@@ -186,13 +186,13 @@ add_one <- function(x) x + 1
 
 a_vector <- c(4, 9, 16, 25, 36)
 
-add_one(a_vector) # read: "take the square root of a vector"
+add_one(a_vector)
 
 ```
 
-This function takes an input vector and adds one to each element in that vector. The result of that procedure is an output vector of the same length, where each element has a value one greater than its corresponding element in the input vector.
+This function takes an input vector and adds one to each element in that vector. The result is an output vector of the same length, where each element has a value one greater than its corresponding element in the input vector.
 
-When it comes to these vectorized functions, R does sometimes exhibit some strange behavior, and it's important to at least be familiar with those circumstances. For instance, operations are applied pairwise when two vectors are applied. 
+When it comes to these vectorized functions, R on occasion exhibits some odd behavior. For instance, operations are applied pairwise when two vectors are applied. 
 
 ```{r}
 
@@ -200,7 +200,7 @@ c(1, 2, 3) + c(4, 5, 6)
 
 ```
 
-Here, 1 is added to 4, 2 is added to 5, and 3 is added to 6. That seems simple enough. However, when the vectors have different lengths, then R chooses to recycle the shorter length vector. For example:
+Here, 1 is added to 4, 2 is added to 5, and 3 is added to 6. That seems simple enough. However, when the vectors have different lengths, then R chooses to reuse numbers from the shorter length vector, starting with the first. This is known as _recycling_. For example:
 
 ```{r}
 
@@ -208,7 +208,7 @@ c(1, 2) + c(3, 4, 5, 6)
 
 ```
 
-Here, 1 is added to 3, 2 is added to 4, then (recycling) 1 is added to 5, and 2 is added to 6. The values in the shorter vector `c(1, 2)` are being recycled or reused in this addition operation. This is not an ideal behavior for a variety of reasons. Still, it does at least ensure that everything in the longer vector is added to something in the shorter vector _according to some standard or rule_.  
+Here, 1 is added to 3, 2 is added to 4, then (recycling) 1 is added to 5, and 2 is added to 6. While this is not always ideal behavior, it does at least provide a standardized or rule-based means of ensuring that everything in the longer vector gets subjected to the vectorized function.  
 
 
 ## Console and Scripts
