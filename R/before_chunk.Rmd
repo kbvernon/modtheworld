@@ -52,7 +52,9 @@ local({
     x <- xfun::split_lines(x)
     x <- strip_white2(x)
     x <- paste(x, sep = '', collapse = '\n')
+    
     hook_source(x, options)
+    
   })
   
 })
@@ -81,6 +83,7 @@ local({
   hook_error <- knitr::knit_hooks$get("error")
   knitr::knit_hooks$set(error = function(x, options) {
     x <- paste0("##", x)
+    x <- sub(" in eval(expr, envir, enclos)", "", x, fixed = TRUE)
     hook_error(x, options)
   })
   
@@ -90,7 +93,7 @@ local({
 
 <!-- chunk options -->
 
-```{r}
+```{r, echo = FALSE}
 
 knitr::opts_chunk$set(echo = TRUE,
                       warning = FALSE,
@@ -112,5 +115,38 @@ set.seed(2020)
 source(here("R/insert_intro.R"))
 
 ```
+
+<!-- 
+make error messages closer to base R 
+https://github.com/hadley/adv-r/blob/master/common.R
+looks like it doesn't work because R no longer
+let's users override s3 methods, so I changed the s3 to "simpleError"
+-->
+
+```{r, echo = FALSE}
+
+registerS3method("wrap", "simpleError", envir = asNamespace("knitr"),
+  function(x, options) {
+    msg <- conditionMessage(x)
+
+    call <- conditionCall(x)
+    if (is.null(call)) {
+      msg <- paste0("Error: ", msg)
+    } else {
+      msg <- paste0("Error in ", deparse(call)[[1]], ": ", msg)
+    }
+
+    msg <- error_wrap(msg)
+    knitr:::msg_wrap(msg, "error", options)
+  }
+)
+
+error_wrap <- function(x, width = getOption("width")) {
+  lines <- strsplit(x, "\n", fixed = TRUE)[[1]]
+  paste(strwrap(lines, width = width), collapse = "\n")
+}
+
+```
+
 
 
