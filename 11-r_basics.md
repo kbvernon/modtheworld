@@ -273,24 +273,24 @@ Some packages that I use in virtually all of my analyses include the following:
 <table class="table table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <tbody>
   <tr>
-   <td style="text-align:left;"> `dplyr` </td>
-   <td style="text-align:left;"> A grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges. </td>
-   <td style="text-align:left;"> [LINK](https://dplyr.tidyverse.org/) </td>
+   <td style="text-align:left;border: 0px"> `dplyr` </td>
+   <td style="text-align:left;border: 0px"> A grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges. </td>
+   <td style="text-align:left;border: 0px"> [LINK](https://dplyr.tidyverse.org/) </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> `ggplot2` </td>
-   <td style="text-align:left;"> A system for declaratively creating graphics, based on The Grammar of Graphics. </td>
-   <td style="text-align:left;"> [LINK](https://ggplot2.tidyverse.org/) </td>
+   <td style="text-align:left;border: 0px"> `ggplot2` </td>
+   <td style="text-align:left;border: 0px"> A system for declaratively creating graphics, based on The Grammar of Graphics. </td>
+   <td style="text-align:left;border: 0px"> [LINK](https://ggplot2.tidyverse.org/) </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> `here` </td>
-   <td style="text-align:left;"> Enables easy file referencing in project-oriented workflows. </td>
-   <td style="text-align:left;"> [LINK](https://here.r-lib.org/) </td>
+   <td style="text-align:left;border: 0px"> `here` </td>
+   <td style="text-align:left;border: 0px"> Enables easy file referencing in project-oriented workflows. </td>
+   <td style="text-align:left;border: 0px"> [LINK](https://here.r-lib.org/) </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> `sf` </td>
-   <td style="text-align:left;"> A package that provides simple feature access for R. </td>
-   <td style="text-align:left;"> [LINK](https://r-spatial.github.io/sf/) </td>
+   <td style="text-align:left;border: 0px"> `sf` </td>
+   <td style="text-align:left;border: 0px"> A package that provides simple feature access for R. </td>
+   <td style="text-align:left;border: 0px"> [LINK](https://r-spatial.github.io/sf/) </td>
   </tr>
 </tbody>
 </table>

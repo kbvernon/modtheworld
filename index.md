@@ -1,7 +1,7 @@
 --- 
 title: "Modeling the World with R"
 author: "Kenneth Blake Vernon"
-date: "2021-01-26"
+date: "2021-01-29"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
@@ -25,7 +25,7 @@ While geared toward practical applications, like analyzing and visualizing data,
 
 <!-- book is also free and open source, licensed under the Creative Commons ... -->
 
-The R source code for for this bookdown website may be found at [github.com/kbvernon/modtheworld](https://github.com/kbvernon/modtheworld). Continuous integration and rendering is maintained with [Github Actions](https://github.com/kbvernon/modtheworld/actions). You can see its current 'build status' with the following Github badge:  
+The R source code for this bookdown website may be found at [github.com/kbvernon/modtheworld](https://github.com/kbvernon/modtheworld). Continuous integration and rendering is maintained with [Github Actions](https://github.com/kbvernon/modtheworld/actions). You can see its current 'build status' with the following Github badge:  
 
 [![renderbook](https://github.com/kbvernon/modtheworld/workflows/renderbook/badge.svg)](https://github.com/kbvernon/modtheworld/actions)  
 
