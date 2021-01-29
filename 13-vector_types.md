@@ -45,12 +45,19 @@ $(document).ready(function() {
 
 
 
+<!-- 
+make error messages closer to base R 
+https://github.com/hadley/adv-r/blob/master/common.R
+looks like it doesn't work because R no longer
+let's users override s3 methods, so I changed the s3 to "simpleError"
+-->
 
 
-<div class="figure" style="text-align: center">
-<a href="https://en.wikipedia.org/wiki/Menagerie" target="_blank"><img src="images/r-menagerie.png" alt="The R Menagerie" width="100%" /></a>
-<p class="caption">(\#fig:r-menagerie)The R Menagerie</p>
-</div>
+
+
+
+
+
 
 ## Overview
 
@@ -58,7 +65,7 @@ $(document).ready(function() {
 <tbody>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Goal__ </td>
-   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> To familiarize students with the _ontology_ of the R Programming Environment. </td>
+   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> To familiarize students with primary data and vector types in R. </td>
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __tl;dr__ </td>
@@ -67,10 +74,9 @@ $(document).ready(function() {
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Outcomes__ </td>
    <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> Here, you will learn about<br><ol>
-<li>R objects, specifically vectors,</li>
-<li>how to create them,</li>
-<li>what kinds there are, and</li>
-<li>how to index them.</li>
+<li>data types and how to create them,</li>
+<li>vector types and how to create them, and</li>
+<li>how to coerce objects of one vector or data type to another,</li>
 </ol> </td>
   </tr>
   <tr>
@@ -87,94 +93,131 @@ $(document).ready(function() {
   </tr>
 </tbody>
 </table>
- 
-R contains a variety of _objects_, the most notable being _functions_ and _vectors_. These live in the R _environment_ (environments, actually). While there is a lot to say about functions and environments, those are mostly super-class 'A' R programming topics, verboten for an introductory text. The bulk of this chapter will, thus, be devoted to vectors. 
 
-Vectors can take a number of different forms, for example, scalars and lists (see Fig. \@ref(fig:r-objects)). In a sense (a slightly misleading sense), these objects are vessels that hold different _data types_, the four primary ones being integer, double (i.e., fractions), logical, and character. Putting effort into understanding these vector forms and data types might at first blush feel like a foolhardy pursuit of the inconsequential and esoteric, a task best relegated to crusty old philosophers. It is, however, of the utmost importance, for the different statistical questions you might want to ask will require data in one or the other form and type to answer. If, for example, you want to get the mean of some distribution, say the average height of actors who auditioned for the part of Aragorn in the timeless cinematic classic _Lord of the Rings_, you will only need a simple vector of double values. If, however, you want to know whether height varies as a function of diet, you will want a more complex object, specifically a data.frame. And, if you prefer order to chaos, you will surely enjoy lists.  
-
-<div class="figure" style="text-align: center">
-<img src="images/r-objects.png" alt="One possible phylogeny of R objects." width="75%" />
-<p class="caption">(\#fig:r-objects)One possible phylogeny of R objects.</p>
-</div>
-
-<br>
-
-Fig. \@ref(fig:r-objects) might seem a little overwhelming at first, but don't let it intimidate you. Its meaning will become clear as we proceed. 
+The word 'vector' is just fancy R-speak for an R object with a specific form or _structure_ that contains one or more _data types_. The forms vectors can take include, among others, scalars and lists (see Fig. \@ref(fig:r-objects)), and the data types they can hold include integer, double (i.e., fractions), logical, character, and factor (though this last one only as an honorable mention). Putting effort into understanding these vector forms and data types might at first blush feel like a foolhardy pursuit of the inconsequential and esoteric, a task best relegated to crusty philosophers. But that is a mistake, for the different statistical questions you might want to ask will require data in one or the other form and type to answer. Understanding these forms and types will also help you manage your data better, thus making your statistical workflow more efficient and reproducible.  
 
 
 ## Data types
 
-There are four primary data types in R: integer, double, logical, and character. The first two are probably more important for statistics, the latter two for data processing (or 'wrangling', as it is often called). We will not discuss any of these in great detail here, pausing only to mention very briefly what each is, how to make them, how to catch one in the wild, and what they are for.  
+As mentioned already,  there are four primary data types in R: integer, double, logical, and character, with integer and double also collectively referred to as numeric. We will not discuss any of these in great detail here, pausing only to mention very briefly what each is, how to make them, how to catch one in the wild, and what they are for. As an honorable mention, we will also include _factors_. These are not strictly their own data type (R actually encodes them as integers), but they are ubiquitous and utilized quite often in statistical analyses. So, we'll treat them as a data type in their own right, on a level with the others; even if they aren't, strictly speaking.
 
-As an honorable mention, we will also discuss _factors_ here. These are not strictly their own data type,^[They are actually just integers.] but they are ubiquitous and utilized quite often in statistical analyses. So, we'll treat them as an honorary data type in their own right, on a level with the others (even if they aren't, technically).
 
-<br>
 
 ### Integer
 
-_What is it?_ A whole number or a number without a fractional component (like 1 as opposed to 1.3).  
-
-_What is it for?_ Counting things! For example, how many students are in this class? One would hope the answer to that is an integer.
-
-_How do you make one?_ By appending an `L` to a number.  
+<table class="table table-hover" style="">
+<tbody>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Meaning </td>
+   <td style="text-align:left;border: 0px"> A whole number or a number without a fractional component (like 1 as opposed to 1.3). </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Use </td>
+   <td style="text-align:left;border: 0px"> Counting things! It answers the question _How many?_ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Example </td>
+   <td style="text-align:left;border: 0px"> How many students are in this class? (Hopefully, an integer.) <br> How many Avengers are there now? </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Create </td>
+   <td style="text-align:left;border: 0px"> By appending an `L` to a number. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Identify </td>
+   <td style="text-align:left;border: 0px"> With `is.integer()`. </td>
+  </tr>
+</tbody>
+</table>
 
 
 ```r
 my_integer <- 3L
-```
 
-<br>
-
-_How to catch one in the wild?_ By asking "Is this an integer?"
-
-
-```r
+my_integer
+## [1] 3
 is.integer(4.2)
 ## [1] FALSE
 is.integer(my_integer)
 ## [1] TRUE
 ```
 
-<br>
-
 ### Double
 
-_What is it?_ A number with a fractional component (like 1.3 as opposed to 1).  
-
-_What is it for?_ Measuring things! For example, how much coffee did I have this morning? Or, how much did it rain last year in Pasquotank County, North Carolina?
-
-_How do you make one?_ By typing a number (with or without a fraction, but no `L`).  
+<table class="table table-hover" style="">
+<tbody>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Meaning </td>
+   <td style="text-align:left;border: 0px"> A number with a fractional component (like 1.3 as opposed to 1). </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Use </td>
+   <td style="text-align:left;border: 0px"> Measuring things! It answers the question _How much?_ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Example </td>
+   <td style="text-align:left;border: 0px"> How much coffee did I have this morning? <br> How much did it rain last year in Pasquotank County, North Carolina? </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Create </td>
+   <td style="text-align:left;border: 0px"> By typing a number (with or without a decimal, but no `L`) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Identify </td>
+   <td style="text-align:left;border: 0px"> With `is.double()`. </td>
+  </tr>
+</tbody>
+</table>
 
 
 ```r
 my_double <- 3.2
-```
 
-<br>
-
-_How to catch one in the wild?_ By asking "Is this a double?"
-
-
-```r
+my_double
+## [1] 3.2
 is.double(3L)
 ## [1] FALSE
 is.double(my_double)
 ## [1] TRUE
 ```
 
-<br>
-
 ### Character
 
-_What is it?_ A string of symbols used to construct words in a natural language (by default, English letters).  
-
-_What is it for?_ Saying things! For example, how many students are in this class? One would hope the answer to that is an integer.
-
-_How do you make one?_ By quoting it, i.e., surrounding a string with double `"` or single `'` apostrophes.  
+<table class="table table-hover" style="">
+<tbody>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Meaning </td>
+   <td style="text-align:left;border: 0px"> A string of symbols used to construct words in a natural language (by default, English letters). </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Use </td>
+   <td style="text-align:left;border: 0px"> Saying things! It can answer a bunch of questions. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Example </td>
+   <td style="text-align:left;border: 0px"> How much coffee did I have this morning? <br> How much did it rain last year in Pasquotank County, North Carolina? </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Create </td>
+   <td style="text-align:left;border: 0px"> By quoting it, i.e., surrounding a string with double `"` or single `'` apostrophes. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Identify </td>
+   <td style="text-align:left;border: 0px"> With `is.character()`. </td>
+  </tr>
+</tbody>
+</table>
 
 
 ```r
 my_character <- 'quotidian'
+
+my_character
+## [1] "quotidian"
+is.character(4.2)
+## [1] FALSE
+is.character(my_character)
+## [1] TRUE
 ```
 
 A quick warning: if you do not surround the character with apostrophes, R will think you are trying to call an object with that name. If that object does not exist, R will protest. 
@@ -182,7 +225,7 @@ A quick warning: if you do not surround the character with apostrophes, R will t
 
 ```r
 quotidian
-#### Error in eval(expr, envir, enclos): object 'quotidian' not found
+#### Error: object 'quotidian' not found
 ```
 
 Similarly, if you use quote marks around a named object, R treats it as a character string, rather than a call to the object.
@@ -195,31 +238,43 @@ my_integer
 ## [1] 3
 ```
 
-<br>
-
-_How to catch one in the wild?_ By asking "Is this a character?"
-
-
-```r
-is.character(4.2)
-## [1] FALSE
-is.character(my_character)
-## [1] TRUE
-```
-
-<br>
-
 ### Logical
 
-_What is it?_ A truth condition, i.e., TRUE or FALSE. Also known as a _boolean_.  
-
-_What is it for?_ Implying things! Specifically, making conditional or hypothetical claims. For example, if it rains today, I will take my umbrella. Or, closer to home, "Hi R, if this is an integer, please add one to it." 
-
-_How do you make one?_ By typing `TRUE`, `FALSE`, `T`, or `F`.  
+<table class="table table-hover" style="">
+<tbody>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Meaning </td>
+   <td style="text-align:left;border: 0px"> A truth condition, i.e., TRUE or FALSE. Also known as a _boolean_. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Use </td>
+   <td style="text-align:left;border: 0px"> Implying things! Specifically, making conditional or hypothetical claims. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Example </td>
+   <td style="text-align:left;border: 0px"> If it rains today, I will take my umbrella. <br> If x is an integer, please add one to it. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Create </td>
+   <td style="text-align:left;border: 0px"> By typing `TRUE`, `FALSE`, `T`, or `F`. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Identify </td>
+   <td style="text-align:left;border: 0px"> With `is.logical()`. </td>
+  </tr>
+</tbody>
+</table>
 
 
 ```r
 my_logical <- TRUE
+
+my_logical 
+## [1] TRUE
+is.logical(my_double) 
+## [1] FALSE
+is.logical(my_logical)
+## [1] TRUE
 ```
 
 You can also create logicals in R using statements that R can evaluate for their truth or falsity. For example,
@@ -237,66 +292,73 @@ You can also create logicals in R using statements that R can evaluate for their
 ## [1] FALSE
 ```
 
-And the truth conditions of these statements can, of course, be assigned to names.
+The symbols `>`, `>=`, and `==` are called _logical operators_. We'll talk more about them in the chapter on indexing vectors. For now, simply note that the truth conditions of statements formed with these operators can be assigned to names, as with any object in R.
 
 
 ```r
 jim_bob <- 'cat' == 'hat'
 ```
 
-<br>
-
-_How to catch one in the wild?_ By asking "Is this _a_ logical?"
-
-
-```r
-is.logical(my_double) 
-## [1] FALSE
-is.logical(my_logical)
-## [1] TRUE
-```
-
 Did you notice that our `is.*` functions all return a `logical`?
-
-<br>
 
 ### Factors
 
-_What is it?_ Categories, typically represented in R as character strings with "levels."
-
-_What is it for?_ Categorizing things! For example, "Tom is a _feline_" or "Jerry is a _mouse_."
-
-_How do you make one?_ With the function `factor()`.
+<table class="table table-hover" style="">
+<tbody>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Meaning </td>
+   <td style="text-align:left;border: 0px"> Categories, typically represented in R as character strings with _levels_. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Use </td>
+   <td style="text-align:left;border: 0px"> Categorizing things! </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Example </td>
+   <td style="text-align:left;border: 0px"> Tom is a _feline_. <br> Jerry is a _mouse_. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Create </td>
+   <td style="text-align:left;border: 0px"> Using the function `factor()` </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;width: 7em; border: 0px"> Identify </td>
+   <td style="text-align:left;border: 0px"> With `is.factor()`. </td>
+  </tr>
+</tbody>
+</table>
 
 
 ```r
 my_factor <- factor("Australian")
-```
 
-
-```r
 my_factor
 ## [1] Australian
 ## Levels: Australian
-```
-
-Notice that unlike a simple character, a factor has "levels." These levels are the categories of the factor variable. A good example is nationality. Nationality is a factor, with the specific levels or categories of that factor including, for instance, _American_, _Australian_, _Chinese_, and _French_.  
-
-_How to catch one in the wild?_ By asking "Is this _a_ factor?"
-
-
-```r
 is.factor("quotidian")
 ## [1] FALSE
 is.factor(my_factor)
 ## [1] TRUE
 ```
 
+Notice that unlike a simple character, a factor has "levels." These levels are the categories of the factor variable. A good example is nationality. Nationality is a factor, with the specific levels or categories of that factor including, for instance, _American_, _Australian_, _Chinese_, and _French_.  
+
+
+```r
+factor(c("American", "Australian", "Chinese", "French"))
+## [1] American   Australian Chinese    French    
+## Levels: American Australian Chinese French
+```
+
+
 ## Vector types
 
 Vectors come in two general flavors: atomic and complex. These differ in one crucial respect. While atomic vectors are limited to one data type, complex vectors can contain many data types. As shown in Fig. \@ref(fig:r-objects), atomic vectors include scalars, vectors, and matrices. Complex vectors include lists and data.frames. 
 
-<br>
+<div class="figure" style="text-align: center">
+<img src="images/r-objects.png" alt="Vector Types." width="75%" />
+<p class="caption">(\#fig:r-objects)Vector Types.</p>
+</div>
 
 ### Scalar
 
@@ -312,8 +374,6 @@ length(my_integer)
 ## [1] 1
 ```
 
-<br>
-
 ### Vector
 
 A vector-vector is an atomic vector that contains multiple elements. These multi-scalar atomic vectors do not really have a name like "list" or "scalar," but in common R parlance the word 'vector' is often used as a synonym, which is a tad confusing, like "Are you going to New York (the state) or New York (the city)?" In what follows, we'll just cross our fingers and hope the context is sufficient to tell the difference.
@@ -326,11 +386,13 @@ The standard way to create one of these is to use the concatenate function on sc
 ```r
 my_vector <- c(1, 2, 3, 4, 5)
 
+my_vector
+## [1] 1 2 3 4 5
 length(my_vector)
 ## [1] 5
 ```
 
-Of course, you can have a vector of any data type, it just cannot be the case that any vector contains multiple data types.
+Of course, you can have a vector of any data type, it just cannot be the case that any vector contains multiple data types. 
 
 
 ```r
@@ -353,8 +415,6 @@ c(1, 'a', TRUE)
 
 It converted them all to character strings! This is known as _implicit coercion_. It is a way of ensuring that all vector-vectors are atomic.
 
-<br>
-
 ### Matrix
 
 A matrix-vector is an atomic vector with _dimensions_, meaning the vector is "folded," so to speak, into rows and columns. As you can see, a matrix has the shape of a data table, like what you would find in an Excel spreadsheet.
@@ -375,18 +435,17 @@ my_matrix
 ## [2,]    2    4    1
 ```
 
-The odd, bracketed numbers printed above and to the left of the matrix are known as _subscripts_. They are like numeric names for columns and rows that can be used to reference specific locations in the matrix. For example, row one is `[1,]`, and column two is `[,2]`. So, if I want to refer to the cell containing the value `3`, I use `[1,2]`. 
-
-If you want to know how many rows and columns a matrix has, you can use `nrow` and `ncol`.
+The odd, bracketed numbers printed above and to the left of the matrix are known as _subscripts_. They are like numeric names for columns and rows that can be used to reference specific locations in the matrix. For example, row one is `[1,]`, and column two is `[,2]`. So, if I want to refer to the cell containing the value `3`, use `[1,2]`. And, if you want to know how many rows and columns a matrix has, you can use `nrow()` and `ncol()`, or the function `dim()`, which returns both counts.
 
 
 ```r
+nrow(my_matrix)
+## [1] 2
 ncol(my_matrix)
 ## [1] 3
+dim(my_matrix)
+## [1] 2 3
 ```
-
-
-<br>
 
 ### List
 
@@ -417,7 +476,7 @@ my_list
 ## [1] TRUE TRUE
 ```
 
-Each vector in the list is called a component. You can find out what list-names these components have using the `names()` function, which returns a character vector.
+Each vector in the list is called a component. You can find the names of these components using the `names()` function, which returns a character vector.
 
 
 ```r
@@ -435,7 +494,6 @@ names(my_list)
 ## [1] "A" "B" "C" "D"
 ```
 
-
 Now, we said above that lists can contain any vector type, and this is true. Lists can even contain other lists!
 
 
@@ -446,15 +504,11 @@ my_super_list <- list('e' = my_list,
 
 In this sense, you will sometimes hear people refer to lists as _recursive_ vectors [@rcoreteam2020introduction].  
 
-<br>
-
 ### Data.frame
 
 A data.frame-vector is a special sort of list with a super-restriction on it: all the vectors it includes must be of the same length. It is also not recursive.
 
 <img src="images/r-objects_df.png" width="30%" style="display: block; margin: auto;" />
-
-<br>
 
 To create a data.frame, use the `data.frame()` function, supplying it with `name = vector` arguments as you would with `list()`.
 
@@ -474,7 +528,7 @@ my_dataframe
 ## 5  5 5.2  e  TRUE
 ```
 
-Notice that when you create the data.frame, the vectors become named columns. To extract those names, we can again use the `names()` function.
+Notice that when you create the data.frame, the vectors become named columns. To extract those column names, we can again use the `names()` function.
 
 
 ```r
@@ -488,15 +542,25 @@ As with a matrix, you can also get the number of columns and rows with `nrow` an
 ```r
 nrow(my_dataframe)
 ## [1] 5
+ncol(my_dataframe)
+## [1] 4
 ```
 
 ## Coercion
 
-R provides tools for transforming objects of one data or vector type to other data and vector types. This is known as _coercion_, which you were introduced to above in the form of _implicit_ coercion. But, what about _explicit_ coercion, meaning coercion you declare explicitly with R code? Well, R provides several functions for this, all having the form `as.*()` where the `*` is replaced with the name of the type that you wish to coerce your object to. 
+R provides tools for transforming objects of one data or vector type into objects of another data or vector type. This is known as _coercion_, which you were introduced to above in the form of _implicit_ coercion. As a reminder, that's what happens when you try to combine different data types in an atomic vector like so:
 
-Why care about coercion? Well, when it comes to coercion of data type, perhaps the most important reason is that you do not want to mistakenly compare apples and oranges. R's implicit coercion rules.
 
-__Data Type Coercion__
+```r
+c(1, 'a', TRUE)
+## [1] "1"    "a"    "TRUE"
+```
+
+But, what about _explicit_ coercion, meaning coercion you declare explicitly with R code? Well, R provides several functions for this, all having the form `as.*()` where the `*` is replaced with the name of the type that you wish to coerce your object to. 
+
+Why care about coercion? Here are two reasons. First, you should probably care about coercion for the simple reason that you do not want to mistakenly compare apples and oranges when conducting an analysis, so you should always make sure to check the data type using the `is.*()` functions described above. And, if you don't get the answer you want from those functions, use the coercion rules we are about to discuss. Second, reproducibility! An essential ingredient of reproducible code is explicit commands. As we noted above, however, R will sometimes invoke implicit coercion, with the consequence that someone who later came along to reproduce your code might for whatever reason fail to apply the coercion and, thus, fail to reproduce your results. Bad, bad, bad all around! So, bottom line, coercion matters!  
+
+### Data type coercion
 
 Here is an example of data type coercion from integer to character.
 
@@ -508,9 +572,11 @@ a_new_character
 ## [1] "1" "2" "3" "4" "5"
 is.integer(a_new_character)
 ## [1] FALSE
+is.character(a_new_character)
+## [1] TRUE
 ```
 
-As you see, it surrounds the numerals with quotation marks, indicating these are now character strings. Other data type coercion functions include `as.integer()`, `as.numeric()`, `as.logical()`, and `as.factor()`. But, notice that R can be somewhat finicky about this. I mean, converting from logical, numeric, or integer to character is obvious. Just wrap the elements in quotes. But, what should R do when you ask it to convert integers to logicals or doubles to integer? 
+As you see, it surrounds the numerals with quotation marks, indicating these are now character strings. Other data type coercion functions include `as.double()`, `as.integer()`, `as.numeric()` (for either double or integer), `as.logical()`, and `as.factor()`. But, notice that R can be somewhat finicky about how these behave. I mean, converting from logical, numeric, or integer to character is obvious. Just wrap the elements in quotes. But, what should R do when you ask it to convert, say, double to integer? 
 
 
 ```r
@@ -520,9 +586,24 @@ as.integer(double_vector)
 ## [1] 1 0 3 4 5
 ```
 
-In this case, it rounds the decimals to whole numbers.
+In this case, it rounds the decimals to whole numbers, which seems intuitive enough. But, if you wanted, for example, to coerce a letter like 'e' into a logical value, which would it be? True or false? Obviously, this is not a meaningful question, and R agrees. Same goes for coercing character strings to numeric values. I mean, is the letter 'b' more like 1.2 or 57, or maybe even -33.3?
 
-__Vector Type Coercion__
+
+```r
+as.logical('e')
+## [1] NA
+as.integer('b')
+## [1] NA
+```
+
+As you see, R chooses not to return a value, providing `NA` instead. 
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">One somewhat bizarre coercion rules involves the translation of numbers into logicals, but the nature of that rule and the explanation for it are deeply esoteric topics involving R's original design. So, rather than delving into that particular idiosyncrasy, I would just encourage you to try out `as.logical()` on a number (double or integer) and see what happens. Hint: try it on zero, too.  </div>\EndKnitrBlock{rmdnote}
+
+
+### Vector type coercion
+
+For our purposes, the primary functions for vector type coercion are these: `as.matrix()`, `as.list()`, and `as.data.frame()`. Here is an example of vector type coercion from data.frame to list.
 
 
 ```r
@@ -542,40 +623,32 @@ a_new_list
 ## [1]  TRUE  TRUE FALSE FALSE  TRUE
 is.data.frame(a_new_list)
 ## [1] FALSE
+is.list(a_new_list)
+## [1] TRUE
 ```
 
-
-
-## Vectorized Functions
-
-A vectorized function is a function $f()$ that takes a [vector](#vector-types) `c(x1, x2, x3, ..., xn)` as input and returns the vector `c(f(x1), f(x2), f(x3), ..., f(xn))` as output. Meaning, in other words, a vectorized function is one that gets applied separately to each element of an input vector. A consequence, or requirement perhaps, is that the input and output vectors have the same length (or number of elements). To make this more concrete, consider the vectorized function `sqrt()` which takes the __sq__ uare __r__ oo __t__ of a number or numbers.  
+To round off this discussion, let me leave you with this question: how should a data.frame be coerced to a matrix? Here is an example.
 
 
 ```r
-sqrt(4)
-## [1] 2
-a_vector <- c(4, 9, 16, 25, 36)
+a_new_matrix <- as.matrix(my_dataframe)
 
-sqrt(a_vector) # read: "take the square root of a vector"
-## [1] 2 3 4 5 6
+a_new_matrix
+##      c1  c2    c3  c4     
+## [1,] "1" "1.1" "a" "TRUE" 
+## [2,] "2" "0.2" "b" "TRUE" 
+## [3,] "3" "3.1" "c" "FALSE"
+## [4,] "4" "4.0" "d" "FALSE"
+## [5,] "5" "5.2" "e" "TRUE"
+is.data.frame(a_new_matrix)
+## [1] FALSE
+is.matrix(a_new_matrix)
+## [1] TRUE
 ```
 
-
-Some ambiguities
-
-
-```r
-c(1, 2, 3) + c(4, 5, 6)
-## [1] 5 7 9
-```
+Remember that the cardinal rule for atomic vectors is that they consist of a single data type!
 
 
-Recycling
 
-
-```r
-c(1, 3) + c(1, 1, 1, 1)
-## [1] 2 4 2 4
-```
 
 

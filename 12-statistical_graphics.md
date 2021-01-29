@@ -45,6 +45,16 @@ $(document).ready(function() {
 
 
 
+<!-- 
+make error messages closer to base R 
+https://github.com/hadley/adv-r/blob/master/common.R
+looks like it doesn't work because R no longer
+let's users override s3 methods, so I changed the s3 to "simpleError"
+-->
+
+
+
+
 
 
 <a href="https://xkcd.com/" target="_blank"><img src="images/r-xkcd_piechart.png" width="70%" style="display: block; margin: auto;" /></a>

@@ -210,11 +210,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.1" data-path="r-basics.html"><a href="r-basics.html#creating-objects-with-assignment"><i class="fa fa-check"></i><b>6.3.1</b> Creating objects with assignment</a></li>
 <li class="chapter" data-level="6.3.2" data-path="r-basics.html"><a href="r-basics.html#doing-things-with-functions"><i class="fa fa-check"></i><b>6.3.2</b> Doing things with functions</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="r-basics.html"><a href="r-basics.html#console-and-scripts"><i class="fa fa-check"></i><b>6.4</b> Console and Scripts</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="r-basics.html"><a href="r-basics.html#r-console"><i class="fa fa-check"></i><b>6.4.1</b> R Console</a></li>
-<li class="chapter" data-level="6.4.2" data-path="r-basics.html"><a href="r-basics.html#r-scripts"><i class="fa fa-check"></i><b>6.4.2</b> R Scripts</a></li>
+<li class="chapter" data-level="6.4" data-path="r-basics.html"><a href="r-basics.html#vectorized-functions"><i class="fa fa-check"></i><b>6.4</b> Vectorized Functions</a></li>
+<li class="chapter" data-level="6.5" data-path="r-basics.html"><a href="r-basics.html#console-and-scripts"><i class="fa fa-check"></i><b>6.5</b> Console and Scripts</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="r-basics.html"><a href="r-basics.html#r-console"><i class="fa fa-check"></i><b>6.5.1</b> R Console</a></li>
+<li class="chapter" data-level="6.5.2" data-path="r-basics.html"><a href="r-basics.html#r-scripts"><i class="fa fa-check"></i><b>6.5.2</b> R Scripts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="r-basics.html"><a href="r-basics.html#packages-in-the-r-library"><i class="fa fa-check"></i><b>6.5</b> Packages in the R Library</a></li>
+<li class="chapter" data-level="6.6" data-path="r-basics.html"><a href="r-basics.html#packages-in-the-r-library"><i class="fa fa-check"></i><b>6.6</b> Packages in the R Library</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="statistical-graphics.html"><a href="statistical-graphics.html"><i class="fa fa-check"></i><b>7</b> Statistical Graphics</a><ul>
 <li class="chapter" data-level="7.1" data-path="statistical-graphics.html"><a href="statistical-graphics.html#overview-1"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
@@ -259,8 +260,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3.4" data-path="vector-types.html"><a href="vector-types.html#list"><i class="fa fa-check"></i><b>8.3.4</b> List</a></li>
 <li class="chapter" data-level="8.3.5" data-path="vector-types.html"><a href="vector-types.html#data.frame"><i class="fa fa-check"></i><b>8.3.5</b> Data.frame</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="vector-types.html"><a href="vector-types.html#coercion"><i class="fa fa-check"></i><b>8.4</b> Coercion</a></li>
-<li class="chapter" data-level="8.5" data-path="vector-types.html"><a href="vector-types.html#vectorized-functions"><i class="fa fa-check"></i><b>8.5</b> Vectorized Functions</a></li>
+<li class="chapter" data-level="8.4" data-path="vector-types.html"><a href="vector-types.html#coercion"><i class="fa fa-check"></i><b>8.4</b> Coercion</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="vector-types.html"><a href="vector-types.html#data-type-coercion"><i class="fa fa-check"></i><b>8.4.1</b> Data type coercion</a></li>
+<li class="chapter" data-level="8.4.2" data-path="vector-types.html"><a href="vector-types.html#vector-type-coercion"><i class="fa fa-check"></i><b>8.4.2</b> Vector type coercion</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="workspace-management.html"><a href="workspace-management.html"><i class="fa fa-check"></i><b>9</b> Workspace Management</a><ul>
 <li class="chapter" data-level="9.1" data-path="workspace-management.html"><a href="workspace-management.html#environments"><i class="fa fa-check"></i><b>9.1</b> Environments</a></li>
@@ -344,6 +347,12 @@ $(document).ready(function() {
 </script>
 <!-- chunk options -->
 <!-- miscellaneous -->
+<!-- 
+make error messages closer to base R 
+https://github.com/hadley/adv-r/blob/master/common.R
+looks like it doesn't work because R no longer
+let's users override s3 methods, so I changed the s3 to "simpleError"
+-->
 <p><a href="https://en.wikipedia.org/wiki/R" target="_blank"><img src="images/r_stuff.png" width="80%" style="display: block; margin: auto;" /></a></p>
 <div id="overview" class="section level2">
 <h2><span class="header-section-number">6.1</span> Overview</h2>
@@ -443,7 +452,7 @@ NONE
 </div>
 <div id="objects-and-functions" class="section level2">
 <h2><span class="header-section-number">6.3</span> Objects and Functions</h2>
-<p>In R, you can <em>make</em> things and you can <em>do</em> things. The things that you make are called <em>objects</em> and the things that you do things with are called <em>functions</em>. The most common kind of R object is a <code>vector</code>. You can learn more about the different types of vectors in <a href="vector-types.html#vector-types">Chapter 6 Vector Types</a>. Other kinds of objects include <code>formula</code>, <code>raster</code>, <code>grob</code>, <code>hist</code>, and <code>density</code>. What about functions? These are actually a special class of object that take other objects as input and typically (though not always) return other objects as output.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> They are thus “functions” in the sense of input-output devices. Any complex statistical operation you want to conduct in R will almost certainly involve the use of one or more functions.</p>
+<p>In R, you can <em>make</em> things and you can <em>do</em> things. The things that you make are called <em>objects</em> and the things that you do things with are called <em>functions</em>. The most common kind of R object is a <code>vector</code>. You can learn more about the different types of vectors in <a href="vector-types.html#vector-types">Chapter 6 Vector Types</a>. Other kinds of objects include <code>formula</code>, <code>raster</code>, <code>grob</code>, <code>hist</code>, and <code>density</code>. What about functions? These are actually a special class of object that take other objects as input and typically (though not always) return other objects as output. They are thus “functions” in the sense of input-output devices. Any complex statistical operation you want to conduct in R will almost certainly involve the use of one or more functions.</p>
 <div id="creating-objects-with-assignment" class="section level3">
 <h3><span class="header-section-number">6.3.1</span> Creating objects with assignment</h3>
 <p>How do you make an object in R? Well, you just…</p>
@@ -482,7 +491,7 @@ R is case sensitive! So, R will not treat <code>My_naME</code> and <code>my_name
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="r-basics.html#cb33-1"></a><span class="fl">6.137</span></span>
 <span id="cb33-2"><a href="r-basics.html#cb33-2"></a><span class="co">## [1] 6.137</span></span>
 <span id="cb33-3"><a href="r-basics.html#cb33-3"></a>boo</span>
-<span id="cb33-4"><a href="r-basics.html#cb33-4"></a><span class="co">#### Error in eval(expr, envir, enclos): object &#39;boo&#39; not found</span></span></code></pre></div>
+<span id="cb33-4"><a href="r-basics.html#cb33-4"></a><span class="co">#### Error: object &#39;boo&#39; not found</span></span></code></pre></div>
 <p>So, giving objects names in R is a good way to avoid errors.</p>
 </div>
 <div id="doing-things-with-functions" class="section level3">
@@ -493,27 +502,52 @@ R is case sensitive! So, R will not treat <code>My_naME</code> and <code>my_name
 <span id="cb34-3"><a href="r-basics.html#cb34-3"></a><span class="co"># for example</span></span>
 <span id="cb34-4"><a href="r-basics.html#cb34-4"></a><span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dt">length.out =</span> <span class="dv">100</span>)</span></code></pre></div>
 <p>If you cast your mind back to the algebra you learned in high school, this syntax should be familiar to you. Consider this algebraic expression:</p>
-<p><span class="math display">\[ f(x) = 2x + 3 \]</span></p>
-<p>The name of this function is <span class="math inline">\(f\)</span>. Its arguments include <span class="math inline">\(x\)</span>. And the object it returns is the result of multiplying <span class="math inline">\(x\)</span> by 2 and adding 3. So, if you supply this function with the value 4 (as in, <span class="math inline">\(f(x=4)\)</span>), it will return 11 as a result. R functions work in precisely the same way.</p>
-<p>Sometimes you just want to see the result of a function call, as it may suggest the next steps in your analysis. Other times, however - for instance, if you believe that you will need the result of your function call to feed as input to some other function, you should probably assign the result to a new name.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="r-basics.html#cb35-1"></a>mu &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)</span>
+<p><span class="math display">\[ f(x, y) = 2x + 3y \]</span></p>
+<p>It has these syntactic properties:</p>
+<ul>
+<li>The name of this function is <span class="math inline">\(f\)</span> (just as the name of the function above is <em>seq</em>).</li>
+<li>Its arguments (or parameters) include <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</li>
+<li>These are surrounded by parentheses <code>()</code>.</li>
+<li>And, the object the function returns is the result of summing <span class="math inline">\(2*x\)</span> and <span class="math inline">\(3*y\)</span>.</li>
+</ul>
+<p>So, if you supply this function with the values 4 and 2 (as in, <span class="math inline">\(f(x=4, y=2)\)</span>), it will return 14 as a result. R functions work in precisely the same way. In fact, we can demonstrate this now:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="r-basics.html#cb35-1"></a>f &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span><span class="st"> </span><span class="dv">3</span><span class="op">*</span>y</span>
 <span id="cb35-2"><a href="r-basics.html#cb35-2"></a></span>
-<span id="cb35-3"><a href="r-basics.html#cb35-3"></a><span class="kw">seq</span>(<span class="dv">1</span>, mu, <span class="dt">length.out =</span> <span class="dv">5</span>)</span>
-<span id="cb35-4"><a href="r-basics.html#cb35-4"></a><span class="co">## [1] 1.0 1.5 2.0 2.5 3.0</span></span></code></pre></div>
+<span id="cb35-3"><a href="r-basics.html#cb35-3"></a><span class="kw">f</span>(<span class="dt">x=</span><span class="dv">4</span>, <span class="dt">y=</span><span class="dv">2</span>)</span>
+<span id="cb35-4"><a href="r-basics.html#cb35-4"></a><span class="co">## [1] 14</span></span></code></pre></div>
+<p>Notice that just as we did with regular object assignment above, we have created a function here and assigned it to a name, in this case, <code>f</code>. This shoud clue you into the fact that functions are objects, too, just a special sort of object that you can also <em>do</em> things with.</p>
 </div>
+</div>
+<div id="vectorized-functions" class="section level2">
+<h2><span class="header-section-number">6.4</span> Vectorized Functions</h2>
+<p>Not all functions in R are vectorized, but many are, and they are an invaluable tool for statistical programming. What is a vectorized function? In a nutshell, it’s a function <span class="math inline">\(f()\)</span> that takes a <a href="vector-types.html#vector-types">vector</a> <code>c(x1, x2, x3, ..., xn)</code> as input and returns the vector <code>c(f(x1), f(x2), f(x3), ..., f(xn))</code> as output. Meaning, in other words, its an action that gets applied separately to each element of a set of values. A consequence, or requirement perhaps, is that the input and output vectors have the same length (or number of elements). To make this more concrete, consider this simple function <code>add_one()</code>.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="r-basics.html#cb36-1"></a>add_one &lt;-<span class="st"> </span><span class="cf">function</span>(x) x <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb36-2"><a href="r-basics.html#cb36-2"></a></span>
+<span id="cb36-3"><a href="r-basics.html#cb36-3"></a>a_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">25</span>, <span class="dv">36</span>)</span>
+<span id="cb36-4"><a href="r-basics.html#cb36-4"></a></span>
+<span id="cb36-5"><a href="r-basics.html#cb36-5"></a><span class="kw">add_one</span>(a_vector) <span class="co"># read: &quot;take the square root of a vector&quot;</span></span>
+<span id="cb36-6"><a href="r-basics.html#cb36-6"></a><span class="co">## [1]  5 10 17 26 37</span></span></code></pre></div>
+<p>This function takes an input vector and adds one to each element in that vector. The result of that procedure is an output vector of the same length, where each element has a value one greater than its corresponding element in the input vector.</p>
+<p>When it comes to these vectorized functions, R does sometimes exhibit some strange behavior, and it’s important to at least be familiar with those circumstances. For instance, operations are applied pairwise when two vectors are applied.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="r-basics.html#cb37-1"></a><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="op">+</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb37-2"><a href="r-basics.html#cb37-2"></a><span class="co">## [1] 5 7 9</span></span></code></pre></div>
+<p>Here, 1 is added to 4, 2 is added to 5, and 3 is added to 6. That seems simple enough. However, when the vectors have different lengths, then R chooses to recycle the shorter length vector. For example:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="r-basics.html#cb38-1"></a><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb38-2"><a href="r-basics.html#cb38-2"></a><span class="co">## [1] 4 6 6 8</span></span></code></pre></div>
+<p>Here, 1 is added to 3, 2 is added to 4, then (recycling) 1 is added to 5, and 2 is added to 6. The values in the shorter vector <code>c(1, 2)</code> are being recycled or reused in this addition operation. This is not an ideal behavior for a variety of reasons. Still, it does at least ensure that everything in the longer vector is added to something in the shorter vector <em>according to some standard or rule</em>.</p>
 </div>
 <div id="console-and-scripts" class="section level2">
-<h2><span class="header-section-number">6.4</span> Console and Scripts</h2>
+<h2><span class="header-section-number">6.5</span> Console and Scripts</h2>
 <p>In this section, we’ll go over some basic considerations of where to <em>write</em> your R code and where to <em>run</em> it.</p>
 <div id="r-console" class="section level3">
-<h3><span class="header-section-number">6.4.1</span> R Console</h3>
+<h3><span class="header-section-number">6.5.1</span> R Console</h3>
 <p>Perhaps this is obvious, but you can write R code basically anywhere - on a napkin at a restaurant, for instance, on your hand in a pinch, or even in a fever dream - but if you want to get your R code to actually <em>run</em>, you will have to send it to the R console, so it can be <em>interpreted</em>. In this sense, at least, the R console is like R’s central nervous system. Signals (your code) get sent to the console to get interpreted and generate some behavioral output (like a plot or a linear model). Here is what typing R code in the actual R console looks like:</p>
-<p><img src="11-r_basics_files/figure-html/unnamed-chunk-12-.gif" width="100%" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="11-r_basics_files/figure-html/unnamed-chunk-15-.gif" width="100%" style="display: block; margin: auto auto auto 0;" /></p>
 <p>Please note that in this book, the greater-than symbol <code>&gt;</code> preceding R code is suppressed, and that the result is preceded by <code>##</code>.</p>
 </div>
 <div id="r-scripts" class="section level3">
-<h3><span class="header-section-number">6.4.2</span> R Scripts</h3>
-<p>One important downside of writing R code directly into the console is that it is more like writing R in a dream than on a restaurant napkin. When you write code into it, you cannot get it back once you “wake up” from your R session.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> This means that working in the console subjects the reproducibility of your analysis to the sometimes (often?) unreliable testimony of your own memory - like trying to remember what happened in your dream. To overcome this limitation of the console, the authors of R have also provided a specially designed text file, called an R “script,” that you can write R code into and save to disc. A dead giveaway that you have one on your computer is the <em>.R</em> file extension.</p>
+<h3><span class="header-section-number">6.5.2</span> R Scripts</h3>
+<p>One important downside of writing R code directly into the console is that it is more like writing R in a dream than on a restaurant napkin. When you write code into it, you cannot get it back once you “wake up” from your R session.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> This means that working in the console subjects the reproducibility of your analysis to the sometimes (often?) unreliable testimony of your own memory - like trying to remember what happened in your dream. To overcome this limitation of the console, the authors of R have also provided a specially designed text file, called an R “script,” that you can write R code into and save to disc. A dead giveaway that you have one on your computer is the <em>.R</em> file extension.</p>
 <p>Note, however, that even with R scripts, you cannot just open one in a text editor and expect the code it contains to run. You would be just as well off wadding up your napkin of code and hurling it defiantly at your monitor. No, to get your code to run, wherever it resides, you must always pass it to the console to get interpreted. There are a number of ways to do this, the most basic being these:</p>
 <ol style="list-style-type: decimal">
 <li>Copy and paste the code from your script into the console. This strategy, of course, makes an R script only slightly more advantageous than a napkin…</li>
@@ -523,12 +557,12 @@ R is case sensitive! So, R will not treat <code>My_naME</code> and <code>my_name
 </div>
 </div>
 <div id="packages-in-the-r-library" class="section level2">
-<h2><span class="header-section-number">6.5</span> Packages in the R Library</h2>
+<h2><span class="header-section-number">6.6</span> Packages in the R Library</h2>
 <p>R is a highly <em>extensible</em> programming language. Being extensible is just a fancy way of saying that individuals can write R code (more often than not, this involves writing functions) that others can later incorporate into their own workflow. These functions can be shared as simple scripts, but they can also be bundled into <em>packages</em>, which you can think of as being sort of like an R “app.” The basic motivation for a package is to save you from having to recreate the wheel every time you open R. That is, it saves you from having to type the same code over and over again. It’s also a powerful tool for reproducibility, as it ensures that the <em>exact same code</em> is run each time.</p>
 <p>To install a package, you use the <code>install.packages()</code> function.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="r-basics.html#cb36-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="r-basics.html#cb39-1"></a><span class="kw">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span></code></pre></div>
 <p>This function simply adds the package to your R <em>library</em>, which is more or less just a folder on your computer. To actually use the functions provided by an R package, you have to “check out” the package from the library. The way to do this in R is with the <code>library()</code> function.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="r-basics.html#cb37-1"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="r-basics.html#cb40-1"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
 <p>Once you have done this, the functions provided by the package are now available to use.</p>
 <p>Some packages that I use in virtually all of my analyses include the following:</p>
 <table class="table table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -594,8 +628,7 @@ A package that provides simple feature access for R.
 <div class="footnotes">
 <hr />
 <ol start="7">
-<li id="fn7"><p>A frustrating exception to this is the base R <code>plot()</code> function. This function results only in side-effects.<a href="r-basics.html#fnref7" class="footnote-back">↩︎</a></p></li>
-<li id="fn8"><p>This is not strictly true, as R provides <em>.Rhistory</em> files, but you have little control over the formatting of those documents.<a href="r-basics.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>This is not strictly true, as R provides <em>.Rhistory</em> files, but you have little control over the formatting of those documents.<a href="r-basics.html#fnref7" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

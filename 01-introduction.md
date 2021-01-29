@@ -45,6 +45,16 @@ $(document).ready(function() {
 
 
 
+<!-- 
+make error messages closer to base R 
+https://github.com/hadley/adv-r/blob/master/common.R
+looks like it doesn't work because R no longer
+let's users override s3 methods, so I changed the s3 to "simpleError"
+-->
+
+
+
+
 
 
 This book provides an advanced introduction to doing statistics with R [@rcoreteam2020language], equipping the reader with the programming skills necessary to do statistics cheaply, efficiently - and perhaps most importantly - in a reproducible fashion.

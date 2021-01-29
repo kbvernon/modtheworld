@@ -47,6 +47,16 @@ $(document).ready(function() {
 
 
 
+<!-- 
+make error messages closer to base R 
+https://github.com/hadley/adv-r/blob/master/common.R
+looks like it doesn't work because R no longer
+let's users override s3 methods, so I changed the s3 to "simpleError"
+-->
+
+
+
+
 
 
 <a href="https://en.wikipedia.org/wiki/R" target="_blank"><img src="images/r_stuff.png" width="80%" style="display: block; margin: auto;" /></a>
@@ -116,7 +126,7 @@ R has functionality for basic arithmetic operations, including
 
 ## Objects and Functions
 
-In R, you can _make_ things and you can _do_ things. The things that you make are called _objects_ and the things that you do things with are called _functions_. The most common kind of R object is a `vector`. You can learn more about the different types of vectors in [Chapter 6 Vector Types](#vector-types). Other kinds of objects include `formula`, `raster`, `grob`, `hist`, and `density`. What about functions? These are actually a special class of object that take other objects as input and typically (though not always) return other objects as output.^[A frustrating exception to this is the base R `plot()` function. This function results only in side-effects.] They are thus "functions" in the sense of input-output devices. Any complex statistical operation you want to conduct in R will almost certainly involve the use of one or more functions.  
+In R, you can _make_ things and you can _do_ things. The things that you make are called _objects_ and the things that you do things with are called _functions_. The most common kind of R object is a `vector`. You can learn more about the different types of vectors in [Chapter 6 Vector Types](#vector-types). Other kinds of objects include `formula`, `raster`, `grob`, `hist`, and `density`. What about functions? These are actually a special class of object that take other objects as input and typically (though not always) return other objects as output. They are thus "functions" in the sense of input-output devices. Any complex statistical operation you want to conduct in R will almost certainly involve the use of one or more functions.  
 
 
 ### Creating objects with assignment
@@ -183,7 +193,7 @@ Now, you may think, "I could just create `5.137` any time I wanted, let it die, 
 6.137
 ## [1] 6.137
 boo
-#### Error in eval(expr, envir, enclos): object 'boo' not found
+#### Error: object 'boo' not found
 ```
 
 So, giving objects names in R is a good way to avoid errors.
@@ -203,25 +213,61 @@ seq(1, 5, length.out = 100)
 
 If you cast your mind back to the algebra you learned in high school, this syntax should be familiar to you. Consider this algebraic expression:
 
-$$ f(x) = 2x + 3 $$
+$$ f(x, y) = 2x + 3y $$
 
-The name of this function is $f$. Its arguments include $x$. And the object it returns is the result of multiplying $x$ by 2 and adding 3. So, if you supply this function with the value 4 (as in, $f(x=4)$), it will return 11 as a result. R functions work in precisely the same way. 
+It has these syntactic properties:
 
-Sometimes you just want to see the result of a function call, as it may suggest the next steps in your analysis. Other times, however - for instance, if you believe that you will need the result of your function call to feed as input to some other function, you should probably assign the result to a new name.  
+* The name of this function is $f$ (just as the name of the function above is _seq_). 
+* Its arguments (or parameters) include $x$ and $y$.
+* These are surrounded by parentheses `()`. 
+* And, the object the function returns is the result of summing $2*x$ and $3*y$. 
+
+So, if you supply this function with the values 4 and 2 (as in, $f(x=4, y=2)$), it will return 14 as a result. R functions work in precisely the same way. In fact, we can demonstrate this now:
 
 
 ```r
-mu <- mean(1:5)
+f <- function(x, y) 2*x + 3*y
 
-seq(1, mu, length.out = 5)
-## [1] 1.0 1.5 2.0 2.5 3.0
+f(x=4, y=2)
+## [1] 14
 ```
 
+Notice that just as we did with regular object assignment above, we have created a function here and assigned it to a name, in this case, `f`.  This shoud clue you into the fact that functions are objects, too, just a special sort of object that you can also _do_ things with.
 
 
+## Vectorized Functions
+
+Not all functions in R are vectorized, but many are, and they are an invaluable tool for statistical programming. What is a vectorized function? In a nutshell, it's a function $f()$ that takes a [vector](#vector-types) `c(x1, x2, x3, ..., xn)` as input and returns the vector `c(f(x1), f(x2), f(x3), ..., f(xn))` as output. Meaning, in other words, its an action that gets applied separately to each element of a set of values. A consequence, or requirement perhaps, is that the input and output vectors have the same length (or number of elements). To make this more concrete, consider this simple function `add_one()`.  
 
 
+```r
+add_one <- function(x) x + 1
 
+a_vector <- c(4, 9, 16, 25, 36)
+
+add_one(a_vector) # read: "take the square root of a vector"
+## [1]  5 10 17 26 37
+```
+
+This function takes an input vector and adds one to each element in that vector. The result of that procedure is an output vector of the same length, where each element has a value one greater than its corresponding element in the input vector.
+
+When it comes to these vectorized functions, R does sometimes exhibit some strange behavior, and it's important to at least be familiar with those circumstances. For instance, operations are applied pairwise when two vectors are applied. 
+
+
+```r
+c(1, 2, 3) + c(4, 5, 6)
+## [1] 5 7 9
+```
+
+Here, 1 is added to 4, 2 is added to 5, and 3 is added to 6. That seems simple enough. However, when the vectors have different lengths, then R chooses to recycle the shorter length vector. For example:
+
+
+```r
+c(1, 2) + c(3, 4, 5, 6)
+## [1] 4 6 6 8
+```
+
+Here, 1 is added to 3, 2 is added to 4, then (recycling) 1 is added to 5, and 2 is added to 6. The values in the shorter vector `c(1, 2)` are being recycled or reused in this addition operation. This is not an ideal behavior for a variety of reasons. Still, it does at least ensure that everything in the longer vector is added to something in the shorter vector _according to some standard or rule_.  
 
 
 ## Console and Scripts
@@ -232,7 +278,7 @@ In this section, we'll go over some basic considerations of where to _write_ you
 
 Perhaps this is obvious, but you can write R code basically anywhere - on a napkin at a restaurant, for instance, on your hand in a pinch, or even in a fever dream - but if you want to get your R code to actually _run_, you will have to send it to the R console, so it can be _interpreted_. In this sense, at least, the R console is like R's central nervous system. Signals (your code) get sent to the console to get interpreted and generate some behavioral output (like a plot or a linear model). Here is what typing R code in the actual R console looks like:
 
-<img src="11-r_basics_files/figure-html/unnamed-chunk-12-.gif" width="100%" style="display: block; margin: auto auto auto 0;" />
+<img src="11-r_basics_files/figure-html/unnamed-chunk-15-.gif" width="100%" style="display: block; margin: auto auto auto 0;" />
 
 Please note that in this book, the greater-than symbol `>` preceding R code is suppressed, and that the result is preceded by `##`.
 

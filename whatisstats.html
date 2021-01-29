@@ -210,11 +210,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.1" data-path="r-basics.html"><a href="r-basics.html#creating-objects-with-assignment"><i class="fa fa-check"></i><b>6.3.1</b> Creating objects with assignment</a></li>
 <li class="chapter" data-level="6.3.2" data-path="r-basics.html"><a href="r-basics.html#doing-things-with-functions"><i class="fa fa-check"></i><b>6.3.2</b> Doing things with functions</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="r-basics.html"><a href="r-basics.html#console-and-scripts"><i class="fa fa-check"></i><b>6.4</b> Console and Scripts</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="r-basics.html"><a href="r-basics.html#r-console"><i class="fa fa-check"></i><b>6.4.1</b> R Console</a></li>
-<li class="chapter" data-level="6.4.2" data-path="r-basics.html"><a href="r-basics.html#r-scripts"><i class="fa fa-check"></i><b>6.4.2</b> R Scripts</a></li>
+<li class="chapter" data-level="6.4" data-path="r-basics.html"><a href="r-basics.html#vectorized-functions"><i class="fa fa-check"></i><b>6.4</b> Vectorized Functions</a></li>
+<li class="chapter" data-level="6.5" data-path="r-basics.html"><a href="r-basics.html#console-and-scripts"><i class="fa fa-check"></i><b>6.5</b> Console and Scripts</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="r-basics.html"><a href="r-basics.html#r-console"><i class="fa fa-check"></i><b>6.5.1</b> R Console</a></li>
+<li class="chapter" data-level="6.5.2" data-path="r-basics.html"><a href="r-basics.html#r-scripts"><i class="fa fa-check"></i><b>6.5.2</b> R Scripts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="r-basics.html"><a href="r-basics.html#packages-in-the-r-library"><i class="fa fa-check"></i><b>6.5</b> Packages in the R Library</a></li>
+<li class="chapter" data-level="6.6" data-path="r-basics.html"><a href="r-basics.html#packages-in-the-r-library"><i class="fa fa-check"></i><b>6.6</b> Packages in the R Library</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="statistical-graphics.html"><a href="statistical-graphics.html"><i class="fa fa-check"></i><b>7</b> Statistical Graphics</a><ul>
 <li class="chapter" data-level="7.1" data-path="statistical-graphics.html"><a href="statistical-graphics.html#overview-1"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
@@ -259,8 +260,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3.4" data-path="vector-types.html"><a href="vector-types.html#list"><i class="fa fa-check"></i><b>8.3.4</b> List</a></li>
 <li class="chapter" data-level="8.3.5" data-path="vector-types.html"><a href="vector-types.html#data.frame"><i class="fa fa-check"></i><b>8.3.5</b> Data.frame</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="vector-types.html"><a href="vector-types.html#coercion"><i class="fa fa-check"></i><b>8.4</b> Coercion</a></li>
-<li class="chapter" data-level="8.5" data-path="vector-types.html"><a href="vector-types.html#vectorized-functions"><i class="fa fa-check"></i><b>8.5</b> Vectorized Functions</a></li>
+<li class="chapter" data-level="8.4" data-path="vector-types.html"><a href="vector-types.html#coercion"><i class="fa fa-check"></i><b>8.4</b> Coercion</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="vector-types.html"><a href="vector-types.html#data-type-coercion"><i class="fa fa-check"></i><b>8.4.1</b> Data type coercion</a></li>
+<li class="chapter" data-level="8.4.2" data-path="vector-types.html"><a href="vector-types.html#vector-type-coercion"><i class="fa fa-check"></i><b>8.4.2</b> Vector type coercion</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="workspace-management.html"><a href="workspace-management.html"><i class="fa fa-check"></i><b>9</b> Workspace Management</a><ul>
 <li class="chapter" data-level="9.1" data-path="workspace-management.html"><a href="workspace-management.html#environments"><i class="fa fa-check"></i><b>9.1</b> Environments</a></li>
@@ -344,6 +347,12 @@ $(document).ready(function() {
 </script>
 <!-- chunk options -->
 <!-- miscellaneous -->
+<!-- 
+make error messages closer to base R 
+https://github.com/hadley/adv-r/blob/master/common.R
+looks like it doesn't work because R no longer
+let's users override s3 methods, so I changed the s3 to "simpleError"
+-->
 <p><img src="21-what_is_statistics_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p><span class="math display">\[
 \begin{aligned}

@@ -210,11 +210,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.1" data-path="r-basics.html"><a href="r-basics.html#creating-objects-with-assignment"><i class="fa fa-check"></i><b>6.3.1</b> Creating objects with assignment</a></li>
 <li class="chapter" data-level="6.3.2" data-path="r-basics.html"><a href="r-basics.html#doing-things-with-functions"><i class="fa fa-check"></i><b>6.3.2</b> Doing things with functions</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="r-basics.html"><a href="r-basics.html#console-and-scripts"><i class="fa fa-check"></i><b>6.4</b> Console and Scripts</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="r-basics.html"><a href="r-basics.html#r-console"><i class="fa fa-check"></i><b>6.4.1</b> R Console</a></li>
-<li class="chapter" data-level="6.4.2" data-path="r-basics.html"><a href="r-basics.html#r-scripts"><i class="fa fa-check"></i><b>6.4.2</b> R Scripts</a></li>
+<li class="chapter" data-level="6.4" data-path="r-basics.html"><a href="r-basics.html#vectorized-functions"><i class="fa fa-check"></i><b>6.4</b> Vectorized Functions</a></li>
+<li class="chapter" data-level="6.5" data-path="r-basics.html"><a href="r-basics.html#console-and-scripts"><i class="fa fa-check"></i><b>6.5</b> Console and Scripts</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="r-basics.html"><a href="r-basics.html#r-console"><i class="fa fa-check"></i><b>6.5.1</b> R Console</a></li>
+<li class="chapter" data-level="6.5.2" data-path="r-basics.html"><a href="r-basics.html#r-scripts"><i class="fa fa-check"></i><b>6.5.2</b> R Scripts</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="r-basics.html"><a href="r-basics.html#packages-in-the-r-library"><i class="fa fa-check"></i><b>6.5</b> Packages in the R Library</a></li>
+<li class="chapter" data-level="6.6" data-path="r-basics.html"><a href="r-basics.html#packages-in-the-r-library"><i class="fa fa-check"></i><b>6.6</b> Packages in the R Library</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="statistical-graphics.html"><a href="statistical-graphics.html"><i class="fa fa-check"></i><b>7</b> Statistical Graphics</a><ul>
 <li class="chapter" data-level="7.1" data-path="statistical-graphics.html"><a href="statistical-graphics.html#overview-1"><i class="fa fa-check"></i><b>7.1</b> Overview</a></li>
@@ -259,8 +260,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3.4" data-path="vector-types.html"><a href="vector-types.html#list"><i class="fa fa-check"></i><b>8.3.4</b> List</a></li>
 <li class="chapter" data-level="8.3.5" data-path="vector-types.html"><a href="vector-types.html#data.frame"><i class="fa fa-check"></i><b>8.3.5</b> Data.frame</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="vector-types.html"><a href="vector-types.html#coercion"><i class="fa fa-check"></i><b>8.4</b> Coercion</a></li>
-<li class="chapter" data-level="8.5" data-path="vector-types.html"><a href="vector-types.html#vectorized-functions"><i class="fa fa-check"></i><b>8.5</b> Vectorized Functions</a></li>
+<li class="chapter" data-level="8.4" data-path="vector-types.html"><a href="vector-types.html#coercion"><i class="fa fa-check"></i><b>8.4</b> Coercion</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="vector-types.html"><a href="vector-types.html#data-type-coercion"><i class="fa fa-check"></i><b>8.4.1</b> Data type coercion</a></li>
+<li class="chapter" data-level="8.4.2" data-path="vector-types.html"><a href="vector-types.html#vector-type-coercion"><i class="fa fa-check"></i><b>8.4.2</b> Vector type coercion</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="workspace-management.html"><a href="workspace-management.html"><i class="fa fa-check"></i><b>9</b> Workspace Management</a><ul>
 <li class="chapter" data-level="9.1" data-path="workspace-management.html"><a href="workspace-management.html#environments"><i class="fa fa-check"></i><b>9.1</b> Environments</a></li>
@@ -344,22 +347,28 @@ $(document).ready(function() {
 </script>
 <!-- chunk options -->
 <!-- miscellaneous -->
+<!-- 
+make error messages closer to base R 
+https://github.com/hadley/adv-r/blob/master/common.R
+looks like it doesn't work because R no longer
+let's users override s3 methods, so I changed the s3 to "simpleError"
+-->
 <div id="environments" class="section level2">
 <h2><span class="header-section-number">9.1</span> Environments</h2>
 <p>So, we now know how to create an object in R, but when we do, <em>where does it go</em>?!!! This is a question that a lot of smart people find themselves asking when first learning about R. While the answer is a tad on the esoteric side, it is perhaps useful to peel back the curtain ever so slightly, so you can see what is happening when you create an object in R. To do that, we need to talk about environments, in particular, the “global” environment or “workspace.” You can think of an environment like the workspace as a special sort of named list.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="workspace-management.html#cb101-1"></a>bob &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,</span>
-<span id="cb101-2"><a href="workspace-management.html#cb101-2"></a>            <span class="dt">b =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>],</span>
-<span id="cb101-3"><a href="workspace-management.html#cb101-3"></a>            <span class="dt">c =</span> <span class="st">&quot;quotidian&quot;</span>,</span>
-<span id="cb101-4"><a href="workspace-management.html#cb101-4"></a>            <span class="dt">d =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb101-5"><a href="workspace-management.html#cb101-5"></a></span>
-<span id="cb101-6"><a href="workspace-management.html#cb101-6"></a><span class="co"># coerce list to environment object</span></span>
-<span id="cb101-7"><a href="workspace-management.html#cb101-7"></a>digital_zoo &lt;-<span class="st"> </span><span class="kw">as.environment</span>(bob)</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="workspace-management.html#cb99-1"></a>bob &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,</span>
+<span id="cb99-2"><a href="workspace-management.html#cb99-2"></a>            <span class="dt">b =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>],</span>
+<span id="cb99-3"><a href="workspace-management.html#cb99-3"></a>            <span class="dt">c =</span> <span class="st">&quot;quotidian&quot;</span>,</span>
+<span id="cb99-4"><a href="workspace-management.html#cb99-4"></a>            <span class="dt">d =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb99-5"><a href="workspace-management.html#cb99-5"></a></span>
+<span id="cb99-6"><a href="workspace-management.html#cb99-6"></a><span class="co"># coerce list to environment object</span></span>
+<span id="cb99-7"><a href="workspace-management.html#cb99-7"></a>digital_zoo &lt;-<span class="st"> </span><span class="kw">as.environment</span>(bob)</span></code></pre></div>
 <p>When you create an object, you do not have to go through these steps explicitly for R adds objects assigned to names to your global environment by default. The key here is just to recognize that when you use <code>&lt;-</code>, you are in effect adding an element to a list, the environment list.</p>
 <p>If you want to know what all lives in your R environment, you can try <code>ls()</code>, which works like <code>names()</code> does for lists, printing the names of its denizens.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="workspace-management.html#cb102-1"></a><span class="kw">ls</span>(digital_zoo)</span>
-<span id="cb102-2"><a href="workspace-management.html#cb102-2"></a><span class="co">## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="workspace-management.html#cb100-1"></a><span class="kw">ls</span>(digital_zoo)</span>
+<span id="cb100-2"><a href="workspace-management.html#cb100-2"></a><span class="co">## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;</span></span></code></pre></div>
 <p>As a general rule, you should keep your environments clean and orderly. This will help prevent you from making careless mistakes (like running operations on the wrong objects) and also make it easier to manage your workflow. One way to do this is to let go of objects that you will not re-use - meaning, you should banish them from your environment. This is achieved with the <code>rm()</code> function.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="workspace-management.html#cb103-1"></a><span class="kw">rm</span>(a, <span class="dt">envir =</span> digital_zoo) <span class="co"># read this as: remove object a from the digital zoo environment</span></span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="workspace-management.html#cb101-1"></a><span class="kw">rm</span>(a, <span class="dt">envir =</span> digital_zoo) <span class="co"># read this as: remove object a from the digital zoo environment</span></span></code></pre></div>
 <p>When you’re removing objects from your global environment or workspace (and not the toy environment that I just created as an example), it is sufficient simply to type <code>rm(&lt;object&gt;)</code> without specifying the environment, since it defaults to the global environment anyway.</p>
 </div>
 <div id="the-working-directory" class="section level2">
