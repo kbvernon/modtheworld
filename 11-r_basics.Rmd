@@ -290,7 +290,8 @@ df <- data.frame(c("`dplyr`", "`ggplot2`", "`here`", "`sf`"),
 
 df %>% 
   knitr::kable(col.names = NULL) %>% 
-  kableExtra::kable_styling(full_width = FALSE, bootstrap_options = "hover")
+  kableExtra::kable_styling(full_width = FALSE, bootstrap_options = "hover") %>% 
+  kableExtra::row_spec(row = 1:nrow(df), extra_css = "border: 0px")
 
 ```
 
