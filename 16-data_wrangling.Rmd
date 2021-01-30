@@ -3,7 +3,7 @@
 ```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
 ```
 
-```{r, echo = FALSE, out.width = '70%', fig.link = 'https://github.com/allisonhorst/stats-illustrations', fig.cap = "Artwork by Allison Horst"}
+```{r, echo = FALSE, out.width = '70%', fig.link = 'https://github.com/allisonhorst/stats-illustrations', fig.cap = "Artwork by Allison Horst contributed to Hadley Wickham's talk \"The Joy of Functional Programming (for Data Science).\""}
 
 knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/data_cowboy.png")
 
