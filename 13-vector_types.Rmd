@@ -35,7 +35,7 @@ The word 'vector' is just fancy R-speak for an R object with a specific form or 
 
 ## Data types
 
-As mentioned already,  there are four primary data types in R: integer, double, logical, and character, with integer and double also collectively referred to as numeric. We will not discuss any of these in great detail here, pausing only to mention very briefly what each is (Meaning), what they are for (Use), how to make them (Create), and how to catch one in the wild (Identify). As an honorable mention, we will also include _factors_. These are not strictly their own data type (R actually encodes them as integers), but they are ubiquitous and utilized quite often in statistical analyses. So, we'll treat them as a data type in their own right, on a level with the others - even if they aren't, strictly speaking.
+R defines a number of different data types, the four primary ones being: integer, double, logical, and character, with integer and double also collectively referred to as numeric. We will not discuss any of these in great detail here, pausing only to mention very briefly what each is (Meaning), what each is for (Use), how to make one (Create), and how to catch one in the wild (Identify). As an honorable mention, we will also include _factors_. These are not strictly their own data type (R actually encodes them as integers), but they are ubiquitous and utilized quite often in statistical analyses. So, we'll treat them as a data type in their own right, on a level with the others, even if they aren't, strictly speaking.
 
 ```{r, echo = FALSE}
 
