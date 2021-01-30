@@ -76,7 +76,7 @@ let's users override s3 methods, so I changed the s3 to "simpleError"
    <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> Here, you will learn about<br><ol>
 <li>data types and how to create them,</li>
 <li>vector types and how to create them, and</li>
-<li>coercion methods for converting one vector or data type to another,</li>
+<li>coercion methods for converting one vector or data type to another.</li>
 </ol> </td>
   </tr>
   <tr>
@@ -85,7 +85,7 @@ let's users override s3 methods, so I changed the s3 to "simpleError"
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Requirements__ </td>
-   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> NONE </td>
+   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> [Chapter 6: R Basics](#r-basics) </td>
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Further Reading__ </td>
