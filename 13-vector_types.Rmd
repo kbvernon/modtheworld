@@ -17,7 +17,7 @@ insert_intro(goal = "To familiarize students with primary data and vector types 
              tldr = "The beings of R are objects.",
              outcomes = c("data types and how to create them,",
                           "vector types and how to create them, and",
-                          "coercion methods for converting one vector or data type to another,"),
+                          "coercion methods for converting one vector or data type to another."),
              datasets = list(),
              requirements = list(),
              readings = list(c(name = "An Introduction to R",
