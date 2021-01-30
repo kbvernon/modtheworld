@@ -17,7 +17,7 @@ insert_intro(goal = "To familiarize students with primary data and vector types 
              tldr = "The beings of R are objects.",
              outcomes = c("data types and how to create them,",
                           "vector types and how to create them, and",
-                          "how to coerce objects of one vector or data type to another,"),
+                          "coercion methods for converting one vector or data type to another,"),
              datasets = list(),
              requirements = list(),
              readings = list(c(name = "An Introduction to R",
@@ -29,17 +29,17 @@ insert_intro(goal = "To familiarize students with primary data and vector types 
 
 ```
 
-The word 'vector' is just fancy R-speak for an R object with a specific form or _structure_ that contains one or more _data types_. The forms vectors can take include, among others, scalars and lists (see Fig. \@ref(fig:r-objects)), and the data types they can hold include integer, double (i.e., fractions), logical, character, and factor (though this last one only as an honorable mention). Putting effort into understanding these vector forms and data types might at first blush feel like a foolhardy pursuit of the inconsequential and esoteric, a task best relegated to crusty philosophers. But that is a mistake, for the different statistical questions you might want to ask will require data in one or the other form and type to answer. Understanding these forms and types will also help you manage your data better, thus making your statistical workflow more efficient and reproducible.  
+The word 'vector' is just fancy R-speak for an R object with a specific form or _structure_ that contains one or more _data types_. The forms vectors can take include, among others, scalars and lists (see Fig. \@ref(fig:r-objects)), and the data types they can hold include integer, double (i.e., fractions), logical, character, and factor (though factor is only an honorable mention). Putting effort into understanding these vector forms and data types might at first blush feel like a foolhardy pursuit of the inconsequential and esoteric, a task best relegated to crusty philosophers. But that is a mistake, for the different statistical questions you might want to ask will require data in one or the other form and type to answer. Understanding these forms and types will also help you manage your data better, thus making your statistical workflow more efficient and reproducible.  
 
 
 ## Data types
 
-As mentioned already,  there are four primary data types in R: integer, double, logical, and character, with integer and double also collectively referred to as numeric. We will not discuss any of these in great detail here, pausing only to mention very briefly what each is, how to make them, how to catch one in the wild, and what they are for. As an honorable mention, we will also include _factors_. These are not strictly their own data type (R actually encodes them as integers), but they are ubiquitous and utilized quite often in statistical analyses. So, we'll treat them as a data type in their own right, on a level with the others; even if they aren't, strictly speaking.
+As mentioned already,  there are four primary data types in R: integer, double, logical, and character, with integer and double also collectively referred to as numeric. We will not discuss any of these in great detail here, pausing only to mention very briefly what each is (Meaning), what they are for (Use), how to make them (Create), and how to catch one in the wild (Identify). As an honorable mention, we will also include _factors_. These are not strictly their own data type (R actually encodes them as integers), but they are ubiquitous and utilized quite often in statistical analyses. So, we'll treat them as a data type in their own right, on a level with the others - even if they aren't, strictly speaking.
 
 ```{r, echo = FALSE}
 
 questions <- c("Meaning", "Use", "Example", "Create", "Identify")
-# questions <- paste0("_", questions, "_")
+questions <- paste0("__", questions, ":__")
 
 make_table <- function(x) {
   
