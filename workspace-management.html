@@ -266,9 +266,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="workspace-management.html"><a href="workspace-management.html"><i class="fa fa-check"></i><b>9</b> Workspace Management</a><ul>
-<li class="chapter" data-level="9.1" data-path="workspace-management.html"><a href="workspace-management.html#environments"><i class="fa fa-check"></i><b>9.1</b> Environments</a></li>
-<li class="chapter" data-level="9.2" data-path="workspace-management.html"><a href="workspace-management.html#the-working-directory"><i class="fa fa-check"></i><b>9.2</b> The Working Directory</a></li>
+<li class="chapter" data-level="9.1" data-path="workspace-management.html"><a href="workspace-management.html#overview-3"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
+<li class="chapter" data-level="9.2" data-path="workspace-management.html"><a href="workspace-management.html#working-directory"><i class="fa fa-check"></i><b>9.2</b> Working directory</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="workspace-management.html"><a href="workspace-management.html#file-paths"><i class="fa fa-check"></i><b>9.2.1</b> File paths</a></li>
+<li class="chapter" data-level="9.2.2" data-path="workspace-management.html"><a href="workspace-management.html#directory-management"><i class="fa fa-check"></i><b>9.2.2</b> Directory management</a></li>
+</ul></li>
 <li class="chapter" data-level="9.3" data-path="workspace-management.html"><a href="workspace-management.html#data-import-and-export"><i class="fa fa-check"></i><b>9.3</b> Data Import and Export</a></li>
+<li class="chapter" data-level="9.4" data-path="workspace-management.html"><a href="workspace-management.html#environments"><i class="fa fa-check"></i><b>9.4</b> Environments</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="workspace-management.html"><a href="workspace-management.html#save-source"><i class="fa fa-check"></i><b>9.4.1</b> Save source!</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="vector-indexing.html"><a href="vector-indexing.html"><i class="fa fa-check"></i><b>10</b> Vector Indexing</a><ul>
 <li class="chapter" data-level="10.1" data-path="vector-indexing.html"><a href="vector-indexing.html#exploring-your-data"><i class="fa fa-check"></i><b>10.1</b> Exploring your data</a></li>
@@ -284,7 +290,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>11</b> Data Wrangling</a><ul>
-<li class="chapter" data-level="11.1" data-path="data-wrangling.html"><a href="data-wrangling.html#overview-3"><i class="fa fa-check"></i><b>11.1</b> Overview</a><ul>
+<li class="chapter" data-level="11.1" data-path="data-wrangling.html"><a href="data-wrangling.html#overview-4"><i class="fa fa-check"></i><b>11.1</b> Overview</a><ul>
 <li class="chapter" data-level="11.1.1" data-path="data-wrangling.html"><a href="data-wrangling.html#arrange-sort-order"><i class="fa fa-check"></i><b>11.1.1</b> Arrange [<code>sort()</code>, <code>order()</code>]</a></li>
 <li class="chapter" data-level="11.1.2" data-path="data-wrangling.html"><a href="data-wrangling.html#combine-c-rbind-cbind-merge"><i class="fa fa-check"></i><b>11.1.2</b> Combine [<code>c()</code>, <code>rbind()</code>, <code>cbind()</code>, <code>merge()</code>]</a></li>
 <li class="chapter" data-level="11.1.3" data-path="data-wrangling.html"><a href="data-wrangling.html#change-transform"><i class="fa fa-check"></i><b>11.1.3</b> Change [<code>transform()</code>]</a></li>
@@ -353,30 +359,138 @@ https://github.com/hadley/adv-r/blob/master/common.R
 looks like it doesn't work because R no longer
 let's users override s3 methods, so I changed the s3 to "simpleError"
 -->
-<div id="environments" class="section level2">
-<h2><span class="header-section-number">9.1</span> Environments</h2>
-<p>So, we now know how to create an object in R, but when we do, <em>where does it go</em>?!!! This is a question that a lot of smart people find themselves asking when first learning about R. While the answer is a tad on the esoteric side, it is perhaps useful to peel back the curtain ever so slightly, so you can see what is happening when you create an object in R. To do that, we need to talk about environments, in particular, the “global” environment or “workspace.” You can think of an environment like the workspace as a special sort of named list.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="workspace-management.html#cb99-1"></a>bob &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,</span>
-<span id="cb99-2"><a href="workspace-management.html#cb99-2"></a>            <span class="dt">b =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>],</span>
-<span id="cb99-3"><a href="workspace-management.html#cb99-3"></a>            <span class="dt">c =</span> <span class="st">&quot;quotidian&quot;</span>,</span>
-<span id="cb99-4"><a href="workspace-management.html#cb99-4"></a>            <span class="dt">d =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb99-5"><a href="workspace-management.html#cb99-5"></a></span>
-<span id="cb99-6"><a href="workspace-management.html#cb99-6"></a><span class="co"># coerce list to environment object</span></span>
-<span id="cb99-7"><a href="workspace-management.html#cb99-7"></a>digital_zoo &lt;-<span class="st"> </span><span class="kw">as.environment</span>(bob)</span></code></pre></div>
-<p>When you create an object, you do not have to go through these steps explicitly for R adds objects assigned to names to your global environment by default. The key here is just to recognize that when you use <code>&lt;-</code>, you are in effect adding an element to a list, the environment list.</p>
-<p>If you want to know what all lives in your R environment, you can try <code>ls()</code>, which works like <code>names()</code> does for lists, printing the names of its denizens.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="workspace-management.html#cb100-1"></a><span class="kw">ls</span>(digital_zoo)</span>
-<span id="cb100-2"><a href="workspace-management.html#cb100-2"></a><span class="co">## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;</span></span></code></pre></div>
-<p>As a general rule, you should keep your environments clean and orderly. This will help prevent you from making careless mistakes (like running operations on the wrong objects) and also make it easier to manage your workflow. One way to do this is to let go of objects that you will not re-use - meaning, you should banish them from your environment. This is achieved with the <code>rm()</code> function.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="workspace-management.html#cb101-1"></a><span class="kw">rm</span>(a, <span class="dt">envir =</span> digital_zoo) <span class="co"># read this as: remove object a from the digital zoo environment</span></span></code></pre></div>
-<p>When you’re removing objects from your global environment or workspace (and not the toy environment that I just created as an example), it is sufficient simply to type <code>rm(&lt;object&gt;)</code> without specifying the environment, since it defaults to the global environment anyway.</p>
+<div class="figure" style="text-align: center"><span id="fig:r-menagerie"></span>
+<img src="images/r-menagerie.png" alt="The R Environment" width="100%" />
+<p class="caption">
+Figure 9.1: The R Environment
+</p>
 </div>
-<div id="the-working-directory" class="section level2">
-<h2><span class="header-section-number">9.2</span> The Working Directory</h2>
+<div id="overview-3" class="section level2">
+<h2><span class="header-section-number">9.1</span> Overview</h2>
+<table class="table-intro table table-hover table-striped" style="margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;">
+<strong>Goal</strong>
+</td>
+<td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
+To familiarize students with the idea of a computing workspace.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;">
+<strong>tl;dr</strong>
+</td>
+<td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
+It’s just like your kitchen! Keeping it clean won’t necessarily make you a great cook, but it will make you a <em>better</em> one.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;">
+<strong>Outcomes</strong>
+</td>
+<td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
+Here, you will learn about<br>
+<ol>
+<li>
+the working directory,
+</li>
+<li>
+absolute and relative file paths,
+</li>
+<li>
+directory management,
+</li>
+<li>
+importing and exporting data,
+</li>
+<li>
+environments, specifically the workspace, and
+</li>
+<li>
+workspace management.
+</li>
+</ol>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;">
+<strong>Datasets</strong>
+</td>
+<td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
+NONE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;">
+<strong>Requirements</strong>
+</td>
+<td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
+<a href="r-basics.html#r-basics">Chapter 6: R Basics</a><br><a href="vector-types.html#vector-types">Chapter 8: Vector Types</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;">
+<strong>Further Reading</strong>
+</td>
+<td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
+<a href="https://cran.r-project.org/doc/manuals/r-release/R-intro.html">An Introduction to R</a> <span class="citation">(R Core Team <a href="#ref-rcoreteam2020introduction" role="doc-biblioref">2020</a><a href="#ref-rcoreteam2020introduction" role="doc-biblioref">a</a>)</span><br><a href="https://adv-r.hadley.nz/">Advanced R</a> <span class="citation">(Wickham <a href="#ref-Wickham2015advanced" role="doc-biblioref">2015</a>)</span>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Think of the workspace as your kitchen.</p>
+</div>
+<div id="working-directory" class="section level2">
+<h2><span class="header-section-number">9.2</span> Working directory</h2>
+<p>Describe the difference between a project directory and a working directory.</p>
+<p>Explain how to identify the current working directory with <code>getwd()</code> and then to make the project directory the working directory with <code>setwd()</code>.</p>
+<p>A question about reproducible code. To be reproducible, shouldn’t it be true that you don’t have to change <em>anything</em> in an R script? But what about <code>setwd()</code>?</p>
+<div id="file-paths" class="section level3">
+<h3><span class="header-section-number">9.2.1</span> File paths</h3>
+<p>Relative vs absolute file paths.</p>
+</div>
+<div id="directory-management" class="section level3">
+<h3><span class="header-section-number">9.2.2</span> Directory management</h3>
+<p>directory structure</p>
+<p>file names</p>
+</div>
 </div>
 <div id="data-import-and-export" class="section level2">
 <h2><span class="header-section-number">9.3</span> Data Import and Export</h2>
+<p>Import and assign! In <a href="r-basics.html#r-basics">R Basics</a> we learned how to create objects with some staying-power using assignment. Well, when we import data, we typically want it to have some staying power too, so we need to assign it to a name right away.</p>
+</div>
+<div id="environments" class="section level2">
+<h2><span class="header-section-number">9.4</span> Environments</h2>
+<p>When we create an object in R, <em>where does it go</em>?!!! This is a question that a lot of smart people find themselves asking when first learning about R. While the answer is a tad on the esoteric side, it is perhaps useful to peel back the curtain ever so slightly, so you can see what is happening when you create an object in R (including functions!). To do that, we need to talk about environments, in particular, the “global” environment, which is your default “workspace.” You can think of an environment like the workspace as a special sort of named list.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="workspace-management.html#cb99-1"></a>bob &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,</span>
+<span id="cb99-2"><a href="workspace-management.html#cb99-2"></a>            <span class="dt">b =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>],</span>
+<span id="cb99-3"><a href="workspace-management.html#cb99-3"></a>            <span class="dt">c =</span> <span class="st">&quot;quotidian&quot;</span>,</span>
+<span id="cb99-4"><a href="workspace-management.html#cb99-4"></a>            <span class="dt">d =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb99-5"><a href="workspace-management.html#cb99-5"></a>            <span class="dt">add_one =</span> <span class="cf">function</span>(x) x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb99-6"><a href="workspace-management.html#cb99-6"></a></span>
+<span id="cb99-7"><a href="workspace-management.html#cb99-7"></a><span class="co"># coerce list to environment object</span></span>
+<span id="cb99-8"><a href="workspace-management.html#cb99-8"></a>digital_zoo &lt;-<span class="st"> </span><span class="kw">as.environment</span>(bob)</span></code></pre></div>
+<p>When you create an object, you do not have to go through these steps explicitly for R adds objects assigned to names to your global environment by default. The key here is just to recognize that when you use <code>&lt;-</code>, you are in effect adding an element to a list, the environment list.</p>
+<p>If you want to know what all lives in your R environment, you can try <code>ls()</code>, which works like <code>names()</code> does for lists, printing the names of its denizens.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="workspace-management.html#cb100-1"></a><span class="kw">ls</span>(digital_zoo)</span>
+<span id="cb100-2"><a href="workspace-management.html#cb100-2"></a><span class="co">## [1] &quot;a&quot;       &quot;add_one&quot; &quot;b&quot;       &quot;c&quot;       &quot;d&quot;</span></span></code></pre></div>
+<p>As a general rule, you should keep your environments clean and orderly. This will help prevent you from making careless mistakes (like running operations on the wrong objects) and also make it easier to manage your workflow. One way to do this is to let go of objects that you will not re-use - meaning, you should banish them from your environment. This is achieved with the <code>rm()</code> function.</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="workspace-management.html#cb101-1"></a><span class="kw">rm</span>(a, <span class="dt">envir =</span> digital_zoo) <span class="co"># read this as: remove object a from the digital zoo environment</span></span></code></pre></div>
+<p>When you’re removing objects from your global environment or workspace (and not the toy environment that I just created as an example), it is sufficient simply to type <code>rm(&lt;object&gt;)</code> without specifying the environment, since it defaults to the global environment anyway.</p>
+<div id="save-source" class="section level3">
+<h3><span class="header-section-number">9.4.1</span> Save source!</h3>
 
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-rcoreteam2020introduction">
+<p>R Core Team. 2020a. <em>An Introduction to R</em>.</p>
+</div>
+<div id="ref-Wickham2015advanced">
+<p>Wickham, Hadley. 2015. <em>Advanced R</em>. Second. Boca Raton, FL: CRC Press.</p>
 </div>
 </div>
             </section>

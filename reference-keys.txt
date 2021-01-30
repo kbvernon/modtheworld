@@ -12,6 +12,7 @@ fig:05-layering-plot
 fig:unnamed-chunk-33
 fig:unnamed-chunk-34
 fig:r-objects
+fig:r-menagerie
 intro
 who-is-this-bookdown-for
 why-this-bookdown-project
@@ -114,9 +115,13 @@ coercion
 data-type-coercion
 vector-type-coercion
 workspace-management
-environments
-the-working-directory
+overview-3
+working-directory
+file-paths
+directory-management
 data-import-and-export
+environments
+save-source
 vector-indexing
 exploring-your-data
 indexing-your-data
@@ -129,7 +134,7 @@ matrix-1
 list-1
 data.frame-1
 data-wrangling
-overview-3
+overview-4
 arrange-sort-order
 combine-c-rbind-cbind-merge
 change-transform
