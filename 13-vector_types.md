@@ -76,7 +76,7 @@ let's users override s3 methods, so I changed the s3 to "simpleError"
    <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> Here, you will learn about<br><ol>
 <li>data types and how to create them,</li>
 <li>vector types and how to create them, and</li>
-<li>how to coerce objects of one vector or data type to another,</li>
+<li>coercion methods for converting one vector or data type to another,</li>
 </ol> </td>
   </tr>
   <tr>
@@ -94,12 +94,12 @@ let's users override s3 methods, so I changed the s3 to "simpleError"
 </tbody>
 </table>
 
-The word 'vector' is just fancy R-speak for an R object with a specific form or _structure_ that contains one or more _data types_. The forms vectors can take include, among others, scalars and lists (see Fig. \@ref(fig:r-objects)), and the data types they can hold include integer, double (i.e., fractions), logical, character, and factor (though this last one only as an honorable mention). Putting effort into understanding these vector forms and data types might at first blush feel like a foolhardy pursuit of the inconsequential and esoteric, a task best relegated to crusty philosophers. But that is a mistake, for the different statistical questions you might want to ask will require data in one or the other form and type to answer. Understanding these forms and types will also help you manage your data better, thus making your statistical workflow more efficient and reproducible.  
+The word 'vector' is just fancy R-speak for an R object with a specific form or _structure_ that contains one or more _data types_. The forms vectors can take include, among others, scalars and lists (see Fig. \@ref(fig:r-objects)), and the data types they can hold include integer, double (i.e., fractions), logical, character, and factor (though factor is only an honorable mention). Putting effort into understanding these vector forms and data types might at first blush feel like a foolhardy pursuit of the inconsequential and esoteric, a task best relegated to crusty philosophers. But that is a mistake, for the different statistical questions you might want to ask will require data in one or the other form and type to answer. Understanding these forms and types will also help you manage your data better, thus making your statistical workflow more efficient and reproducible.  
 
 
 ## Data types
 
-As mentioned already,  there are four primary data types in R: integer, double, logical, and character, with integer and double also collectively referred to as numeric. We will not discuss any of these in great detail here, pausing only to mention very briefly what each is, how to make them, how to catch one in the wild, and what they are for. As an honorable mention, we will also include _factors_. These are not strictly their own data type (R actually encodes them as integers), but they are ubiquitous and utilized quite often in statistical analyses. So, we'll treat them as a data type in their own right, on a level with the others; even if they aren't, strictly speaking.
+As mentioned already,  there are four primary data types in R: integer, double, logical, and character, with integer and double also collectively referred to as numeric. We will not discuss any of these in great detail here, pausing only to mention very briefly what each is (Meaning), what they are for (Use), how to make them (Create), and how to catch one in the wild (Identify). As an honorable mention, we will also include _factors_. These are not strictly their own data type (R actually encodes them as integers), but they are ubiquitous and utilized quite often in statistical analyses. So, we'll treat them as a data type in their own right, on a level with the others - even if they aren't, strictly speaking.
 
 
 
@@ -108,23 +108,23 @@ As mentioned already,  there are four primary data types in R: integer, double, 
 <table class="table table-hover" style="">
 <tbody>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Meaning </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Meaning:__ </td>
    <td style="text-align:left;border: 0px"> A whole number or a number without a fractional component (like 1 as opposed to 1.3). </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Use </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Use:__ </td>
    <td style="text-align:left;border: 0px"> Counting things! It answers the question _How many?_ </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Example </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Example:__ </td>
    <td style="text-align:left;border: 0px"> How many students are in this class? (Hopefully, an integer.) <br> How many Avengers are there now? </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Create </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Create:__ </td>
    <td style="text-align:left;border: 0px"> By appending an `L` to a number. </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Identify </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Identify:__ </td>
    <td style="text-align:left;border: 0px"> With `is.integer()`. </td>
   </tr>
 </tbody>
@@ -147,23 +147,23 @@ is.integer(my_integer)
 <table class="table table-hover" style="">
 <tbody>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Meaning </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Meaning:__ </td>
    <td style="text-align:left;border: 0px"> A number with a fractional component (like 1.3 as opposed to 1). </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Use </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Use:__ </td>
    <td style="text-align:left;border: 0px"> Measuring things! It answers the question _How much?_ </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Example </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Example:__ </td>
    <td style="text-align:left;border: 0px"> How much coffee did I have this morning? <br> How much did it rain last year in Pasquotank County, North Carolina? </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Create </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Create:__ </td>
    <td style="text-align:left;border: 0px"> By typing a number (with or without a decimal, but no `L`) </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Identify </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Identify:__ </td>
    <td style="text-align:left;border: 0px"> With `is.double()`. </td>
   </tr>
 </tbody>
@@ -186,23 +186,23 @@ is.double(my_double)
 <table class="table table-hover" style="">
 <tbody>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Meaning </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Meaning:__ </td>
    <td style="text-align:left;border: 0px"> A string of symbols used to construct words in a natural language (by default, English letters). </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Use </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Use:__ </td>
    <td style="text-align:left;border: 0px"> Saying things! It can answer a bunch of questions. </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Example </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Example:__ </td>
    <td style="text-align:left;border: 0px"> How much coffee did I have this morning? <br> How much did it rain last year in Pasquotank County, North Carolina? </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Create </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Create:__ </td>
    <td style="text-align:left;border: 0px"> By quoting it, i.e., surrounding a string with double `"` or single `'` apostrophes. </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Identify </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Identify:__ </td>
    <td style="text-align:left;border: 0px"> With `is.character()`. </td>
   </tr>
 </tbody>
@@ -243,23 +243,23 @@ my_integer
 <table class="table table-hover" style="">
 <tbody>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Meaning </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Meaning:__ </td>
    <td style="text-align:left;border: 0px"> A truth condition, i.e., TRUE or FALSE. Also known as a _boolean_. </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Use </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Use:__ </td>
    <td style="text-align:left;border: 0px"> Implying things! Specifically, making conditional or hypothetical claims. </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Example </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Example:__ </td>
    <td style="text-align:left;border: 0px"> If it rains today, I will take my umbrella. <br> If x is an integer, please add one to it. </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Create </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Create:__ </td>
    <td style="text-align:left;border: 0px"> By typing `TRUE`, `FALSE`, `T`, or `F`. </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Identify </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Identify:__ </td>
    <td style="text-align:left;border: 0px"> With `is.logical()`. </td>
   </tr>
 </tbody>
@@ -306,23 +306,23 @@ Did you notice that our `is.*` functions all return a `logical`?
 <table class="table table-hover" style="">
 <tbody>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Meaning </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Meaning:__ </td>
    <td style="text-align:left;border: 0px"> Categories, typically represented in R as character strings with _levels_. </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Use </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Use:__ </td>
    <td style="text-align:left;border: 0px"> Categorizing things! </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Example </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Example:__ </td>
    <td style="text-align:left;border: 0px"> Tom is a _feline_. <br> Jerry is a _mouse_. </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Create </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Create:__ </td>
    <td style="text-align:left;border: 0px"> Using the function `factor()` </td>
   </tr>
   <tr>
-   <td style="text-align:left;width: 7em; border: 0px"> Identify </td>
+   <td style="text-align:left;width: 7em; border: 0px"> __Identify:__ </td>
    <td style="text-align:left;border: 0px"> With `is.factor()`. </td>
   </tr>
 </tbody>

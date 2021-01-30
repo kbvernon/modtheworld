@@ -1,7 +1,7 @@
 --- 
 title: "Modeling the World with R"
 author: "Kenneth Blake Vernon"
-date: "2021-01-29"
+date: "2021-01-30"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
