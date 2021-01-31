@@ -213,7 +213,12 @@ Here, 1 is added to 3, 2 is added to 4, then (recycling) 1 is added to 5, and 2 
 
 ## Console and Scripts
 
-In this section, we'll go over some basic considerations of where to _write_ your R code and where to _run_ it. 
+In this section, we'll go over some basic considerations of where to _write_ your R code and where to _run_ it.
+
+```{r, echo = FALSE, out.width = "85%"}
+knitr::include_graphics("images/r-code_to_console.png")
+```
+
 
 ### R Console
 
