@@ -546,6 +546,61 @@ ncol(my_dataframe)
 ## [1] 4
 ```
 
+## Vector display
+
+Because lists and data.frames have complex structures with multiple data types, it's useful to have a way to display that information in the console. One really, really useful function in that regard is `str()`, 'str' being short for "structure." This prints slightly different information depending on whether you provide it a list or data.frame. Here is a list: 
+
+
+```r
+str(my_list)
+## List of 4
+##  $ A: int [1:4] 1 2 3 4
+##  $ B: num [1:5] 1.1 0.2 3.1 4 5.2
+##  $ C: chr [1:3] "a" "b" "c"
+##  $ D: logi [1:2] TRUE TRUE
+```
+
+As you can see, `str()` provides five critical pieces of information: 
+
+1. the type of vector whose structure is being displayed (i.e., a list of 4)
+2. the names of the list objects (c1, c2, c3, c4), 
+3. the abbreviated data type of each list object
+    * int = integer, 
+    * num = number or double, 
+    * chr = character, and 
+    * logi = logical, 
+4. the dimensions of each element (e.g., c2 is a flat, or one-dimensional, vector with five components, hence [1:5]), and 
+5. the actual components of each list element (e.g., c1 consists of four values, 1, 2, 3, and 4).
+
+Here is how it looks for data.frames.
+
+
+```r
+str(my_dataframe)
+## 'data.frame':	5 obs. of  4 variables:
+##  $ c1: int  1 2 3 4 5
+##  $ c2: num  1.1 0.2 3.1 4 5.2
+##  $ c3: chr  "a" "b" "c" "d" ...
+##  $ c4: logi  TRUE TRUE FALSE FALSE TRUE
+```
+
+The big differences here are, first, that `str()` tells you that it has provided the structure of a data.frame, and, second, that it doesn't bother to specify the dimensions of each vector in the data.frame, instead describing the number of rows (or observations) and columns (or variables). This is because of the super-restriction on data.frames, namely, that each column have the same length.
+
+One other useful function for displaying data.frames is `head()`, which shows the first six rows by default.
+
+
+
+```r
+head(my_dataframe)
+##   c1  c2 c3    c4
+## 1  1 1.1  a  TRUE
+## 2  2 0.2  b  TRUE
+## 3  3 3.1  c FALSE
+## 4  4 4.0  d FALSE
+## 5  5 5.2  e  TRUE
+```
+
+
 ## Coercion
 
 R provides tools for transforming objects of one data or vector type into objects of another data or vector type. This is known as _coercion_, which you were introduced to above in the form of _implicit_ coercion. As a reminder, that's what happens when you try to combine different data types in an atomic vector like so:
@@ -598,7 +653,7 @@ as.integer('b')
 
 As you see, R chooses not to return a value, providing `NA` instead. 
 
-\BeginKnitrBlock{rmdnote}<div class="rmdnote">One somewhat bizarre coercion rules involves the translation of numbers into logicals, but the nature of that rule and the explanation for it are deeply esoteric topics involving R's original design. So, rather than delving into that particular idiosyncrasy, I would just encourage you to try out `as.logical()` on a number (double or integer) and see what happens. Hint: try it on zero, too.  </div>\EndKnitrBlock{rmdnote}
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">One somewhat bizarre coercion rule involves the translation of numbers into logicals, but the nature of that rule and the explanation for it are deeply esoteric topics involving R's original design. So, rather than delving into that particular idiosyncrasy, I would just encourage you to try out `as.logical()` on a number (double or integer) and see what happens. Hint: try it on zero, too.  </div>\EndKnitrBlock{rmdnote}
 
 
 ### Vector type coercion

@@ -272,13 +272,16 @@ Here, 1 is added to 3, 2 is added to 4, then (recycling) 1 is added to 5, and 2 
 
 ## Console and Scripts
 
-In this section, we'll go over some basic considerations of where to _write_ your R code and where to _run_ it. 
+In this section, we'll go over some basic considerations of where to _write_ your R code and where to _run_ it.
+
+<img src="images/r-code_to_console.png" width="85%" style="display: block; margin: auto;" />
+
 
 ### R Console
 
 Perhaps this is obvious, but you can write R code basically anywhere - on a napkin at a restaurant, for instance, on your hand in a pinch, or even in a fever dream - but if you want to get your R code to actually _run_, you will have to send it to the R console, so it can be _interpreted_. In this sense, at least, the R console is like R's central nervous system. Signals (your code) get sent to the console to get interpreted and generate some behavioral output (like a plot or a linear model). Here is what typing R code in the actual R console looks like:
 
-<img src="11-r_basics_files/figure-html/unnamed-chunk-15-.gif" width="100%" style="display: block; margin: auto auto auto 0;" />
+<img src="11-r_basics_files/figure-html/unnamed-chunk-16-.gif" width="100%" style="display: block; margin: auto auto auto 0;" />
 
 Please note that in this book, the greater-than symbol `>` preceding R code is suppressed, and that the result is preceded by `##`.
 

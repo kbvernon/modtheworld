@@ -24,7 +24,7 @@
 <meta name="author" content="Kenneth Blake Vernon" />
 
 
-<meta name="date" content="2021-01-30" />
+<meta name="date" content="2021-01-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -260,21 +260,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3.4" data-path="vector-types.html"><a href="vector-types.html#list"><i class="fa fa-check"></i><b>8.3.4</b> List</a></li>
 <li class="chapter" data-level="8.3.5" data-path="vector-types.html"><a href="vector-types.html#data.frame"><i class="fa fa-check"></i><b>8.3.5</b> Data.frame</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="vector-types.html"><a href="vector-types.html#coercion"><i class="fa fa-check"></i><b>8.4</b> Coercion</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="vector-types.html"><a href="vector-types.html#data-type-coercion"><i class="fa fa-check"></i><b>8.4.1</b> Data type coercion</a></li>
-<li class="chapter" data-level="8.4.2" data-path="vector-types.html"><a href="vector-types.html#vector-type-coercion"><i class="fa fa-check"></i><b>8.4.2</b> Vector type coercion</a></li>
+<li class="chapter" data-level="8.4" data-path="vector-types.html"><a href="vector-types.html#vector-display"><i class="fa fa-check"></i><b>8.4</b> Vector display</a></li>
+<li class="chapter" data-level="8.5" data-path="vector-types.html"><a href="vector-types.html#coercion"><i class="fa fa-check"></i><b>8.5</b> Coercion</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="vector-types.html"><a href="vector-types.html#data-type-coercion"><i class="fa fa-check"></i><b>8.5.1</b> Data type coercion</a></li>
+<li class="chapter" data-level="8.5.2" data-path="vector-types.html"><a href="vector-types.html#vector-type-coercion"><i class="fa fa-check"></i><b>8.5.2</b> Vector type coercion</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="workspace-management.html"><a href="workspace-management.html"><i class="fa fa-check"></i><b>9</b> Workspace Management</a><ul>
 <li class="chapter" data-level="9.1" data-path="workspace-management.html"><a href="workspace-management.html#overview-3"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
-<li class="chapter" data-level="9.2" data-path="workspace-management.html"><a href="workspace-management.html#working-directory"><i class="fa fa-check"></i><b>9.2</b> Working directory</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="workspace-management.html"><a href="workspace-management.html#file-paths"><i class="fa fa-check"></i><b>9.2.1</b> File paths</a></li>
-<li class="chapter" data-level="9.2.2" data-path="workspace-management.html"><a href="workspace-management.html#directory-management"><i class="fa fa-check"></i><b>9.2.2</b> Directory management</a></li>
+<li class="chapter" data-level="9.2" data-path="workspace-management.html"><a href="workspace-management.html#the-workspace"><i class="fa fa-check"></i><b>9.2</b> The Workspace</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="workspace-management.html"><a href="workspace-management.html#workspace-management-1"><i class="fa fa-check"></i><b>9.2.1</b> Workspace Management</a></li>
+<li class="chapter" data-level="9.2.2" data-path="workspace-management.html"><a href="workspace-management.html#save-source"><i class="fa fa-check"></i><b>9.2.2</b> Save source!</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="workspace-management.html"><a href="workspace-management.html#data-import-and-export"><i class="fa fa-check"></i><b>9.3</b> Data Import and Export</a></li>
-<li class="chapter" data-level="9.4" data-path="workspace-management.html"><a href="workspace-management.html#environments"><i class="fa fa-check"></i><b>9.4</b> Environments</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="workspace-management.html"><a href="workspace-management.html#save-source"><i class="fa fa-check"></i><b>9.4.1</b> Save source!</a></li>
+<li class="chapter" data-level="9.3" data-path="workspace-management.html"><a href="workspace-management.html#working-directory"><i class="fa fa-check"></i><b>9.3</b> Working directory</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="workspace-management.html"><a href="workspace-management.html#file-paths"><i class="fa fa-check"></i><b>9.3.1</b> File paths</a></li>
+<li class="chapter" data-level="9.3.2" data-path="workspace-management.html"><a href="workspace-management.html#directory-management"><i class="fa fa-check"></i><b>9.3.2</b> Directory management</a></li>
 </ul></li>
+<li class="chapter" data-level="9.4" data-path="workspace-management.html"><a href="workspace-management.html#data-import-and-export"><i class="fa fa-check"></i><b>9.4</b> Data Import and Export</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="vector-indexing.html"><a href="vector-indexing.html"><i class="fa fa-check"></i><b>10</b> Vector Indexing</a><ul>
 <li class="chapter" data-level="10.1" data-path="vector-indexing.html"><a href="vector-indexing.html#exploring-your-data"><i class="fa fa-check"></i><b>10.1</b> Exploring your data</a></li>
@@ -545,10 +547,11 @@ R is case sensitive! So, R will not treat <code>My_naME</code> and <code>my_name
 <div id="console-and-scripts" class="section level2">
 <h2><span class="header-section-number">6.5</span> Console and Scripts</h2>
 <p>In this section, we’ll go over some basic considerations of where to <em>write</em> your R code and where to <em>run</em> it.</p>
+<p><img src="images/r-code_to_console.png" width="85%" style="display: block; margin: auto;" /></p>
 <div id="r-console" class="section level3">
 <h3><span class="header-section-number">6.5.1</span> R Console</h3>
 <p>Perhaps this is obvious, but you can write R code basically anywhere - on a napkin at a restaurant, for instance, on your hand in a pinch, or even in a fever dream - but if you want to get your R code to actually <em>run</em>, you will have to send it to the R console, so it can be <em>interpreted</em>. In this sense, at least, the R console is like R’s central nervous system. Signals (your code) get sent to the console to get interpreted and generate some behavioral output (like a plot or a linear model). Here is what typing R code in the actual R console looks like:</p>
-<p><img src="11-r_basics_files/figure-html/unnamed-chunk-15-.gif" width="100%" style="display: block; margin: auto auto auto 0;" /></p>
+<p><img src="11-r_basics_files/figure-html/unnamed-chunk-16-.gif" width="100%" style="display: block; margin: auto auto auto 0;" /></p>
 <p>Please note that in this book, the greater-than symbol <code>&gt;</code> preceding R code is suppressed, and that the result is preceded by <code>##</code>.</p>
 </div>
 <div id="r-scripts" class="section level3">

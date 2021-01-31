@@ -24,7 +24,7 @@
 <meta name="author" content="Kenneth Blake Vernon" />
 
 
-<meta name="date" content="2021-01-30" />
+<meta name="date" content="2021-01-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -260,21 +260,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3.4" data-path="vector-types.html"><a href="vector-types.html#list"><i class="fa fa-check"></i><b>8.3.4</b> List</a></li>
 <li class="chapter" data-level="8.3.5" data-path="vector-types.html"><a href="vector-types.html#data.frame"><i class="fa fa-check"></i><b>8.3.5</b> Data.frame</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="vector-types.html"><a href="vector-types.html#coercion"><i class="fa fa-check"></i><b>8.4</b> Coercion</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="vector-types.html"><a href="vector-types.html#data-type-coercion"><i class="fa fa-check"></i><b>8.4.1</b> Data type coercion</a></li>
-<li class="chapter" data-level="8.4.2" data-path="vector-types.html"><a href="vector-types.html#vector-type-coercion"><i class="fa fa-check"></i><b>8.4.2</b> Vector type coercion</a></li>
+<li class="chapter" data-level="8.4" data-path="vector-types.html"><a href="vector-types.html#vector-display"><i class="fa fa-check"></i><b>8.4</b> Vector display</a></li>
+<li class="chapter" data-level="8.5" data-path="vector-types.html"><a href="vector-types.html#coercion"><i class="fa fa-check"></i><b>8.5</b> Coercion</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="vector-types.html"><a href="vector-types.html#data-type-coercion"><i class="fa fa-check"></i><b>8.5.1</b> Data type coercion</a></li>
+<li class="chapter" data-level="8.5.2" data-path="vector-types.html"><a href="vector-types.html#vector-type-coercion"><i class="fa fa-check"></i><b>8.5.2</b> Vector type coercion</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="workspace-management.html"><a href="workspace-management.html"><i class="fa fa-check"></i><b>9</b> Workspace Management</a><ul>
 <li class="chapter" data-level="9.1" data-path="workspace-management.html"><a href="workspace-management.html#overview-3"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
-<li class="chapter" data-level="9.2" data-path="workspace-management.html"><a href="workspace-management.html#working-directory"><i class="fa fa-check"></i><b>9.2</b> Working directory</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="workspace-management.html"><a href="workspace-management.html#file-paths"><i class="fa fa-check"></i><b>9.2.1</b> File paths</a></li>
-<li class="chapter" data-level="9.2.2" data-path="workspace-management.html"><a href="workspace-management.html#directory-management"><i class="fa fa-check"></i><b>9.2.2</b> Directory management</a></li>
+<li class="chapter" data-level="9.2" data-path="workspace-management.html"><a href="workspace-management.html#the-workspace"><i class="fa fa-check"></i><b>9.2</b> The Workspace</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="workspace-management.html"><a href="workspace-management.html#workspace-management-1"><i class="fa fa-check"></i><b>9.2.1</b> Workspace Management</a></li>
+<li class="chapter" data-level="9.2.2" data-path="workspace-management.html"><a href="workspace-management.html#save-source"><i class="fa fa-check"></i><b>9.2.2</b> Save source!</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="workspace-management.html"><a href="workspace-management.html#data-import-and-export"><i class="fa fa-check"></i><b>9.3</b> Data Import and Export</a></li>
-<li class="chapter" data-level="9.4" data-path="workspace-management.html"><a href="workspace-management.html#environments"><i class="fa fa-check"></i><b>9.4</b> Environments</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="workspace-management.html"><a href="workspace-management.html#save-source"><i class="fa fa-check"></i><b>9.4.1</b> Save source!</a></li>
+<li class="chapter" data-level="9.3" data-path="workspace-management.html"><a href="workspace-management.html#working-directory"><i class="fa fa-check"></i><b>9.3</b> Working directory</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="workspace-management.html"><a href="workspace-management.html#file-paths"><i class="fa fa-check"></i><b>9.3.1</b> File paths</a></li>
+<li class="chapter" data-level="9.3.2" data-path="workspace-management.html"><a href="workspace-management.html#directory-management"><i class="fa fa-check"></i><b>9.3.2</b> Directory management</a></li>
 </ul></li>
+<li class="chapter" data-level="9.4" data-path="workspace-management.html"><a href="workspace-management.html#data-import-and-export"><i class="fa fa-check"></i><b>9.4</b> Data Import and Export</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="vector-indexing.html"><a href="vector-indexing.html"><i class="fa fa-check"></i><b>10</b> Vector Indexing</a><ul>
 <li class="chapter" data-level="10.1" data-path="vector-indexing.html"><a href="vector-indexing.html#exploring-your-data"><i class="fa fa-check"></i><b>10.1</b> Exploring your data</a></li>
@@ -855,76 +857,116 @@ Figure 8.1: Vector Types.
 <span id="cb92-4"><a href="vector-types.html#cb92-4"></a><span class="co">## [1] 4</span></span></code></pre></div>
 </div>
 </div>
+<div id="vector-display" class="section level2">
+<h2><span class="header-section-number">8.4</span> Vector display</h2>
+<p>Because lists and data.frames have complex structures with multiple data types, it’s useful to have a way to display that information in the console. One really, really useful function in that regard is <code>str()</code>, ‘str’ being short for “structure.” This prints slightly different information depending on whether you provide it a list or data.frame. Here is a list:</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="vector-types.html#cb93-1"></a><span class="kw">str</span>(my_list)</span>
+<span id="cb93-2"><a href="vector-types.html#cb93-2"></a><span class="co">## List of 4</span></span>
+<span id="cb93-3"><a href="vector-types.html#cb93-3"></a><span class="co">##  $ A: int [1:4] 1 2 3 4</span></span>
+<span id="cb93-4"><a href="vector-types.html#cb93-4"></a><span class="co">##  $ B: num [1:5] 1.1 0.2 3.1 4 5.2</span></span>
+<span id="cb93-5"><a href="vector-types.html#cb93-5"></a><span class="co">##  $ C: chr [1:3] &quot;a&quot; &quot;b&quot; &quot;c&quot;</span></span>
+<span id="cb93-6"><a href="vector-types.html#cb93-6"></a><span class="co">##  $ D: logi [1:2] TRUE TRUE</span></span></code></pre></div>
+<p>As you can see, <code>str()</code> provides five critical pieces of information:</p>
+<ol style="list-style-type: decimal">
+<li>the type of vector whose structure is being displayed (i.e., a list of 4)</li>
+<li>the names of the list objects (c1, c2, c3, c4),</li>
+<li>the abbreviated data type of each list object
+<ul>
+<li>int = integer,</li>
+<li>num = number or double,</li>
+<li>chr = character, and</li>
+<li>logi = logical,</li>
+</ul></li>
+<li>the dimensions of each element (e.g., c2 is a flat, or one-dimensional, vector with five components, hence [1:5]), and</li>
+<li>the actual components of each list element (e.g., c1 consists of four values, 1, 2, 3, and 4).</li>
+</ol>
+<p>Here is how it looks for data.frames.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="vector-types.html#cb94-1"></a><span class="kw">str</span>(my_dataframe)</span>
+<span id="cb94-2"><a href="vector-types.html#cb94-2"></a><span class="co">## &#39;data.frame&#39;:    5 obs. of  4 variables:</span></span>
+<span id="cb94-3"><a href="vector-types.html#cb94-3"></a><span class="co">##  $ c1: int  1 2 3 4 5</span></span>
+<span id="cb94-4"><a href="vector-types.html#cb94-4"></a><span class="co">##  $ c2: num  1.1 0.2 3.1 4 5.2</span></span>
+<span id="cb94-5"><a href="vector-types.html#cb94-5"></a><span class="co">##  $ c3: chr  &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; ...</span></span>
+<span id="cb94-6"><a href="vector-types.html#cb94-6"></a><span class="co">##  $ c4: logi  TRUE TRUE FALSE FALSE TRUE</span></span></code></pre></div>
+<p>The big differences here are, first, that <code>str()</code> tells you that it has provided the structure of a data.frame, and, second, that it doesn’t bother to specify the dimensions of each vector in the data.frame, instead describing the number of rows (or observations) and columns (or variables). This is because of the super-restriction on data.frames, namely, that each column have the same length.</p>
+<p>One other useful function for displaying data.frames is <code>head()</code>, which shows the first six rows by default.</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="vector-types.html#cb95-1"></a><span class="kw">head</span>(my_dataframe)</span>
+<span id="cb95-2"><a href="vector-types.html#cb95-2"></a><span class="co">##   c1  c2 c3    c4</span></span>
+<span id="cb95-3"><a href="vector-types.html#cb95-3"></a><span class="co">## 1  1 1.1  a  TRUE</span></span>
+<span id="cb95-4"><a href="vector-types.html#cb95-4"></a><span class="co">## 2  2 0.2  b  TRUE</span></span>
+<span id="cb95-5"><a href="vector-types.html#cb95-5"></a><span class="co">## 3  3 3.1  c FALSE</span></span>
+<span id="cb95-6"><a href="vector-types.html#cb95-6"></a><span class="co">## 4  4 4.0  d FALSE</span></span>
+<span id="cb95-7"><a href="vector-types.html#cb95-7"></a><span class="co">## 5  5 5.2  e  TRUE</span></span></code></pre></div>
+</div>
 <div id="coercion" class="section level2">
-<h2><span class="header-section-number">8.4</span> Coercion</h2>
+<h2><span class="header-section-number">8.5</span> Coercion</h2>
 <p>R provides tools for transforming objects of one data or vector type into objects of another data or vector type. This is known as <em>coercion</em>, which you were introduced to above in the form of <em>implicit</em> coercion. As a reminder, that’s what happens when you try to combine different data types in an atomic vector like so:</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="vector-types.html#cb93-1"></a><span class="kw">c</span>(<span class="dv">1</span>, <span class="st">&#39;a&#39;</span>, <span class="ot">TRUE</span>)</span>
-<span id="cb93-2"><a href="vector-types.html#cb93-2"></a><span class="co">## [1] &quot;1&quot;    &quot;a&quot;    &quot;TRUE&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="vector-types.html#cb96-1"></a><span class="kw">c</span>(<span class="dv">1</span>, <span class="st">&#39;a&#39;</span>, <span class="ot">TRUE</span>)</span>
+<span id="cb96-2"><a href="vector-types.html#cb96-2"></a><span class="co">## [1] &quot;1&quot;    &quot;a&quot;    &quot;TRUE&quot;</span></span></code></pre></div>
 <p>But, what about <em>explicit</em> coercion, meaning coercion you declare explicitly with R code? Well, R provides several functions for this, all having the form <code>as.*()</code> where the <code>*</code> is replaced with the name of the type that you wish to coerce your object to.</p>
 <p>Why care about coercion? Here are two reasons. First, you should probably care about coercion for the simple reason that you do not want to mistakenly compare apples and oranges when conducting an analysis, so you should always make sure to check the data type using the <code>is.*()</code> functions described above. And, if you don’t get the answer you want from those functions, use the coercion rules we are about to discuss. Second, reproducibility! An essential ingredient of reproducible code is explicit commands. As we noted above, however, R will sometimes invoke implicit coercion, with the consequence that someone who later came along to reproduce your code might for whatever reason fail to apply the coercion and, thus, fail to reproduce your results. Bad, bad, bad all around! So, bottom line, coercion matters!</p>
 <div id="data-type-coercion" class="section level3">
-<h3><span class="header-section-number">8.4.1</span> Data type coercion</h3>
+<h3><span class="header-section-number">8.5.1</span> Data type coercion</h3>
 <p>Here is an example of data type coercion from integer to character.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="vector-types.html#cb94-1"></a>a_new_character &lt;-<span class="st"> </span><span class="kw">as.character</span>(integer_vector)</span>
-<span id="cb94-2"><a href="vector-types.html#cb94-2"></a></span>
-<span id="cb94-3"><a href="vector-types.html#cb94-3"></a>a_new_character</span>
-<span id="cb94-4"><a href="vector-types.html#cb94-4"></a><span class="co">## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; &quot;5&quot;</span></span>
-<span id="cb94-5"><a href="vector-types.html#cb94-5"></a><span class="kw">is.integer</span>(a_new_character)</span>
-<span id="cb94-6"><a href="vector-types.html#cb94-6"></a><span class="co">## [1] FALSE</span></span>
-<span id="cb94-7"><a href="vector-types.html#cb94-7"></a><span class="kw">is.character</span>(a_new_character)</span>
-<span id="cb94-8"><a href="vector-types.html#cb94-8"></a><span class="co">## [1] TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="vector-types.html#cb97-1"></a>a_new_character &lt;-<span class="st"> </span><span class="kw">as.character</span>(integer_vector)</span>
+<span id="cb97-2"><a href="vector-types.html#cb97-2"></a></span>
+<span id="cb97-3"><a href="vector-types.html#cb97-3"></a>a_new_character</span>
+<span id="cb97-4"><a href="vector-types.html#cb97-4"></a><span class="co">## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; &quot;5&quot;</span></span>
+<span id="cb97-5"><a href="vector-types.html#cb97-5"></a><span class="kw">is.integer</span>(a_new_character)</span>
+<span id="cb97-6"><a href="vector-types.html#cb97-6"></a><span class="co">## [1] FALSE</span></span>
+<span id="cb97-7"><a href="vector-types.html#cb97-7"></a><span class="kw">is.character</span>(a_new_character)</span>
+<span id="cb97-8"><a href="vector-types.html#cb97-8"></a><span class="co">## [1] TRUE</span></span></code></pre></div>
 <p>As you see, it surrounds the numerals with quotation marks, indicating these are now character strings. Other data type coercion functions include <code>as.double()</code>, <code>as.integer()</code>, <code>as.numeric()</code> (for either double or integer), <code>as.logical()</code>, and <code>as.factor()</code>. But, notice that R can be somewhat finicky about how these behave. I mean, converting from logical, numeric, or integer to character is obvious. Just wrap the elements in quotes. But, what should R do when you ask it to convert, say, double to integer?</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="vector-types.html#cb95-1"></a>double_vector</span>
-<span id="cb95-2"><a href="vector-types.html#cb95-2"></a><span class="co">## [1] 1.1 0.2 3.1 4.0 5.2</span></span>
-<span id="cb95-3"><a href="vector-types.html#cb95-3"></a><span class="kw">as.integer</span>(double_vector)</span>
-<span id="cb95-4"><a href="vector-types.html#cb95-4"></a><span class="co">## [1] 1 0 3 4 5</span></span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="vector-types.html#cb98-1"></a>double_vector</span>
+<span id="cb98-2"><a href="vector-types.html#cb98-2"></a><span class="co">## [1] 1.1 0.2 3.1 4.0 5.2</span></span>
+<span id="cb98-3"><a href="vector-types.html#cb98-3"></a><span class="kw">as.integer</span>(double_vector)</span>
+<span id="cb98-4"><a href="vector-types.html#cb98-4"></a><span class="co">## [1] 1 0 3 4 5</span></span></code></pre></div>
 <p>In this case, it rounds the decimals to whole numbers, which seems intuitive enough. But, if you wanted, for example, to coerce a letter like ‘e’ into a logical value, which would it be? True or false? Obviously, this is not a meaningful question, and R agrees. Same goes for coercing character strings to numeric values. I mean, is the letter ‘b’ more like 1.2 or 57, or maybe even -33.3?</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="vector-types.html#cb96-1"></a><span class="kw">as.logical</span>(<span class="st">&#39;e&#39;</span>)</span>
-<span id="cb96-2"><a href="vector-types.html#cb96-2"></a><span class="co">## [1] NA</span></span>
-<span id="cb96-3"><a href="vector-types.html#cb96-3"></a><span class="kw">as.integer</span>(<span class="st">&#39;b&#39;</span>)</span>
-<span id="cb96-4"><a href="vector-types.html#cb96-4"></a><span class="co">## [1] NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="vector-types.html#cb99-1"></a><span class="kw">as.logical</span>(<span class="st">&#39;e&#39;</span>)</span>
+<span id="cb99-2"><a href="vector-types.html#cb99-2"></a><span class="co">## [1] NA</span></span>
+<span id="cb99-3"><a href="vector-types.html#cb99-3"></a><span class="kw">as.integer</span>(<span class="st">&#39;b&#39;</span>)</span>
+<span id="cb99-4"><a href="vector-types.html#cb99-4"></a><span class="co">## [1] NA</span></span></code></pre></div>
 <p>As you see, R chooses not to return a value, providing <code>NA</code> instead.</p>
 
 <div class="rmdnote">
-One somewhat bizarre coercion rules involves the translation of numbers into logicals, but the nature of that rule and the explanation for it are deeply esoteric topics involving R’s original design. So, rather than delving into that particular idiosyncrasy, I would just encourage you to try out <code>as.logical()</code> on a number (double or integer) and see what happens. Hint: try it on zero, too.
+One somewhat bizarre coercion rule involves the translation of numbers into logicals, but the nature of that rule and the explanation for it are deeply esoteric topics involving R’s original design. So, rather than delving into that particular idiosyncrasy, I would just encourage you to try out <code>as.logical()</code> on a number (double or integer) and see what happens. Hint: try it on zero, too.
 </div>
 
 </div>
 <div id="vector-type-coercion" class="section level3">
-<h3><span class="header-section-number">8.4.2</span> Vector type coercion</h3>
+<h3><span class="header-section-number">8.5.2</span> Vector type coercion</h3>
 <p>For our purposes, the primary functions for vector type coercion are these: <code>as.matrix()</code>, <code>as.list()</code>, and <code>as.data.frame()</code>. Here is an example of vector type coercion from data.frame to list.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="vector-types.html#cb97-1"></a>a_new_list &lt;-<span class="st"> </span><span class="kw">as.list</span>(my_dataframe)</span>
-<span id="cb97-2"><a href="vector-types.html#cb97-2"></a></span>
-<span id="cb97-3"><a href="vector-types.html#cb97-3"></a>a_new_list</span>
-<span id="cb97-4"><a href="vector-types.html#cb97-4"></a><span class="co">## $c1</span></span>
-<span id="cb97-5"><a href="vector-types.html#cb97-5"></a><span class="co">## [1] 1 2 3 4 5</span></span>
-<span id="cb97-6"><a href="vector-types.html#cb97-6"></a><span class="co">## </span></span>
-<span id="cb97-7"><a href="vector-types.html#cb97-7"></a><span class="co">## $c2</span></span>
-<span id="cb97-8"><a href="vector-types.html#cb97-8"></a><span class="co">## [1] 1.1 0.2 3.1 4.0 5.2</span></span>
-<span id="cb97-9"><a href="vector-types.html#cb97-9"></a><span class="co">## </span></span>
-<span id="cb97-10"><a href="vector-types.html#cb97-10"></a><span class="co">## $c3</span></span>
-<span id="cb97-11"><a href="vector-types.html#cb97-11"></a><span class="co">## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;</span></span>
-<span id="cb97-12"><a href="vector-types.html#cb97-12"></a><span class="co">## </span></span>
-<span id="cb97-13"><a href="vector-types.html#cb97-13"></a><span class="co">## $c4</span></span>
-<span id="cb97-14"><a href="vector-types.html#cb97-14"></a><span class="co">## [1]  TRUE  TRUE FALSE FALSE  TRUE</span></span>
-<span id="cb97-15"><a href="vector-types.html#cb97-15"></a><span class="kw">is.data.frame</span>(a_new_list)</span>
-<span id="cb97-16"><a href="vector-types.html#cb97-16"></a><span class="co">## [1] FALSE</span></span>
-<span id="cb97-17"><a href="vector-types.html#cb97-17"></a><span class="kw">is.list</span>(a_new_list)</span>
-<span id="cb97-18"><a href="vector-types.html#cb97-18"></a><span class="co">## [1] TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="vector-types.html#cb100-1"></a>a_new_list &lt;-<span class="st"> </span><span class="kw">as.list</span>(my_dataframe)</span>
+<span id="cb100-2"><a href="vector-types.html#cb100-2"></a></span>
+<span id="cb100-3"><a href="vector-types.html#cb100-3"></a>a_new_list</span>
+<span id="cb100-4"><a href="vector-types.html#cb100-4"></a><span class="co">## $c1</span></span>
+<span id="cb100-5"><a href="vector-types.html#cb100-5"></a><span class="co">## [1] 1 2 3 4 5</span></span>
+<span id="cb100-6"><a href="vector-types.html#cb100-6"></a><span class="co">## </span></span>
+<span id="cb100-7"><a href="vector-types.html#cb100-7"></a><span class="co">## $c2</span></span>
+<span id="cb100-8"><a href="vector-types.html#cb100-8"></a><span class="co">## [1] 1.1 0.2 3.1 4.0 5.2</span></span>
+<span id="cb100-9"><a href="vector-types.html#cb100-9"></a><span class="co">## </span></span>
+<span id="cb100-10"><a href="vector-types.html#cb100-10"></a><span class="co">## $c3</span></span>
+<span id="cb100-11"><a href="vector-types.html#cb100-11"></a><span class="co">## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;</span></span>
+<span id="cb100-12"><a href="vector-types.html#cb100-12"></a><span class="co">## </span></span>
+<span id="cb100-13"><a href="vector-types.html#cb100-13"></a><span class="co">## $c4</span></span>
+<span id="cb100-14"><a href="vector-types.html#cb100-14"></a><span class="co">## [1]  TRUE  TRUE FALSE FALSE  TRUE</span></span>
+<span id="cb100-15"><a href="vector-types.html#cb100-15"></a><span class="kw">is.data.frame</span>(a_new_list)</span>
+<span id="cb100-16"><a href="vector-types.html#cb100-16"></a><span class="co">## [1] FALSE</span></span>
+<span id="cb100-17"><a href="vector-types.html#cb100-17"></a><span class="kw">is.list</span>(a_new_list)</span>
+<span id="cb100-18"><a href="vector-types.html#cb100-18"></a><span class="co">## [1] TRUE</span></span></code></pre></div>
 <p>To round off this discussion, let me leave you with this question: how should a data.frame be coerced to a matrix? Here is an example.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="vector-types.html#cb98-1"></a>a_new_matrix &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(my_dataframe)</span>
-<span id="cb98-2"><a href="vector-types.html#cb98-2"></a></span>
-<span id="cb98-3"><a href="vector-types.html#cb98-3"></a>a_new_matrix</span>
-<span id="cb98-4"><a href="vector-types.html#cb98-4"></a><span class="co">##      c1  c2    c3  c4     </span></span>
-<span id="cb98-5"><a href="vector-types.html#cb98-5"></a><span class="co">## [1,] &quot;1&quot; &quot;1.1&quot; &quot;a&quot; &quot;TRUE&quot; </span></span>
-<span id="cb98-6"><a href="vector-types.html#cb98-6"></a><span class="co">## [2,] &quot;2&quot; &quot;0.2&quot; &quot;b&quot; &quot;TRUE&quot; </span></span>
-<span id="cb98-7"><a href="vector-types.html#cb98-7"></a><span class="co">## [3,] &quot;3&quot; &quot;3.1&quot; &quot;c&quot; &quot;FALSE&quot;</span></span>
-<span id="cb98-8"><a href="vector-types.html#cb98-8"></a><span class="co">## [4,] &quot;4&quot; &quot;4.0&quot; &quot;d&quot; &quot;FALSE&quot;</span></span>
-<span id="cb98-9"><a href="vector-types.html#cb98-9"></a><span class="co">## [5,] &quot;5&quot; &quot;5.2&quot; &quot;e&quot; &quot;TRUE&quot;</span></span>
-<span id="cb98-10"><a href="vector-types.html#cb98-10"></a><span class="kw">is.data.frame</span>(a_new_matrix)</span>
-<span id="cb98-11"><a href="vector-types.html#cb98-11"></a><span class="co">## [1] FALSE</span></span>
-<span id="cb98-12"><a href="vector-types.html#cb98-12"></a><span class="kw">is.matrix</span>(a_new_matrix)</span>
-<span id="cb98-13"><a href="vector-types.html#cb98-13"></a><span class="co">## [1] TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="vector-types.html#cb101-1"></a>a_new_matrix &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(my_dataframe)</span>
+<span id="cb101-2"><a href="vector-types.html#cb101-2"></a></span>
+<span id="cb101-3"><a href="vector-types.html#cb101-3"></a>a_new_matrix</span>
+<span id="cb101-4"><a href="vector-types.html#cb101-4"></a><span class="co">##      c1  c2    c3  c4     </span></span>
+<span id="cb101-5"><a href="vector-types.html#cb101-5"></a><span class="co">## [1,] &quot;1&quot; &quot;1.1&quot; &quot;a&quot; &quot;TRUE&quot; </span></span>
+<span id="cb101-6"><a href="vector-types.html#cb101-6"></a><span class="co">## [2,] &quot;2&quot; &quot;0.2&quot; &quot;b&quot; &quot;TRUE&quot; </span></span>
+<span id="cb101-7"><a href="vector-types.html#cb101-7"></a><span class="co">## [3,] &quot;3&quot; &quot;3.1&quot; &quot;c&quot; &quot;FALSE&quot;</span></span>
+<span id="cb101-8"><a href="vector-types.html#cb101-8"></a><span class="co">## [4,] &quot;4&quot; &quot;4.0&quot; &quot;d&quot; &quot;FALSE&quot;</span></span>
+<span id="cb101-9"><a href="vector-types.html#cb101-9"></a><span class="co">## [5,] &quot;5&quot; &quot;5.2&quot; &quot;e&quot; &quot;TRUE&quot;</span></span>
+<span id="cb101-10"><a href="vector-types.html#cb101-10"></a><span class="kw">is.data.frame</span>(a_new_matrix)</span>
+<span id="cb101-11"><a href="vector-types.html#cb101-11"></a><span class="co">## [1] FALSE</span></span>
+<span id="cb101-12"><a href="vector-types.html#cb101-12"></a><span class="kw">is.matrix</span>(a_new_matrix)</span>
+<span id="cb101-13"><a href="vector-types.html#cb101-13"></a><span class="co">## [1] TRUE</span></span></code></pre></div>
 <p>Remember that the cardinal rule for atomic vectors is that they consist of a single data type!</p>
 
 </div>
