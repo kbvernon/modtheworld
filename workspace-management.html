@@ -24,7 +24,7 @@
 <meta name="author" content="Kenneth Blake Vernon" />
 
 
-<meta name="date" content="2021-01-31" />
+<meta name="date" content="2021-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -270,11 +270,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.1" data-path="workspace-management.html"><a href="workspace-management.html#overview-3"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
 <li class="chapter" data-level="9.2" data-path="workspace-management.html"><a href="workspace-management.html#the-workspace"><i class="fa fa-check"></i><b>9.2</b> The Workspace</a><ul>
 <li class="chapter" data-level="9.2.1" data-path="workspace-management.html"><a href="workspace-management.html#workspace-management-1"><i class="fa fa-check"></i><b>9.2.1</b> Workspace Management</a></li>
-<li class="chapter" data-level="9.2.2" data-path="workspace-management.html"><a href="workspace-management.html#save-source"><i class="fa fa-check"></i><b>9.2.2</b> Save source!</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="workspace-management.html"><a href="workspace-management.html#working-directory"><i class="fa fa-check"></i><b>9.3</b> Working directory</a><ul>
+<li class="chapter" data-level="9.3" data-path="workspace-management.html"><a href="workspace-management.html#the-working-directory"><i class="fa fa-check"></i><b>9.3</b> The working directory</a><ul>
 <li class="chapter" data-level="9.3.1" data-path="workspace-management.html"><a href="workspace-management.html#file-paths"><i class="fa fa-check"></i><b>9.3.1</b> File paths</a></li>
-<li class="chapter" data-level="9.3.2" data-path="workspace-management.html"><a href="workspace-management.html#directory-management"><i class="fa fa-check"></i><b>9.3.2</b> Directory management</a></li>
+<li class="chapter" data-level="9.3.2" data-path="workspace-management.html"><a href="workspace-management.html#setting-the-working-directory"><i class="fa fa-check"></i><b>9.3.2</b> Setting the working directory</a></li>
+<li class="chapter" data-level="9.3.3" data-path="workspace-management.html"><a href="workspace-management.html#reproducible-projects"><i class="fa fa-check"></i><b>9.3.3</b> Reproducible projects</a></li>
+<li class="chapter" data-level="9.3.4" data-path="workspace-management.html"><a href="workspace-management.html#directory-management"><i class="fa fa-check"></i><b>9.3.4</b> Directory management</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="workspace-management.html"><a href="workspace-management.html#data-import-and-export"><i class="fa fa-check"></i><b>9.4</b> Data Import and Export</a></li>
 </ul></li>
@@ -384,7 +385,7 @@ To introduce students to the idea of a computing workspace.
 <strong>tl;dr</strong>
 </td>
 <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
-It’s just like your kitchen! Keeping it clean won’t necessarily make you a great cook, but it will make you a <em>better</em> one.
+It’s just like your kitchen! Keeping it clean won’t necessarily make you a <em>great</em> cook, but it will make you a <em>better</em> one.
 </td>
 </tr>
 <tr>
@@ -395,16 +396,16 @@ It’s just like your kitchen! Keeping it clean won’t necessarily make you a g
 Here, you will learn about<br>
 <ol>
 <li>
-environments, specifically the workspace,
+the workspace (as an environment),
 </li>
 <li>
 workspace management,
 </li>
 <li>
-the working directory,
+absolute and relative file paths,
 </li>
 <li>
-absolute and relative file paths,
+the working directory,
 </li>
 <li>
 directory management, and
@@ -436,16 +437,15 @@ NONE
 <strong>Further Reading</strong>
 </td>
 <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
-<a href="https://cran.r-project.org/doc/manuals/r-release/R-intro.html">An Introduction to R</a> <span class="citation">(R Core Team <a href="#ref-rcoreteam2020introduction" role="doc-biblioref">2020</a><a href="#ref-rcoreteam2020introduction" role="doc-biblioref">a</a>)</span><br><a href="https://adv-r.hadley.nz/">Advanced R</a> <span class="citation">(Wickham <a href="#ref-Wickham2015advanced" role="doc-biblioref">2015</a>)</span>
+NONE
 </td>
 </tr>
 </tbody>
 </table>
-<p>Think of the workspace as your kitchen.</p>
 </div>
 <div id="the-workspace" class="section level2">
 <h2><span class="header-section-number">9.2</span> The Workspace</h2>
-<p>When we create an object in R, <em>where does it go</em>?!!! This is a question that a lot of smart people find themselves asking when first learning R. While the answer is a tad on the esoteric side, it is perhaps useful to peel back the curtain ever so slightly, so you can see what is happening when you create an object in R. To do that, we need to talk about environments, in particular, the “global” environment, which is your default “workspace.” You can think of an environment like the workspace as a special sort of named list.</p>
+<p>When you first start working with R, you might find yourself on occasion asking a rather innocuous question: <em>Where do the objects we create actually go</em>? The technical and very far afield answer is your computer’s memory, with an anchor (related to the object’s name) that allows you to retrieve them. The simpler and way more intuitive answer is that they end up in one of your R environments, in particular, your <em>workspace</em>. You can think of an environment like the workspace as a special sort of named list.</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="workspace-management.html#cb102-1"></a>bob &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,</span>
 <span id="cb102-2"><a href="workspace-management.html#cb102-2"></a>            <span class="dt">add_one =</span> <span class="cf">function</span>(x){ x <span class="op">+</span><span class="st"> </span><span class="dv">1</span> },</span>
 <span id="cb102-3"><a href="workspace-management.html#cb102-3"></a>            <span class="dt">b =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>],</span>
@@ -453,16 +453,16 @@ NONE
 <span id="cb102-5"><a href="workspace-management.html#cb102-5"></a>            <span class="dt">d =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb102-6"><a href="workspace-management.html#cb102-6"></a></span>
 <span id="cb102-7"><a href="workspace-management.html#cb102-7"></a><span class="co"># coerce list to environment object</span></span>
-<span id="cb102-8"><a href="workspace-management.html#cb102-8"></a>digital_zoo &lt;-<span class="st"> </span><span class="kw">as.environment</span>(bob)</span></code></pre></div>
-<p>When you create an object, you do not have to go through these steps explicitly for R adds any objects you define to your global environment by default. The key here is just to recognize that when you use <code>&lt;-</code>, you are in effect adding an element to a list, the environment list.</p>
-<p>If you want to know what objects currently reside in your workspace, you can try <code>ls()</code>, which works like <code>names()</code> does for lists, printing the names of its denizens.</p>
+<span id="cb102-8"><a href="workspace-management.html#cb102-8"></a>workspace &lt;-<span class="st"> </span><span class="kw">as.environment</span>(bob)</span></code></pre></div>
+<p>When you create an object, you do not have to explicitly add it to an environment, for R adds your defined objects to your workspace by default. The key here is just to recognize that when you use <code>&lt;-</code>, you are really just adding an element to a list, the environment list.</p>
+<p>If you want to know what objects currently reside in your workspace, you can use <code>ls()</code>, which works like <code>names()</code> does for lists, printing the names of its denizens.</p>
 <div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="workspace-management.html#cb103-1"></a><span class="kw">names</span>(bob)</span>
 <span id="cb103-2"><a href="workspace-management.html#cb103-2"></a><span class="co">## [1] &quot;a&quot;       &quot;add_one&quot; &quot;b&quot;       &quot;c&quot;       &quot;d&quot;</span></span>
-<span id="cb103-3"><a href="workspace-management.html#cb103-3"></a><span class="kw">ls</span>(digital_zoo)</span>
+<span id="cb103-3"><a href="workspace-management.html#cb103-3"></a><span class="kw">ls</span>(workspace)</span>
 <span id="cb103-4"><a href="workspace-management.html#cb103-4"></a><span class="co">## [1] &quot;a&quot;       &quot;add_one&quot; &quot;b&quot;       &quot;c&quot;       &quot;d&quot;</span></span></code></pre></div>
-<p>Because the global environment is treated as your default workspace, you do not have to specify the environment in the <code>ls()</code> call. In the example above, we specify the environment explicitly to emphasize the list-analogy, so that when you call <code>ls()</code>, you are doing something very similar to checking the names of a list.</p>
+<p>Note that because <code>ls()</code> assumes you are interested in the workspace, you do not have to specify the environment explicitly. In the example above, we did so just to emphasize the list-analogy. That is, wen you call <code>ls()</code>, you are doing something very similar to checking the names of a list.</p>
 <p>One other function you might find useful is <code>ls.str()</code>. This is a combination of <code>ls()</code> and <code>str()</code>, which you were introduced to in the previous chapter. This function lists all the elements in the workspace and provides information about their structure.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="workspace-management.html#cb104-1"></a><span class="kw">ls.str</span>(digital_zoo)</span>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="workspace-management.html#cb104-1"></a><span class="kw">ls.str</span>(workspace)</span>
 <span id="cb104-2"><a href="workspace-management.html#cb104-2"></a><span class="co">## a :  int [1:5] 1 2 3 4 5</span></span>
 <span id="cb104-3"><a href="workspace-management.html#cb104-3"></a><span class="co">## add_one : function (x)  </span></span>
 <span id="cb104-4"><a href="workspace-management.html#cb104-4"></a><span class="co">## b :  chr [1:10] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot;</span></span>
@@ -470,57 +470,91 @@ NONE
 <span id="cb104-6"><a href="workspace-management.html#cb104-6"></a><span class="co">## d :  logi TRUE</span></span></code></pre></div>
 
 <div class="rmdnote">
-The information provided by <code>ls.str()</code> is more or less what you will find in RStudio’s Environment pane, by default the pane in the upper right corner of the RStudio window.
+The information provided by <code>ls()</code> and <code>ls.str()</code> is more or less what you will find in RStudio’s Environment pane, by default the pane in the upper right corner of the RStudio window. That means you do not normally need to use either function. RStudio does it for you.
 </div>
 
 <div id="workspace-management-1" class="section level3">
 <h3><span class="header-section-number">9.2.1</span> Workspace Management</h3>
-<p>As a general rule, you should keep your workspace clean and orderly when conducting any analysis, just as you should keep your kitchen clean and orderly when cooking. There are two big reasons for this. First, it will help prevent careless mistakes (like running operations on the wrong objects or adding a cup of salt when the recipe calls for sugar). It will also make it easier to manage your workflow, to make it more efficient and intelligible. Right now, I have this horrifying image of that college roommate, you know, the one that never does the dishes, leaves food stains on the counter, lets food rot in the fridge, and for some reason you can’t quite fathom, spends several weeks conducting an experiment involving molds growing beneath the sink. And now that person is somehow, by some miracle, in charge of - I don’t know - Katz’s Deli in New York! One shudders at the thought! I mean, talk about a kitchen nightmare. By all that is good, you ought to avoid this. You want to avoid workspace nightmares.</p>
+<p>As a general rule, you should keep your workspace clean and orderly when conducting any analysis, just as you should keep your kitchen clean and orderly when cooking. There are two big reasons for this. First, it will help prevent careless mistakes (like running operations on the wrong objects or adding a cup of salt when the recipe calls for sugar). Second, it will make it easier to manage your workflow, to make it more efficient and intelligible. Right now, I have this horrifying image of that college roommate, you know, the one that never does the dishes, leaves food stains on the counter, lets food rot in the fridge, and for some reason you can’t quite fathom, spends several weeks conducting an experiment involving molds growing beneath the sink. And now that person is somehow, by some miracle, in charge of - I don’t know - Katz’s Deli in New York! One shudders at the thought! I mean, talk about a kitchen nightmare. By all that is good, you ought to avoid this. You want to avoid workspace nightmares.</p>
 <p>One way to do that is to regularly remove objects that you will not re-use - meaning, you should banish them from your workspace. This is achieved with the <code>rm()</code> or <em>remove</em> function.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="workspace-management.html#cb105-1"></a><span class="kw">rm</span>(a, <span class="dt">envir =</span> digital_zoo) <span class="co"># read this as: remove object a from the digital zoo environment</span></span>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="workspace-management.html#cb105-1"></a><span class="kw">rm</span>(a, <span class="dt">envir =</span> workspace) <span class="co"># read this as: remove object a from the workspace</span></span>
 <span id="cb105-2"><a href="workspace-management.html#cb105-2"></a></span>
-<span id="cb105-3"><a href="workspace-management.html#cb105-3"></a><span class="kw">ls</span>(digital_zoo)</span>
+<span id="cb105-3"><a href="workspace-management.html#cb105-3"></a><span class="kw">ls</span>(workspace)</span>
 <span id="cb105-4"><a href="workspace-management.html#cb105-4"></a><span class="co">## [1] &quot;add_one&quot; &quot;b&quot;       &quot;c&quot;       &quot;d&quot;</span></span></code></pre></div>
-<p>Just as we noted with <code>ls()</code>, when you’re removing objects from your workspace (and not the toy environment that I just created as an example), it is sufficient to type <code>rm(&lt;object&gt;)</code> without specifying the environment, since it defaults to the global environment anyway.</p>
-</div>
-<div id="save-source" class="section level3">
-<h3><span class="header-section-number">9.2.2</span> Save source!</h3>
+<p>Just as we noted with <code>ls()</code>, when you’re removing objects from your workspace (and not the toy environment that I just created as an example), it is sufficient to type <code>rm(&lt;object&gt;)</code> without specifying the environment, since it defaults to the workspace anyway.</p>
 </div>
 </div>
-<div id="working-directory" class="section level2">
-<h2><span class="header-section-number">9.3</span> Working directory</h2>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
-<img src="images/r-working_directory.png" alt="Leslie has two folders on her computer: (i) scrap_book_folder and (ii) NPS_project_folder. She wants to read the file _data.csv_ into R, but something has gone wrong..." width="90%" />
-<p class="caption">
-Figure 9.2: Leslie has two folders on her computer: (i) scrap_book_folder and (ii) NPS_project_folder. She wants to read the file <em>data.csv</em> into R, but something has gone wrong…
-</p>
-</div>
-<p>Describe the difference between a project directory and a working directory.</p>
-<p>Explain how to identify the current working directory with <code>getwd()</code> and then to make the project directory the working directory with <code>setwd()</code>.</p>
-<p>A question about reproducible code. To be reproducible, shouldn’t it be true that you don’t have to change <em>anything</em> in an R script? But what about <code>setwd()</code>?</p>
+<div id="the-working-directory" class="section level2">
+<h2><span class="header-section-number">9.3</span> The working directory</h2>
+<p>Now that we have some sense of the workspace in R, we need some way to associate it with a particular location on your computer. Why? For the familiar reasons: (i) to make your workflow more efficient (mostly by saving you from the tedium of excessive typing!) and (ii) to make your workflow more reproducible! And, actually, we can add one other very big one with very immediate, practical consequences, namely, (iii) to make collaboration easier! To make these big claims more digestible, let’s talk about file paths, and in particular the distinction between relative and absolute file paths.</p>
 <div id="file-paths" class="section level3">
 <h3><span class="header-section-number">9.3.1</span> File paths</h3>
-<p>Relative vs absolute file paths.</p>
+<p>A file path, maybe you know, is just a way of specifying the location of a file in a hierarchical directory. If you think of that hierarchical directory as having a tree-like structure, you can represent it as we do in Fig. <a href="workspace-management.html#fig:14-file-paths">9.2</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:14-file-paths"></span>
+<img src="images/file_paths.png" alt="Tree-like structure of a hierarchical computer directory. The orange line represents the absolute file path to data.csv." width="90%" />
+<p class="caption">
+Figure 9.2: Tree-like structure of a hierarchical computer directory. The orange line represents the absolute file path to data.csv.
+</p>
+</div>
+<p>A complete file path for <code>data.csv</code> here might look like this:</p>
+<p>ROOT/Users/Leslie/NPS_project_folder/data.csv</p>
+<p>with the backslash <code>/</code> providing a folder or directory <em>separator</em>, signifying that the bit on the right-hand side is contained within the bit on the left-hand side (sometimes called the “parent” directory). Assuming that <code>ROOT</code> is the first or top-most directory in this system (meaning it’s not a sub-folder of some other folder or directory), that file path is also <em>absolute</em>. No matter where you are on your computer, using that file path will also pick out that specific <code>data.csv</code> file.</p>
+<p>A <em>relative</em> file path, on the other hand, is one that depends on your current location on your computer. It is <em>relative</em> to that location. For instance, the relative file path</p>
+<p>NPS_project_folder/data.csv</p>
+<p>will find <code>data.csv</code> <em>only if</em> your current location on your computer is</p>
+<p>ROOT/Users/Leslie</p>
+<p>As you can see, if we take care to make our location known, relative file paths can save us a lot of typing. They also contribute to reproducibility, but let’s build up to that idea.</p>
+</div>
+<div id="setting-the-working-directory" class="section level3">
+<h3><span class="header-section-number">9.3.2</span> Setting the working directory</h3>
+<p>First, let’s consider what happens if you try to use relative file paths in R without specifying what directory you are currently working in. So, let’s look more carefully at the folders in Leslie’s user directory.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="images/r-working_directory.png" alt="Leslie has two folders in her directory on the computer: (i) scrap_book_folder and (ii) NPS_project_folder. She wants to read the file _data.csv_ into R, but something has gone wrong..." width="90%" />
+<p class="caption">
+Figure 9.3: Leslie has two folders in her directory on the computer: (i) scrap_book_folder and (ii) NPS_project_folder. She wants to read the file <em>data.csv</em> into R, but something has gone wrong…
+</p>
+</div>
+<p>From the diagram, you can see that her <code>scrap_book_folder</code> contains, among other things, some image and audio files. Similarly, <code>NPS_project_folder</code> includes some text and data files, as well as an R script! Now, suppose Leslie wants to open the file <code>NPS_project_folder/data.csv</code> in R and assign it to a name using this line of code:</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="workspace-management.html#cb106-1"></a>dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data.csv&quot;</span>)</span></code></pre></div>
+<p>What happens? It throws an error! R says it cannot open a connection because the file or directory does not exist. Why is this? The simple answer is that <code>data.csv</code> is a relative path, but R is currently pointing to the <code>scrap_book_folder</code>, so it’s looking in there for that file. Assuming we want to avoid absolute file paths - hint: we do! - we need some way to point R to <code>NPS_project_folder</code>, so we can use the relative path <code>data.csv</code>.</p>
+<p>To help with this, base R provides two functions: <code>getwd()</code> and <code>setwd()</code>. As you might have guessed, the first identifies or <em>gets</em> the current working directory, the second changes or <em>sets</em> it. If Leslie were to use these commands while working with R on her own computer, she could type this:</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="workspace-management.html#cb107-1"></a><span class="kw">getwd</span>()</span>
+<span id="cb107-2"><a href="workspace-management.html#cb107-2"></a><span class="co">## [1] &quot;ROOT/Users/Leslie/scrap_book_folder&quot;</span></span>
+<span id="cb107-3"><a href="workspace-management.html#cb107-3"></a></span>
+<span id="cb107-4"><a href="workspace-management.html#cb107-4"></a><span class="kw">setwd</span>(<span class="st">&quot;ROOT/Users/Leslie/NPS_project_folder&quot;</span>)</span>
+<span id="cb107-5"><a href="workspace-management.html#cb107-5"></a></span>
+<span id="cb107-6"><a href="workspace-management.html#cb107-6"></a><span class="kw">getwd</span>()</span>
+<span id="cb107-7"><a href="workspace-management.html#cb107-7"></a><span class="co">## [1] &quot;ROOT/Users/Leslie/NPS_project_folder&quot;</span></span></code></pre></div>
+<p>Having set the working directory to <code>NPS_project_folder</code>, she could now go on to using the relative path <code>data.csv</code> to import that data into R.</p>
+</div>
+<div id="reproducible-projects" class="section level3">
+<h3><span class="header-section-number">9.3.3</span> Reproducible projects</h3>
+<p>What makes code reproducible? While we can’t give a complete answer to that now, we can offer at least one <em>necessary condition</em>:</p>
+<blockquote>
+<p>R code is reproducible <em>only if</em> it is self-contained.</p>
+</blockquote>
+<p>What does it mean for R code to be self-contained? Putting it simply, you should be able to save your R script (or the folder containing it, along with any data it requires) onto an external thumb drive, load it onto another computer (even one with a different operating system), run all the code, and get the exact (or very nearly the same) results <em>WITHOUT CHANGING ANYTHING</em> in the script.</p>
+<p>This definition of containment should give you some sense of the problem <code>setwd()</code> poses. While it does allow you to use relative file paths in whatever comes after it, it itself requires an absolute file path! Meaning, each time you load the script onto a different computer, to run the code, you have to update <code>setwd()</code> with a new absolute path to the working directory. Thus, it bakes in an inherently unreproducible element of code.</p>
+<p>What is the solution to this? In a word, Projects, specifically RStudio projects.</p>
+
+<div class="rmdnote">
+For a passionate and sometimes humorous defense of RStudio Projects as an alternative to <code>setwd()</code>, see Jenny Bryan’s somewhat infamous blog post, <a href="https://www.tidyverse.org/blog/2017/12/workflow-vs-script/">Project-oriented workflow</a>.
+</div>
+
+<p>What is a project? It’s two things, really, a folder and a file. When you create a project in RStudio, you first give it a name. This name is then assigned to the project folder and file, with the latter also having a <em>.Rproj</em> extension. The project folder contains the project file and gets set as the working directory by default. Basically, what happens is that whenever you open the project in RStudio, RStudio finds the absolute file path to the folder containing the <em>.Rproj</em> file and sets it as the working directory.</p>
+<p>I won’t go into detail about how to make one. The basic steps are to open RStudio, then go to <code>File &gt; New Project</code> and make suitable choices based on the prompts.</p>
 </div>
 <div id="directory-management" class="section level3">
-<h3><span class="header-section-number">9.3.2</span> Directory management</h3>
+<h3><span class="header-section-number">9.3.4</span> Directory management</h3>
 <p>directory structure</p>
-<p>file names</p>
+<p><img src="images/rstudio-project_folder.png" width="30%" style="display: block; margin: auto;" /></p>
+<p>Some rules for how to name files and folders:</p>
 </div>
 </div>
 <div id="data-import-and-export" class="section level2">
 <h2><span class="header-section-number">9.4</span> Data Import and Export</h2>
 <p>Import and assign! In <a href="r-basics.html#r-basics">R Basics</a> we learned how to create objects with some staying-power using assignment. Well, when we import data, we typically want it to have some staying power too, so we need to assign it to a name right away.</p>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-rcoreteam2020introduction">
-<p>R Core Team. 2020a. <em>An Introduction to R</em>.</p>
-</div>
-<div id="ref-Wickham2015advanced">
-<p>Wickham, Hadley. 2015. <em>Advanced R</em>. Second. Boca Raton, FL: CRC Press.</p>
 </div>
 </div>
             </section>
