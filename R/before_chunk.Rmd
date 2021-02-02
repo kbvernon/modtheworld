@@ -123,7 +123,7 @@ looks like it doesn't work because R no longer
 let's users override s3 methods, so I changed the s3 to "simpleError"
 -->
 
-```{r, echo = FALSE}
+```{r, eval = FALSE}
 
 registerS3method("wrap", "simpleError", envir = asNamespace("knitr"),
   function(x, options) {
