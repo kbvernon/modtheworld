@@ -24,7 +24,7 @@
 <meta name="author" content="Kenneth Blake Vernon" />
 
 
-<meta name="date" content="2021-02-02" />
+<meta name="date" content="2021-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -277,7 +277,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.3.3" data-path="workspace-management.html"><a href="workspace-management.html#reproducible-projects"><i class="fa fa-check"></i><b>9.3.3</b> Reproducible projects</a></li>
 <li class="chapter" data-level="9.3.4" data-path="workspace-management.html"><a href="workspace-management.html#directory-management"><i class="fa fa-check"></i><b>9.3.4</b> Directory management</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="workspace-management.html"><a href="workspace-management.html#data-import-and-export"><i class="fa fa-check"></i><b>9.4</b> Data Import and Export</a></li>
+<li class="chapter" data-level="9.4" data-path="workspace-management.html"><a href="workspace-management.html#data-import-and-export"><i class="fa fa-check"></i><b>9.4</b> Data Import and Export</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="workspace-management.html"><a href="workspace-management.html#read-and-write-tables"><i class="fa fa-check"></i><b>9.4.1</b> Read and write tables</a></li>
+<li class="chapter" data-level="9.4.2" data-path="workspace-management.html"><a href="workspace-management.html#read-and-save-objects"><i class="fa fa-check"></i><b>9.4.2</b> Read and save objects</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="vector-indexing.html"><a href="vector-indexing.html"><i class="fa fa-check"></i><b>10</b> Vector Indexing</a><ul>
 <li class="chapter" data-level="10.1" data-path="vector-indexing.html"><a href="vector-indexing.html#exploring-your-data"><i class="fa fa-check"></i><b>10.1</b> Exploring your data</a></li>
@@ -421,7 +424,7 @@ importing and exporting data.
 <strong>Datasets</strong>
 </td>
 <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
-NONE
+<a href="https://allisonhorst.github.io/palmerpenguins/">Palmer Penguins</a> <span class="citation">(Horst, Hill, and Gorman <a href="#ref-horst2020palmer" role="doc-biblioref">2020</a>)</span>
 </td>
 </tr>
 <tr>
@@ -482,6 +485,11 @@ The information provided by <code>ls()</code> and <code>ls.str()</code> is more 
 <span id="cb105-3"><a href="workspace-management.html#cb105-3"></a><span class="kw">ls</span>(workspace)</span>
 <span id="cb105-4"><a href="workspace-management.html#cb105-4"></a><span class="co">## [1] &quot;add_one&quot; &quot;b&quot;       &quot;c&quot;       &quot;d&quot;</span></span></code></pre></div>
 <p>Just as we noted with <code>ls()</code>, when you’re removing objects from your workspace (and not the toy environment that I just created as an example), it is sufficient to type <code>rm(&lt;object&gt;)</code> without specifying the environment, since it defaults to the workspace anyway.</p>
+
+<div class="rmdnote">
+List objects provide another really useful tool for workspace management, though their utility might not be as obvious to R users early in their career. A very common use case, however, involves data objects that have different values but share identical structures (like data.frames with the same number of columns, all having the same names). This will happen, for example, when you are doing bootstrap resampling or simulations and want to generate a new model for each set of data. There are more sophisticated ways to manage such data, but a list is a good option too. Rather than having, say, ten thousand unique data.frames in your R environment, you have a single list to hold them all.
+</div>
+
 </div>
 </div>
 <div id="the-working-directory" class="section level2">
@@ -508,7 +516,7 @@ Figure 9.2: Tree-like structure of a hierarchical computer directory. The orange
 <div id="setting-the-working-directory" class="section level3">
 <h3><span class="header-section-number">9.3.2</span> Setting the working directory</h3>
 <p>First, let’s consider what happens if you try to use relative file paths in R without specifying what directory you are currently working in. So, let’s look more carefully at the folders in Leslie’s user directory.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
 <img src="images/r-working_directory.png" alt="Leslie has two folders in her directory on the computer: (i) scrap_book_folder and (ii) NPS_project_folder. She wants to read the file _data.csv_ into R, but something has gone wrong..." width="90%" />
 <p class="caption">
 Figure 9.3: Leslie has two folders in her directory on the computer: (i) scrap_book_folder and (ii) NPS_project_folder. She wants to read the file <em>data.csv</em> into R, but something has gone wrong…
@@ -541,20 +549,84 @@ Figure 9.3: Leslie has two folders in her directory on the computer: (i) scrap_b
 For a passionate and sometimes humorous defense of RStudio Projects as an alternative to <code>setwd()</code>, see Jenny Bryan’s somewhat infamous blog post, <a href="https://www.tidyverse.org/blog/2017/12/workflow-vs-script/">Project-oriented workflow</a>.
 </div>
 
-<p>What is a project? It’s two things, really, a folder and a file. When you create a project in RStudio, you first give it a name. This name is then assigned to the project folder and file, with the latter also having a <em>.Rproj</em> extension. The project folder contains the project file and gets set as the working directory by default. Basically, what happens is that whenever you open the project in RStudio, RStudio finds the absolute file path to the folder containing the <em>.Rproj</em> file and sets it as the working directory.</p>
-<p>I won’t go into detail about how to make one. The basic steps are to open RStudio, then go to <code>File &gt; New Project</code> and make suitable choices based on the prompts.</p>
+<p>What is a project? It’s two things, really: a folder and a file. When you create a project in RStudio, you first give it a name. This name is then assigned to the project folder, which holds a project file that also has that name. You can identify the project file because it has a <em>.Rproj</em> extension. Whenever you open the project in RStudio, RStudio finds the absolute file path to the folder containing the <em>.Rproj</em> file and sets it as the working directory.</p>
+<p>I won’t go into detail about how to make one. The basic steps are to open RStudio, then click <code>File &gt; New Project</code> and make suitable choices based on the prompts. You’ll almost certainly want to choose an Empty Project to begin with. And make sure to save it in a directory you will remember with a name that that clearly expresses the purpose of the project.</p>
 </div>
 <div id="directory-management" class="section level3">
 <h3><span class="header-section-number">9.3.4</span> Directory management</h3>
-<p>directory structure</p>
+<p>Every research project is different, but some common elements to tend to holdover. For instance, you will typically have some empirical inputs (meaning, your data), outputs (like figures), and because you are working with R, you will also have R scripts (and probably even Rmarkdown documents, though we are not discussing those here). These common elements should suggest a useful structure (shown in Fig. <a href="#fig:14-directory-structure"><strong>??</strong></a>) that you will want to return to again and again for your project directory. Namely, it should have a data folder (where you include your hard won empirical observations), a figures folder (any that you might want to share with collaborators, include in publications, or use as a tool for communicating with the public), and a scripts or R folder (where you will include all the scripts that you write for your analysis).</p>
 <p><img src="images/rstudio-project_folder.png" width="30%" style="display: block; margin: auto;" /></p>
-<p>Some rules for how to name files and folders:</p>
+<p><strong>Naming Conventions</strong></p>
+<p>Here are a few - somewhat opinionated - rules of thumb for naming files and folders:</p>
+<ol style="list-style-type: decimal">
+<li>Make the name super descriptive. For example, if you have an R script that you write to process spatial data before conducting some analysis, call it <code>process_spatial_data.R</code>.<br />
+</li>
+<li>Do not use empty spaces! This is a big one. In several contexts, like URL file paths, spaces will break paths. For instance, if you go to download “bob.com/my resume.pdf”, you’ll end up with a file called “my.” To avoid these sorts of issues, you should use underscores <code>_</code> and dashes <code>-</code> in place of spaces.<br />
+</li>
+<li>Above all else, though, <strong>BE CONSISTENT</strong> with your naming conventions. Believe me when I say this, it will save you a lot of heartache in the long run.</li>
+</ol>
 </div>
 </div>
 <div id="data-import-and-export" class="section level2">
 <h2><span class="header-section-number">9.4</span> Data Import and Export</h2>
-<p>Import and assign! In <a href="r-basics.html#r-basics">R Basics</a> we learned how to create objects with some staying-power using assignment. Well, when we import data, we typically want it to have some staying power too, so we need to assign it to a name right away.</p>
+<p>Consider this scenario: you’ve gone out to the field, perhaps working with <a href="https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php">Dr. Kristen Gorman</a> at <a href="https://pal.lternet.edu/">Palmer Station</a> in Antarctica. While there, you collect a heroic number of observations on the native penguin species, which you document meticulously (probably writing it down on paper, though that’s starting to change). Now, back home, you find yourself sitting at your computer, wanting to model your precious in R. Obviously, it will not do to prostrate yourself before your computer, holding up your field notes in pious supplication. Your computer - at least as of the writing of this sentence - won’t even acknowledge your presence. So, you’ll have to do it yourself. To that end, you’ll first want to digitize your data, probably using a spreadsheet application like Excel. And, because you have foresight, you’ll decide to save your data to a comma-separated values (or <code>.csv</code>) file. At this point, perhaps fortunately, you’ve now completed the lion’s share of your research project (I’d put it around 70-75%), but you’re still not done! To make that beautiful model in R, you’ll need to get your data into R first.</p>
+<p>OK, so what do we do here?</p>
+<div id="read-and-write-tables" class="section level3">
+<h3><span class="header-section-number">9.4.1</span> Read and write tables</h3>
+<p>Notice, to begin with, that we are talking about tabular or <em>rectangular</em> data, likely consisting of varying data types. This should clue you into the vector type that you will be creating in R. Hint: it rhymes with <em>data.frame</em>. Notice, too, that we are talking about a <em>comma-separated values</em> file. What does that mean, exactly? Basically, it refers to a plain text file format in which columns of data are separated by commas. Consider, for example, your penguins data, which you’ve saved to a file called <code>penguins.csv</code>. Here is how the first six lines should look when opened with your operating system’s text editor:</p>
+<pre><code>&quot;species&quot;,&quot;island&quot;,&quot;bill_length_mm&quot;,&quot;flipper_length_mm&quot;,&quot;body_mass_g&quot;,&quot;sex&quot;,&quot;year&quot;
+&quot;Adelie&quot;,&quot;Torgersen&quot;,39.1,181,3750,&quot;male&quot;,2007
+&quot;Adelie&quot;,&quot;Torgersen&quot;,39.5,186,3800,&quot;female&quot;,2007
+&quot;Adelie&quot;,&quot;Torgersen&quot;,40.3,195,3250,&quot;female&quot;,2007
+&quot;Adelie&quot;,&quot;Torgersen&quot;,NA,NA,NA,NA,2007
+&quot;Adelie&quot;,&quot;Torgersen&quot;,36.7,193,3450,&quot;female&quot;,2007</code></pre>
+<p>As you can see, the first line of text, known as the <em>header</em>, specifies the column names, and the following lines indicate the actual rows of data, which are separated into columns with commas. Some other column separators you might encounter from time to time include semi-colon (<code>;</code>, which is more common in countries that use the comma as decimal place, though it also uses the <code>.csv</code> file extension) and tabs (or a specific number of blank spaces, with file extension <code>.tsv</code>).</p>
+<p>To import these <em>delimited</em> text files of tabular data, R provides the function <code>read.table()</code>. To work with this function, you need to familiarize yourself with three key parameters: <code>file</code>, <code>sep</code>, and <code>header</code>.
+* The value you supply to <code>file</code> is the path to the data file, which you rightly stored in the data folder of your RStudio project directory, so that the path is relative. You’ll want to provide this as a character string, meaning you need to enclose it in quotation marks: <code>file = "data/penguins.csv"</code>.
+* The <code>sep</code> parameter wants to know what separator is being used to signal columns. In this case, it’s a comma, which you’ll also want to supply as a character string: <code>sep = ","</code>.
+* Finally, you’ll want to specify whether the first line of text is a <code>header</code> or not (sometimes they are not included). This you will give a logical value (<code>TRUE</code> if the header exists, <code>FALSE</code> otherwise): <code>header = TRUE</code>.</p>
+<p>All together then, you will want to write this:</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="workspace-management.html#cb109-1"></a>penguins &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="dt">file =</span> <span class="st">&quot;data/penguins.csv&quot;</span>,</span>
+<span id="cb109-2"><a href="workspace-management.html#cb109-2"></a>                       <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>,</span>
+<span id="cb109-3"><a href="workspace-management.html#cb109-3"></a>                       <span class="dt">header =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p>making sure to assign the imported data to a name so that it sticks around.</p>
 
+<div class="rmdimportant">
+When writing an R script for analysis (as opposed to, say, data management), you should strive as far as possible to load all necessary data at the beginning. <strong>Do not rely on reading and writing intermediate results in the middle of your workflow as this will potentially compromise the reproducibility of your analysis.</strong>
+</div>
+
+<p>What about exporting data out of R? For that, you’ll use <code>write.table()</code>. This function more or less mirrors <code>read.table()</code>, but requires that you also specify what data.frame you are wanting to save to file. So, supposing you’ve done some processing of your penguins data, added columns perhaps or filtered rows, and assigned the new data.frame to <code>penguins_new</code>, you’ll do something like this:</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="workspace-management.html#cb110-1"></a><span class="kw">write.table</span>(penguins_new,</span>
+<span id="cb110-2"><a href="workspace-management.html#cb110-2"></a>            <span class="dt">file =</span> <span class="st">&quot;data/penguins_new.csv&quot;</span>,</span>
+<span id="cb110-3"><a href="workspace-management.html#cb110-3"></a>            <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>,</span>
+<span id="cb110-4"><a href="workspace-management.html#cb110-4"></a>            <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<p>Just ignore <code>row.names</code> in this function call. It’s an odd design choice on the part of the authors of R that you don’t need to understand, though do remember to <em>ALWAYS</em> set it to FALSE.</p>
+
+<div class="rmdnote">
+If you deal with comma-separated text files regularly, you might prefer <code>read.csv()</code> and <code>write.csv()</code>, which are wrappers around <code>read.table()</code> and <code>write.table()</code> that set <code>sep = ","</code> and <code>header = TRUE</code> by default.
+</div>
+
+</div>
+<div id="read-and-save-objects" class="section level3">
+<h3><span class="header-section-number">9.4.2</span> Read and save objects</h3>
+<p>The authors of R have defined a few R-specific file types, but let’s just focus on one, <em>.Rds</em>. This format allows you to save a single R object to file. The functions for reading and writing these file types are <code>saveRDS()</code> and <code>readRDS()</code>. You use these basically the same way you use <code>read.table()</code> and <code>write.table()</code>.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="workspace-management.html#cb111-1"></a><span class="kw">saveRDS</span>(penguins, <span class="dt">file =</span> <span class="st">&quot;data/penguins.Rds&quot;</span>)</span>
+<span id="cb111-2"><a href="workspace-management.html#cb111-2"></a></span>
+<span id="cb111-3"><a href="workspace-management.html#cb111-3"></a>penguins &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;data/penguins.Rds&quot;</span>)</span></code></pre></div>
+<p>There are few occasions when you will use these, but when you do, they will typically be to save or restore non-rectangular or non-tabular data objects like lists and models.</p>
+
+<div class="rmdnote">
+Some other related functions include <code>load()</code> and <code>save()</code>, which allow you to save multiple R objects at once, and <code>load.image()</code> and <code>save.image()</code>, which allow you to save and restore all the R objects in your current working environment. However, you should not rely on these. In fact, <strong>don’t use them</strong>. Why? Because this will force you to write R scripts that are reproducible!
+</div>
+
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-horst2020palmer">
+<p>Horst, Allison Marie, Alison Presmanes Hill, and Kristen B Gorman. 2020. <em>Palmerpenguins: Palmer Archipelago (Antarctica) Penguin Data</em>. <a href="https://allisonhorst.github.io/palmerpenguins/">https://allisonhorst.github.io/palmerpenguins/</a>.</p>
 </div>
 </div>
             </section>

@@ -87,7 +87,7 @@ let's users override s3 methods, so I changed the s3 to "simpleError"
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Datasets__ </td>
-   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> NONE </td>
+   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/) [@horst2020palmer] </td>
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Requirements__ </td>
@@ -164,6 +164,8 @@ ls(workspace)
 
 Just as we noted with `ls()`, when you're removing objects from your workspace (and not the toy environment that I just created as an example), it is sufficient to type `rm(<object>)` without specifying the environment, since it defaults to the workspace anyway.  
 
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">List objects provide another really useful tool for workspace management, though their utility might not be as obvious to R users early in their career. A very common use case, however, involves data objects that have different values but share identical structures (like data.frames with the same number of columns, all having the same names). This will happen, for example, when you are doing bootstrap resampling or simulations and want to generate a new model for each set of data. There are more sophisticated ways to manage such data, but a list is a good option too. Rather than having, say, ten thousand unique data.frames in your R environment, you have a single list to hold them all.</div>\EndKnitrBlock{rmdnote}
+
 
 ## The working directory
 
@@ -201,7 +203,7 @@ First, let's consider what happens if you try to use relative file paths in R wi
 
 <div class="figure" style="text-align: center">
 <img src="images/r-working_directory.png" alt="Leslie has two folders in her directory on the computer: (i) scrap_book_folder and (ii) NPS_project_folder. She wants to read the file _data.csv_ into R, but something has gone wrong..." width="90%" />
-<p class="caption">(\#fig:unnamed-chunk-8)Leslie has two folders in her directory on the computer: (i) scrap_book_folder and (ii) NPS_project_folder. She wants to read the file _data.csv_ into R, but something has gone wrong...</p>
+<p class="caption">(\#fig:unnamed-chunk-9)Leslie has two folders in her directory on the computer: (i) scrap_book_folder and (ii) NPS_project_folder. She wants to read the file _data.csv_ into R, but something has gone wrong...</p>
 </div>
 
 From the diagram, you can see that her `scrap_book_folder` contains, among other things, some image and audio files. Similarly, `NPS_project_folder` includes some text and data files, as well as an R script! Now, suppose Leslie wants to open the file `NPS_project_folder/data.csv` in R and assign it to a name using this line of code:
@@ -238,26 +240,94 @@ This definition of containment should give you some sense of the problem `setwd(
 
 What is the solution to this? In a word, Projects, specifically RStudio projects. 
 
-\BeginKnitrBlock{rmdnote}<div class="rmdnote">For a passionate and sometimes humorous defense of RStudio Projects as an alternative to `setwd()`, see Jenny Bryan's somewhat infamous blog post, [Project-oriented workflow](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/). </div>\EndKnitrBlock{rmdnote}
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">For a passionate and sometimes humorous defense of RStudio Projects as an alternative to `setwd()`, see Jenny Bryan's somewhat infamous blog post, [Project-oriented workflow](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/).</div>\EndKnitrBlock{rmdnote}
 
-What is a project? It's two things, really, a folder and a file. When you create a project in RStudio, you first give it a name. This name is then assigned to the project folder and file, with the latter also having a _.Rproj_ extension. The project folder contains the project file and gets set as the working directory by default. Basically, what happens is that whenever you open the project in RStudio, RStudio finds the absolute file path to the folder containing the _.Rproj_ file and sets it as the working directory.  
+What is a project? It's two things, really: a folder and a file. When you create a project in RStudio, you first give it a name. This name is then assigned to the project folder, which holds a project file that also has that name. You can identify the project file because it has a _.Rproj_ extension. Whenever you open the project in RStudio, RStudio finds the absolute file path to the folder containing the _.Rproj_ file and sets it as the working directory.  
 
-I won't go into detail about how to make one. The basic steps are to open RStudio, then go to `File > New Project` and make suitable choices based on the prompts.
+I won't go into detail about how to make one. The basic steps are to open RStudio, then click `File > New Project` and make suitable choices based on the prompts. You'll almost certainly want to choose an Empty Project to begin with. And make sure to save it in a directory you will remember with a name that that clearly expresses the purpose of the project.  
 
 
 ### Directory management
 
-directory structure
+Every research project is different, but some common elements to tend to holdover. For instance, you will typically have some empirical inputs (meaning, your data), outputs (like figures), and because you are working with R, you will also have R scripts (and probably even Rmarkdown documents, though we are not discussing those here). These common elements should suggest a useful structure (shown in Fig. \@ref(fig:14-directory-structure)) that you will want to return to again and again for your project directory. Namely, it should have a data folder (where you include your hard won empirical observations), a figures folder (any that you might want to share with collaborators, include in publications, or use as a tool for communicating with the public), and a scripts or R folder (where you will include all the scripts that you write for your analysis).     
 
 <img src="images/rstudio-project_folder.png" width="30%" style="display: block; margin: auto;" />
 
+__Naming Conventions__  
 
-Some rules for how to name files and folders:
+Here are a few - somewhat opinionated - rules of thumb for naming files and folders: 
 
-
+1. Make the name super descriptive. For example, if you have an R script that you write to process spatial data before conducting some analysis, call it `process_spatial_data.R`.  
+2. Do not use empty spaces! This is a big one. In several contexts, like URL file paths, spaces will break paths. For instance, if you go to download "bob.com/my resume.pdf", you'll end up with a file called "my." To avoid these sorts of issues, you should use underscores `_` and dashes `-` in place of spaces.  
+3. Above all else, though, __BE CONSISTENT__ with your naming conventions. Believe me when I say this, it will save you a lot of heartache in the long run.  
 
 
 ## Data Import and Export
 
-Import and assign! In [R Basics](#r-basics) we learned how to create objects with some staying-power using assignment. Well, when we import data, we typically want it to have some staying power too, so we need to assign it to a name right away.  
+Consider this scenario: you've gone out to the field, perhaps working with [Dr. Kristen Gorman](https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php) at [Palmer Station](https://pal.lternet.edu/) in Antarctica. While there, you collect a heroic number of observations on the native penguin species, which you document meticulously (probably writing it down on paper, though that's starting to change). Now, back home, you find yourself sitting at your computer, wanting to model your precious in R. Obviously, it will not do to prostrate yourself before your computer, holding up your field notes in pious supplication. Your computer - at least as of the writing of this sentence - won't even acknowledge your presence. So, you'll have to do it yourself. To that end, you'll first want to digitize your data, probably using a spreadsheet application like Excel. And, because you have foresight, you'll decide to save your data to a comma-separated values (or `.csv`) file. At this point, perhaps fortunately, you've now completed the lion's share of your research project (I'd put it around 70-75%), but you're still not done! To make that beautiful model in R, you'll need to get your data into R first.
 
+OK, so what do we do here?  
+
+### Read and write tables
+
+Notice, to begin with, that we are talking about tabular or _rectangular_ data, likely consisting of varying data types. This should clue you into the vector type that you will be creating in R. Hint: it rhymes with _data.frame_. Notice, too, that we are talking about a _comma-separated values_ file. What does that mean, exactly? Basically, it refers to a plain text file format in which columns of data are separated by commas. Consider, for example, your penguins data, which you've saved to a file called `penguins.csv`. Here is how the first six lines should look when opened with your operating system's text editor:
+
+```
+"species","island","bill_length_mm","flipper_length_mm","body_mass_g","sex","year"
+"Adelie","Torgersen",39.1,181,3750,"male",2007
+"Adelie","Torgersen",39.5,186,3800,"female",2007
+"Adelie","Torgersen",40.3,195,3250,"female",2007
+"Adelie","Torgersen",NA,NA,NA,NA,2007
+"Adelie","Torgersen",36.7,193,3450,"female",2007
+```
+
+As you can see, the first line of text, known as the _header_, specifies the column names, and the following lines indicate the actual rows of data, which are separated into columns with commas. Some other column separators you might encounter from time to time include semi-colon (`;`, which is more common in countries that use the comma as decimal place, though it also uses the `.csv` file extension) and tabs (or a specific number of blank spaces, with file extension `.tsv`). 
+
+To import these _delimited_ text files of tabular data, R provides the function `read.table()`. To work with this function, you need to familiarize yourself with three key parameters: `file`, `sep`, and `header`. 
+* The value you supply to `file` is the path to the data file, which you rightly stored in the data folder of your RStudio project directory, so that the path is relative. You'll want to provide this as a character string, meaning you need to enclose it in quotation marks: `file = "data/penguins.csv"`. 
+* The `sep` parameter wants to know what separator is being used to signal columns. In this case, it's a comma, which you'll also want to supply as a character string: `sep = ","`. 
+* Finally, you'll want to specify whether the first line of text is a `header` or not (sometimes they are not included). This you will give a logical value (`TRUE` if the header exists, `FALSE` otherwise): `header = TRUE`. 
+
+All together then, you will want to write this:
+
+
+```r
+penguins <- read.table(file = "data/penguins.csv",
+                       sep = ",",
+                       header = TRUE)
+```
+
+making sure to assign the imported data to a name so that it sticks around. 
+
+\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">When writing an R script for analysis (as opposed to, say, data management), you should strive as far as possible to load all necessary data at the beginning. __Do not rely on reading and writing intermediate results in the middle of your workflow as this will potentially compromise the reproducibility of your analysis.__</div>\EndKnitrBlock{rmdimportant}
+
+
+What about exporting data out of R? For that, you'll use `write.table()`. This function more or less mirrors `read.table()`, but requires that you also specify what data.frame you are wanting to save to file. So, supposing you've done some processing of your penguins data, added columns perhaps or filtered rows, and assigned the new data.frame to `penguins_new`, you'll do something like this:
+
+
+```r
+write.table(penguins_new,
+            file = "data/penguins_new.csv",
+            sep = ",",
+            row.names = FALSE)
+```
+
+Just ignore `row.names` in this function call. It's an odd design choice on the part of the authors of R that you don't need to understand, though do remember to _ALWAYS_ set it to FALSE.  
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">If you deal with comma-separated text files regularly, you might prefer `read.csv()` and `write.csv()`, which are wrappers around `read.table()` and `write.table()` that set `sep = ","` and `header = TRUE` by default. </div>\EndKnitrBlock{rmdnote}
+
+
+### Read and save objects
+
+The authors of R have defined a few R-specific file types, but let's just focus on one, _.Rds_. This format allows you to save a single R object to file. The functions for reading and writing these file types are `saveRDS()` and `readRDS()`. You use these basically the same way you use `read.table()` and `write.table()`. 
+
+
+```r
+saveRDS(penguins, file = "data/penguins.Rds")
+
+penguins <- readRDS("data/penguins.Rds")
+```
+
+There are few occasions when you will use these, but when you do, they will typically be to save or restore non-rectangular or non-tabular data objects like lists and models. 
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">Some other related functions include `load()` and `save()`, which allow you to save multiple R objects at once, and `load.image()` and `save.image()`, which allow you to save and restore all the R objects in your current working environment. However, you should not rely on these. In fact, __don't use them__. Why? Because this will force you to write R scripts that are reproducible! </div>\EndKnitrBlock{rmdnote}
