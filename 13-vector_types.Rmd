@@ -361,7 +361,7 @@ my_matrix
 
 ```
 
-The odd, bracketed numbers printed above and to the left of the matrix are known as _subscripts_. They are like numeric names for columns and rows that can be used to reference specific locations in the matrix. For example, row one is `[1,]`, and column two is `[,2]`. So, if I want to refer to the cell containing the value `3`, use `[1,2]`. And, if you want to know how many rows and columns a matrix has, you can use `nrow()` and `ncol()`, or the function `dim()`, which returns both counts.
+The odd, bracketed numbers printed above and to the left of the matrix are known as _subscripts_. They are like numeric names for columns and rows that can be used to reference specific locations in the matrix. For example, row one is `[1,]`, and column two is `[,2]`. So, if I want to refer to the cell containing the value `3`, use `[1,2]` (for more on this topic, see [Chapter 10: Vector Indexing](#vector-indexing)). And, if you want to know how many rows and columns a matrix has, you can use `nrow()` and `ncol()`, or the function `dim()`, which returns both counts.
 
 ```{r}
 
@@ -437,7 +437,7 @@ knitr::include_graphics("images/r-objects_df.png")
 
 To create a data.frame, use the `data.frame()` function, supplying it with `name = vector` arguments as you would with `list()`.
 
-```{r}
+```{r, render = function(x, ...){ print(x) }}
 
 my_dataframe <- data.frame('c1' = integer_vector,
                            'c2' = double_vector,
