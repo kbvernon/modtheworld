@@ -22,7 +22,7 @@ insert_intro(goal = "To explain how to index vectors.",
 
 Consider these scenarios: 
 
-* You have a global dataset detailing movie theater attendance rates for the last decade, but you want to compare trends in Brazil to those in, say, France.
+* You have a global dataset detailing movie theater attendance rates for the last decade, but you only want to compare trends in Brazil to those in, say, France.
 * You have an enormous pollen record going back some 15,000 years, but you're only interested in the terminal Pleistocene (say, 11 to 10,000 years ago).
 * You have age and mortality data for all of the United States, but you have discovered that your Utah data has some errors, which you need to fix.  
 
@@ -452,7 +452,7 @@ new_vector[3]
 
 ```
 
-Is there a simplere way to write this? Sort of, but it's a tad unseemly:
+Is there a simpler way to write this? Sort of, but it's a tad unseemly:
 
 ```{r}
 
@@ -470,4 +470,4 @@ my_list[['c5']][[2]][3] <- 75
 
 ```
 
-But, try to avoid this. It gets really hard to follow what's actually happening. Can you describe this code does? 
+But, try to avoid this. It gets really hard to follow what's actually happening. Can you describe what this code does? 
