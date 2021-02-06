@@ -31,9 +31,7 @@ As an alternative to DTM, this book adopts an _Everything-is-a-Model_ (EM) appro
 For details about this perspective, have a look at [Chapter 12 What is statistics?](#whatisstats).  
 
 ```{block2 01-everything_is_a_model, type = "rmdnote"}
-
 To see how someone might take the EM approach and run off a cliff with it, have a look at Jonas Kristoffer Lindelov's very insightful and very enjoyable article [Common statistical tests are linear models (or: how to teach stats)](https://lindeloev.github.io/tests-as-linear/).
-
 ```
 
 Now, if I'm being honest, there are a few additional reasons to prefer this book over others. First, it's brief. That's because it doesn't try to do _everything_. At the end of the day, there's no substituting for the guiding hand of a thoughtful teacher. This book embraces that idea, offloading a lot of what is "unsaid" into the classroom. For instance, there's no discussion of how to install R! Second, the book does not shy away from mathematical notation, which seems to be more in vogue these days, though it does so sparingly. Third, it doesn't treat you like a child. As far as we are concerned, you're an adult, so we treat you like you one. Of course, that's not to say this book doesn't have a sense of humor. It very much does, which brings me to the final reason you should prefer this book. The humor in it is mine.  
