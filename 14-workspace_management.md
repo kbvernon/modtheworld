@@ -104,7 +104,7 @@ let's users override s3 methods, so I changed the s3 to "simpleError"
 
 ## The Workspace
 
-When you first start working with R, you might find yourself on occasion asking a rather innocuous question: _Where do the objects we create actually go_? The technical and very far afield answer is your computer's memory, with an anchor (related to the object's name) that allows you to retrieve them. The simpler and way more intuitive answer is that they end up in one of your R environments, in particular, your _workspace_. You can think of an environment like the workspace as a special sort of named list. 
+When you first start working with R, you might find yourself on occasion asking a rather innocuous question: _Where do the objects we create actually go_? The technical answer is your computer's memory, with an anchor (related to the object's name) that allows you to retrieve them. The simpler and more intuitive answer is that they end up in one of your R environments, in particular, your _workspace_. You can think of an environment like the workspace as a special sort of named list. 
 
 
 ```r
@@ -118,7 +118,7 @@ bob <- list(a = 1:5,
 workspace <- as.environment(bob)
 ```
 
-When you create an object, you do not have to explicitly add it to an environment, for R adds your defined objects to your workspace by default. The key here is just to recognize that when you use `<-`, you are really just adding an element to a list, the environment list.  
+When you create an object, you do not have to explicitly add it to an environment, for R adds your defined objects to your workspace by default. The key here is just to recognize that when you use `<-`, you are really just adding an element to a list, the environment-list.  
 
 If you want to know what objects currently reside in your workspace, you can use `ls()`, which works like `names()` does for lists, printing the names of its denizens.
 
@@ -130,7 +130,7 @@ ls(workspace)
 ## [1] "a"       "add_one" "b"       "c"       "d"
 ```
 
-Note that because `ls()` assumes you are interested in the workspace, you do not have to specify the environment explicitly. In the example above, we did so just to emphasize the list-analogy. That is, wen you call `ls()`, you are doing something very similar to checking the names of a list.  
+Note that because `ls()` assumes you are interested in the workspace, you do not have to specify the environment explicitly. You can just do `ls()` instead of `ls(workspace)`. In the example above, we chose the more verbose alternative just to emphasize the environment-as-list analogy.  
 
 One other function you might find useful is `ls.str()`. This is a combination of `ls()` and `str()`, which you were introduced to in the previous chapter. This function lists all the elements in the workspace and provides information about their structure.
 
@@ -164,7 +164,7 @@ ls(workspace)
 
 Just as we noted with `ls()`, when you're removing objects from your workspace (and not the toy environment that I just created as an example), it is sufficient to type `rm(<object>)` without specifying the environment, since it defaults to the workspace anyway.  
 
-\BeginKnitrBlock{rmdnote}<div class="rmdnote">List objects provide another really useful tool for workspace management, though their utility might not be as obvious to R users early in their career. A very common use case, however, involves data objects that have different values but share identical structures (like data.frames with the same number of columns, all having the same names). This will happen, for example, when you are doing bootstrap resampling or simulations and want to generate a new model for each set of data. There are more sophisticated ways to manage such data, but a list is a good option too. Rather than having, say, ten thousand unique data.frames in your R environment, you have a single list to hold them all.</div>\EndKnitrBlock{rmdnote}
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">List objects provide another really useful tool for workspace management, though their utility might not be as obvious to R users early in their career. A very common use case involves data objects that have different values but share identical structures (like data.frames with the same number of columns, all having the same names). This will happen, for example, when you are doing bootstrap resampling or simulations and want to generate a new model for each set of data. There are more sophisticated ways to manage such data, but a list is a good option too. Rather than having, say, ten thousand unique data.frames in your R environment, you have a single list to hold them all.</div>\EndKnitrBlock{rmdnote}
 
 
 ## The working directory

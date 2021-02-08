@@ -24,7 +24,7 @@
 <meta name="author" content="Kenneth Blake Vernon" />
 
 
-<meta name="date" content="2021-02-06" />
+<meta name="date" content="2021-02-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -451,7 +451,7 @@ NONE
 </div>
 <div id="the-workspace" class="section level2">
 <h2><span class="header-section-number">9.2</span> The Workspace</h2>
-<p>When you first start working with R, you might find yourself on occasion asking a rather innocuous question: <em>Where do the objects we create actually go</em>? The technical and very far afield answer is your computer’s memory, with an anchor (related to the object’s name) that allows you to retrieve them. The simpler and way more intuitive answer is that they end up in one of your R environments, in particular, your <em>workspace</em>. You can think of an environment like the workspace as a special sort of named list.</p>
+<p>When you first start working with R, you might find yourself on occasion asking a rather innocuous question: <em>Where do the objects we create actually go</em>? The technical answer is your computer’s memory, with an anchor (related to the object’s name) that allows you to retrieve them. The simpler and more intuitive answer is that they end up in one of your R environments, in particular, your <em>workspace</em>. You can think of an environment like the workspace as a special sort of named list.</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="workspace-management.html#cb102-1"></a>bob &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,</span>
 <span id="cb102-2"><a href="workspace-management.html#cb102-2"></a>            <span class="dt">add_one =</span> <span class="cf">function</span>(x){ x <span class="op">+</span><span class="st"> </span><span class="dv">1</span> },</span>
 <span id="cb102-3"><a href="workspace-management.html#cb102-3"></a>            <span class="dt">b =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>],</span>
@@ -460,13 +460,13 @@ NONE
 <span id="cb102-6"><a href="workspace-management.html#cb102-6"></a></span>
 <span id="cb102-7"><a href="workspace-management.html#cb102-7"></a><span class="co"># coerce list to environment object</span></span>
 <span id="cb102-8"><a href="workspace-management.html#cb102-8"></a>workspace &lt;-<span class="st"> </span><span class="kw">as.environment</span>(bob)</span></code></pre></div>
-<p>When you create an object, you do not have to explicitly add it to an environment, for R adds your defined objects to your workspace by default. The key here is just to recognize that when you use <code>&lt;-</code>, you are really just adding an element to a list, the environment list.</p>
+<p>When you create an object, you do not have to explicitly add it to an environment, for R adds your defined objects to your workspace by default. The key here is just to recognize that when you use <code>&lt;-</code>, you are really just adding an element to a list, the environment-list.</p>
 <p>If you want to know what objects currently reside in your workspace, you can use <code>ls()</code>, which works like <code>names()</code> does for lists, printing the names of its denizens.</p>
 <div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="workspace-management.html#cb103-1"></a><span class="kw">names</span>(bob)</span>
 <span id="cb103-2"><a href="workspace-management.html#cb103-2"></a><span class="co">## [1] &quot;a&quot;       &quot;add_one&quot; &quot;b&quot;       &quot;c&quot;       &quot;d&quot;</span></span>
 <span id="cb103-3"><a href="workspace-management.html#cb103-3"></a><span class="kw">ls</span>(workspace)</span>
 <span id="cb103-4"><a href="workspace-management.html#cb103-4"></a><span class="co">## [1] &quot;a&quot;       &quot;add_one&quot; &quot;b&quot;       &quot;c&quot;       &quot;d&quot;</span></span></code></pre></div>
-<p>Note that because <code>ls()</code> assumes you are interested in the workspace, you do not have to specify the environment explicitly. In the example above, we did so just to emphasize the list-analogy. That is, wen you call <code>ls()</code>, you are doing something very similar to checking the names of a list.</p>
+<p>Note that because <code>ls()</code> assumes you are interested in the workspace, you do not have to specify the environment explicitly. You can just do <code>ls()</code> instead of <code>ls(workspace)</code>. In the example above, we chose the more verbose alternative just to emphasize the environment-as-list analogy.</p>
 <p>One other function you might find useful is <code>ls.str()</code>. This is a combination of <code>ls()</code> and <code>str()</code>, which you were introduced to in the previous chapter. This function lists all the elements in the workspace and provides information about their structure.</p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="workspace-management.html#cb104-1"></a><span class="kw">ls.str</span>(workspace)</span>
 <span id="cb104-2"><a href="workspace-management.html#cb104-2"></a><span class="co">## a :  int [1:5] 1 2 3 4 5</span></span>
@@ -490,7 +490,7 @@ The information provided by <code>ls()</code> and <code>ls.str()</code> is more 
 <p>Just as we noted with <code>ls()</code>, when you’re removing objects from your workspace (and not the toy environment that I just created as an example), it is sufficient to type <code>rm(&lt;object&gt;)</code> without specifying the environment, since it defaults to the workspace anyway.</p>
 
 <div class="rmdnote">
-List objects provide another really useful tool for workspace management, though their utility might not be as obvious to R users early in their career. A very common use case, however, involves data objects that have different values but share identical structures (like data.frames with the same number of columns, all having the same names). This will happen, for example, when you are doing bootstrap resampling or simulations and want to generate a new model for each set of data. There are more sophisticated ways to manage such data, but a list is a good option too. Rather than having, say, ten thousand unique data.frames in your R environment, you have a single list to hold them all.
+List objects provide another really useful tool for workspace management, though their utility might not be as obvious to R users early in their career. A very common use case involves data objects that have different values but share identical structures (like data.frames with the same number of columns, all having the same names). This will happen, for example, when you are doing bootstrap resampling or simulations and want to generate a new model for each set of data. There are more sophisticated ways to manage such data, but a list is a good option too. Rather than having, say, ten thousand unique data.frames in your R environment, you have a single list to hold them all.
 </div>
 
 </div>
