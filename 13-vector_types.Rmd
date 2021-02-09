@@ -448,9 +448,11 @@ my_dataframe
 
 ```
 
-Notice that when you create the data.frame, the vectors become named columns. To extract those column names, we can again use the `names()` function.
+Notice that when you create the data.frame, the vectors become named columns. To change or extract those column names, we can again use the `names()` function.
 
 ```{r}
+
+names(my_dataframe) <- c("A", "B", "C", "D")
 
 names(my_dataframe)
 
