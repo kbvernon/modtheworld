@@ -528,12 +528,14 @@ my_dataframe
 ## 5  5 5.2  e  TRUE
 ```
 
-Notice that when you create the data.frame, the vectors become named columns. To extract those column names, we can again use the `names()` function.
+Notice that when you create the data.frame, the vectors become named columns. To change or extract those column names, we can again use the `names()` function.
 
 
 ```r
+names(my_dataframe) <- c("A", "B", "C", "D")
+
 names(my_dataframe)
-## [1] "c1" "c2" "c3" "c4"
+## [1] "A" "B" "C" "D"
 ```
 
 As with a matrix, you can also get the number of columns and rows with `nrow` and `ncol`.
@@ -578,10 +580,10 @@ Here is how it looks for data.frames.
 ```r
 str(my_dataframe)
 ## 'data.frame':	5 obs. of  4 variables:
-##  $ c1: int  1 2 3 4 5
-##  $ c2: num  1.1 0.2 3.1 4 5.2
-##  $ c3: chr  "a" "b" "c" "d" ...
-##  $ c4: logi  TRUE TRUE FALSE FALSE TRUE
+##  $ A: int  1 2 3 4 5
+##  $ B: num  1.1 0.2 3.1 4 5.2
+##  $ C: chr  "a" "b" "c" "d" ...
+##  $ D: logi  TRUE TRUE FALSE FALSE TRUE
 ```
 
 The big differences here are, first, that `str()` tells you that it has provided the structure of a data.frame, and, second, that it doesn't bother to specify the dimensions of each vector in the data.frame, instead describing the number of rows (or observations) and columns (or variables). This is because of the super-restriction on data.frames, namely, that each column have the same length.
@@ -592,12 +594,12 @@ One other useful function for displaying data.frames is `head()`, which shows th
 
 ```r
 head(my_dataframe)
-##   c1  c2 c3    c4
-## 1  1 1.1  a  TRUE
-## 2  2 0.2  b  TRUE
-## 3  3 3.1  c FALSE
-## 4  4 4.0  d FALSE
-## 5  5 5.2  e  TRUE
+##   A   B C     D
+## 1 1 1.1 a  TRUE
+## 2 2 0.2 b  TRUE
+## 3 3 3.1 c FALSE
+## 4 4 4.0 d FALSE
+## 5 5 5.2 e  TRUE
 ```
 
 
@@ -665,16 +667,16 @@ For our purposes, the primary functions for vector type coercion are these: `as.
 a_new_list <- as.list(my_dataframe)
 
 a_new_list
-## $c1
+## $A
 ## [1] 1 2 3 4 5
 ## 
-## $c2
+## $B
 ## [1] 1.1 0.2 3.1 4.0 5.2
 ## 
-## $c3
+## $C
 ## [1] "a" "b" "c" "d" "e"
 ## 
-## $c4
+## $D
 ## [1]  TRUE  TRUE FALSE FALSE  TRUE
 is.data.frame(a_new_list)
 ## [1] FALSE
@@ -689,7 +691,7 @@ To round off this discussion, let me leave you with this question: how should a 
 a_new_matrix <- as.matrix(my_dataframe)
 
 a_new_matrix
-##      c1  c2    c3  c4     
+##      A   B     C   D      
 ## [1,] "1" "1.1" "a" "TRUE" 
 ## [2,] "2" "0.2" "b" "TRUE" 
 ## [3,] "3" "3.1" "c" "FALSE"

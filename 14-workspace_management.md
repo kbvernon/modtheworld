@@ -102,7 +102,7 @@ let's users override s3 methods, so I changed the s3 to "simpleError"
 
 
 
-## The Workspace
+## The workspace
 
 When you first start working with R, you might find yourself on occasion asking a rather innocuous question: _Where do the objects we create actually go_? The technical answer is your computer's memory, with an anchor (related to the object's name) that allows you to retrieve them. The simpler and more intuitive answer is that they end up in one of your R environments, in particular, your _workspace_. You can think of an environment like the workspace as a special sort of named list. 
 
@@ -148,7 +148,7 @@ ls.str(workspace)
 
 
 
-### Workspace Management
+### Workspace management
 
 As a general rule, you should keep your workspace clean and orderly when conducting any analysis, just as you should keep your kitchen clean and orderly when cooking. There are two big reasons for this. First, it will help prevent careless mistakes (like running operations on the wrong objects or adding a cup of salt when the recipe calls for sugar). Second, it will make it easier to manage your workflow, to make it more efficient and intelligible. Right now, I have this horrifying image of that college roommate, you know, the one that never does the dishes, leaves food stains on the counter, lets food rot in the fridge, and for some reason you can't quite fathom, spends several weeks conducting an experiment involving molds growing beneath the sink. And now that person is somehow, by some miracle, in charge of - I don't know - Katz's Deli in New York! One shudders at the thought! I mean, talk about a kitchen nightmare. By all that is good, you ought to avoid this. You want to avoid workspace nightmares. 
 
@@ -251,7 +251,10 @@ I won't go into detail about how to make one. The basic steps are to open RStudi
 
 Every research project is different, but some common elements to tend to holdover. For instance, you will typically have some empirical inputs (meaning, your data), outputs (like figures), and because you are working with R, you will also have R scripts (and probably even Rmarkdown documents, though we are not discussing those here). These common elements should suggest a useful structure (shown in Fig. \@ref(fig:14-directory-structure)) that you will want to return to again and again for your project directory. Namely, it should have a data folder (where you include your hard won empirical observations), a figures folder (any that you might want to share with collaborators, include in publications, or use as a tool for communicating with the public), and a scripts or R folder (where you will include all the scripts that you write for your analysis).     
 
-<img src="images/rstudio-project_folder.png" width="30%" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="images/rstudio-project_folder.png" alt="Recommended directory structure includes subfolders for data, scripts, and figures." width="30%" />
+<p class="caption">(\#fig:14-directory-structure)Recommended directory structure includes subfolders for data, scripts, and figures.</p>
+</div>
 
 __Naming Conventions__  
 
