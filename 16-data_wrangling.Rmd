@@ -9,47 +9,215 @@ knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-il
 
 ```
 
-<br>
-
 ## Overview
 
 ```{r, echo = FALSE, results = 'asis'}
 
-insert_intro(goal = "To teach students how to manipulate and massage raw data into a format suitable for statistical analysis.",
-             tldr = "Managing data is challenging in any context, but at least it's reproducible in R.",
-             outcomes = c("importing and exporting data", 
-                          "indexing R objects,",
-                          "data wrangling,",
-                          "conditionals, and",
-                          "handling missing values."),
-             datasets = list(c(name = "Palmer Penguins", 
-                               url = "https://allisonhorst.github.io/palmerpenguins/",
-                               ref = "[@horst2020palmer]")),
-             requirements = list(),
-             readings = list(c(name = "An Introduction to R",
-                               url = "https://cran.r-project.org/doc/manuals/r-release/R-intro.html",
-                               ref = "[@rcoreteam2020introduction]"))
-             )
+insert_intro(goal = "To teach students how to clean, shape, and transform raw tabular data to make it suitable for statistical analysis.",
+             tldr = "Wrangling data is challenging in any context, but at least it's reproducible in R.",
+             outcomes = c("reshaping data.frames between wide and long format,",
+                          "arranging data.frames by ordering along one or more variables or columns,",
+                          "transforming data.frames by adding or changing variable or column values,",
+                          "subsetting data.frames by filtering rows and selecting columns,", 
+                          "summarizing data.frames by aggregating factor variables,",
+                          "combining data.frames by binding rows and/or columns, and",
+                          "cleaning data.frames by handling missing values."),
+             datasets = list(c(name = "Tables",
+                               ref = "[@Wickham]",
+                               url = "https://tidyr.tidyverse.org/reference/table1.html")),
+             requirements = list(c(name = "Chapter 6: R Basics",
+                                   url = "#r-basics"),
+                                 c(name = "Chapter 8: Vector Types",
+                                   url = "#vector-types"),
+                                 c(name = "Chapter 9: Workspace Management",
+                                   url = "#workspace-management")),
+             readings = list(c(name = "R For Data Science",
+                               url = "https://r4ds.had.co.nz/index.html",
+                               ref = "[@Wickham]"))
+)
 
 ```
 
-<br>
+Data pre-processing, colloquially referred to as data _wrangling_, is the work you do to prepare your data for analysis in R. Typically, this involves getting your data into R, making sure it's in the right shape or format, and making sure you have the right variables and observations. The first of these we already covered in [Chapter 9: Workspace Management](#workspace-management). Here, we will focus on the latter aspects of data wrangling, shaping our data and transforming it. While these are far less glamorous than other parts of a statistical workflow, they are no less important. They will also gobble up the greater part of your research effort, even when done efficiently. So, we will spend quite a bit of time on these aspects of data wrangling. Please note that the focus here will be on wrangling data.frames.
+
+```{block2, type = "rmdnote"}
+This chapter borrows heavily from the tidy framework as detailed in _R for Data Science_ [@Wickham], especially the arguments for a tidy format in the next section. The big difference is that it covers base R tools for tidying data, rather than those provided by the `tidyverse` family of R packages, which are in many ways more expressive and user-friendly. You can learn more about them at the [tidyverse website](https://www.tidyverse.org/).
+```
 
 
-### Arrange [`sort()`, `order()`]
+## Shaping data
 
-### Combine [`c()`, `rbind()`, `cbind()`, `merge()`]
+_How should you organize your data in a table?_ This might seem like a no-brainer. I mean, are there really that many options for structuring a table? The answer is Yes, there are, and each alternative confronts you with important trade-offs that affect the efficiency and reproducibility of your code. Consider these tables: 
 
-### Change [`transform()`]
+```{r, echo = FALSE}
 
-### Filter [`subset()`]
+table1 <- as.data.frame(table1)
+table2 <- as.data.frame(table2)
+table3 <- as.data.frame(table4a)
+table4 <- as.data.frame(table4b)
 
-### Select [`subset()`]
+```
 
-### Reshape [`reshape()`]
- 
+```{r, render = function(x, options) { print(x) }}
 
-## Handling Missing Data
+table1
+table2
+table3 # count of cases
+table4 # population
+
+```
+
+Each shows the same data (counts of tuberculosis and total population for Afghanistan, Brazil, and China between 1999 and 2000), but each represents that data in a slightly different way, with slightly different consequences for your downstream workflow.  
+
+So, what tabular format should we choose? Here, I would like to recommend what Hadley @Wickham2018 refers to as a _tidy_ format (that's `table1` above). For rectangular data to be in a tidy format, it must satisfy these three rules:
+
+1. Each variable must have its own column.  
+2. Each observation must have its own row.  
+3. Each value must have its own cell.  
+
+These are represented graphically in our toy table, as shown in Fig. \@ref(fig:r-tidy-data).  
+
+```{r r-tidy-data, echo = FALSE, fig.cap = "Graphical representation of tidy terms."}
+
+knitr::include_graphics("images/r-tidy_df.png")
+
+```
+
+Why care about making your data tidy? As @Wickham points out, there are two primary reasons:
+
+1. Having a consistent format for your data means you can rely on a consistent set of tools for managing it.  
+2. Constraining each column to a single variable means you can take advantage of R's vectorized functions. For instance, if you are trying to scale and center a variable, you will find this easier to achieve if its values are contained in a single column rather than spread out across multiple columns. 
+
+So, now we know what the tidy format is and why we should use it. The obvious question to ask next is how we actually get our data into that format. If you find yourself in the position of trying to get your data into a tidy format, this implies that it is currently _not_ in a tidy format, not necessarily _messy_, _per se_, just untidy. The two big ways that a dataset can be untidy are 
+
+1. Having observations spread out across multiple rows (like `table2`).
+2. Having variables spread out across multiple columns (like `table3` and `table4`).
+
+Base R provides the `reshape()` function to tidy tables that commit these sins. Before reviewing this function, let's first be honest about it. It's poorly written (or at least, it's written with a very narrowly defined motivation, namely, longitudinal data), and it behaves in a very strange and usually frustrating way. For these reasons, I am reluctant to explain how to use it. It's a bit like teaching someone English using common expressions from Victorian England. But, I'm going to do it anyway, if only to make you familiar with it. So, hold your nose now and let's forge ahead. 
+
+When you use `reshape()`, you are doing one of two things: (a) making the table _longer_ by _stacking_ columns containing values for the same variable, thus increasing the number of rows, or (b) making the table _wider_ by _unstacking_ columns containing values for multiple variables, thus increasing the number of columns. This is shown graphically in \@ref(fig:r-pivoting).
+
+```{r r-pivoting, echo = FALSE, fig.cap = "Graphical representation of reshaping a data.frame."}
+
+knitr::include_graphics("images/r-pivoting.png")
+
+```
+
+
+As an example, let's consider `table3`, which has values of the `year` variable stored as column names, specifically `1999` and `2000`, and the values of the `cases` variable stored across both columns. To get this into a tidy format, we need to (a) combine those column _names_ into a single variable and place that variable in a column with the name _year_ and (b) combine the column _values_ into a single variable and place that variable in a column with the name _cases_. In terms of `reshape()` parameters, we need to do the following:
+
+1. Point to the columns we are collapsing using the `varying` argument, 
+2. Specify the name of the new column we are going to move the original column _names_ to using the `timevar` parameter,
+2. Define the values of that column (which are the original column names) using the `times` parameter, 
+2. Specify what column we are going to move the column _values_ to using the `v.names` argument, and
+2. Specify the `direction` in which we are reshaping, in this case _long_. 
+
+```{r, render = function(x, options) { print(x) }}
+
+long_table3 <- reshape(table3, 
+                       varying = c('1999', '2000'), 
+                       v.names = "cases", 
+                       timevar = "year",
+                       times = c(1999, 2000),
+                       direction = "long")
+
+
+long_table3
+
+```
+
+This has two unwanted side effects: (i) row names, which you should never ever use, and (ii) an additional `id` column, which is redundant considering we have the `country` column. Given the limitations of `reshape()`, it is not easy to address these side effects within the function call itself, so our best bet is to remove these manually like so:
+
+```{r, render = function(x, options) { print(x) }}
+
+row.names(long_table3) <- NULL
+
+long_table3$id <- NULL
+
+long_table3
+
+```
+
+It is rare that you will want or need to `reshape()` in the _wide_ direction, but here is an example just in case:
+
+```{r, render = function(x, options) { print(x) }}
+
+wide_table3 <- reshape(long_table3,
+                       v.names = "cases",
+                       idvar = "country",
+                       timevar = "year",
+                       direction = "wide")
+
+names(wide_table3) <- c("country", "1999", "2000")
+
+wide_table3
+
+```
+
+Basically, you are undoing the reverse of `reshape()` in the _long_ direction. You tell the function which column is providing the values of the new columns with `v.names`, which column is providing the names of the new columns with `timevar`, and which column is providing the objects being described by the data with `idvar`. Finally, you set `direction = "wide"`.   
+
+
+
+## Transforming data
+
+Let's start with something simple like changing the order of rows in a data.frame.
+
+### Arrange  
+
+On occasion you might want to re-order a data.frame, specifically changing the order in which rows appear. One would prefer that base R provide a simple function that does just that, taking a data.frame as input, along with a specification of which variable or variables should be used to re-order rows, and returning the re-ordered data.frame as output. Unfortunately, that does not exist. The base solution, thus, requires some finagling. Specifically, you need to create an index vector of the re-ordered rows and use that on the data.frame. To create the index vector, we use the `order()` function. The entire procedure looks like this:
+
+```{r, render = function(x, options) { print(x) }}
+
+df <- data.frame("c1" = c(4, 3, 77, 19, 25),
+                 "c2" = c("A", "B", "C", "D", "E"),
+                 "c3" = c(TRUE, TRUE, FALSE, TRUE, FALSE))
+
+# create index vector
+i <- order(df$c1, decreasing = FALSE)
+
+df$c1
+i
+
+df[i, ]
+
+```
+
+Note, that you can order by increasing values of the variable (`decreasing = FALSE`) or decreasing values of the variable (`increasing = TRUE`). 
+
+```{r, render = function(x, options) { print(x) }}
+
+i <- order(df$c1, decreasing = TRUE)
+
+i
+
+df[i, ]
+
+```
+
+
+### Change  
+
+[`transform()`]  
+
+### Filter  
+
+[`subset()`]  
+
+### Select  
+
+[`subset()`]  
+
+### Combine  
+
+[`rbind()`, `cbind()`, `merge()`]  
+
+```{r r-join-dfs, echo = FALSE, out.width = "90%", fig.cap = "Results of different merge parameters and their SQL equivalents."}
+
+knitr::include_graphics("images/r-join_dfs.png")
+
+```
+
+### Clean
 
 
 
