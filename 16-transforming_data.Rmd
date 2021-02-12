@@ -1,0 +1,85 @@
+# Transforming data {#transforming-data}
+
+```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
+```
+
+```{r, echo = FALSE, out.width = '70%', fig.link = 'https://github.com/allisonhorst/stats-illustrations', fig.cap = "Artwork by Allison Horst contributed to Hadley Wickham's talk \"The Joy of Functional Programming (for Data Science).\""}
+
+knitr::include_graphics("https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/data_cowboy.png")
+
+```
+
+## Overview
+
+```{r, echo = FALSE, results = 'asis'}
+
+insert_intro(goal = "To teach students how to transform raw tabular data to make it suitable for statistical analysis.",
+             tldr = "Wrangling data is challenging in any context, but at least it's reproducible in R.",
+             outcomes = c("arranging data.frames by ordering along one or more variables or columns,",
+                          "subsetting data.frames by filtering rows and selecting columns,", 
+                          "transforming data.frames by adding or changing variable or column values,",
+                          "summarizing data.frames by aggregating factor variables, and",
+                          "combining data.frames by binding rows and/or columns."),
+             datasets = list(c(name = "Palmer Penguins",
+                               url = "https://allisonhorst.github.io/palmerpenguins/",
+                               ref = "[@horst2020palmer]")),
+             requirements = list(),
+             readings = list()
+)
+
+```
+
+Data _wrangling_ refers to all the work you do to prepare your data for analysis in R. Typically, this involves getting your data into R, making sure it's in the right shape or format, making sure you have the right variables and observations, and changing those to fit the analysis where needed. The first of these we already covered in [Chapter 9: Workspace Management](#workspace-management). Here, we will focus on the latter aspects of data wrangling, specifically subsetting and transforming data. While these are far less glamorous than other parts of a statistical workflow, they are no less important. They will also gobble up the greater part of your research effort, even when done efficiently. So, we will spend quite a bit of time on these aspects of data wrangling. Please note that the focus here will be on wrangling data.frames.
+
+
+## Order  
+
+Let's start with something simple like changing the order of rows in a data.frame. For this, we'll use our penguins data.
+
+```{r, render = function(x, ...){ print(x) }}
+
+penguins <- read.csv("penguins.csv")
+
+str(penguins)
+
+```
+
+Suppose we want to re-arrange the rows of this data.frame by sorting them from the smallest penguin to the largest. One would prefer that base R provide a simple function that does this for us. Ideally, it would take a data.frame as input, along with a specification of which variable or variables should be used to re-order rows, and return the re-ordered data.frame as output. Unfortunately, that does not exist, not in base R anyway. So, ordering a data.frame requires some finagling. Specifically, you need to create an _index vector_ of the re-ordered rows and apply that to the data.frame. To create such a vector, we use the `order()` function. To see how this work:
+
+```{r, render = function(x, options) { print(x) }}
+
+# create index vector
+i <- order(df$c1, decreasing = FALSE)
+
+df$c1
+i
+
+df[i, ]
+
+```
+
+Note, that you can order by increasing values of the variable (`decreasing = FALSE`) or decreasing values of the variable (`increasing = TRUE`). 
+
+```{r, render = function(x, options) { print(x) }}
+
+i <- order(df$c1, decreasing = TRUE)
+
+i
+
+df[i, ]
+
+```
+
+
+### Change  
+
+[`transform()`]  
+
+
+### Combine  
+
+
+
+
+
+
