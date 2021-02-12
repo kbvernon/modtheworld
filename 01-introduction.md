@@ -67,10 +67,11 @@ It is primarily geared toward students who have some familiarity with basic stat
 
 Lots of really good resources for learning R and/or statistics exist, for example, 
 
-- Cetinkaya-Rundel and Hardin (2020) "[Introduction to Modern Statistics](https://openintro-ims.netlify.app/)"
-- Ismay and Kim (2020) "[Statistical Inference via Data Science](https://moderndive.com/index.html)"
-- Phillips (2018) "[YaRrr! The Pirate's Guide to R](https://bookdown.org/ndphillips/YaRrr/)"
-- Wickham and Grolemund (2017) "[R for Data Science](https://r4ds.had.co.nz/index.html)"
+- Cetinkaya-Rundel and Hardin (2020) "[Introduction to Modern Statistics](https://openintro-ims.netlify.app/)"  
+- Ismay and Kim (2020) "[Statistical Inference via Data Science](https://moderndive.com/index.html)"  
+- Phillips (2018) "[YaRrr! The Pirate's Guide to R](https://bookdown.org/ndphillips/YaRrr/)"  
+- Wickham and Grolemund (2017) "[R for Data Science](https://r4ds.had.co.nz/index.html)"  
+- Bryan (2019) "[STAT545](https://stat545.com/)"  
 
 So, why write another one? The best way to answer that question is probably with the big idea motivating this material, specifically the intuition that statistics is, in the first place, a framework for building and evaluating _models_ of the world. This idea guides the book's layout and content, providing a fresh approach to statistics and statistical programming.
 
