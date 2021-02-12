@@ -296,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.6.3" data-path="subsetting-data.html"><a href="subsetting-data.html#logical-index"><i class="fa fa-check"></i><b>10.6.3</b> Logical index</a></li>
 <li class="chapter" data-level="10.6.4" data-path="subsetting-data.html"><a href="subsetting-data.html#empty-index"><i class="fa fa-check"></i><b>10.6.4</b> Empty index</a></li>
 </ul></li>
-<li class="chapter" data-level="10.7" data-path="subsetting-data.html"><a href="subsetting-data.html#rules-for-subsetting-tables"><i class="fa fa-check"></i><b>10.7</b> Rules for subsetting tables</a></li>
+<li class="chapter" data-level="10.7" data-path="subsetting-data.html"><a href="subsetting-data.html#subset-output"><i class="fa fa-check"></i><b>10.7</b> Subset output</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>11</b> Transforming data</a><ul>
 <li class="chapter" data-level="11.1" data-path="transforming-data.html"><a href="transforming-data.html#overview-5"><i class="fa fa-check"></i><b>11.1</b> Overview</a></li>
@@ -446,34 +446,34 @@ NONE
 <div id="order" class="section level2">
 <h2><span class="header-section-number">11.2</span> Order</h2>
 <p>Let’s start with something simple like changing the order of rows in a data.frame. For this, we’ll use our penguins data.</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="transforming-data.html#cb138-1"></a>penguins &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;penguins.csv&quot;</span>)</span>
-<span id="cb138-2"><a href="transforming-data.html#cb138-2"></a></span>
-<span id="cb138-3"><a href="transforming-data.html#cb138-3"></a><span class="kw">str</span>(penguins)</span>
-<span id="cb138-4"><a href="transforming-data.html#cb138-4"></a><span class="co">## &#39;data.frame&#39;:    344 obs. of  7 variables:</span></span>
-<span id="cb138-5"><a href="transforming-data.html#cb138-5"></a><span class="co">##  $ species          : chr  &quot;Adelie&quot; &quot;Adelie&quot; &quot;Adelie&quot; &quot;Adelie&quot; ...</span></span>
-<span id="cb138-6"><a href="transforming-data.html#cb138-6"></a><span class="co">##  $ island           : chr  &quot;Torgersen&quot; &quot;Torgersen&quot; &quot;Torgersen&quot; &quot;Torgersen&quot; ...</span></span>
-<span id="cb138-7"><a href="transforming-data.html#cb138-7"></a><span class="co">##  $ bill_length_mm   : num  39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...</span></span>
-<span id="cb138-8"><a href="transforming-data.html#cb138-8"></a><span class="co">##  $ flipper_length_mm: int  181 186 195 NA 193 190 181 195 193 190 ...</span></span>
-<span id="cb138-9"><a href="transforming-data.html#cb138-9"></a><span class="co">##  $ body_mass_g      : int  3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...</span></span>
-<span id="cb138-10"><a href="transforming-data.html#cb138-10"></a><span class="co">##  $ sex              : chr  &quot;male&quot; &quot;female&quot; &quot;female&quot; NA ...</span></span>
-<span id="cb138-11"><a href="transforming-data.html#cb138-11"></a><span class="co">##  $ year             : int  2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...</span></span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="transforming-data.html#cb136-1"></a>penguins &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;penguins.csv&quot;</span>)</span>
+<span id="cb136-2"><a href="transforming-data.html#cb136-2"></a></span>
+<span id="cb136-3"><a href="transforming-data.html#cb136-3"></a><span class="kw">str</span>(penguins)</span>
+<span id="cb136-4"><a href="transforming-data.html#cb136-4"></a><span class="co">## &#39;data.frame&#39;:    344 obs. of  7 variables:</span></span>
+<span id="cb136-5"><a href="transforming-data.html#cb136-5"></a><span class="co">##  $ species          : chr  &quot;Adelie&quot; &quot;Adelie&quot; &quot;Adelie&quot; &quot;Adelie&quot; ...</span></span>
+<span id="cb136-6"><a href="transforming-data.html#cb136-6"></a><span class="co">##  $ island           : chr  &quot;Torgersen&quot; &quot;Torgersen&quot; &quot;Torgersen&quot; &quot;Torgersen&quot; ...</span></span>
+<span id="cb136-7"><a href="transforming-data.html#cb136-7"></a><span class="co">##  $ bill_length_mm   : num  39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...</span></span>
+<span id="cb136-8"><a href="transforming-data.html#cb136-8"></a><span class="co">##  $ flipper_length_mm: int  181 186 195 NA 193 190 181 195 193 190 ...</span></span>
+<span id="cb136-9"><a href="transforming-data.html#cb136-9"></a><span class="co">##  $ body_mass_g      : int  3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...</span></span>
+<span id="cb136-10"><a href="transforming-data.html#cb136-10"></a><span class="co">##  $ sex              : chr  &quot;male&quot; &quot;female&quot; &quot;female&quot; NA ...</span></span>
+<span id="cb136-11"><a href="transforming-data.html#cb136-11"></a><span class="co">##  $ year             : int  2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...</span></span></code></pre></div>
 <p>Suppose we want to re-arrange the rows of this data.frame by sorting them from the smallest penguin to the largest. One would prefer that base R provide a simple function that does this for us. Ideally, it would take a data.frame as input, along with a specification of which variable or variables should be used to re-order rows, and return the re-ordered data.frame as output. Unfortunately, that does not exist, not in base R anyway. So, ordering a data.frame requires some finagling. Specifically, you need to create an <em>index vector</em> of the re-ordered rows and apply that to the data.frame. To create such a vector, we use the <code>order()</code> function. To see how this work:</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="transforming-data.html#cb139-1"></a><span class="co"># create index vector</span></span>
-<span id="cb139-2"><a href="transforming-data.html#cb139-2"></a>i &lt;-<span class="st"> </span><span class="kw">order</span>(df<span class="op">$</span>c1, <span class="dt">decreasing =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb139-3"><a href="transforming-data.html#cb139-3"></a><span class="co">#### Error in df$c1: object of type &#39;closure&#39; is not subsettable</span></span>
-<span id="cb139-4"><a href="transforming-data.html#cb139-4"></a>df<span class="op">$</span>c1</span>
-<span id="cb139-5"><a href="transforming-data.html#cb139-5"></a><span class="co">#### Error in df$c1: object of type &#39;closure&#39; is not subsettable</span></span>
-<span id="cb139-6"><a href="transforming-data.html#cb139-6"></a>i</span>
-<span id="cb139-7"><a href="transforming-data.html#cb139-7"></a><span class="co">#### Error: object &#39;i&#39; not found</span></span>
-<span id="cb139-8"><a href="transforming-data.html#cb139-8"></a>df[i, ]</span>
-<span id="cb139-9"><a href="transforming-data.html#cb139-9"></a><span class="co">#### Error: object &#39;i&#39; not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="transforming-data.html#cb137-1"></a><span class="co"># create index vector</span></span>
+<span id="cb137-2"><a href="transforming-data.html#cb137-2"></a>i &lt;-<span class="st"> </span><span class="kw">order</span>(df<span class="op">$</span>c1, <span class="dt">decreasing =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb137-3"><a href="transforming-data.html#cb137-3"></a><span class="co">#### Error in df$c1: object of type &#39;closure&#39; is not subsettable</span></span>
+<span id="cb137-4"><a href="transforming-data.html#cb137-4"></a>df<span class="op">$</span>c1</span>
+<span id="cb137-5"><a href="transforming-data.html#cb137-5"></a><span class="co">#### Error in df$c1: object of type &#39;closure&#39; is not subsettable</span></span>
+<span id="cb137-6"><a href="transforming-data.html#cb137-6"></a>i</span>
+<span id="cb137-7"><a href="transforming-data.html#cb137-7"></a><span class="co">#### Error: object &#39;i&#39; not found</span></span>
+<span id="cb137-8"><a href="transforming-data.html#cb137-8"></a>df[i, ]</span>
+<span id="cb137-9"><a href="transforming-data.html#cb137-9"></a><span class="co">#### Error: object &#39;i&#39; not found</span></span></code></pre></div>
 <p>Note, that you can order by increasing values of the variable (<code>decreasing = FALSE</code>) or decreasing values of the variable (<code>increasing = TRUE</code>).</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="transforming-data.html#cb140-1"></a>i &lt;-<span class="st"> </span><span class="kw">order</span>(df<span class="op">$</span>c1, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb140-2"><a href="transforming-data.html#cb140-2"></a><span class="co">#### Error in df$c1: object of type &#39;closure&#39; is not subsettable</span></span>
-<span id="cb140-3"><a href="transforming-data.html#cb140-3"></a>i</span>
-<span id="cb140-4"><a href="transforming-data.html#cb140-4"></a><span class="co">#### Error: object &#39;i&#39; not found</span></span>
-<span id="cb140-5"><a href="transforming-data.html#cb140-5"></a>df[i, ]</span>
-<span id="cb140-6"><a href="transforming-data.html#cb140-6"></a><span class="co">#### Error: object &#39;i&#39; not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="transforming-data.html#cb138-1"></a>i &lt;-<span class="st"> </span><span class="kw">order</span>(df<span class="op">$</span>c1, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb138-2"><a href="transforming-data.html#cb138-2"></a><span class="co">#### Error in df$c1: object of type &#39;closure&#39; is not subsettable</span></span>
+<span id="cb138-3"><a href="transforming-data.html#cb138-3"></a>i</span>
+<span id="cb138-4"><a href="transforming-data.html#cb138-4"></a><span class="co">#### Error: object &#39;i&#39; not found</span></span>
+<span id="cb138-5"><a href="transforming-data.html#cb138-5"></a>df[i, ]</span>
+<span id="cb138-6"><a href="transforming-data.html#cb138-6"></a><span class="co">#### Error: object &#39;i&#39; not found</span></span></code></pre></div>
 <div id="change" class="section level3">
 <h3><span class="header-section-number">11.2.1</span> Change</h3>
 <p>[<code>transform()</code>]</p>

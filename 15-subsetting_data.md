@@ -569,49 +569,13 @@ ncol(penguins_subset) == ncol(penguins)
 ```
 
 
-## Rules for subsetting tables
+## Subset output
 
-While `subset()` always returns a data.frame, filtering rows and subsetting variables with `[` will return a different vector type depending on whether you are subsetting it with one or more rows and/or one or more columns. We can represent these outcomes as a 2x2 contingency matrix, with the value in each cell indicating the resulting vector type:
-
-<div class="figure" style="text-align: center">
-<img src="images/subset_table_rules.png" alt="Contingency matrix for subsetting tables." width="35%" />
-<p class="caption">(\#fig:unnamed-chunk-26)Contingency matrix for subsetting tables.</p>
-</div>
-
-
-In words, this gives us the following rules:
-
-1. Specifying _a single row and a single column_ will return a scalar (a single value).  
-2. Specifying _a single row and multiple columns_ will return a data.frame.
-2. Specifying _multiple rows and a single column_ will return a vector (a variable).
-2. Specifying _multiple rows and multiple columns_ will return a data.frame.
+While `subset()` always returns a data.frame, filtering rows and subsetting variables with `[` will return a different vector type depending on whether you are subsetting it with one or more columns. We can represent these outcomes as a 2x2 contingency matrix, with the value in each cell indicating the resulting vector If you select one variable, `[` will return a vector, and if you select multiple variables, it will return a data.frame.
 
 If you recall that an atomic vector can have only one value, these rules should make sense to you. A column just is a vector with a single set of values, so indexing a single column should return a vector. However, a row cuts across vectors, potentially including multiple data types, so R has a choice to either coerce them all to the same data type and return a vector or keep the data types different and return a smaller data.frame. The latter is the safer alternative, so it makes sense. Same goes for specifying multiple rows and columns. You are, in effect, asking for a smaller data.frame contained within a larger one.   
 
-_Rule 1: single row and single column &#8594; scalar_  
-
-
-```r
-row_i <- 2
-col_i <- 3
-
-penguins[row_i, col_i]
-## [1] 39.5
-```
-
-_Rule 2: single row and multiple columns &#8594; data.frame_  
-
-
-```r
-row_i <- 2
-col_i <- 3:5
-
-penguins[row_i, col_i]
-##   bill_length_mm flipper_length_mm body_mass_g
-## 2           39.5               186        3800
-```
-
-_Rule 3: multiple rows and single column &#8594; vector_  
+_Single column &#8594; vector_  
 
 
 ```r
@@ -622,7 +586,7 @@ penguins[row_i, col_i]
 ## [1] 39.1 39.5 40.3   NA 36.7
 ```
 
-_Rule 4: multiple rows and multiple columns &#8594; data.frame_  
+_Multiple columns &#8594; data.frame_  
 
 
 ```r

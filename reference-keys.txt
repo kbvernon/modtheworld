@@ -16,7 +16,6 @@ fig:r-menagerie
 fig:14-file-paths
 fig:unnamed-chunk-9
 fig:14-directory-structure
-fig:unnamed-chunk-26
 intro
 who-is-this-bookdown-for
 why-this-bookdown-project
@@ -143,7 +142,7 @@ integer-index
 character-index
 logical-index
 empty-index
-rules-for-subsetting-tables
+subset-output
 transforming-data
 overview-5
 order
