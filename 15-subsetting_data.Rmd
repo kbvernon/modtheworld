@@ -1,0 +1,452 @@
+# Subsetting Data {#subsetting-data}
+
+```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
+```
+
+```{r, echo = FALSE}
+
+render_print <- function(x, ...) print(x)
+
+```
+
+
+## Overview
+
+```{r, echo = FALSE, results = 'asis'}
+
+insert_intro(goal = "To understand how to subset data in R.",
+             tldr = "Like when you use your index finger to _point_ at something.",
+             outcomes = c("the friendly `subset()` function and",
+                          "the foreboding subset operators `[` and `$`."),
+             datasets = list(c(name = "Palmer Penguins",
+                               url = "https://allisonhorst.github.io/palmerpenguins/",
+                               ref = "[@horst2020palmer]")),
+             requirements = list(c(name = "Chapter 6: R Basics",
+                                   url = "#r-basics")),
+             readings = list())
+
+```
+
+Consider these three scenarios: 
+
+* You have a global dataset detailing movie theater attendance rates, along with movie genre and director, for the last decade, but you only want to compare general attendance trends in Brazil to those in, say, France.  
+* You have an enormous pollen record for Western North America going back some 15,000 years, but you're only interested in the terminal Pleistocene (approximately 11,000 to 10,000 years ago).  
+* You have measurements of multiple penguin traits across several species, but you only want to model the relationship of bill length to body mass for Adelie penguins living on Torgersen Island.
+
+In all of these scenarios, you are required to extract from the total data just the portion relevant to your specific research question. This is known as _subsetting_. It comes in two primary flavors: (i) _selecting variables_ or columns by their name or numeric position and (ii) _filtering observations_ or rows according to the values of one or more variables. While R provides many tools and methods for subsetting data in these ways, we will focus on the `subset()` function, which provides a friendly interface to handling tabular data or data.frames. We will also cover the sparser bracket `[` and dollar `$` operators, which provide greater flexibility, albeit with a much more formidable syntax.
+
+We'll be working again with our familiar penguins data.
+
+```{r}
+
+penguins <- read.csv("penguins.csv")
+
+str(penguins)
+
+```
+
+
+## Selecting variables
+
+Subsetting data by selecting variables is fairly straightforward with `subset()`. You simply pass the name of each column you want to the function's `select` parameter. Here are some examples.  
+
+_Select one variable_  
+
+```{r, render = render_print}
+
+penguins_subset <- subset(penguins, select = island)
+
+head(penguins_subset)
+
+```
+
+_Select multiple variables_  
+
+```{r, render = render_print}
+
+penguins_subset <- subset(penguins, select = c(species, island, body_mass_g))
+
+head(penguins_subset)
+
+```
+
+
+## Filtering observations
+
+Subsetting data by filtering observations is a little bit more involved, but intuitively, you are simply asking for those observations that satisfy a certain condition. Getting `subset()` to return those observations requires that you pass an expression containing a comparison operator to the function's eponymous `subset` parameter. The expression is then evaluated by R for its truth or falsity, with observations that evaluate to `TRUE` being returned, observations that evaluate to `FALSE` being ignored. Let's walk through an example, then try to break down what is happening in a little more detail. Suppose we want only those observations of penguins residing on Biscoe Island. Here is how we would go about collecting those observations from our penguins data.frame.
+
+```{r, render = render_print}
+
+biscoe_penguins <- subset(penguins, subset = (island == "Biscoe"))
+
+head(biscoe_penguins)
+
+```
+
+Here we supplied this key information to the `subset()` function: 
+
+```r
+subset = (island == "Biscoe")
+``` 
+
+with the additional parentheses provided only for readability, not because they are required. What does this expression mean exactly? In effect, it is directing `subset()` to scan through our data, specifically the `island` column, and select only those rows where the value is _Biscoe_. That's `island == "Biscoe"`. The so-called _comparison operator_ here is the double equal sign, `==`. This is importantly different than the single equal sign, `=`, which is used inside a function as part of a `key=value` or `argument=value` pair. R provides several helpful comparison operators:  
+
+* `==` for _equals_ in the sense of a perfect match,  
+* `!=` for _not equals_,  
+* `>` for _greater than_,  
+* `>=` for _greater than or equal to_,  
+* `<` for _less than_, and  
+* `<=` for _less than or equal to_.  
+
+You can use the first two, `==` and `!=`, for comparisons with either character or numeric variables (integer or double), but the rest apply only to the latter. Let's run through a few more examples:  
+
+_Filter penguins with body mass greater than 3500 grams_.  
+
+```{r, render = render_print}
+
+larger_penguins <- subset(penguins, subset = (body_mass_g > 3500))
+
+head(larger_penguins)
+
+```
+
+_Filter penguins with beaks longer than 39 millimeters_.
+
+```{r, render = render_print}
+
+long_beaks <- subset(penguins, subset = (bill_length_mm > 39))
+
+head(long_beaks)
+
+```
+
+### Multiple conditions
+
+Often enough, we will want to combine a number of these simple conditions into one complex expression. In R, this is done with Boolean operators:  
+
+* `&` for _and_,  
+*  `|` for _or_, and  
+* `!` for _not_.  
+
+To demonstrate the underlying logic of these Boolean operators, consider these shapes and colors. You can think of each of A, B, and C as its own observation or row in a data.frame that includes two variables `color` and `shape`.  
+
+```{r, echo = FALSE, out.width = "40%"}
+
+knitr::include_graphics("images/booleans_example.png")
+
+```
+
+```{r, echo = FALSE, results = "asis"}
+
+Boolean <- c("x", "y", "x & y", "x | y", "x & !y", "!x & y", "!(x & y)", "!(x | y)")
+
+Subset <- c('color == "yellow"', 'shape == "circle"', 
+            'color == "yellow" & shape == "circle"',
+            'color == "yellow" | shape == "circle"',
+            'color == "yellow" & shape != "circle"',
+            'color != "yellow" & shape == "circle"',
+            '!(color == "yellow" & shape == "circle")',
+            '!(color == "yellow" | shape == "circle")')
+Subset <- paste0('`', Subset, '`')
+
+Result <- c("A, B", "B, C", "B", "A, B, C", "A", "C", "A, C", "NULL")
+
+df <- data.frame(Boolean, Subset, Result) %>% 
+  knitr::kable(format = "html") %>% 
+  kableExtra::kable_styling(full_width = FALSE)
+
+gsub("&amp;", "&", df)
+
+```
+
+<br>
+
+And here is an example with our penguins data.frame, where we ask R to return those observations in which (a) penguins reside on Biscoe Island and (b) their bills are longer than 39 millimeters.  
+
+```{r, render = render_print}
+
+biscoe_long_beaks <- subset(penguins, 
+                            subset = (island == "Biscoe" & bill_length_mm > 39))
+
+head(biscoe_long_beaks)
+
+```
+
+
+## Filtering and selecting
+
+`subset()` also allows you to filter observations and select rows at the same time.
+
+```{r, render = render_print}
+
+biscoe_long_beaks <- subset(penguins, 
+                            subset = (island == "Biscoe" & bill_length_mm > 39),
+                            select = c(species, island, bill_length_mm))
+
+head(biscoe_long_beaks)
+
+```
+
+In this example, we filter observations to include only penguins that (a) reside on Biscoe Island and (b) have a bill length longer than 39 millimeters. We also select only the `species`, `island`, and `bill_length_mm` variables.  
+
+
+## Formiddable subsetting
+
+Selecting variables and filtering rows can also be done with the bracket `[` operator. This is a less friendly tool in many ways, but it is more flexible, meaning you can subset a data.frame in more ways than you can with the `subset()` function. What is more, understanding it, and especially the concept of an index vector, should help us better understand the use of `subset()` too. So, let's first walk through an example of how to subset a data.frame. Then we'll break down what we're doing in more detail.  
+
+The basic syntax is this:  
+
+```r
+dataframe[row, column]
+```
+
+where `dataframe` is the name of your dataframe, `row` is an index vector of the filtered observations, and `column` is an index vector of the selected variables. As you see, the closed `[` operator flanks the row and column indexes, which are separated by a comma.  
+
+Here is an actual example with penguins:
+
+```{r, render = render_print}
+
+# i for index
+row_i <- 1:5
+col_i <- 1:3
+
+penguins[row_i, col_i]
+
+```
+
+This code filters the first five observations in the penguins data and selects the first three variables. The key to understanding this is to understand the concept of an index vector.
+
+
+## Index vectors
+
+You should already be familiar with index vectors. That is actually what we were constructing when, for example, we supplied `subset = (bill_length_mm > 39)` to `subset()`. These are known specifically as _logical_ index vectors, for they include `TRUE` and `FALSE` values. The greater _flexibility_ of `[` comes from the fact that you can supply it an index vector defined by any data type, not just logical vectors as `subset()` requires. That said, the three that are most useful (and the three that you will use most often) are:  
+
+- __Integer__, which indexes by _position_,      
+- __Character__, which indexes by _name_, and  
+- __Logical__, which indexes by _condition_, as you learned above.
+
+Let's walk through some examples of each.
+
+
+### Integer index
+
+With integer indexing, you select variables and filter rows by their literal numeric position. This is actually what we used in our example just above. The basic idea is to supply the `[` operator with a vector of integers for rows or observations and a vector of integers for columns or variables.  
+
+```{r, render = render_print}
+
+row_i <- c(2, 4, 6, 8, 10)
+col_i <- c(1, 3, 5)
+
+penguins[row_i, col_i]
+
+```
+
+For brevity, we can supply the indexing vectors directly.
+
+```{r, render = render_print}
+
+penguins[c(2, 4, 6, 8, 10), c(1, 3, 5)]
+
+```
+
+And, this is usually fine if the subsetting you are doing is quite simple. For more complex cases, you should stick to creating the indexing vectors first.  
+
+Because these are numbers, R allows us to perform arithmetic operations on them (like addition and subtraction) to produce new vectors. (Note that the parentheses are not necessary and are only added to increase readability.)
+
+```{r, render = render_print}
+
+(row_i <- (row_i - 1))
+(col_i <- (col_i + 1))
+
+penguins[row_i, col_i]
+
+```
+
+Finally, if we want _everything but_ some value or values, we simply negate the vectors with the dash, `-`.
+
+```{r, render = render_print}
+
+# remove these specific columns
+penguins[row_i, -col_i]
+
+```
+
+
+### Character index
+
+With character indexing, you reference objects by their given name. With data.frames, this is most useful for selecting variables. 
+
+```{r, render = render_print}
+
+row_i <- 1:5
+col_i <- c("species", "island", "body_mass_g")
+
+penguins[row_i, col_i]
+
+```
+
+If we want to extract a single variable as a vector from a data.frame, we can also use the `$` operator, which does not require you to quote the variable name. Because the `$` operator returns a single vector, we can also do simple indexing on it too.
+
+```{r}
+
+body_mass_g <- penguins$body_mass_g
+
+body_mass_g[1:5]
+
+```
+
+
+### Logical index
+
+To illustrate what our logical index vectors are doing in `subset()` and `[`, let's look at the first five values of `body_mass_g` from the penguins data and suppose, perhaps, that we want to return only those penguins having a body mass greater than 3500 grams.  
+
+```{r}
+
+body_mass_g <- c(3750, 3800, 3250, NA, 3450, 3650)
+
+body_mass_g > 3500
+
+```
+
+As you see, R compares every value in `body_mass_g` to 3500. If the value is greater than 3500, it returns `TRUE`. If it is less than 3500, it returns `FALSE`. And `NA` returns `NA`. In `subset()`, these logical values are then used to decide which observations to filter. As mentioned above, observations or rows in which the comparison evaluates to `TRUE` are returned, those that evaluate to `FALSE` or `NA` are ignored.  
+
+Combining this idea with the use of the `$` operator, we can subset using `[` in this way:
+
+```{r, render = render_print}
+
+# extract body mass variable as vector
+body_mass_g <- penguins$body_mass_g
+
+# construct logical index vector with it
+row_i <- (body_mass_g > 3500)
+
+# select variables
+col_i <- c("species", "island", "body_mass_g")
+
+# subset penguins
+penguins_subset <- penguins[row_i, col_i]
+
+head(penguins_subset)
+
+```
+
+Here, we subset the penguins data by penguins having a body mass greater than 3500 grams and select the variables `species`, `island`, and `body_mass_g`. 
+
+You can also use these in `subset()`. This is especially useful when your filter expression includes a very complex comparison.
+
+```{r, render = render_print}
+
+# multiple conditions
+ind_1 <- (penguins$body_mass_g > 3500)
+ind_2 <- (penguins$island == "Biscoe")
+ind_3 <- (penguins$bill_length_mm > 50)
+
+# combined with Booleans into one row index
+row_i <- (ind_1 & ind_2) | ind_3
+
+# select variables
+col_i <- c("species", "island", "body_mass_g")
+
+penguins_subset <- subset(penguins,
+                          subset = row_i,
+                          filter = col_i)
+
+head(penguins_subset)
+
+```
+
+
+### Empty index
+
+For completeness, we should also mention that an empty vector will simply return unchanged whatever you are subsetting with it. This is not particularly useful when applied to simple atomic vectors, but it does save some typing when applied to data.frames and other vector types with dimensions. It saves typing by allowing you to leave unspecified the row index to return all rows and column index to return all columns.
+
+```{r}
+
+col_i <- c("species", "island", "body_mass_g")
+
+# empty space or empty vector for rows
+penguins_subset <- penguins[ , col_i]
+
+# does it return all rows?
+nrow(penguins_subset) == nrow(penguins)
+
+```
+
+```{r}
+
+row_i <- 1:10
+
+# empty space or empty vector for columns
+penguins_subset <- penguins[row_i, ]
+
+# does it return all columns?
+ncol(penguins_subset) == ncol(penguins)
+
+```
+
+
+## Rules for subsetting tables
+
+R follows some simple rules for filtering rows and subsetting variables that you should be aware of. These concern whether we subsetting single or multiple rows and single or multiple columns, so we can represent these rules as a 2x2 contingency matrix, with the value in each cell indicating the resulting vector type:
+
+```{r, echo = FALSE, out.width = "35%", fig.cap = "Contingency matrix for subsetting tables."}
+
+knitr::include_graphics("images/subset_table_rules.png")
+
+```
+
+
+In words, this gives us the following rules:
+
+1. Specifying _a single row AND a single column_ will return a scalar (a single value).  
+2. Specifying _a single row AND multiple columns_ will return a data.frame.
+2. Specifying _multiple rows BUT only a single column_ will return a vector (a variable).
+2. Specifying _multiple rows AND/OR multiple columns_ will return a data.frame.
+
+If you recall that an atomic vector can have only one value, these rules should make sense to you. A column just is a vector with a single set of values, so indexing a single column should return a vector. However, a row cuts across vectors, potentially including multiple data types, so R has a choice to either coerce them all to the same data type and return a vector or keep the data types different and return a smaller data.frame. The latter is the safer alternative, so it makes sense. Same goes for specifying multiple rows and columns. You are, in effect, asking for a smaller data.frame contained within a larger one.   
+
+_Rule 1: single row and single column &#8594; scalar_  
+
+```{r, render = render_print}
+
+row_i <- 2
+col_i <- 3
+
+penguins[row_i, col_i]
+
+```
+
+_Rule 2: single row and multiple columns &#8594; data.frame_  
+
+```{r, render = render_print}
+
+row_i <- 2
+col_i <- 3:5
+
+penguins[row_i, col_i]
+
+```
+
+_Rule 3: multiple rows and single column &#8594; vector_  
+
+```{r, render = render_print}
+
+row_i <- 1:5
+col_i <- 3
+
+penguins[row_i, col_i]
+
+```
+
+_Rule 4: multiple rows and multiple columns &#8594; data.frame_  
+
+```{r, render = render_print}
+
+row_i <- 1:5
+col_i <- 3:5
+
+penguins[row_i, col_i]
+
+```
+
+
