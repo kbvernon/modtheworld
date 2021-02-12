@@ -389,7 +389,7 @@ ncol(penguins_subset) == ncol(penguins)
 
 While `subset()` always returns a data.frame, filtering rows and subsetting variables with `[` will return a different vector type depending on whether you are subsetting it with one or more columns. We can represent these outcomes as a 2x2 contingency matrix, with the value in each cell indicating the resulting vector If you select one variable, `[` will return a vector, and if you select multiple variables, it will return a data.frame.
 
-If you recall that an atomic vector can have only one value, these rules should make sense to you. A column just is a vector with a single set of values, so indexing a single column should return a vector. However, a row cuts across vectors, potentially including multiple data types, so R has a choice to either coerce them all to the same data type and return a vector or keep the data types different and return a smaller data.frame. The latter is the safer alternative, so it makes sense. Same goes for specifying multiple rows and columns. You are, in effect, asking for a smaller data.frame contained within a larger one.   
+If you recall that an atomic vector can have only one value, these rules should make sense to you. A column just is a vector with a single set of values, so indexing a single column should return a vector. However, a row cuts across vectors, potentially including multiple data types, so R has a choice to either coerce them all to the same data type and return a vector or keep the data types different and return a smaller data.frame. The latter is the safer alternative, so it makes sense.   
 
 _Single column &#8594; vector_  
 
