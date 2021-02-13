@@ -70,7 +70,7 @@ let's users override s3 methods, so I changed the s3 to "simpleError"
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __tl;dr__ </td>
-   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> Like when you use your index finger to _point_ at something. </td>
+   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> Like eating only the green M&amp;Ms. </td>
   </tr>
   <tr>
    <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Outcomes__ </td>
