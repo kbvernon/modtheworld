@@ -15,7 +15,7 @@ render_print <- function(x, ...) print(x)
 ```{r, echo = FALSE, results = 'asis'}
 
 insert_intro(goal = "To understand how to subset data in R.",
-             tldr = "Like when you use your index finger to _point_ at something.",
+             tldr = "Like eating only the green M&Ms.",
              outcomes = c("the friendly `subset()` function and",
                           "the foreboding subset operators `[` and `$`."),
              datasets = list(c(name = "Palmer Penguins",
