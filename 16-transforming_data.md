@@ -1,4 +1,4 @@
-# Transforming data {#transforming-data}
+# Transforming Data {#transforming-data}
 
 
 
@@ -99,12 +99,7 @@ let's users override s3 methods, so I changed the s3 to "simpleError"
 </tbody>
 </table>
 
-Data _wrangling_ refers to all the work you do to prepare your data for analysis in R. Typically, this involves getting your data into R, making sure it's in the right shape or format, making sure you have the right variables and observations, and changing those to fit the analysis where needed. The first of these we already covered in [Chapter 9: Workspace Management](#workspace-management). Here, we will focus on the latter aspects of data wrangling, specifically subsetting and transforming data. While these are far less glamorous than other parts of a statistical workflow, they are no less important. They will also gobble up the greater part of your research effort, even when done efficiently. So, we will spend quite a bit of time on these aspects of data wrangling. Please note that the focus here will be on wrangling data.frames.
-
-
-## Order  
-
-Let's start with something simple like changing the order of rows in a data.frame. For this, we'll use our penguins data.
+For this, we'll use our penguins data.
 
 
 ```r
@@ -121,40 +116,108 @@ str(penguins)
 ##  $ year             : int  2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...
 ```
 
-Suppose we want to re-arrange the rows of this data.frame by sorting them from the smallest penguin to the largest. One would prefer that base R provide a simple function that does this for us. Ideally, it would take a data.frame as input, along with a specification of which variable or variables should be used to re-order rows, and return the re-ordered data.frame as output. Unfortunately, that does not exist, not in base R anyway. So, ordering a data.frame requires some finagling. Specifically, you need to create an _index vector_ of the re-ordered rows and apply that to the data.frame. To create such a vector, we use the `order()` function. To see how this work:
+## Order  
+
+Suppose we want to re-arrange the rows of our penguins by sorting them in terms of body mass. Ideally, base R would provide us a function that takes a data.frame as input, along with a specification of which variable or variables should be used to re-order rows, and return the re-ordered data.frame as output. Unfortunately, that does not exist, not in base R anyway. So, ordering a data.frame requires some finagling. Specifically, you need to create an _index vector_ of the re-ordered rows and apply that to the data.frame. To create such a vector, we use the `order()` function. 
 
 
 ```r
 # create index vector
-i <- order(df$c1, decreasing = FALSE)
-#### Error in df$c1: object of type 'closure' is not subsettable
-df$c1
-#### Error in df$c1: object of type 'closure' is not subsettable
-i
-#### Error: object 'i' not found
-df[i, ]
-#### Error: object 'i' not found
+row_i <- order(penguins$body_mass_g)
+
+row_i[1:5]
+## [1] 315  59  65  55  99
+order_penguins <- penguins[row_i, ]
+
+head(order_penguins)
+##       species    island bill_length_mm flipper_length_mm body_mass_g    sex
+## 315 Chinstrap     Dream           46.9               192        2700 female
+## 59     Adelie    Biscoe           36.5               181        2850 female
+## 65     Adelie    Biscoe           36.4               184        2850 female
+## 55     Adelie    Biscoe           34.5               187        2900 female
+## 99     Adelie     Dream           33.1               178        2900 female
+## 117    Adelie Torgersen           38.6               188        2900 female
+##     year
+## 315 2008
+## 59  2008
+## 65  2008
+## 55  2008
+## 99  2008
+## 117 2009
 ```
 
 Note, that you can order by increasing values of the variable (`decreasing = FALSE`) or decreasing values of the variable (`increasing = TRUE`). 
 
 
 ```r
-i <- order(df$c1, decreasing = TRUE)
-#### Error in df$c1: object of type 'closure' is not subsettable
-i
-#### Error: object 'i' not found
-df[i, ]
-#### Error: object 'i' not found
+row_i <- order(penguins$body_mass_g, decreasing = TRUE)
+
+order_penguins <- penguins[row_i, ]
+
+head(order_penguins)
+##     species island bill_length_mm flipper_length_mm body_mass_g  sex year
+## 170  Gentoo Biscoe           49.2               221        6300 male 2007
+## 186  Gentoo Biscoe           59.6               230        6050 male 2007
+## 230  Gentoo Biscoe           51.1               220        6000 male 2008
+## 270  Gentoo Biscoe           48.8               222        6000 male 2009
+## 232  Gentoo Biscoe           45.2               223        5950 male 2008
+## 264  Gentoo Biscoe           49.8               229        5950 male 2009
 ```
 
 
-### Change  
+### Changing variables  
 
-[`transform()`]  
+
+
+```r
+new_penguins <- transform(penguins, 
+                          body_mass_g = scale(body_mass_g))
+```
+
+
+```r
+new_penguins <- transform(penguins, 
+                          body_mass_g = scale(body_mass_g),
+                          bill_length_mm = scale(bill_length_mm),
+                          flipper_length_mm = scale(flipper_length_mm))
+```
+
+
+### Adding variables
+
+
+
+```r
+new_penguins <- transform(penguins, 
+                          body_mass_zs = scale(body_mass_g))
+
+setdiff(names(new_penguins), names(penguins))
+## [1] "body_mass_zs"
+```
+
+
+```r
+new_penguins$body_mass_zs <- scale(penguins$body_mass_g)
+
+new_penguins[ , "body_mass_zs"] <- scale(penguins$body_mass_g)
+```
 
 
 ### Combine  
+
+
+```r
+all_penguins <- rbind(penguins, new_penguins)
+
+penguins <- cbind(penguins, new_variables)
+```
+
+You can also add new variables with `cbind()`.
+
+
+```r
+new_penguins <- cbind(penguins, "body_mass_z" = scale(penguins$body_mass_g))
+```
 
 
 

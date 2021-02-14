@@ -137,7 +137,6 @@ filtering-observations
 multiple-conditions
 filtering-and-selecting
 formiddable-subsetting
-index-vectors
 integer-index
 character-index
 logical-index
@@ -146,7 +145,8 @@ subset-output
 transforming-data
 overview-5
 order
-change
+changing-variables
+adding-variables
 combine
 whatisstats
 univariate-description

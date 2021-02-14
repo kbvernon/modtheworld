@@ -24,7 +24,7 @@
 <meta name="author" content="Kenneth Blake Vernon" />
 
 
-<meta name="date" content="2021-02-13" />
+<meta name="date" content="2021-02-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -289,20 +289,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.1" data-path="subsetting-data.html"><a href="subsetting-data.html#multiple-conditions"><i class="fa fa-check"></i><b>10.3.1</b> Multiple conditions</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="subsetting-data.html"><a href="subsetting-data.html#filtering-and-selecting"><i class="fa fa-check"></i><b>10.4</b> Filtering and selecting</a></li>
-<li class="chapter" data-level="10.5" data-path="subsetting-data.html"><a href="subsetting-data.html#formiddable-subsetting"><i class="fa fa-check"></i><b>10.5</b> Formiddable subsetting</a></li>
-<li class="chapter" data-level="10.6" data-path="subsetting-data.html"><a href="subsetting-data.html#index-vectors"><i class="fa fa-check"></i><b>10.6</b> Index vectors</a><ul>
-<li class="chapter" data-level="10.6.1" data-path="subsetting-data.html"><a href="subsetting-data.html#integer-index"><i class="fa fa-check"></i><b>10.6.1</b> Integer index</a></li>
-<li class="chapter" data-level="10.6.2" data-path="subsetting-data.html"><a href="subsetting-data.html#character-index"><i class="fa fa-check"></i><b>10.6.2</b> Character index</a></li>
-<li class="chapter" data-level="10.6.3" data-path="subsetting-data.html"><a href="subsetting-data.html#logical-index"><i class="fa fa-check"></i><b>10.6.3</b> Logical index</a></li>
-<li class="chapter" data-level="10.6.4" data-path="subsetting-data.html"><a href="subsetting-data.html#empty-index"><i class="fa fa-check"></i><b>10.6.4</b> Empty index</a></li>
+<li class="chapter" data-level="10.5" data-path="subsetting-data.html"><a href="subsetting-data.html#formiddable-subsetting"><i class="fa fa-check"></i><b>10.5</b> Formiddable subsetting</a><ul>
+<li class="chapter" data-level="10.5.1" data-path="subsetting-data.html"><a href="subsetting-data.html#integer-index"><i class="fa fa-check"></i><b>10.5.1</b> Integer index</a></li>
+<li class="chapter" data-level="10.5.2" data-path="subsetting-data.html"><a href="subsetting-data.html#character-index"><i class="fa fa-check"></i><b>10.5.2</b> Character index</a></li>
+<li class="chapter" data-level="10.5.3" data-path="subsetting-data.html"><a href="subsetting-data.html#logical-index"><i class="fa fa-check"></i><b>10.5.3</b> Logical index</a></li>
+<li class="chapter" data-level="10.5.4" data-path="subsetting-data.html"><a href="subsetting-data.html#empty-index"><i class="fa fa-check"></i><b>10.5.4</b> Empty index</a></li>
 </ul></li>
-<li class="chapter" data-level="10.7" data-path="subsetting-data.html"><a href="subsetting-data.html#subset-output"><i class="fa fa-check"></i><b>10.7</b> Subset output</a></li>
+<li class="chapter" data-level="10.6" data-path="subsetting-data.html"><a href="subsetting-data.html#subset-output"><i class="fa fa-check"></i><b>10.6</b> Subset output</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>11</b> Transforming data</a><ul>
+<li class="chapter" data-level="11" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>11</b> Transforming Data</a><ul>
 <li class="chapter" data-level="11.1" data-path="transforming-data.html"><a href="transforming-data.html#overview-5"><i class="fa fa-check"></i><b>11.1</b> Overview</a></li>
 <li class="chapter" data-level="11.2" data-path="transforming-data.html"><a href="transforming-data.html#order"><i class="fa fa-check"></i><b>11.2</b> Order</a><ul>
-<li class="chapter" data-level="11.2.1" data-path="transforming-data.html"><a href="transforming-data.html#change"><i class="fa fa-check"></i><b>11.2.1</b> Change</a></li>
-<li class="chapter" data-level="11.2.2" data-path="transforming-data.html"><a href="transforming-data.html#combine"><i class="fa fa-check"></i><b>11.2.2</b> Combine</a></li>
+<li class="chapter" data-level="11.2.1" data-path="transforming-data.html"><a href="transforming-data.html#changing-variables"><i class="fa fa-check"></i><b>11.2.1</b> Changing variables</a></li>
+<li class="chapter" data-level="11.2.2" data-path="transforming-data.html"><a href="transforming-data.html#adding-variables"><i class="fa fa-check"></i><b>11.2.2</b> Adding variables</a></li>
+<li class="chapter" data-level="11.2.3" data-path="transforming-data.html"><a href="transforming-data.html#combine"><i class="fa fa-check"></i><b>11.2.3</b> Combine</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>II Introduction to Statistics</b></span></li>
@@ -694,9 +694,6 @@ NULL
 <span id="cb122-10"><a href="subsetting-data.html#cb122-10"></a><span class="co">## 4  Adelie Torgersen             NA</span></span>
 <span id="cb122-11"><a href="subsetting-data.html#cb122-11"></a><span class="co">## 5  Adelie Torgersen           36.7</span></span></code></pre></div>
 <p>This code filters the first five observations in the penguins data and selects the first three variables. The key to understanding this is to understand the concept of an index vector.</p>
-</div>
-<div id="index-vectors" class="section level2">
-<h2><span class="header-section-number">10.6</span> Index vectors</h2>
 <p>You should already be familiar with index vectors. That is actually what we were constructing when, for example, we supplied <code>subset = (bill_length_mm &gt; 39)</code> to <code>subset()</code>. These are known specifically as <em>logical</em> index vectors, for they include <code>TRUE</code> and <code>FALSE</code> values. The greater <em>flexibility</em> of <code>[</code> comes from the fact that you can supply it an index vector defined by any data type, not just logical vectors as <code>subset()</code> requires. That said, the three that are most useful (and the three that you will use most often) are:</p>
 <ul>
 <li><strong>Integer</strong>, which indexes by <em>position</em>,<br />
@@ -707,7 +704,7 @@ NULL
 </ul>
 <p>Let’s walk through some examples of each.</p>
 <div id="integer-index" class="section level3">
-<h3><span class="header-section-number">10.6.1</span> Integer index</h3>
+<h3><span class="header-section-number">10.5.1</span> Integer index</h3>
 <p>With integer indexing, you select variables and filter rows by their literal numeric position. This is actually what we used in our example just above. The basic idea is to supply the <code>[</code> operator with a vector of integers for rows or observations and a vector of integers for columns or variables.</p>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="subsetting-data.html#cb123-1"></a>row_i &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>)</span>
 <span id="cb123-2"><a href="subsetting-data.html#cb123-2"></a>col_i &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
@@ -751,7 +748,7 @@ NULL
 <span id="cb126-8"><a href="subsetting-data.html#cb126-8"></a><span class="co">## 9  Adelie           34.1        3475 2007</span></span></code></pre></div>
 </div>
 <div id="character-index" class="section level3">
-<h3><span class="header-section-number">10.6.2</span> Character index</h3>
+<h3><span class="header-section-number">10.5.2</span> Character index</h3>
 <p>With character indexing, you reference objects by their given name. With data.frames, this is most useful for selecting variables.</p>
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="subsetting-data.html#cb127-1"></a>row_i &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></span>
 <span id="cb127-2"><a href="subsetting-data.html#cb127-2"></a>col_i &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;species&quot;</span>, <span class="st">&quot;island&quot;</span>, <span class="st">&quot;body_mass_g&quot;</span>)</span>
@@ -770,7 +767,7 @@ NULL
 <span id="cb128-4"><a href="subsetting-data.html#cb128-4"></a><span class="co">## [1] 3750 3800 3250   NA 3450</span></span></code></pre></div>
 </div>
 <div id="logical-index" class="section level3">
-<h3><span class="header-section-number">10.6.3</span> Logical index</h3>
+<h3><span class="header-section-number">10.5.3</span> Logical index</h3>
 <p>To illustrate what our logical index vectors are doing in <code>subset()</code> and <code>[</code>, let’s look at the first five values of <code>body_mass_g</code> from the penguins data and suppose, perhaps, that we want to return only those penguins having a body mass greater than 3500 grams.</p>
 <div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="subsetting-data.html#cb129-1"></a>body_mass_g &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3750</span>, <span class="dv">3800</span>, <span class="dv">3250</span>, <span class="ot">NA</span>, <span class="dv">3450</span>, <span class="dv">3650</span>)</span>
 <span id="cb129-2"><a href="subsetting-data.html#cb129-2"></a></span>
@@ -825,7 +822,7 @@ NULL
 <span id="cb131-23"><a href="subsetting-data.html#cb131-23"></a><span class="co">## 27  Adelie Biscoe           40.6               183        3550   male 2007</span></span></code></pre></div>
 </div>
 <div id="empty-index" class="section level3">
-<h3><span class="header-section-number">10.6.4</span> Empty index</h3>
+<h3><span class="header-section-number">10.5.4</span> Empty index</h3>
 <p>For completeness, we should also mention that an empty vector will simply return unchanged whatever you are subsetting with it. This is not particularly useful when applied to simple atomic vectors, but it does save some typing when applied to data.frames and other vector types with dimensions. It saves typing by allowing you to leave unspecified the row index to return all rows and column index to return all columns.</p>
 <div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="subsetting-data.html#cb132-1"></a>col_i &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;species&quot;</span>, <span class="st">&quot;island&quot;</span>, <span class="st">&quot;body_mass_g&quot;</span>)</span>
 <span id="cb132-2"><a href="subsetting-data.html#cb132-2"></a></span>
@@ -846,7 +843,7 @@ NULL
 </div>
 </div>
 <div id="subset-output" class="section level2">
-<h2><span class="header-section-number">10.7</span> Subset output</h2>
+<h2><span class="header-section-number">10.6</span> Subset output</h2>
 <p>While <code>subset()</code> always returns a data.frame, filtering rows and subsetting variables with <code>[</code> will return a different vector type depending on whether you are subsetting it with one or more columns. We can represent these outcomes as a 2x2 contingency matrix, with the value in each cell indicating the resulting vector If you select one variable, <code>[</code> will return a vector, and if you select multiple variables, it will return a data.frame.</p>
 <p>If you recall that an atomic vector can have only one value, these rules should make sense to you. A column just is a vector with a single set of values, so indexing a single column should return a vector. However, a row cuts across vectors, potentially including multiple data types, so R has a choice to either coerce them all to the same data type and return a vector or keep the data types different and return a smaller data.frame. The latter is the safer alternative, so it makes sense.</p>
 <p><em>Single column → vector</em></p>
