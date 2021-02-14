@@ -216,9 +216,6 @@ penguins[row_i, col_i]
 
 This code filters the first five observations in the penguins data and selects the first three variables. The key to understanding this is to understand the concept of an index vector.
 
-
-## Index vectors
-
 You should already be familiar with index vectors. That is actually what we were constructing when, for example, we supplied `subset = (bill_length_mm > 39)` to `subset()`. These are known specifically as _logical_ index vectors, for they include `TRUE` and `FALSE` values. The greater _flexibility_ of `[` comes from the fact that you can supply it an index vector defined by any data type, not just logical vectors as `subset()` requires. That said, the three that are most useful (and the three that you will use most often) are:  
 
 - __Integer__, which indexes by _position_,      
