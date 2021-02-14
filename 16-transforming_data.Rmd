@@ -1,4 +1,4 @@
-# Transforming data {#transforming-data}
+# Transforming Data {#transforming-data}
 
 ```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
 ```
@@ -29,12 +29,7 @@ insert_intro(goal = "To teach students how to transform raw tabular data to make
 
 ```
 
-Data _wrangling_ refers to all the work you do to prepare your data for analysis in R. Typically, this involves getting your data into R, making sure it's in the right shape or format, making sure you have the right variables and observations, and changing those to fit the analysis where needed. The first of these we already covered in [Chapter 9: Workspace Management](#workspace-management). Here, we will focus on the latter aspects of data wrangling, specifically subsetting and transforming data. While these are far less glamorous than other parts of a statistical workflow, they are no less important. They will also gobble up the greater part of your research effort, even when done efficiently. So, we will spend quite a bit of time on these aspects of data wrangling. Please note that the focus here will be on wrangling data.frames.
-
-
-## Order  
-
-Let's start with something simple like changing the order of rows in a data.frame. For this, we'll use our penguins data.
+For this, we'll use our penguins data.
 
 ```{r, render = function(x, ...){ print(x) }}
 
@@ -44,17 +39,20 @@ str(penguins)
 
 ```
 
-Suppose we want to re-arrange the rows of this data.frame by sorting them from the smallest penguin to the largest. One would prefer that base R provide a simple function that does this for us. Ideally, it would take a data.frame as input, along with a specification of which variable or variables should be used to re-order rows, and return the re-ordered data.frame as output. Unfortunately, that does not exist, not in base R anyway. So, ordering a data.frame requires some finagling. Specifically, you need to create an _index vector_ of the re-ordered rows and apply that to the data.frame. To create such a vector, we use the `order()` function. To see how this work:
+## Order  
+
+Suppose we want to re-arrange the rows of our penguins by sorting them in terms of body mass. Ideally, base R would provide us a function that takes a data.frame as input, along with a specification of which variable or variables should be used to re-order rows, and return the re-ordered data.frame as output. Unfortunately, that does not exist, not in base R anyway. So, ordering a data.frame requires some finagling. Specifically, you need to create an _index vector_ of the re-ordered rows and apply that to the data.frame. To create such a vector, we use the `order()` function. 
 
 ```{r, render = function(x, options) { print(x) }}
 
 # create index vector
-i <- order(df$c1, decreasing = FALSE)
+row_i <- order(penguins$body_mass_g)
 
-df$c1
-i
+row_i[1:5]
 
-df[i, ]
+order_penguins <- penguins[row_i, ]
+
+head(order_penguins)
 
 ```
 
@@ -62,21 +60,73 @@ Note, that you can order by increasing values of the variable (`decreasing = FAL
 
 ```{r, render = function(x, options) { print(x) }}
 
-i <- order(df$c1, decreasing = TRUE)
+row_i <- order(penguins$body_mass_g, decreasing = TRUE)
 
-i
+order_penguins <- penguins[row_i, ]
 
-df[i, ]
+head(order_penguins)
 
 ```
 
 
-### Change  
+### Changing variables  
 
-[`transform()`]  
+
+```{r}
+
+new_penguins <- transform(penguins, 
+                          body_mass_g = scale(body_mass_g))
+
+```
+
+```{r}
+
+new_penguins <- transform(penguins, 
+                          body_mass_g = scale(body_mass_g),
+                          bill_length_mm = scale(bill_length_mm),
+                          flipper_length_mm = scale(flipper_length_mm))
+
+```
+
+
+### Adding variables
+
+
+```{r}
+
+new_penguins <- transform(penguins, 
+                          body_mass_zs = scale(body_mass_g))
+
+setdiff(names(new_penguins), names(penguins))
+
+```
+
+```{r}
+
+new_penguins$body_mass_zs <- scale(penguins$body_mass_g)
+
+new_penguins[ , "body_mass_zs"] <- scale(penguins$body_mass_g)
+
+```
 
 
 ### Combine  
+
+```{r, eval = FALSE}
+
+all_penguins <- rbind(penguins, new_penguins)
+
+penguins <- cbind(penguins, new_variables)
+
+```
+
+You can also add new variables with `cbind()`.
+
+```{r, eval = FALSE}
+
+new_penguins <- cbind(penguins, "body_mass_z" = scale(penguins$body_mass_g))
+
+```
 
 
 
