@@ -122,7 +122,7 @@ str(penguins)
 
 ## Selecting variables
 
-Subsetting data by selecting variables is fairly straightforward with `subset()`. You simply pass the name of each column you want to the function's `select` parameter. Here are some examples.  
+Subsetting data by selecting variables is fairly straightforward with `subset()`. You first tell the function what table you want to subset, then pass to the function's `select` parameter the name of each column you want to return. Here are some examples.  
 
 _Select one variable_  
 
@@ -155,6 +155,10 @@ head(penguins_subset)
 ## 5  Adelie Torgersen        3450
 ## 6  Adelie Torgersen        3650
 ```
+
+Translating into a natural language, this expression instructs R to "_Look inside_ the table `penguins` and return the variables `species`, `island`, and `body_mass_g`."
+
+\BeginKnitrBlock{rmdnote}<div class="rmdnote">Note that you do not have to quote variable names when referring to them within the `subset()` function for R knows that you are referring to the variables within the specified table.  </div>\EndKnitrBlock{rmdnote}
 
 
 ## Filtering observations
@@ -341,7 +345,7 @@ The basic syntax is this:
 dataframe[row, column]
 ```
 
-where `dataframe` is the name of your dataframe, `row` is an index vector of the filtered observations, and `column` is an index vector of the selected variables. As you see, the closed `[` operator flanks the row and column indexes, which are separated by a comma.  
+where `dataframe` is the name of your dataframe, `row` is an index vector of the filtered observations, and `column` is an index vector of the selected variables. As you see, the closed `[` operator flanks the row and column indexes, which are separated by a comma. If you were to translate the meaning of this R expression into a natural language, it would be something like "_Look inside_ `dataframe` and return these specific `row`s and these specific `column`s."  
 
 Here is an actual example with penguins:
 
@@ -360,9 +364,7 @@ penguins[row_i, col_i]
 ## 5  Adelie Torgersen           36.7
 ```
 
-This code filters the first five observations in the penguins data and selects the first three variables. The key to understanding this is to understand the concept of an index vector.
-
-You should already be familiar with index vectors. That is actually what we were constructing when, for example, we supplied `subset = (bill_length_mm > 39)` to `subset()`. These are known specifically as _logical_ index vectors, for they include `TRUE` and `FALSE` values. The greater _flexibility_ of `[` comes from the fact that you can supply it an index vector defined by any data type, not just logical vectors as `subset()` requires. That said, the three that are most useful (and the three that you will use most often) are:  
+This code filters the first five observations in the penguins data and selects the first three variables. The key to understanding this is to understand the concept of an index vector, which you should already be famliar with. That is actually what we were constructing when we supplied `subset = (bill_length_mm > 39)` to `subset()`. These are known specifically as _logical_ index vectors, for they rely on `TRUE` and `FALSE` values to perform the filter. The greater _flexibility_ of `[` comes from the fact that you can supply it an index vector defined by any data type, not just logical vectors as `subset()` requires. That said, the three that are most useful (and the three that you will use most often) are:  
 
 - __Integer__, which indexes by _position_,      
 - __Character__, which indexes by _name_, and  
@@ -539,7 +541,7 @@ head(penguins_subset)
 
 ### Empty index
 
-For completeness, we should also mention that an empty vector will simply return unchanged whatever you are subsetting with it. This is not particularly useful when applied to simple atomic vectors, but it does save some typing when applied to data.frames and other vector types with dimensions. It saves typing by allowing you to leave unspecified the row index to return all rows and column index to return all columns.
+For completeness, we should also mention that an empty vector will simply return unchanged whatever you are subsetting with it. This is not particularly useful when applied to simple atomic vectors, but it does save some typing when applied to data.frames and other vector types with dimensions. If you want to return all rows, simply leave the row index unspecified, and if you want to return all columns, leave the column index unspecified.
 
 
 ```r
@@ -566,11 +568,9 @@ ncol(penguins_subset) == ncol(penguins)
 ```
 
 
-## Subset output
+## Result
 
-While `subset()` always returns a data.frame, filtering rows and subsetting variables with `[` will return a different vector type depending on whether you are subsetting it with one or more columns. We can represent these outcomes as a 2x2 contingency matrix, with the value in each cell indicating the resulting vector If you select one variable, `[` will return a vector, and if you select multiple variables, it will return a data.frame.
-
-If you recall that an atomic vector can have only one value, these rules should make sense to you. A column just is a vector with a single set of values, so indexing a single column should return a vector. However, a row cuts across vectors, potentially including multiple data types, so R has a choice to either coerce them all to the same data type and return a vector or keep the data types different and return a smaller data.frame. The latter is the safer alternative, so it makes sense.   
+While `subset()` always returns a data.frame, filtering rows and selecting variables with `[` will return a different vector type depending on whether you are subsetting it with one or more columns. If you select one variable, `[` will return a vector, and if you select multiple variables, it will return a data.frame. If you recall that an atomic vector can have only one value, these results should make sense to you. A column just is a vector with a single set of values, so indexing a single column should return a vector. However, a row cuts across vectors, potentially including multiple data types, so R has a choice to either coerce them all to the same data type and return a vector or keep the data types different and return a smaller data.frame. The latter is the safer alternative, so it makes sense.   
 
 _Single column &#8594; vector_  
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Kenneth Blake Vernon" />
 
 
-<meta name="date" content="2021-02-14" />
+<meta name="date" content="2021-02-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -295,15 +295,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5.3" data-path="subsetting-data.html"><a href="subsetting-data.html#logical-index"><i class="fa fa-check"></i><b>10.5.3</b> Logical index</a></li>
 <li class="chapter" data-level="10.5.4" data-path="subsetting-data.html"><a href="subsetting-data.html#empty-index"><i class="fa fa-check"></i><b>10.5.4</b> Empty index</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="subsetting-data.html"><a href="subsetting-data.html#subset-output"><i class="fa fa-check"></i><b>10.6</b> Subset output</a></li>
+<li class="chapter" data-level="10.6" data-path="subsetting-data.html"><a href="subsetting-data.html#result"><i class="fa fa-check"></i><b>10.6</b> Result</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>11</b> Transforming Data</a><ul>
 <li class="chapter" data-level="11.1" data-path="transforming-data.html"><a href="transforming-data.html#overview-5"><i class="fa fa-check"></i><b>11.1</b> Overview</a></li>
-<li class="chapter" data-level="11.2" data-path="transforming-data.html"><a href="transforming-data.html#order"><i class="fa fa-check"></i><b>11.2</b> Order</a><ul>
-<li class="chapter" data-level="11.2.1" data-path="transforming-data.html"><a href="transforming-data.html#changing-variables"><i class="fa fa-check"></i><b>11.2.1</b> Changing variables</a></li>
-<li class="chapter" data-level="11.2.2" data-path="transforming-data.html"><a href="transforming-data.html#adding-variables"><i class="fa fa-check"></i><b>11.2.2</b> Adding variables</a></li>
-<li class="chapter" data-level="11.2.3" data-path="transforming-data.html"><a href="transforming-data.html#combine"><i class="fa fa-check"></i><b>11.2.3</b> Combine</a></li>
-</ul></li>
+<li class="chapter" data-level="11.2" data-path="transforming-data.html"><a href="transforming-data.html#order-table"><i class="fa fa-check"></i><b>11.2</b> Order table</a></li>
+<li class="chapter" data-level="11.3" data-path="transforming-data.html"><a href="transforming-data.html#combine-tables"><i class="fa fa-check"></i><b>11.3</b> Combine tables</a></li>
+<li class="chapter" data-level="11.4" data-path="transforming-data.html"><a href="transforming-data.html#change-variable"><i class="fa fa-check"></i><b>11.4</b> Change variable</a></li>
+<li class="chapter" data-level="11.5" data-path="transforming-data.html"><a href="transforming-data.html#add-variable"><i class="fa fa-check"></i><b>11.5</b> Add variable</a></li>
+<li class="chapter" data-level="11.6" data-path="transforming-data.html"><a href="transforming-data.html#aggregate-factors"><i class="fa fa-check"></i><b>11.6</b> Aggregate factors</a></li>
 </ul></li>
 <li class="part"><span><b>II Introduction to Statistics</b></span></li>
 <li class="chapter" data-level="12" data-path="whatisstats.html"><a href="whatisstats.html"><i class="fa fa-check"></i><b>12</b> What is Statistics?</a></li>
@@ -450,7 +450,7 @@ NONE
 </div>
 <div id="selecting-variables" class="section level2">
 <h2><span class="header-section-number">10.2</span> Selecting variables</h2>
-<p>Subsetting data by selecting variables is fairly straightforward with <code>subset()</code>. You simply pass the name of each column you want to the function’s <code>select</code> parameter. Here are some examples.</p>
+<p>Subsetting data by selecting variables is fairly straightforward with <code>subset()</code>. You first tell the function what table you want to subset, then pass to the function’s <code>select</code> parameter the name of each column you want to return. Here are some examples.</p>
 <p><em>Select one variable</em></p>
 <div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="subsetting-data.html#cb113-1"></a>penguins_subset &lt;-<span class="st"> </span><span class="kw">subset</span>(penguins, <span class="dt">select =</span> island)</span>
 <span id="cb113-2"><a href="subsetting-data.html#cb113-2"></a></span>
@@ -473,6 +473,12 @@ NONE
 <span id="cb114-8"><a href="subsetting-data.html#cb114-8"></a><span class="co">## 4  Adelie Torgersen          NA</span></span>
 <span id="cb114-9"><a href="subsetting-data.html#cb114-9"></a><span class="co">## 5  Adelie Torgersen        3450</span></span>
 <span id="cb114-10"><a href="subsetting-data.html#cb114-10"></a><span class="co">## 6  Adelie Torgersen        3650</span></span></code></pre></div>
+<p>Translating into a natural language, this expression instructs R to “<em>Look inside</em> the table <code>penguins</code> and return the variables <code>species</code>, <code>island</code>, and <code>body_mass_g</code>.”</p>
+
+<div class="rmdnote">
+Note that you do not have to quote variable names when referring to them within the <code>subset()</code> function for R knows that you are referring to the variables within the specified table.
+</div>
+
 </div>
 <div id="filtering-observations" class="section level2">
 <h2><span class="header-section-number">10.3</span> Filtering observations</h2>
@@ -680,7 +686,7 @@ NULL
 <p>Selecting variables and filtering rows can also be done with the bracket <code>[</code> operator. This is a less friendly tool in many ways, but it is more flexible, meaning you can subset a data.frame in more ways than you can with the <code>subset()</code> function. What is more, understanding it, and especially the concept of an index vector, should help us better understand the use of <code>subset()</code> too. So, let’s first walk through an example of how to subset a data.frame. Then we’ll break down what we’re doing in more detail.</p>
 <p>The basic syntax is this:</p>
 <div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="subsetting-data.html#cb121-1"></a>dataframe[row, column]</span></code></pre></div>
-<p>where <code>dataframe</code> is the name of your dataframe, <code>row</code> is an index vector of the filtered observations, and <code>column</code> is an index vector of the selected variables. As you see, the closed <code>[</code> operator flanks the row and column indexes, which are separated by a comma.</p>
+<p>where <code>dataframe</code> is the name of your dataframe, <code>row</code> is an index vector of the filtered observations, and <code>column</code> is an index vector of the selected variables. As you see, the closed <code>[</code> operator flanks the row and column indexes, which are separated by a comma. If you were to translate the meaning of this R expression into a natural language, it would be something like “<em>Look inside</em> <code>dataframe</code> and return these specific <code>row</code>s and these specific <code>column</code>s.”</p>
 <p>Here is an actual example with penguins:</p>
 <div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="subsetting-data.html#cb122-1"></a><span class="co"># i for index</span></span>
 <span id="cb122-2"><a href="subsetting-data.html#cb122-2"></a>row_i &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></span>
@@ -693,8 +699,7 @@ NULL
 <span id="cb122-9"><a href="subsetting-data.html#cb122-9"></a><span class="co">## 3  Adelie Torgersen           40.3</span></span>
 <span id="cb122-10"><a href="subsetting-data.html#cb122-10"></a><span class="co">## 4  Adelie Torgersen             NA</span></span>
 <span id="cb122-11"><a href="subsetting-data.html#cb122-11"></a><span class="co">## 5  Adelie Torgersen           36.7</span></span></code></pre></div>
-<p>This code filters the first five observations in the penguins data and selects the first three variables. The key to understanding this is to understand the concept of an index vector.</p>
-<p>You should already be familiar with index vectors. That is actually what we were constructing when, for example, we supplied <code>subset = (bill_length_mm &gt; 39)</code> to <code>subset()</code>. These are known specifically as <em>logical</em> index vectors, for they include <code>TRUE</code> and <code>FALSE</code> values. The greater <em>flexibility</em> of <code>[</code> comes from the fact that you can supply it an index vector defined by any data type, not just logical vectors as <code>subset()</code> requires. That said, the three that are most useful (and the three that you will use most often) are:</p>
+<p>This code filters the first five observations in the penguins data and selects the first three variables. The key to understanding this is to understand the concept of an index vector, which you should already be famliar with. That is actually what we were constructing when we supplied <code>subset = (bill_length_mm &gt; 39)</code> to <code>subset()</code>. These are known specifically as <em>logical</em> index vectors, for they rely on <code>TRUE</code> and <code>FALSE</code> values to perform the filter. The greater <em>flexibility</em> of <code>[</code> comes from the fact that you can supply it an index vector defined by any data type, not just logical vectors as <code>subset()</code> requires. That said, the three that are most useful (and the three that you will use most often) are:</p>
 <ul>
 <li><strong>Integer</strong>, which indexes by <em>position</em>,<br />
 </li>
@@ -823,7 +828,7 @@ NULL
 </div>
 <div id="empty-index" class="section level3">
 <h3><span class="header-section-number">10.5.4</span> Empty index</h3>
-<p>For completeness, we should also mention that an empty vector will simply return unchanged whatever you are subsetting with it. This is not particularly useful when applied to simple atomic vectors, but it does save some typing when applied to data.frames and other vector types with dimensions. It saves typing by allowing you to leave unspecified the row index to return all rows and column index to return all columns.</p>
+<p>For completeness, we should also mention that an empty vector will simply return unchanged whatever you are subsetting with it. This is not particularly useful when applied to simple atomic vectors, but it does save some typing when applied to data.frames and other vector types with dimensions. If you want to return all rows, simply leave the row index unspecified, and if you want to return all columns, leave the column index unspecified.</p>
 <div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="subsetting-data.html#cb132-1"></a>col_i &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;species&quot;</span>, <span class="st">&quot;island&quot;</span>, <span class="st">&quot;body_mass_g&quot;</span>)</span>
 <span id="cb132-2"><a href="subsetting-data.html#cb132-2"></a></span>
 <span id="cb132-3"><a href="subsetting-data.html#cb132-3"></a><span class="co"># empty space or empty vector for rows</span></span>
@@ -842,10 +847,9 @@ NULL
 <span id="cb133-8"><a href="subsetting-data.html#cb133-8"></a><span class="co">## [1] TRUE</span></span></code></pre></div>
 </div>
 </div>
-<div id="subset-output" class="section level2">
-<h2><span class="header-section-number">10.6</span> Subset output</h2>
-<p>While <code>subset()</code> always returns a data.frame, filtering rows and subsetting variables with <code>[</code> will return a different vector type depending on whether you are subsetting it with one or more columns. We can represent these outcomes as a 2x2 contingency matrix, with the value in each cell indicating the resulting vector If you select one variable, <code>[</code> will return a vector, and if you select multiple variables, it will return a data.frame.</p>
-<p>If you recall that an atomic vector can have only one value, these rules should make sense to you. A column just is a vector with a single set of values, so indexing a single column should return a vector. However, a row cuts across vectors, potentially including multiple data types, so R has a choice to either coerce them all to the same data type and return a vector or keep the data types different and return a smaller data.frame. The latter is the safer alternative, so it makes sense.</p>
+<div id="result" class="section level2">
+<h2><span class="header-section-number">10.6</span> Result</h2>
+<p>While <code>subset()</code> always returns a data.frame, filtering rows and selecting variables with <code>[</code> will return a different vector type depending on whether you are subsetting it with one or more columns. If you select one variable, <code>[</code> will return a vector, and if you select multiple variables, it will return a data.frame. If you recall that an atomic vector can have only one value, these results should make sense to you. A column just is a vector with a single set of values, so indexing a single column should return a vector. However, a row cuts across vectors, potentially including multiple data types, so R has a choice to either coerce them all to the same data type and return a vector or keep the data types different and return a smaller data.frame. The latter is the safer alternative, so it makes sense.</p>
 <p><em>Single column → vector</em></p>
 <div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="subsetting-data.html#cb134-1"></a>row_i &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></span>
 <span id="cb134-2"><a href="subsetting-data.html#cb134-2"></a>col_i &lt;-<span class="st"> </span><span class="dv">3</span></span>

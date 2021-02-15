@@ -24,7 +24,7 @@
 <meta name="author" content="Kenneth Blake Vernon" />
 
 
-<meta name="date" content="2021-02-14" />
+<meta name="date" content="2021-02-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -295,15 +295,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5.3" data-path="subsetting-data.html"><a href="subsetting-data.html#logical-index"><i class="fa fa-check"></i><b>10.5.3</b> Logical index</a></li>
 <li class="chapter" data-level="10.5.4" data-path="subsetting-data.html"><a href="subsetting-data.html#empty-index"><i class="fa fa-check"></i><b>10.5.4</b> Empty index</a></li>
 </ul></li>
-<li class="chapter" data-level="10.6" data-path="subsetting-data.html"><a href="subsetting-data.html#subset-output"><i class="fa fa-check"></i><b>10.6</b> Subset output</a></li>
+<li class="chapter" data-level="10.6" data-path="subsetting-data.html"><a href="subsetting-data.html#result"><i class="fa fa-check"></i><b>10.6</b> Result</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="transforming-data.html"><a href="transforming-data.html"><i class="fa fa-check"></i><b>11</b> Transforming Data</a><ul>
 <li class="chapter" data-level="11.1" data-path="transforming-data.html"><a href="transforming-data.html#overview-5"><i class="fa fa-check"></i><b>11.1</b> Overview</a></li>
-<li class="chapter" data-level="11.2" data-path="transforming-data.html"><a href="transforming-data.html#order"><i class="fa fa-check"></i><b>11.2</b> Order</a><ul>
-<li class="chapter" data-level="11.2.1" data-path="transforming-data.html"><a href="transforming-data.html#changing-variables"><i class="fa fa-check"></i><b>11.2.1</b> Changing variables</a></li>
-<li class="chapter" data-level="11.2.2" data-path="transforming-data.html"><a href="transforming-data.html#adding-variables"><i class="fa fa-check"></i><b>11.2.2</b> Adding variables</a></li>
-<li class="chapter" data-level="11.2.3" data-path="transforming-data.html"><a href="transforming-data.html#combine"><i class="fa fa-check"></i><b>11.2.3</b> Combine</a></li>
-</ul></li>
+<li class="chapter" data-level="11.2" data-path="transforming-data.html"><a href="transforming-data.html#order-table"><i class="fa fa-check"></i><b>11.2</b> Order table</a></li>
+<li class="chapter" data-level="11.3" data-path="transforming-data.html"><a href="transforming-data.html#combine-tables"><i class="fa fa-check"></i><b>11.3</b> Combine tables</a></li>
+<li class="chapter" data-level="11.4" data-path="transforming-data.html"><a href="transforming-data.html#change-variable"><i class="fa fa-check"></i><b>11.4</b> Change variable</a></li>
+<li class="chapter" data-level="11.5" data-path="transforming-data.html"><a href="transforming-data.html#add-variable"><i class="fa fa-check"></i><b>11.5</b> Add variable</a></li>
+<li class="chapter" data-level="11.6" data-path="transforming-data.html"><a href="transforming-data.html#aggregate-factors"><i class="fa fa-check"></i><b>11.6</b> Aggregate factors</a></li>
 </ul></li>
 <li class="part"><span><b>II Introduction to Statistics</b></span></li>
 <li class="chapter" data-level="12" data-path="whatisstats.html"><a href="whatisstats.html"><i class="fa fa-check"></i><b>12</b> What is Statistics?</a></li>
@@ -379,7 +379,7 @@ Figure 4.1: Artwork by Allison Horst contributed to Hadley Wickham’s talk “T
 <strong>Goal</strong>
 </td>
 <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
-To teach students how to transform raw tabular data to make it suitable for statistical analysis.
+To learn how to transform tabular data to make it suitable for statistical analysis.
 </td>
 </tr>
 <tr>
@@ -387,7 +387,7 @@ To teach students how to transform raw tabular data to make it suitable for stat
 <strong>tl;dr</strong>
 </td>
 <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
-Wrangling data is challenging in any context, but at least it’s reproducible in R.
+Transforming data is challenging in any context, but at least it’s reproducible in R.
 </td>
 </tr>
 <tr>
@@ -398,19 +398,16 @@ Wrangling data is challenging in any context, but at least it’s reproducible i
 Here, you will learn about<br>
 <ol>
 <li>
-arranging data.frames by ordering along one or more variables or columns,
+arranging data.frames by ordering along one or more variables,
 </li>
 <li>
-subsetting data.frames by filtering rows and selecting columns,
+combining data.frames by binding rows and columns,
 </li>
 <li>
-transforming data.frames by adding or changing variable or column values,
+transforming data.frames by adding variables or changing values, and
 </li>
 <li>
-summarizing data.frames by aggregating factor variables, and
-</li>
-<li>
-combining data.frames by binding rows and/or columns.
+summarizing data.frames by aggregating factor variables.
 </li>
 </ol>
 </td>
@@ -441,7 +438,7 @@ NONE
 </tr>
 </tbody>
 </table>
-<p>For this, we’ll use our penguins data.</p>
+<p>Often times, getting your data ready for analysis will require you to transform it in one way or another, though not, of course, in ways that would imply you are cooking the books! To explore the various tools R provides for doing this, we’ll return again to our penguins data.</p>
 <div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="transforming-data.html#cb136-1"></a>penguins &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;penguins.csv&quot;</span>)</span>
 <span id="cb136-2"><a href="transforming-data.html#cb136-2"></a></span>
 <span id="cb136-3"><a href="transforming-data.html#cb136-3"></a><span class="kw">str</span>(penguins)</span>
@@ -454,73 +451,180 @@ NONE
 <span id="cb136-10"><a href="transforming-data.html#cb136-10"></a><span class="co">##  $ sex              : chr  &quot;male&quot; &quot;female&quot; &quot;female&quot; NA ...</span></span>
 <span id="cb136-11"><a href="transforming-data.html#cb136-11"></a><span class="co">##  $ year             : int  2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...</span></span></code></pre></div>
 </div>
-<div id="order" class="section level2">
-<h2><span class="header-section-number">11.2</span> Order</h2>
-<p>Suppose we want to re-arrange the rows of our penguins by sorting them in terms of body mass. Ideally, base R would provide us a function that takes a data.frame as input, along with a specification of which variable or variables should be used to re-order rows, and return the re-ordered data.frame as output. Unfortunately, that does not exist, not in base R anyway. So, ordering a data.frame requires some finagling. Specifically, you need to create an <em>index vector</em> of the re-ordered rows and apply that to the data.frame. To create such a vector, we use the <code>order()</code> function.</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="transforming-data.html#cb137-1"></a><span class="co"># create index vector</span></span>
-<span id="cb137-2"><a href="transforming-data.html#cb137-2"></a>row_i &lt;-<span class="st"> </span><span class="kw">order</span>(penguins<span class="op">$</span>body_mass_g)</span>
-<span id="cb137-3"><a href="transforming-data.html#cb137-3"></a></span>
-<span id="cb137-4"><a href="transforming-data.html#cb137-4"></a>row_i[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</span>
-<span id="cb137-5"><a href="transforming-data.html#cb137-5"></a><span class="co">## [1] 315  59  65  55  99</span></span>
-<span id="cb137-6"><a href="transforming-data.html#cb137-6"></a>order_penguins &lt;-<span class="st"> </span>penguins[row_i, ]</span>
-<span id="cb137-7"><a href="transforming-data.html#cb137-7"></a></span>
-<span id="cb137-8"><a href="transforming-data.html#cb137-8"></a><span class="kw">head</span>(order_penguins)</span>
-<span id="cb137-9"><a href="transforming-data.html#cb137-9"></a><span class="co">##       species    island bill_length_mm flipper_length_mm body_mass_g    sex</span></span>
-<span id="cb137-10"><a href="transforming-data.html#cb137-10"></a><span class="co">## 315 Chinstrap     Dream           46.9               192        2700 female</span></span>
-<span id="cb137-11"><a href="transforming-data.html#cb137-11"></a><span class="co">## 59     Adelie    Biscoe           36.5               181        2850 female</span></span>
-<span id="cb137-12"><a href="transforming-data.html#cb137-12"></a><span class="co">## 65     Adelie    Biscoe           36.4               184        2850 female</span></span>
-<span id="cb137-13"><a href="transforming-data.html#cb137-13"></a><span class="co">## 55     Adelie    Biscoe           34.5               187        2900 female</span></span>
-<span id="cb137-14"><a href="transforming-data.html#cb137-14"></a><span class="co">## 99     Adelie     Dream           33.1               178        2900 female</span></span>
-<span id="cb137-15"><a href="transforming-data.html#cb137-15"></a><span class="co">## 117    Adelie Torgersen           38.6               188        2900 female</span></span>
-<span id="cb137-16"><a href="transforming-data.html#cb137-16"></a><span class="co">##     year</span></span>
-<span id="cb137-17"><a href="transforming-data.html#cb137-17"></a><span class="co">## 315 2008</span></span>
-<span id="cb137-18"><a href="transforming-data.html#cb137-18"></a><span class="co">## 59  2008</span></span>
-<span id="cb137-19"><a href="transforming-data.html#cb137-19"></a><span class="co">## 65  2008</span></span>
-<span id="cb137-20"><a href="transforming-data.html#cb137-20"></a><span class="co">## 55  2008</span></span>
-<span id="cb137-21"><a href="transforming-data.html#cb137-21"></a><span class="co">## 99  2008</span></span>
-<span id="cb137-22"><a href="transforming-data.html#cb137-22"></a><span class="co">## 117 2009</span></span></code></pre></div>
-<p>Note, that you can order by increasing values of the variable (<code>decreasing = FALSE</code>) or decreasing values of the variable (<code>increasing = TRUE</code>).</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="transforming-data.html#cb138-1"></a>row_i &lt;-<span class="st"> </span><span class="kw">order</span>(penguins<span class="op">$</span>body_mass_g, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb138-2"><a href="transforming-data.html#cb138-2"></a></span>
-<span id="cb138-3"><a href="transforming-data.html#cb138-3"></a>order_penguins &lt;-<span class="st"> </span>penguins[row_i, ]</span>
-<span id="cb138-4"><a href="transforming-data.html#cb138-4"></a></span>
-<span id="cb138-5"><a href="transforming-data.html#cb138-5"></a><span class="kw">head</span>(order_penguins)</span>
-<span id="cb138-6"><a href="transforming-data.html#cb138-6"></a><span class="co">##     species island bill_length_mm flipper_length_mm body_mass_g  sex year</span></span>
-<span id="cb138-7"><a href="transforming-data.html#cb138-7"></a><span class="co">## 170  Gentoo Biscoe           49.2               221        6300 male 2007</span></span>
-<span id="cb138-8"><a href="transforming-data.html#cb138-8"></a><span class="co">## 186  Gentoo Biscoe           59.6               230        6050 male 2007</span></span>
-<span id="cb138-9"><a href="transforming-data.html#cb138-9"></a><span class="co">## 230  Gentoo Biscoe           51.1               220        6000 male 2008</span></span>
-<span id="cb138-10"><a href="transforming-data.html#cb138-10"></a><span class="co">## 270  Gentoo Biscoe           48.8               222        6000 male 2009</span></span>
-<span id="cb138-11"><a href="transforming-data.html#cb138-11"></a><span class="co">## 232  Gentoo Biscoe           45.2               223        5950 male 2008</span></span>
-<span id="cb138-12"><a href="transforming-data.html#cb138-12"></a><span class="co">## 264  Gentoo Biscoe           49.8               229        5950 male 2009</span></span></code></pre></div>
-<div id="changing-variables" class="section level3">
-<h3><span class="header-section-number">11.2.1</span> Changing variables</h3>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="transforming-data.html#cb139-1"></a>new_penguins &lt;-<span class="st"> </span><span class="kw">transform</span>(penguins, </span>
-<span id="cb139-2"><a href="transforming-data.html#cb139-2"></a>                          <span class="dt">body_mass_g =</span> <span class="kw">scale</span>(body_mass_g))</span></code></pre></div>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="transforming-data.html#cb140-1"></a>new_penguins &lt;-<span class="st"> </span><span class="kw">transform</span>(penguins, </span>
-<span id="cb140-2"><a href="transforming-data.html#cb140-2"></a>                          <span class="dt">body_mass_g =</span> <span class="kw">scale</span>(body_mass_g),</span>
-<span id="cb140-3"><a href="transforming-data.html#cb140-3"></a>                          <span class="dt">bill_length_mm =</span> <span class="kw">scale</span>(bill_length_mm),</span>
-<span id="cb140-4"><a href="transforming-data.html#cb140-4"></a>                          <span class="dt">flipper_length_mm =</span> <span class="kw">scale</span>(flipper_length_mm))</span></code></pre></div>
+<div id="order-table" class="section level2">
+<h2><span class="header-section-number">11.2</span> Order table</h2>
+<p>Suppose we want to re-arrange the rows of our penguins data by sorting in terms of body mass. Ideally, base R would provide us a function that takes a data.frame as input, along with a specification of which variable or variables should be used to re-order rows, and return the re-ordered data.frame as output. Unfortunately, that does not exist, not in base R anyway. So, ordering a data.frame requires some finagling. Specifically, you need to create an <em>index vector</em> of the re-ordered rows and apply that to the data.frame. In this case, the sorting vector needs to have a length equal to the number of rows in the table. This is because we are not subsetting or filtering the rows, but simply returning them in a different order. To create such a vector, we use the <code>order()</code> function, passing it the variable we want to order the table with. It is probably easiest to see how <code>order()</code> works by first considering a vector of un-ordered letters.</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="transforming-data.html#cb137-1"></a>unordered_letters &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;b&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;c&quot;</span>)</span>
+<span id="cb137-2"><a href="transforming-data.html#cb137-2"></a></span>
+<span id="cb137-3"><a href="transforming-data.html#cb137-3"></a>(i &lt;-<span class="st"> </span><span class="kw">order</span>(unordered_letters))</span>
+<span id="cb137-4"><a href="transforming-data.html#cb137-4"></a><span class="co">## [1] 4 1 5 2 3</span></span></code></pre></div>
+<p>The vector <code>order()</code> returns here is a vector of numeric positions. These numeric positions line up with the letters in the <code>unordered_letters</code> vector like so:</p>
+<ul>
+<li><code>4</code> refers to <code>"a"</code></li>
+<li><code>1</code> refers to <code>"b"</code>,</li>
+<li><code>5</code> refers to <code>"c"</code>,</li>
+<li><code>2</code> refers to <code>"d"</code>, and</li>
+<li><code>3</code> refers to <code>"e"</code>.</li>
+</ul>
+<p>We can, thus, use the result of <code>order()</code> to put the letters of <code>unordered_letters</code> into their proper alphabetic order.</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="transforming-data.html#cb138-1"></a>unordered_letters[i]</span>
+<span id="cb138-2"><a href="transforming-data.html#cb138-2"></a><span class="co">## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;</span></span></code></pre></div>
+<p>When applied to a variable in a table, the numeric positions returned are also the row numbers. Hence, we can use the result of <code>order()</code> to re-arrange rows in a table by the specified variable.</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="transforming-data.html#cb139-1"></a><span class="co"># create index vector</span></span>
+<span id="cb139-2"><a href="transforming-data.html#cb139-2"></a>row_order &lt;-<span class="st"> </span><span class="kw">order</span>(penguins<span class="op">$</span>body_mass_g)</span>
+<span id="cb139-3"><a href="transforming-data.html#cb139-3"></a></span>
+<span id="cb139-4"><a href="transforming-data.html#cb139-4"></a>row_order[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</span>
+<span id="cb139-5"><a href="transforming-data.html#cb139-5"></a><span class="co">## [1] 315  59  65  55  99</span></span>
+<span id="cb139-6"><a href="transforming-data.html#cb139-6"></a>order_penguins &lt;-<span class="st"> </span>penguins[row_order, ]</span>
+<span id="cb139-7"><a href="transforming-data.html#cb139-7"></a></span>
+<span id="cb139-8"><a href="transforming-data.html#cb139-8"></a><span class="kw">head</span>(order_penguins)</span>
+<span id="cb139-9"><a href="transforming-data.html#cb139-9"></a><span class="co">##       species    island bill_length_mm flipper_length_mm body_mass_g    sex</span></span>
+<span id="cb139-10"><a href="transforming-data.html#cb139-10"></a><span class="co">## 315 Chinstrap     Dream           46.9               192        2700 female</span></span>
+<span id="cb139-11"><a href="transforming-data.html#cb139-11"></a><span class="co">## 59     Adelie    Biscoe           36.5               181        2850 female</span></span>
+<span id="cb139-12"><a href="transforming-data.html#cb139-12"></a><span class="co">## 65     Adelie    Biscoe           36.4               184        2850 female</span></span>
+<span id="cb139-13"><a href="transforming-data.html#cb139-13"></a><span class="co">## 55     Adelie    Biscoe           34.5               187        2900 female</span></span>
+<span id="cb139-14"><a href="transforming-data.html#cb139-14"></a><span class="co">## 99     Adelie     Dream           33.1               178        2900 female</span></span>
+<span id="cb139-15"><a href="transforming-data.html#cb139-15"></a><span class="co">## 117    Adelie Torgersen           38.6               188        2900 female</span></span>
+<span id="cb139-16"><a href="transforming-data.html#cb139-16"></a><span class="co">##     year</span></span>
+<span id="cb139-17"><a href="transforming-data.html#cb139-17"></a><span class="co">## 315 2008</span></span>
+<span id="cb139-18"><a href="transforming-data.html#cb139-18"></a><span class="co">## 59  2008</span></span>
+<span id="cb139-19"><a href="transforming-data.html#cb139-19"></a><span class="co">## 65  2008</span></span>
+<span id="cb139-20"><a href="transforming-data.html#cb139-20"></a><span class="co">## 55  2008</span></span>
+<span id="cb139-21"><a href="transforming-data.html#cb139-21"></a><span class="co">## 99  2008</span></span>
+<span id="cb139-22"><a href="transforming-data.html#cb139-22"></a><span class="co">## 117 2009</span></span></code></pre></div>
+<p>Note, that you can order by increasing (<code>decreasing = FALSE</code>) or decreasing (<code>increasing = TRUE</code>) values of the variable.</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="transforming-data.html#cb140-1"></a>row_order  &lt;-<span class="st"> </span><span class="kw">order</span>(penguins<span class="op">$</span>body_mass_g, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb140-2"><a href="transforming-data.html#cb140-2"></a></span>
+<span id="cb140-3"><a href="transforming-data.html#cb140-3"></a>order_penguins &lt;-<span class="st"> </span>penguins[row_order , ]</span>
+<span id="cb140-4"><a href="transforming-data.html#cb140-4"></a></span>
+<span id="cb140-5"><a href="transforming-data.html#cb140-5"></a><span class="kw">head</span>(order_penguins)</span>
+<span id="cb140-6"><a href="transforming-data.html#cb140-6"></a><span class="co">##     species island bill_length_mm flipper_length_mm body_mass_g  sex year</span></span>
+<span id="cb140-7"><a href="transforming-data.html#cb140-7"></a><span class="co">## 170  Gentoo Biscoe           49.2               221        6300 male 2007</span></span>
+<span id="cb140-8"><a href="transforming-data.html#cb140-8"></a><span class="co">## 186  Gentoo Biscoe           59.6               230        6050 male 2007</span></span>
+<span id="cb140-9"><a href="transforming-data.html#cb140-9"></a><span class="co">## 230  Gentoo Biscoe           51.1               220        6000 male 2008</span></span>
+<span id="cb140-10"><a href="transforming-data.html#cb140-10"></a><span class="co">## 270  Gentoo Biscoe           48.8               222        6000 male 2009</span></span>
+<span id="cb140-11"><a href="transforming-data.html#cb140-11"></a><span class="co">## 232  Gentoo Biscoe           45.2               223        5950 male 2008</span></span>
+<span id="cb140-12"><a href="transforming-data.html#cb140-12"></a><span class="co">## 264  Gentoo Biscoe           49.8               229        5950 male 2009</span></span></code></pre></div>
+<p>You can also order a table by multiple variables.</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="transforming-data.html#cb141-1"></a>row_order &lt;-<span class="st"> </span><span class="kw">order</span>(penguins<span class="op">$</span>species,</span>
+<span id="cb141-2"><a href="transforming-data.html#cb141-2"></a>                   penguins<span class="op">$</span>island,</span>
+<span id="cb141-3"><a href="transforming-data.html#cb141-3"></a>                   penguins<span class="op">$</span>body_mass_g)</span>
+<span id="cb141-4"><a href="transforming-data.html#cb141-4"></a></span>
+<span id="cb141-5"><a href="transforming-data.html#cb141-5"></a>order_penguins &lt;-<span class="st"> </span>penguins[row_order , ]</span>
+<span id="cb141-6"><a href="transforming-data.html#cb141-6"></a></span>
+<span id="cb141-7"><a href="transforming-data.html#cb141-7"></a><span class="kw">head</span>(order_penguins)</span>
+<span id="cb141-8"><a href="transforming-data.html#cb141-8"></a><span class="co">##     species island bill_length_mm flipper_length_mm body_mass_g    sex year</span></span>
+<span id="cb141-9"><a href="transforming-data.html#cb141-9"></a><span class="co">## 59   Adelie Biscoe           36.5               181        2850 female 2008</span></span>
+<span id="cb141-10"><a href="transforming-data.html#cb141-10"></a><span class="co">## 65   Adelie Biscoe           36.4               184        2850 female 2008</span></span>
+<span id="cb141-11"><a href="transforming-data.html#cb141-11"></a><span class="co">## 55   Adelie Biscoe           34.5               187        2900 female 2008</span></span>
+<span id="cb141-12"><a href="transforming-data.html#cb141-12"></a><span class="co">## 105  Adelie Biscoe           37.9               193        2925 female 2009</span></span>
+<span id="cb141-13"><a href="transforming-data.html#cb141-13"></a><span class="co">## 103  Adelie Biscoe           37.7               183        3075 female 2009</span></span>
+<span id="cb141-14"><a href="transforming-data.html#cb141-14"></a><span class="co">## 29   Adelie Biscoe           37.9               172        3150 female 2007</span></span></code></pre></div>
 </div>
-<div id="adding-variables" class="section level3">
-<h3><span class="header-section-number">11.2.2</span> Adding variables</h3>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="transforming-data.html#cb141-1"></a>new_penguins &lt;-<span class="st"> </span><span class="kw">transform</span>(penguins, </span>
-<span id="cb141-2"><a href="transforming-data.html#cb141-2"></a>                          <span class="dt">body_mass_zs =</span> <span class="kw">scale</span>(body_mass_g))</span>
-<span id="cb141-3"><a href="transforming-data.html#cb141-3"></a></span>
-<span id="cb141-4"><a href="transforming-data.html#cb141-4"></a><span class="kw">setdiff</span>(<span class="kw">names</span>(new_penguins), <span class="kw">names</span>(penguins))</span>
-<span id="cb141-5"><a href="transforming-data.html#cb141-5"></a><span class="co">## [1] &quot;body_mass_zs&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="transforming-data.html#cb142-1"></a>new_penguins<span class="op">$</span>body_mass_zs &lt;-<span class="st"> </span><span class="kw">scale</span>(penguins<span class="op">$</span>body_mass_g)</span>
+<div id="combine-tables" class="section level2">
+<h2><span class="header-section-number">11.3</span> Combine tables</h2>
+<p>You will often find yourself wanting to combine multiple tables together. Sometimes this is because of the way that you collected data in the field, like having multiple forms with multiple tables that make data collection easier. Other times it is probably owing to the fact that you collected some data, then someone else collected some more, and now you need to put the two together. There are two primary ways to do this in R. Which one you should use depends on the circumstances of your data.</p>
+<ul>
+<li>If you have two tables with the <strong>same variables</strong> but <strong>new observations</strong>, then you will combine the observations or rows of each table together. If you had, for example, gone out a year or two after the initial phases of penguins data collection and measured the same variables as before (flipper length, bill length, and body mass), you would want to ensure that the newly measured values remain <em>bound</em> to the same variables in your original table. This is achieved with <code>rbind()</code>.<br />
+</li>
+<li>If you have two tables with <strong>new variables</strong> but the <strong>same observations</strong>, then you will combine the variables or columns of each table together. If you had, for example, identified the same penguins during the same years as in the initial phases of penguin data collection and, say, measured their heights in centimeters and the size of their feet in millimeters, you would want to ensure that these values are <em>bound</em> to the same penguins in the same years as your other variables. This is achieved with <code>cbind()</code>.</li>
+</ul>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="transforming-data.html#cb142-1"></a>penguins &lt;-<span class="st"> </span><span class="kw">rbind</span>(penguins, new_observations)</span>
 <span id="cb142-2"><a href="transforming-data.html#cb142-2"></a></span>
-<span id="cb142-3"><a href="transforming-data.html#cb142-3"></a>new_penguins[ , <span class="st">&quot;body_mass_zs&quot;</span>] &lt;-<span class="st"> </span><span class="kw">scale</span>(penguins<span class="op">$</span>body_mass_g)</span></code></pre></div>
+<span id="cb142-3"><a href="transforming-data.html#cb142-3"></a>penguins &lt;-<span class="st"> </span><span class="kw">cbind</span>(penguins, new_variables)</span></code></pre></div>
 </div>
-<div id="combine" class="section level3">
-<h3><span class="header-section-number">11.2.3</span> Combine</h3>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="transforming-data.html#cb143-1"></a>all_penguins &lt;-<span class="st"> </span><span class="kw">rbind</span>(penguins, new_penguins)</span>
-<span id="cb143-2"><a href="transforming-data.html#cb143-2"></a></span>
-<span id="cb143-3"><a href="transforming-data.html#cb143-3"></a>penguins &lt;-<span class="st"> </span><span class="kw">cbind</span>(penguins, new_variables)</span></code></pre></div>
-<p>You can also add new variables with <code>cbind()</code>.</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="transforming-data.html#cb144-1"></a>new_penguins &lt;-<span class="st"> </span><span class="kw">cbind</span>(penguins, <span class="st">&quot;body_mass_z&quot;</span> =<span class="st"> </span><span class="kw">scale</span>(penguins<span class="op">$</span>body_mass_g))</span></code></pre></div>
+<div id="change-variable" class="section level2">
+<h2><span class="header-section-number">11.4</span> Change variable</h2>
+<p>Sometimes you will want to change the values of a variable. The simple, friendly way to do this involves the <code>transform()</code> function.</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="transforming-data.html#cb143-1"></a><span class="co"># single variable</span></span>
+<span id="cb143-2"><a href="transforming-data.html#cb143-2"></a>penguins &lt;-<span class="st"> </span><span class="kw">transform</span>(penguins, </span>
+<span id="cb143-3"><a href="transforming-data.html#cb143-3"></a>                      <span class="dt">body_mass_g =</span> body_mass_g <span class="op">*</span><span class="st"> </span><span class="dv">10</span>)</span>
+<span id="cb143-4"><a href="transforming-data.html#cb143-4"></a></span>
+<span id="cb143-5"><a href="transforming-data.html#cb143-5"></a><span class="co"># multiple variables</span></span>
+<span id="cb143-6"><a href="transforming-data.html#cb143-6"></a>penguins &lt;-<span class="st"> </span><span class="kw">transform</span>(penguins, </span>
+<span id="cb143-7"><a href="transforming-data.html#cb143-7"></a>                      <span class="dt">body_mass_g =</span> <span class="kw">scale</span>(body_mass_g),</span>
+<span id="cb143-8"><a href="transforming-data.html#cb143-8"></a>                      <span class="dt">bill_length_mm =</span> <span class="kw">scale</span>(bill_length_mm),</span>
+<span id="cb143-9"><a href="transforming-data.html#cb143-9"></a>                      <span class="dt">flipper_length_mm =</span> <span class="kw">scale</span>(flipper_length_mm))</span></code></pre></div>
 
+<div class="rmdnote">
+As with <code>subset()</code>, you do not have to quote variable names when referring to them within the <code>transform()</code> function. Again, this is because R knows that you are referring to the variables within the specified table.
 </div>
+
+<p>You can achieve the same result with the <code>[</code> and <code>$</code> operators, though in a less elegant way, especially for multiple variables.</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="transforming-data.html#cb144-1"></a><span class="co"># bracket operator</span></span>
+<span id="cb144-2"><a href="transforming-data.html#cb144-2"></a>penguins[ , <span class="st">&quot;body_mass_g&quot;</span>] &lt;-<span class="st"> </span><span class="kw">scale</span>(penguins<span class="op">$</span>body_mass_g)</span>
+<span id="cb144-3"><a href="transforming-data.html#cb144-3"></a>penguins[ , <span class="st">&quot;bill_length_mm&quot;</span>] &lt;-<span class="st"> </span><span class="kw">scale</span>(penguins<span class="op">$</span>bill_length_mm)</span>
+<span id="cb144-4"><a href="transforming-data.html#cb144-4"></a>penguins[ , <span class="st">&quot;flipper_length_mm&quot;</span>] =<span class="st"> </span><span class="kw">scale</span>(penguins<span class="op">$</span>flipper_length_mm)</span>
+<span id="cb144-5"><a href="transforming-data.html#cb144-5"></a></span>
+<span id="cb144-6"><a href="transforming-data.html#cb144-6"></a><span class="co"># dollar operator</span></span>
+<span id="cb144-7"><a href="transforming-data.html#cb144-7"></a>penguins<span class="op">$</span>body_mass_g &lt;-<span class="st"> </span><span class="kw">scale</span>(penguins<span class="op">$</span>body_mass_g)</span>
+<span id="cb144-8"><a href="transforming-data.html#cb144-8"></a>penguins<span class="op">$</span>bill_length_mm &lt;-<span class="st"> </span><span class="kw">scale</span>(penguins<span class="op">$</span>bill_length_mm)</span>
+<span id="cb144-9"><a href="transforming-data.html#cb144-9"></a>penguins<span class="op">$</span>flipper_length_mm =<span class="st"> </span><span class="kw">scale</span>(penguins<span class="op">$</span>flipper_length_mm)</span></code></pre></div>
+</div>
+<div id="add-variable" class="section level2">
+<h2><span class="header-section-number">11.5</span> Add variable</h2>
+<p>The <code>transform()</code> function also allows you to append new variables to your table. This is most useful when you want to use other variables in the table to define a new variable. For instance, if we wanted to find the ratio of bill length to body mass for each individual penguin and add that ratio as a new column, we could do this:</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="transforming-data.html#cb145-1"></a>original_variables &lt;-<span class="st"> </span><span class="kw">names</span>(penguins)</span>
+<span id="cb145-2"><a href="transforming-data.html#cb145-2"></a></span>
+<span id="cb145-3"><a href="transforming-data.html#cb145-3"></a><span class="co"># add ratio variable</span></span>
+<span id="cb145-4"><a href="transforming-data.html#cb145-4"></a>penguins &lt;-<span class="st"> </span><span class="kw">transform</span>(penguins, </span>
+<span id="cb145-5"><a href="transforming-data.html#cb145-5"></a>                      <span class="dt">ratio_bill_mass =</span> bill_length_mm <span class="op">/</span><span class="st"> </span>body_mass_g)</span>
+<span id="cb145-6"><a href="transforming-data.html#cb145-6"></a></span>
+<span id="cb145-7"><a href="transforming-data.html#cb145-7"></a>new_variables &lt;-<span class="st"> </span><span class="kw">names</span>(penguins)</span>
+<span id="cb145-8"><a href="transforming-data.html#cb145-8"></a></span>
+<span id="cb145-9"><a href="transforming-data.html#cb145-9"></a><span class="kw">setdiff</span>(new_variables, original_variables)</span>
+<span id="cb145-10"><a href="transforming-data.html#cb145-10"></a><span class="co">## [1] &quot;ratio_bill_mass&quot;</span></span></code></pre></div>
+<p>The <code>setdiff()</code> function (short for <em>set difference</em>) here is simply asking for the names of variables in the modified penguins table that are <em>not</em> in the original penguins table, so this is just a way of showing that we have in fact added a new variable.</p>
+<p>As above, you can achieve the same result with the <code>[</code> and <code>$</code> operators, though again in a far less friendly way.</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="transforming-data.html#cb146-1"></a>penguins<span class="op">$</span>ratio_bill_mass &lt;-<span class="st"> </span>penguins<span class="op">$</span>bill_length_mm <span class="op">/</span><span class="st"> </span>penguins<span class="op">$</span>body_mass_g</span>
+<span id="cb146-2"><a href="transforming-data.html#cb146-2"></a></span>
+<span id="cb146-3"><a href="transforming-data.html#cb146-3"></a>penguins[ , <span class="st">&quot;body_mass_zs&quot;</span>] &lt;-<span class="st"> </span>penguins<span class="op">$</span>bill_length_mm <span class="op">/</span><span class="st"> </span>penguins<span class="op">$</span>body_mass_g</span></code></pre></div>
+<p>Using these subset operators can get exceptionally tedious when you want to add many new variables based on values of the original variables.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="transforming-data.html#cb147-1"></a>new_penguins &lt;-<span class="st"> </span><span class="kw">transform</span>(penguins, </span>
+<span id="cb147-2"><a href="transforming-data.html#cb147-2"></a>                          <span class="dt">ratio_bill_mass =</span> bill_length_mm <span class="op">/</span><span class="st"> </span>body_mass_g,</span>
+<span id="cb147-3"><a href="transforming-data.html#cb147-3"></a>                          <span class="dt">ratio_bill_fipper =</span> bill_length_mm <span class="op">/</span><span class="st"> </span>flipper_length_mm,</span>
+<span id="cb147-4"><a href="transforming-data.html#cb147-4"></a>                          <span class="dt">normalized_body_mass =</span> body_mass_g <span class="op">/</span><span class="st"> </span><span class="kw">max</span>(body_mass_g))</span>
+<span id="cb147-5"><a href="transforming-data.html#cb147-5"></a></span>
+<span id="cb147-6"><a href="transforming-data.html#cb147-6"></a><span class="kw">setdiff</span>(<span class="kw">names</span>(new_penguins), <span class="kw">names</span>(penguins))</span>
+<span id="cb147-7"><a href="transforming-data.html#cb147-7"></a><span class="co">## [1] &quot;ratio_bill_fipper&quot;    &quot;normalized_body_mass&quot;</span></span></code></pre></div>
+</div>
+<div id="aggregate-factors" class="section level2">
+<h2><span class="header-section-number">11.6</span> Aggregate factors</h2>
+<p>Suppose you want to know the mean body mass of penguins <em>on each island</em> or the median bill length <em>of each species</em>. To find these values, you need a way of summarizing your data relative to one or more groups. To achieve this, R provides the <code>aggregate()</code> function. This is a powerful, albeit quirky, function. The parameters you will mosty likely interact with on a regular basis are these:</p>
+<ul>
+<li><code>data</code> = the data.frame containing the variable you want to summarize,<br />
+</li>
+<li><code>formula</code> = an R formula of the form <code>y ~ c1 + c2</code> that specifies the variable (<code>y</code>) to be summarized as a function of one or more factor variables (<code>c1</code>, <code>c2</code>, …, <code>cn</code>), and<br />
+</li>
+<li><code>FUN</code> = the R function that you use to compute the summary statistic.</li>
+</ul>
+<p>As a simple case, consider the scenario where we want to get mean body mass for each island.</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="transforming-data.html#cb148-1"></a><span class="kw">aggregate</span>(<span class="dt">formula =</span> (body_mass_g <span class="op">~</span><span class="st"> </span>island),</span>
+<span id="cb148-2"><a href="transforming-data.html#cb148-2"></a>          <span class="dt">data =</span> penguins,</span>
+<span id="cb148-3"><a href="transforming-data.html#cb148-3"></a>          <span class="dt">FUN =</span> mean)</span>
+<span id="cb148-4"><a href="transforming-data.html#cb148-4"></a><span class="co">##      island body_mass_g</span></span>
+<span id="cb148-5"><a href="transforming-data.html#cb148-5"></a><span class="co">## 1    Biscoe    4716.018</span></span>
+<span id="cb148-6"><a href="transforming-data.html#cb148-6"></a><span class="co">## 2     Dream    3712.903</span></span>
+<span id="cb148-7"><a href="transforming-data.html#cb148-7"></a><span class="co">## 3 Torgersen    3706.373</span></span></code></pre></div>
+<p>And median bill length of each species.</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="transforming-data.html#cb149-1"></a><span class="kw">aggregate</span>(<span class="dt">formula =</span> (bill_length_mm <span class="op">~</span><span class="st"> </span>species),</span>
+<span id="cb149-2"><a href="transforming-data.html#cb149-2"></a>          <span class="dt">data =</span> penguins,</span>
+<span id="cb149-3"><a href="transforming-data.html#cb149-3"></a>          <span class="dt">FUN =</span> median)</span>
+<span id="cb149-4"><a href="transforming-data.html#cb149-4"></a><span class="co">##     species bill_length_mm</span></span>
+<span id="cb149-5"><a href="transforming-data.html#cb149-5"></a><span class="co">## 1    Adelie          38.80</span></span>
+<span id="cb149-6"><a href="transforming-data.html#cb149-6"></a><span class="co">## 2 Chinstrap          49.55</span></span>
+<span id="cb149-7"><a href="transforming-data.html#cb149-7"></a><span class="co">## 3    Gentoo          47.30</span></span></code></pre></div>
+<p>And, finally, mean body mass for each species on each island.</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="transforming-data.html#cb150-1"></a><span class="kw">aggregate</span>(<span class="dt">formula =</span> (body_mass_g <span class="op">~</span><span class="st"> </span>island <span class="op">+</span><span class="st"> </span>species),</span>
+<span id="cb150-2"><a href="transforming-data.html#cb150-2"></a>          <span class="dt">data =</span> penguins,</span>
+<span id="cb150-3"><a href="transforming-data.html#cb150-3"></a>          <span class="dt">FUN =</span> mean)</span>
+<span id="cb150-4"><a href="transforming-data.html#cb150-4"></a><span class="co">##      island   species body_mass_g</span></span>
+<span id="cb150-5"><a href="transforming-data.html#cb150-5"></a><span class="co">## 1    Biscoe    Adelie    3709.659</span></span>
+<span id="cb150-6"><a href="transforming-data.html#cb150-6"></a><span class="co">## 2     Dream    Adelie    3688.393</span></span>
+<span id="cb150-7"><a href="transforming-data.html#cb150-7"></a><span class="co">## 3 Torgersen    Adelie    3706.373</span></span>
+<span id="cb150-8"><a href="transforming-data.html#cb150-8"></a><span class="co">## 4     Dream Chinstrap    3733.088</span></span>
+<span id="cb150-9"><a href="transforming-data.html#cb150-9"></a><span class="co">## 5    Biscoe    Gentoo    5076.016</span></span></code></pre></div>
+
 </div>
 </div>
 
