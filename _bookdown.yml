@@ -11,7 +11,7 @@ rmd_files:
     - "14-workspace_management.Rmd"
     - "15-subsetting_data.Rmd"
     - "16-transforming_data.Rmd"
-    - "21-what_is_statistics.Rmd"
+    - "21-empirical_modeling.Rmd"
     - "22-univariate_description.Rmd"
     - "23-probability_distributions.Rmd"
     - "24-inference_tests.Rmd"

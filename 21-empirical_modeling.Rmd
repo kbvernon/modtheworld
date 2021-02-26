@@ -1,0 +1,361 @@
+# (PART) Introduction to Statistics {-}
+
+# Empirical Modeling {#empirical-modeling}
+
+```{r, include = FALSE, echo = FALSE, child = "R/before_chunk.Rmd"}
+```
+
+## Overview
+
+```{r, echo = FALSE, results = 'asis'}
+
+insert_intro(
+  goal = "To understand the process of empirical modeling.",
+  tldr = "",
+  outcomes = c("modeling an outcome,", 
+               "sampling from a population,",
+               "describing a sample, and",
+               "inferring properties of a population."),
+  datasets = list(),
+  requirements = list(),
+  readings = list()
+)
+
+```
+
+Empirical modeling is for scientists what inquiry is for the philosopher Charles Sanders Peirce, a process by which one moves from a state of doubt or uncertainty about some topic to one of belief, understanding, or certainty. For Peirce, this process is almost mechanical, like a reflex response to the irritation of a nerve. You find yourself stirred by the "irritation of doubt" to find a belief that puts your questioning mind to rest. For models, the process is strikingly similar. Uncertainty tugs on a model like a stretched spring, compelling it to settle on a state of energetic equilibrium.^[Joshua Loftus' blog post on [Least squares as springs](https://joshualoftus.com/posts/2020-11-23-least-squares-as-springs/) actually gave me the idea for this analogy.] The objective, in either case, is to _minimize uncertainty_ about some topic, as far as that is possible. In what follows, we'll unpack this idea in more detail, starting first with the very idea of an empirical model.   
+
+## Model components
+
+Consider this innocuous scenario: _a jar contains some number of marbles, which you are asked to estimate_. Rather than thinking about how you might actually go about estimating the number of marbles here, let's look at general features of the scenario itself, especially the two critical pieces of information it provides. First, the scenario indicates that the jar contains an actual - albeit unknown - number of marbles. This we will refer to as the __outcome__ and denote $y$. Second, we have your estimate of $y$, or what we will call your __expectation__ of $y$'s value and denote $E[y]$. From these two variables, we can actually calculate a third, namely, the __error__ in your estimate, which we denote by convention with the Greek letter $\epsilon$ (epsilon). The error measures the difference between the actual or observed value of $y$ and your expectation $E[y]$.  
+
+Together, these three ingredients give us all the raw materials we need to define an empirical model. It boils down to this simple formula:
+
+$$ y = E[y] + \epsilon $$
+
+where, again, 
+
+* $y$ is the outcome, 
+* $E[y]$ is the expectation of $y$, and 
+* $\epsilon$ is the error.
+
+In a manner of speaking, this formula _decomposes_ your outcome variable - your data - into a more certain component (the expectation) and a less certain component (the error).  
+
+
+### Outcome
+
+The outcome, $y$, is a __random variable__ consisting of the value of each _possible_ outcome or combination of outcomes in a __sample space__. Importantly, each numeric value has a probability of occurrence such that we can define the distribution of probabilities over all outcomes. This distribution is known as the __probability distribution__ of the random variable.  
+
+For example, the sample space for a fair, six-sided dice would be the set {1, 2, 3, 4, 5, 6} and its probability distribution would be {1/6, 1/6, 1/6, 1/6, 1/6, 1/6}.
+
+<!-- consists of the observed values of a variable we want to explain. The variable itself is simply a property, either of events or of things. Some examples, pulled haphazardly from my own mind, include:
+
+* The _magnitude_ of an earthquake,
+* The _height_ of a person,
+* The _grade_ of a student,
+* The _bitterness_ of a beer,
+* The _color_ of a marble,
+* The _run time_ of a race.
+
+Each of these properties will have a certain value that can be observed and/or measured. Run times in a marathon, for example, will have a unique value for each runner, which is measured in continuous durations of time, like 2 hours, 34 minutes, and 32 seconds (or 2:34:32). So, we have the variable for our outcome, which is a common property of some type of thing, and we have its observed or measured values for individual instances of that type.  
+
+Typically, the outcome is the result of some underlying empirical process. In the case of the jar of marbles, the underlying process would just be that someone filled it up, though other attributes might be more or less relevant, for instance, the jar's volume. For run times in a race, the underlying process might be the number of hours of practice in the previous year.
+
+-->
+
+
+### Expectation
+
+, which we derive from our prior knowledge or understanding of the underlying process. 
+
+If we have no information about the underlying process, our 
+
+```{r, echo = FALSE, fig.show = "hold", out.width = "40%"}
+
+today <- 20201228
+
+set.seed(today)
+
+intercept <- 0
+
+slope <- 1
+
+n <- 15
+
+x <- runif(n, min = 0.25, max = 5)
+x <- sort(x)
+
+# error -- normally distributed
+error <- rnorm(n, mean = 0, sd = 1.3)
+
+y <- intercept + (slope * x) + error 
+
+r_observations <- data.frame(x = rnorm(length(x)), 
+                             y = y)
+
+limits <- c(min(floor(c(x, y))), 
+            max(ceiling(c(x, y))))
+
+wee_gray <- "#c7c7c7"
+
+# base plot
+lm_plot <- ggplot() +
+  geom_vline(xintercept = 0, color = "#5c5c5c", size = 0.8) +
+  labs(x = "", y = "Y", title = "Unknown process") +
+  theme_bw() + 
+  theme(legend.position = "none",
+        panel.grid = element_blank(),
+        panel.border = element_rect(color = wee_gray, fill = NA),
+        axis.text.x = element_text(color = "transparent"),
+        axis.ticks.x = element_line(color = "transparent"),
+        axis.title.x = element_text(color = "transparent")) +
+  coord_fixed(xlim = limits, ylim = limits)
+
+# add observations, model, and rss
+lm_plot +
+  geom_point(data = r_observations, aes(x, y), 
+             size = 2.75,
+             color = "#5c5c5c") +
+  geom_segment(data = r_observations, aes(x = -1.5, y = mean(y), xend = 1.5, yend = mean(y)),
+               size = 0.8,
+               color = "darkred") +
+  annotate(geom = "text",
+           x = 1.7, 
+           y = mean(r_observations$y), 
+           label = "E(y)", 
+           hjust = 0, 
+           size = 7)
+
+observations <- data.frame(x, y)
+
+base_lm <- lm(y ~ x, data = observations)
+
+base_df <- base_lm %>% 
+  coef() %>% 
+  t() %>% 
+  as.data.frame() %>% 
+  rename("intercept" = "(Intercept)",
+         "slope" = "x")
+
+
+# base plot
+lm_plot <- ggplot() +
+  geom_hline(yintercept = 0, color = "#5c5c5c", size = 0.8) +
+  geom_vline(xintercept = 0, color = "#5c5c5c", size = 0.8) +
+  labs(x = "X", y = "Y", title = "Known process") +
+  theme_bw() + 
+  theme(legend.position = "none",
+        panel.grid = element_blank(),
+        panel.border = element_rect(color = wee_gray, fill = NA)) +
+  coord_fixed(xlim = limits, ylim = limits)
+
+# add observations, model, and rss
+lm_plot <- 
+  lm_plot +
+  geom_abline(data = base_df,
+              aes(intercept = intercept, slope = slope),
+              size = 0.8,
+              color = "darkred") +
+  geom_point(data = observations, aes(x, y), 
+             size = 2.75,
+             color = "#5c5c5c")
+
+# add text and arrows
+arrow_spec <- arrow(length = unit(0.015, "npc"), type = "closed")
+
+y_seg <- observations[7, ]
+y_seg <- data.frame("x" = y_seg[["x"]] - 1,
+                    "y" = y_seg[["y"]],
+                    "xend" = y_seg[["x"]] - 0.2,
+                    "yend" = y_seg[["y"]])
+
+ey_seg <- predict(base_lm, newdata = data.frame(x = 6))
+ey_seg <- data.frame("xend" = 6,
+                     "yend" = ey_seg - 0.2,
+                     "x" = 6,
+                     "y" = ey_seg - 1.3)
+
+er_seg <- observations[3, "x"]
+er_seg <- data.frame("xend" = er_seg + 0.1,
+                     "yend" = 1,
+                     "x" = er_seg + 1.2,
+                     "y" = 1)
+
+lm_plot +
+  geom_segment(data = ey_seg, 
+               aes(x, y, xend = xend, yend = yend),
+               arrow = arrow_spec) +
+  annotate(geom = "text",
+           x = ey_seg$x, 
+           y = ey_seg$y - 0.35, 
+           label = "E(y)", 
+           hjust = 0.5, 
+           size = 7)
+
+
+```
+
+
+### Error
+
+, which we can characterize as the mismatch between our expectation and what we actually observe.
+
+$$ \epsilon = y - E[y] $$
+<!--
+This implies that the closer our expectation, $E(y)$, gets to the observed value of the outcome, $y$, the smaller our uncertainty, $\epsilon$, becomes. So, we can think of the process of model building as getting our expectations into agreement with what we observe. And, because we derive our expectations from our prior knowledge or understanding, any change to our expectations owing to a mismatch with observation ought to lead us to revise our beliefs.
+
+I have this very simple theory that _rain makes things wet_. From this theory, I derive the following hypothesis:  
+
+$H_{1}$ If it rains, then the sidewalk will become wet.  
+
+Now suppose that on some occasion I observe that it is raining. Combining that observation with my hypothesis $H_{1}$, I predict that the sidewalk is wet. Having made this prediction, I can now go out and check.  
+
+
+$$ \epsilon \sim N(0, \sigma) $$
+-->
+
+
+## Model process
+
+1. Gather data (sample from outcome).  
+2. Build model (describe property of sample).  
+2. Compare model to alternatives (infer property of population).  
+
+### Sampling
+
+
+
+### Describing
+
+or, model building
+
+
+### Inferring
+
+```{r, echo = FALSE}
+
+today <- 20201228
+
+set.seed(today)
+
+intercept <- 0
+
+slope <- 1
+
+n <- 15
+
+x <- runif(n, min = 0.25, max = 5)
+x <- sort(x)
+
+# error -- normally distributed
+error <- rnorm(n, mean = 0, sd = 1.3)
+
+y <- intercept + (slope * x) + error 
+
+observations <- data.frame(x, y)
+
+base_lm <- lm(y ~ x, data = observations)
+
+base_df <- base_lm %>% 
+  coef() %>% 
+  t() %>% 
+  as.data.frame() %>% 
+  rename("intercept" = "(Intercept)",
+         "slope" = "x")
+
+rss_segments <- cbind(observations, 
+                      "xend" = x, 
+                      "yend" = predict(base_lm, data = x))
+
+limits <- c(min(floor(c(x, y))), 
+            max(ceiling(c(x, y))))
+
+wee_gray <- "#c7c7c7"
+
+# base plot
+lm_plot <- ggplot() +
+  geom_hline(yintercept = 0, color = "#5c5c5c", size = 0.8) +
+  geom_vline(xintercept = 0, color = "#5c5c5c", size = 0.8) +
+  labs(x = "X", y = "Y") +
+  theme_bw() + 
+  theme(legend.position = "none",
+        panel.grid = element_blank(),
+        panel.border = element_rect(color = wee_gray, fill = NA)) +
+  coord_fixed(xlim = limits, ylim = limits)
+
+# add observations, model, and rss
+lm_plot <- 
+  lm_plot +
+  geom_segment(data = rss_segments, 
+               aes(x = x, y = y, xend = xend, yend = yend), 
+               color = "gray", 
+               alpha = 0.75) +
+  geom_abline(data = base_df,
+              aes(intercept = intercept, slope = slope),
+              size = 0.8,
+              color = "darkred") +
+  geom_point(data = observations, aes(x, y), 
+             size = 2.75,
+             color = "#5c5c5c")
+
+# add text and arrows
+arrow_spec <- arrow(length = unit(0.015, "npc"), type = "closed")
+
+y_seg <- observations[7, ]
+y_seg <- data.frame("x" = y_seg[["x"]] - 1,
+                    "y" = y_seg[["y"]],
+                    "xend" = y_seg[["x"]] - 0.2,
+                    "yend" = y_seg[["y"]])
+
+ey_seg <- predict(base_lm, newdata = data.frame(x = 6))
+ey_seg <- data.frame("xend" = 6,
+                     "yend" = ey_seg - 0.2,
+                     "x" = 6,
+                     "y" = ey_seg - 1.3)
+
+er_seg <- observations[3, "x"]
+er_seg <- data.frame("xend" = er_seg + 0.1,
+                     "yend" = 1,
+                     "x" = er_seg + 1.2,
+                     "y" = 1)
+
+lm_plot +
+  geom_segment(data = y_seg, 
+             aes(x, y, xend = xend, yend = yend),
+             arrow = arrow_spec) +
+  annotate(geom = "text", 
+           x = y_seg$x - 0.1, 
+           y = y_seg$y, 
+           label = "y", 
+           hjust = 1, 
+           size = 7) +
+  geom_segment(data = ey_seg, 
+               aes(x, y, xend = xend, yend = yend),
+               arrow = arrow_spec) +
+  annotate(geom = "text",
+           x = ey_seg$x, 
+           y = ey_seg$y - 0.35, 
+           label = "E[Y]", 
+           hjust = 0.5, 
+           size = 7) +
+  geom_segment(data = er_seg, 
+               aes(x, y, xend = xend, yend = yend),
+               arrow = arrow_spec) +
+  annotate(geom = "text",
+           x = er_seg$x + 0.1, 
+           y = er_seg$y, 
+           label = "epsilon", 
+           parse = TRUE,
+           hjust = 0, 
+           size = 7)
+
+```
+
+$$
+\begin{aligned}
+  y &= E(y) + \epsilon \\
+  E(y) &= mu \\
+  \epsilon &\sim N(0, sigma) \\
+\end{aligned}
+$$
+
