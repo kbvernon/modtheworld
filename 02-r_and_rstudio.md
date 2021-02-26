@@ -67,7 +67,7 @@ let's users override s3 methods, so I changed the s3 to "simpleError"
 
 R is variously described as a programming *language* for statistical computing and as a programming *environment* [@hornik2020faq]. In fact, if you use R to conduct any statistical analysis that will likely end up in a scientific publication, you will want to refer to it as such -- to say something like "All analyses were conducted in the R Programming Environment" or "All analyses were conducted with the R Programming Language" -- and then to cite it! For example,
 
-> Statistical analysis was performed in R version 4.0.3 [@rcoreteam2020language].
+> Statistical analysis was performed in R version 4.0.4 [@rcoreteam2020language].
 
 And the full citation you can now see in the References below.
 

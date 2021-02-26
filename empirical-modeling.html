@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 12 What is Statistics? | Modeling the World with R</title>
+  <title>Chapter 12 Empirical Modeling | Modeling the World with R</title>
   <meta name="description" content="This book provides a gentle yet comprehensive introduction to doing basic statistics in R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 12 What is Statistics? | Modeling the World with R" />
+  <meta property="og:title" content="Chapter 12 Empirical Modeling | Modeling the World with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 12 What is Statistics? | Modeling the World with R" />
+  <meta name="twitter:title" content="Chapter 12 Empirical Modeling | Modeling the World with R" />
   
   <meta name="twitter:description" content="This book provides a gentle yet comprehensive introduction to doing basic statistics in R." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Kenneth Blake Vernon" />
 
 
-<meta name="date" content="2021-02-15" />
+<meta name="date" content="2021-02-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -306,8 +306,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.6" data-path="transforming-data.html"><a href="transforming-data.html#aggregate-factors"><i class="fa fa-check"></i><b>11.6</b> Aggregate factors</a></li>
 </ul></li>
 <li class="part"><span><b>II Introduction to Statistics</b></span></li>
-<li class="chapter" data-level="12" data-path="whatisstats.html"><a href="whatisstats.html"><i class="fa fa-check"></i><b>12</b> What is Statistics?</a></li>
-<li class="chapter" data-level="13" data-path="univariate-description.html"><a href="univariate-description.html"><i class="fa fa-check"></i><b>13</b> Univariate Description</a></li>
+<li class="chapter" data-level="12" data-path="empirical-modeling.html"><a href="empirical-modeling.html"><i class="fa fa-check"></i><b>12</b> Empirical Modeling</a><ul>
+<li class="chapter" data-level="12.1" data-path="empirical-modeling.html"><a href="empirical-modeling.html#overview-6"><i class="fa fa-check"></i><b>12.1</b> Overview</a></li>
+<li class="chapter" data-level="12.2" data-path="empirical-modeling.html"><a href="empirical-modeling.html#model-components"><i class="fa fa-check"></i><b>12.2</b> Model components</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="empirical-modeling.html"><a href="empirical-modeling.html#outcome"><i class="fa fa-check"></i><b>12.2.1</b> Outcome</a></li>
+<li class="chapter" data-level="12.2.2" data-path="empirical-modeling.html"><a href="empirical-modeling.html#expectation"><i class="fa fa-check"></i><b>12.2.2</b> Expectation</a></li>
+<li class="chapter" data-level="12.2.3" data-path="empirical-modeling.html"><a href="empirical-modeling.html#error"><i class="fa fa-check"></i><b>12.2.3</b> Error</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="empirical-modeling.html"><a href="empirical-modeling.html#model-process"><i class="fa fa-check"></i><b>12.3</b> Model process</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="empirical-modeling.html"><a href="empirical-modeling.html#sampling"><i class="fa fa-check"></i><b>12.3.1</b> Sampling</a></li>
+<li class="chapter" data-level="12.3.2" data-path="empirical-modeling.html"><a href="empirical-modeling.html#describing"><i class="fa fa-check"></i><b>12.3.2</b> Describing</a></li>
+<li class="chapter" data-level="12.3.3" data-path="empirical-modeling.html"><a href="empirical-modeling.html#inferring"><i class="fa fa-check"></i><b>12.3.3</b> Inferring</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="univariate-description.html"><a href="univariate-description.html"><i class="fa fa-check"></i><b>13</b> Univariate Description</a><ul>
+<li class="chapter" data-level="13.1" data-path="univariate-description.html"><a href="univariate-description.html#overview-7"><i class="fa fa-check"></i><b>13.1</b> Overview</a></li>
+<li class="chapter" data-level="13.2" data-path="univariate-description.html"><a href="univariate-description.html#central-tendency"><i class="fa fa-check"></i><b>13.2</b> Central tendency</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="univariate-description.html"><a href="univariate-description.html#mean"><i class="fa fa-check"></i><b>13.2.1</b> Mean</a></li>
+<li class="chapter" data-level="13.2.2" data-path="univariate-description.html"><a href="univariate-description.html#median"><i class="fa fa-check"></i><b>13.2.2</b> Median</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="univariate-description.html"><a href="univariate-description.html#variability"><i class="fa fa-check"></i><b>13.3</b> Variability</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="univariate-description.html"><a href="univariate-description.html#variance"><i class="fa fa-check"></i><b>13.3.1</b> Variance</a></li>
+<li class="chapter" data-level="13.3.2" data-path="univariate-description.html"><a href="univariate-description.html#standard-deviation"><i class="fa fa-check"></i><b>13.3.2</b> Standard deviation</a></li>
+<li class="chapter" data-level="13.3.3" data-path="univariate-description.html"><a href="univariate-description.html#quantiles"><i class="fa fa-check"></i><b>13.3.3</b> Quantiles</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="univariate-description.html"><a href="univariate-description.html#categorical-data"><i class="fa fa-check"></i><b>13.4</b> Categorical Data</a><ul>
+<li class="chapter" data-level="13.4.1" data-path="univariate-description.html"><a href="univariate-description.html#mode"><i class="fa fa-check"></i><b>13.4.1</b> Mode</a></li>
+<li class="chapter" data-level="13.4.2" data-path="univariate-description.html"><a href="univariate-description.html#counts-and-proportions"><i class="fa fa-check"></i><b>13.4.2</b> Counts and proportions</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="14" data-path="probability-distributions.html"><a href="probability-distributions.html"><i class="fa fa-check"></i><b>14</b> Probability Distributions</a></li>
 <li class="chapter" data-level="15" data-path="inference-tests.html"><a href="inference-tests.html"><i class="fa fa-check"></i><b>15</b> Inference Tests</a></li>
 <li class="chapter" data-level="16" data-path="multivariate-description.html"><a href="multivariate-description.html"><i class="fa fa-check"></i><b>16</b> Multivariate Description</a></li>
@@ -335,8 +362,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="whatisstats" class="section level1">
-<h1><span class="header-section-number">Chapter 12</span> What is Statistics?</h1>
+<div id="empirical-modeling" class="section level1">
+<h1><span class="header-section-number">Chapter 12</span> Empirical Modeling</h1>
 <!-- include libraries -->
 <!-- kableExtra bootstrap css 
 https://haozhu233.github.io/kableExtra/bookdown/use-bootstrap-tables-in-gitbooks-epub.html
@@ -364,7 +391,149 @@ https://github.com/hadley/adv-r/blob/master/common.R
 looks like it doesn't work because R no longer
 let's users override s3 methods, so I changed the s3 to "simpleError"
 -->
-<p><img src="21-what_is_statistics_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="overview-6" class="section level2">
+<h2><span class="header-section-number">12.1</span> Overview</h2>
+<table class="table-intro table table-hover table-striped" style="margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;">
+<strong>Goal</strong>
+</td>
+<td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
+To understand the process of empirical modeling.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;">
+<strong>tl;dr</strong>
+</td>
+<td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;">
+<strong>Outcomes</strong>
+</td>
+<td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
+Here, you will learn about<br>
+<ol>
+<li>
+modeling an outcome,
+</li>
+<li>
+sampling from a population,
+</li>
+<li>
+describing a sample, and
+</li>
+<li>
+inferring properties of a population.
+</li>
+</ol>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;">
+<strong>Datasets</strong>
+</td>
+<td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
+NONE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;">
+<strong>Requirements</strong>
+</td>
+<td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
+NONE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;">
+<strong>Further Reading</strong>
+</td>
+<td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
+NONE
+</td>
+</tr>
+</tbody>
+</table>
+<p>Empirical modeling is for scientists what inquiry is for the philosopher Charles Sanders Peirce, a process by which one moves from a state of doubt or uncertainty about some topic to one of belief, understanding, or certainty. For Peirce, this process is almost mechanical, like a reflex response to the irritation of a nerve. You find yourself stirred by the “irritation of doubt” to find a belief that puts your questioning mind to rest. For models, the process is strikingly similar. Uncertainty tugs on a model like a stretched spring, compelling it to settle on a state of energetic equilibrium.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> The objective, in either case, is to <em>minimize uncertainty</em> about some topic, as far as that is possible. In what follows, we’ll unpack this idea in more detail, starting first with the very idea of an empirical model.</p>
+</div>
+<div id="model-components" class="section level2">
+<h2><span class="header-section-number">12.2</span> Model components</h2>
+<p>Consider this innocuous scenario: <em>a jar contains some number of marbles, which you are asked to estimate</em>. Rather than thinking about how you might actually go about estimating the number of marbles here, let’s look at general features of the scenario itself, especially the two critical pieces of information it provides. First, the scenario indicates that the jar contains an actual - albeit unknown - number of marbles. This we will refer to as the <strong>outcome</strong> and denote <span class="math inline">\(y\)</span>. Second, we have your estimate of <span class="math inline">\(y\)</span>, or what we will call your <strong>expectation</strong> of <span class="math inline">\(y\)</span>’s value and denote <span class="math inline">\(E[y]\)</span>. From these two variables, we can actually calculate a third, namely, the <strong>error</strong> in your estimate, which we denote by convention with the Greek letter <span class="math inline">\(\epsilon\)</span> (epsilon). The error measures the difference between the actual or observed value of <span class="math inline">\(y\)</span> and your expectation <span class="math inline">\(E[y]\)</span>.</p>
+<p>Together, these three ingredients give us all the raw materials we need to define an empirical model. It boils down to this simple formula:</p>
+<p><span class="math display">\[ y = E[y] + \epsilon \]</span></p>
+<p>where, again,</p>
+<ul>
+<li><span class="math inline">\(y\)</span> is the outcome,</li>
+<li><span class="math inline">\(E[y]\)</span> is the expectation of <span class="math inline">\(y\)</span>, and</li>
+<li><span class="math inline">\(\epsilon\)</span> is the error.</li>
+</ul>
+<p>In a manner of speaking, this formula <em>decomposes</em> your outcome variable - your data - into a more certain component (the expectation) and a less certain component (the error).</p>
+<div id="outcome" class="section level3">
+<h3><span class="header-section-number">12.2.1</span> Outcome</h3>
+<p>The outcome, <span class="math inline">\(y\)</span>, is a <strong>random variable</strong> consisting of the value of each <em>possible</em> outcome or combination of outcomes in a <strong>sample space</strong>. Importantly, each numeric value has a probability of occurrence such that we can define the distribution of probabilities over all outcomes. This distribution is known as the <strong>probability distribution</strong> of the random variable.</p>
+<p>For example, the sample space for a fair, six-sided dice would be the set {1, 2, 3, 4, 5, 6} and its probability distribution would be {1/6, 1/6, 1/6, 1/6, 1/6, 1/6}.</p>
+<!-- consists of the observed values of a variable we want to explain. The variable itself is simply a property, either of events or of things. Some examples, pulled haphazardly from my own mind, include:
+
+* The _magnitude_ of an earthquake,
+* The _height_ of a person,
+* The _grade_ of a student,
+* The _bitterness_ of a beer,
+* The _color_ of a marble,
+* The _run time_ of a race.
+
+Each of these properties will have a certain value that can be observed and/or measured. Run times in a marathon, for example, will have a unique value for each runner, which is measured in continuous durations of time, like 2 hours, 34 minutes, and 32 seconds (or 2:34:32). So, we have the variable for our outcome, which is a common property of some type of thing, and we have its observed or measured values for individual instances of that type.  
+
+Typically, the outcome is the result of some underlying empirical process. In the case of the jar of marbles, the underlying process would just be that someone filled it up, though other attributes might be more or less relevant, for instance, the jar's volume. For run times in a race, the underlying process might be the number of hours of practice in the previous year.
+
+-->
+</div>
+<div id="expectation" class="section level3">
+<h3><span class="header-section-number">12.2.2</span> Expectation</h3>
+<p>, which we derive from our prior knowledge or understanding of the underlying process.</p>
+<p>If we have no information about the underlying process, our</p>
+<p><img src="21-empirical_modeling_files/figure-html/unnamed-chunk-3-1.png" width="40%" style="display: block; margin: auto;" /><img src="21-empirical_modeling_files/figure-html/unnamed-chunk-3-2.png" width="40%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="error" class="section level3">
+<h3><span class="header-section-number">12.2.3</span> Error</h3>
+<p>, which we can characterize as the mismatch between our expectation and what we actually observe.</p>
+<p><span class="math display">\[ \epsilon = y - E[y] \]</span>
+<!--
+This implies that the closer our expectation, $E(y)$, gets to the observed value of the outcome, $y$, the smaller our uncertainty, $\epsilon$, becomes. So, we can think of the process of model building as getting our expectations into agreement with what we observe. And, because we derive our expectations from our prior knowledge or understanding, any change to our expectations owing to a mismatch with observation ought to lead us to revise our beliefs.
+
+I have this very simple theory that _rain makes things wet_. From this theory, I derive the following hypothesis:  
+
+$H_{1}$ If it rains, then the sidewalk will become wet.  
+
+Now suppose that on some occasion I observe that it is raining. Combining that observation with my hypothesis $H_{1}$, I predict that the sidewalk is wet. Having made this prediction, I can now go out and check.  
+
+
+$$ \epsilon \sim N(0, \sigma) $$
+--></p>
+</div>
+</div>
+<div id="model-process" class="section level2">
+<h2><span class="header-section-number">12.3</span> Model process</h2>
+<ol style="list-style-type: decimal">
+<li>Gather data (sample from outcome).<br />
+</li>
+<li>Build model (describe property of sample).<br />
+</li>
+<li>Compare model to alternatives (infer property of population).</li>
+</ol>
+<div id="sampling" class="section level3">
+<h3><span class="header-section-number">12.3.1</span> Sampling</h3>
+</div>
+<div id="describing" class="section level3">
+<h3><span class="header-section-number">12.3.2</span> Describing</h3>
+<p>or, model building</p>
+</div>
+<div id="inferring" class="section level3">
+<h3><span class="header-section-number">12.3.3</span> Inferring</h3>
+<p><img src="21-empirical_modeling_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p><span class="math display">\[
 \begin{aligned}
   y &amp;= E(y) + \epsilon \\
@@ -372,18 +541,15 @@ let's users override s3 methods, so I changed the s3 to "simpleError"
   \epsilon &amp;\sim N(0, sigma) \\
 \end{aligned}
 \]</span></p>
-<p>I like this because it is modular. You can use this to explain:
-- what does E(y) mean? It’s the expected value or what you would guess as the value for any new observation of y. Why is it constant? Well, we don’t have any other information to control how it varies.
-o Now it’s a short step to add in X. And the nice thing is that you only now have to change the E(y) definition to E(y) = beta X.
-- What does sigma mean? It’s a measure of how much observed y varies around mu. We don’t know exactly what this variation might be, but we can try to quantify the range of errors.
-o Better yet, we don’t just say that the variation is between +/- sigma, but that there is probability of errors, which is higher closer to mu, and then drops off away from it.
-o It’s easy then to change the description of the errors. We’ve used a normal distribution, but if your data don’t match this, you can change N(0, sigma) to Pois(lambda), or Binom(pi) giving you a GLM. (You need a link function as well, but that’s pretty straightforward)
-o You can use this to explain iid – why is the 0 important in the errors? It’s so that the errors are unbiased (which they should be), and that these are symmetric with a normal distribution
-- Other things:
-o You can explain heteroscedascity by changing sigma to sigma_i
-o Mixed models change sigma to sigma_j (where j is the group membership)
-o Temporal or spatial models just alter sigma to two components, u and v, and then you can start to explain how you model u (the spatial error).</p>
 
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="8">
+<li id="fn8"><p>Joshua Loftus’ blog post on <a href="https://joshualoftus.com/posts/2020-11-23-least-squares-as-springs/">Least squares as springs</a> actually gave me the idea for this analogy.<a href="empirical-modeling.html#fnref8" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
