@@ -452,7 +452,7 @@ NONE
 </table>
 <p>As a way of priming you for the topics we’ll cover here, consider this somewhat bland adaptation of an already bland scenario. You have six balls, with four of them being red, two gray, as shown in Fig. <a href="univariate-description.html#fig:balls-and-urn">13.1</a>. You can think of these balls as being the result of an <em>experiment</em>, with the outcome of interest being their color. Let’s stipulate, as well, that you have no information about <em>why</em> they are these colors. You don’t know, for example, that the author has a preference for dark reds and grays.</p>
 <div class="figure" style="text-align: center"><span id="fig:balls-and-urn"></span>
-<img src="images/balls_and_urn.png" alt="Colored balls and urn. Outcome of an unknown process." width="40%" />
+<img src="images/balls_and_urn.png" alt="Colored balls and urn. Outcome of an unknown process." width="50%" />
 <p class="caption">
 Figure 13.1: Colored balls and urn. Outcome of an unknown process.
 </p>
@@ -486,7 +486,7 @@ Instead of using <span class="math inline">\(y\)</span> as our variable, we are 
 </div>
 <div id="central-tendency" class="section level2">
 <h2><span class="header-section-number">13.2</span> Central tendency</h2>
-<p>The two most common measures of central tendency are the mean and the median. Their slightly less popular sibling is the mode, which is typically reserved for categorical data.</p>
+<p>Central tendency, otherwise known as the location of a variable or its first moment, refers to the expected value of a variable. The two most common measures of it are the mean and the median. Their slightly less popular cousin is the mode, which is typically reserved for categorical data.</p>
 <div id="mean" class="section level3">
 <h3><span class="header-section-number">13.2.1</span> Mean</h3>
 <p>If you recall, we are defining our expectation for an outcome, <span class="math inline">\(x\)</span>, in terms of its central tendency. In this case, we measure the central tendency using the mean, hence our expectation is:</p>
@@ -594,20 +594,41 @@ med(x) =
 </div>
 <div id="variability" class="section level2">
 <h2><span class="header-section-number">13.3</span> Variability</h2>
-<div class="figure" style="text-align: center"><span id="fig:expected-error"></span>
-<img src="22-univariate_description_files/figure-html/expected-error-1.png" alt="Expected error in hours of sleep per night for college students." width="624" />
+<p>Variability, otherwise known as dispersion, uncertainty, or the second moment of a variable, refers to its expected error. There are two primary measures of variability, the variance and the standard deviation. Before, we get to those, however, let’s think a little bit about what we mean by expected error. There are two parts to this, the <em>expectation</em> and the <em>error</em>. The error is easy enough to explain. As we learned already, it’s the difference between the observed and the expected outcome. That is,</p>
+<p><span class="math display">\[ \epsilon = y - E[y] \]</span></p>
+<p>where the expectation is defined by the sample mean, <span class="math inline">\(E[y] = \bar{x}\)</span>. Here is how that looks in R using our college sleep data:</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="univariate-description.html#cb160-1"></a><span class="co"># get sample mean</span></span>
+<span id="cb160-2"><a href="univariate-description.html#cb160-2"></a>xbar &lt;-<span class="st"> </span><span class="kw">mean</span>(x)</span>
+<span id="cb160-3"><a href="univariate-description.html#cb160-3"></a></span>
+<span id="cb160-4"><a href="univariate-description.html#cb160-4"></a><span class="co"># calculate errors (epsilon, e)</span></span>
+<span id="cb160-5"><a href="univariate-description.html#cb160-5"></a>errors &lt;-<span class="st"> </span>(x <span class="op">-</span><span class="st"> </span>xbar)</span></code></pre></div>
+<p>Now, what about the <em>expectation</em> of the errors? We already have the idea of expected value, which we identified with the central tendency, typically the mean of the observations. As a first approximation then, we might try to measure variability using the mean of the errors:</p>
+<p><span class="math display">\[ \frac{1}{n} \sum_{i=1}^{n} (x - \bar{x}) \]</span></p>
+<p>Let’s try that approach with our sleep data.</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="univariate-description.html#cb161-1"></a><span class="co"># number of errors</span></span>
+<span id="cb161-2"><a href="univariate-description.html#cb161-2"></a>n_errors &lt;-<span class="st"> </span><span class="kw">length</span>(errors)</span>
+<span id="cb161-3"><a href="univariate-description.html#cb161-3"></a></span>
+<span id="cb161-4"><a href="univariate-description.html#cb161-4"></a><span class="co"># calculate mean of errors</span></span>
+<span id="cb161-5"><a href="univariate-description.html#cb161-5"></a><span class="kw">sum</span>(errors) <span class="op">/</span><span class="st"> </span>n_errors</span>
+<span id="cb161-6"><a href="univariate-description.html#cb161-6"></a><span class="co">## [1] 0</span></span></code></pre></div>
+<p>It’s zero! But, why? Let’s look at the way the actual values fall out relative to the mean, as shown in Fig. <a href="univariate-description.html#fig:center-mass">13.3</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:center-mass"></span>
+<img src="22-univariate_description_files/figure-html/center-mass-1.png" alt="Center of mass of college sleep data." width="316.8" />
 <p class="caption">
-Figure 13.3: Expected error in hours of sleep per night for college students.
+Figure 13.3: Center of mass of college sleep data.
 </p>
 </div>
+<p>Now, let’s have a look at the sum of the errors above the mean (errors greater than zero) and the sum of the errors below the mean (errors less than zero):</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="univariate-description.html#cb162-1"></a><span class="kw">sum</span>(errors[errors <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>])</span>
+<span id="cb162-2"><a href="univariate-description.html#cb162-2"></a><span class="co">## [1] -5.415</span></span>
+<span id="cb162-3"><a href="univariate-description.html#cb162-3"></a><span class="kw">sum</span>(errors[errors <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>])</span>
+<span id="cb162-4"><a href="univariate-description.html#cb162-4"></a><span class="co">## [1] 5.415</span></span></code></pre></div>
+<p>They’re the same, but with different signs! That means when you sum all of them together, you get zero! Hence, dividing by the number of observations, <span class="math inline">\(n\)</span>, still returns zero as the mean of the errors. While that is technically correct, it is not terribly informative, especially when what we want is not just the <em>difference</em> but the <em>distance</em> between the observed and expected, which is always positive. Now, how do we get that? The standard solution is to square the errors first, then divide by the number of observations. This is known as the <strong>variance</strong>.</p>
 <div id="variance" class="section level3">
 <h3><span class="header-section-number">13.3.1</span> Variance</h3>
-<p>The expected amount of difference between (the square of) the observed and the mean values.</p>
-<p><span class="math inline">\(\sigma^{2}\)</span> = population variance</p>
-<p><span class="math inline">\(s^{2}\)</span> = sample variance</p>
-<p>For discrete variables, the population variance is given by:</p>
-<p><span class="math display">\[ \sigma^{2} = \frac{1}{N} \sum_{i=1}^{N} (x_{i}-\mu)^{2} \]</span></p>
-<p>The sample variance as</p>
+<p>To be precise, variance is defined as the expected amount of difference between the square of errors. For discrete variables, the population variance, <span class="math inline">\(\sigma^{2}\)</span>, is given by:</p>
+<p><span class="math display">\[ \sigma^{2} = \frac{1}{N} \sum_{i=1}^{N} (x_{i}-\mu)^{2} \]</span>
+The sample variance, <span class="math inline">\(s^{2}\)</span>, is then defined as:</p>
 <p><span class="math display">\[ s^{2} = \frac{1}{n-1} \sum_{i=1}^{n} (x_{i} - \bar{x})^{2} \]</span></p>
 </div>
 <div id="standard-deviation" class="section level3">

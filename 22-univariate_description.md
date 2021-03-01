@@ -94,7 +94,7 @@ let's users override s3 methods, so I changed the s3 to "simpleError"
 As a way of priming you for the topics we'll cover here, consider this somewhat bland adaptation of an already bland scenario. You have six balls, with four of them being red, two gray, as shown in Fig. \@ref(fig:balls-and-urn). You can think of these balls as being the result of an _experiment_, with the outcome of interest being their color. Let's stipulate, as well, that you have no information about _why_ they are these colors. You don't know, for example, that the author has a preference for dark reds and grays.    
 
 <div class="figure" style="text-align: center">
-<img src="images/balls_and_urn.png" alt="Colored balls and urn. Outcome of an unknown process." width="40%" />
+<img src="images/balls_and_urn.png" alt="Colored balls and urn. Outcome of an unknown process." width="50%" />
 <p class="caption">(\#fig:balls-and-urn)Colored balls and urn. Outcome of an unknown process.</p>
 </div>
 
@@ -130,7 +130,7 @@ That being said, univariate models offer us some powerful tools for getting a ha
 
 ## Central tendency
 
-The two most common measures of central tendency are the mean and the median. Their slightly less popular sibling is the mode, which is typically reserved for categorical data. 
+Central tendency, otherwise known as the location of a variable or its first moment, refers to the expected value of a variable. The two most common measures of it are the mean and the median. Their slightly less popular cousin is the mode, which is typically reserved for categorical data. 
 
 ### Mean
 
@@ -297,27 +297,65 @@ The mode is a measure of the most frequent value in a data set. Of all the measu
 
 ## Variability
 
+
+
+Variability, otherwise known as dispersion, uncertainty, or the second moment of a variable, refers to its expected error. There are two primary measures of variability, the variance and the standard deviation. Before, we get to those, however, let's think a little bit about what we mean by expected error. There are two parts to this, the _expectation_ and the _error_. The error is easy enough to explain. As we learned already, it's the difference between the observed and the expected outcome. That is,
+
+$$ \epsilon = y - E[y] $$
+
+where the expectation is defined by the sample mean, $E[y] = \bar{x}$. Here is how that looks in R using our college sleep data:
+
+
+```r
+# get sample mean
+xbar <- mean(x)
+
+# calculate errors (epsilon, e)
+errors <- (x - xbar)
+```
+
+Now, what about the _expectation_ of the errors? We already have the idea of expected value, which we identified with the central tendency, typically the mean of the observations. As a first approximation then, we might try to measure variability using the mean of the errors: 
+
+$$ \frac{1}{n} \sum_{i=1}^{n} (x - \bar{x}) $$
+
+Let's try that approach with our sleep data.
+
+
+```r
+# number of errors
+n_errors <- length(errors)
+
+# calculate mean of errors
+sum(errors) / n_errors
+## [1] 0
+```
+
+It's zero! But, why? Let's look at the way the actual values fall out relative to the mean, as shown in Fig. \@ref(fig:center-mass).  
+
 <div class="figure" style="text-align: center">
-<img src="22-univariate_description_files/figure-html/expected-error-1.png" alt="Expected error in hours of sleep per night for college students." width="624" />
-<p class="caption">(\#fig:expected-error)Expected error in hours of sleep per night for college students.</p>
+<img src="22-univariate_description_files/figure-html/center-mass-1.png" alt="Center of mass of college sleep data." width="316.8" />
+<p class="caption">(\#fig:center-mass)Center of mass of college sleep data.</p>
 </div>
+
+Now, let's have a look at the sum of the errors above the mean (errors greater than zero) and the sum of the errors below the mean (errors less than zero):
+
+
+```r
+sum(errors[errors < 0])
+## [1] -5.415
+sum(errors[errors > 0])
+## [1] 5.415
+```
+
+They're the same, but with different signs! That means when you sum all of them together, you get zero! Hence, dividing by the number of observations, $n$, still returns zero as the mean of the errors. While that is technically correct, it is not terribly informative, especially when what we want is not just the _difference_ but the _distance_ between the observed and expected, which is always positive. Now, how do we get that? The standard solution is to square the errors first, then divide by the number of observations. This is known as the __variance__.  
 
 
 ### Variance
 
-The expected amount of difference between (the square of) the observed and the mean values.
-
-$\sigma^{2}$ = population variance
-
-$s^{2}$ = sample variance
-
-
-For discrete variables, the population variance is given by:
+To be precise, variance is defined as the expected amount of difference between the square of errors. For discrete variables, the population variance, $\sigma^{2}$, is given by:
 
 $$ \sigma^{2} = \frac{1}{N} \sum_{i=1}^{N} (x_{i}-\mu)^{2} $$
-
-
-The sample variance as
+The sample variance, $s^{2}$, is then defined as:
 
 $$ s^{2} = \frac{1}{n-1} \sum_{i=1}^{n} (x_{i} - \bar{x})^{2} $$
 

@@ -18,7 +18,7 @@ fig:unnamed-chunk-9
 fig:14-directory-structure
 fig:balls-and-urn
 fig:sleep-pattern
-fig:expected-error
+fig:center-mass
 intro
 who-is-this-bookdown-for
 why-this-bookdown-project
