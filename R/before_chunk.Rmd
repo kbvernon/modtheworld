@@ -9,6 +9,7 @@ library(here)
 library(knitr)
 library(kableExtra)
 library(tidyr)
+library(viridis)
 
 ```
 
@@ -18,7 +19,8 @@ https://haozhu233.github.io/kableExtra/bookdown/use-bootstrap-tables-in-gitbooks
 
 ```{r}
 
-options(kableExtra.html.bsTable = TRUE)
+options(kableExtra.html.bsTable = TRUE,
+        str = strOptions(vec.len = 2))
 
 ```
 
