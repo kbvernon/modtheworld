@@ -24,7 +24,7 @@
 <meta name="author" content="Kenneth Blake Vernon" />
 
 
-<meta name="date" content="2021-02-26" />
+<meta name="date" content="2021-03-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -324,16 +324,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.2" data-path="univariate-description.html"><a href="univariate-description.html#central-tendency"><i class="fa fa-check"></i><b>13.2</b> Central tendency</a><ul>
 <li class="chapter" data-level="13.2.1" data-path="univariate-description.html"><a href="univariate-description.html#mean"><i class="fa fa-check"></i><b>13.2.1</b> Mean</a></li>
 <li class="chapter" data-level="13.2.2" data-path="univariate-description.html"><a href="univariate-description.html#median"><i class="fa fa-check"></i><b>13.2.2</b> Median</a></li>
+<li class="chapter" data-level="13.2.3" data-path="univariate-description.html"><a href="univariate-description.html#mode"><i class="fa fa-check"></i><b>13.2.3</b> Mode</a></li>
 </ul></li>
 <li class="chapter" data-level="13.3" data-path="univariate-description.html"><a href="univariate-description.html#variability"><i class="fa fa-check"></i><b>13.3</b> Variability</a><ul>
 <li class="chapter" data-level="13.3.1" data-path="univariate-description.html"><a href="univariate-description.html#variance"><i class="fa fa-check"></i><b>13.3.1</b> Variance</a></li>
 <li class="chapter" data-level="13.3.2" data-path="univariate-description.html"><a href="univariate-description.html#standard-deviation"><i class="fa fa-check"></i><b>13.3.2</b> Standard deviation</a></li>
-<li class="chapter" data-level="13.3.3" data-path="univariate-description.html"><a href="univariate-description.html#quantiles"><i class="fa fa-check"></i><b>13.3.3</b> Quantiles</a></li>
 </ul></li>
-<li class="chapter" data-level="13.4" data-path="univariate-description.html"><a href="univariate-description.html#categorical-data"><i class="fa fa-check"></i><b>13.4</b> Categorical Data</a><ul>
-<li class="chapter" data-level="13.4.1" data-path="univariate-description.html"><a href="univariate-description.html#mode"><i class="fa fa-check"></i><b>13.4.1</b> Mode</a></li>
-<li class="chapter" data-level="13.4.2" data-path="univariate-description.html"><a href="univariate-description.html#counts-and-proportions"><i class="fa fa-check"></i><b>13.4.2</b> Counts and proportions</a></li>
-</ul></li>
+<li class="chapter" data-level="13.4" data-path="univariate-description.html"><a href="univariate-description.html#quantiles"><i class="fa fa-check"></i><b>13.4</b> Quantiles</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="probability-distributions.html"><a href="probability-distributions.html"><i class="fa fa-check"></i><b>14</b> Probability Distributions</a></li>
 <li class="chapter" data-level="15" data-path="inference-tests.html"><a href="inference-tests.html"><i class="fa fa-check"></i><b>15</b> Inference Tests</a></li>
@@ -453,18 +450,24 @@ NONE
 </tr>
 </tbody>
 </table>
-<p>As a way of priming you for the topics we’ll cover here, consider this toy scenario. You have six squares, as shown in Fig. <a href="univariate-description.html#fig:outcome-squares">13.1</a>, with four of them being red, two gray.</p>
-<div class="figure" style="text-align: center"><span id="fig:outcome-squares"></span>
-<img src="images/expectation_when_process_unknown.png" alt="Outcome of an unknown process." width="40%" />
+<p>As a way of priming you for the topics we’ll cover here, consider this somewhat bland adaptation of an already bland scenario. You have six balls, with four of them being red, two gray, as shown in Fig. <a href="univariate-description.html#fig:balls-and-urn">13.1</a>. You can think of these balls as being the result of an <em>experiment</em>, with the outcome of interest being their color. Let’s stipulate, as well, that you have no information about <em>why</em> they are these colors. You don’t know, for example, that the author has a preference for dark reds and grays.</p>
+<div class="figure" style="text-align: center"><span id="fig:balls-and-urn"></span>
+<img src="images/balls_and_urn.png" alt="Colored balls and urn. Outcome of an unknown process." width="40%" />
 <p class="caption">
-Figure 13.1: Outcome of an unknown process.
+Figure 13.1: Colored balls and urn. Outcome of an unknown process.
 </p>
 </div>
-<p>You can think of these squares as being the result of an experiment, with the outcome of interest being the observed color. Let’s stipulate, as well, that you have no information about <em>why</em> they are these colors. You don’t know, for example, that the author has a preference for dark reds and grays. Now, suppose we shuffle these squares, then have you select one at random, without looking. What color do you expect to draw? The answer, I hope, is red. Why? Because there are more of them! In which case, you are more <em>likely</em> to draw red just by chance.</p>
-<p>And, just like that, lacking any information about how this particular outcome came to be, you still managed to form a pretty reasonable expectation about it solely on the basis of the value it <em>tends</em> toward or is <em>more likely to take</em>. The technical term for this value of the outcome is its <strong>central tendency</strong>, though you will sometimes hear it referred to as the <em>location</em> of your data. As the name suggests, this is the value around which observations of your outcome tend to cluster.</p>
-<p>Fortunately, that is not the <em>only</em> information we can extract from this scenario, for suppose now that we had you repeat this exercise, say, a hundred times. How often do you think, having guessed red, that gray would actually be the color to come up? Roughly a third of the time, right? And, why is that? Because the <em>proportion</em> of squares that are gray is one-third! That is to say, in spite of your expectation, and just by chance, you should draw a gray square one-third of the time.</p>
-<p>Thus, you have won this additional bit of new knowledge, a precise, quantitative expectation about your own error, the technical for which is <strong>variability</strong>, also sometimes referred to as <em>uncertainty</em>.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> This is a measure not just of the actual but of the <em>expected</em> disagreement between your expectation and the outcome.</p>
-<p>You now have the makings of an empirical model. On the one hand, you have your expectation about the outcome, which you have identified with its central tendency. And, on the other hand, you have your expectation of the error or variability. Because this involves a single random variable, you have just engaged in what we will refer to it as <strong>univariate description</strong>, understood here as the act of building a model of an outcome in terms of its central tendency and variability. Framed in terms of our fundamental formula</p>
+<p>As part of this thought experiment, suppose we plop them in a jar, shake it up, then have you select one at random. Without looking, what color do you expect to draw? The answer, I hope, is red. Why? Because there are more of them! So, you are more <em>likely</em> to draw red just by chance. Now, think about what you just did. Lacking any information about how this particular outcome came to be, you still managed to form a pretty reasonable expectation about it solely on the basis of the value it <em>tends</em> toward or is <em>more likely to take</em>. This value of the outcome is commonly referred to as its <strong>central tendency</strong>, though you will sometimes hear it described as the <em>location</em> of your data. As the name suggests, this is the value around which observations of your outcome tend to cluster.</p>
+<p>Fortunately, that is not the <em>only</em> information we can extract from this scenario, for suppose now that we had you repeat this exercise, say, a hundred times, replacing the ball each time. How often do you think, having guessed red, that gray would actually be the color to come up? Roughly a third of the time, right? And, why is that? Because the <em>proportion</em> of squares that are gray is one-third! That is to say, in spite of your expectation, and just by chance, you should draw a gray ball one-third of the time. Thus, you have won this additional bit of new knowledge, a precise, quantitative expectation about your own error, otherwise known as <strong>variability</strong>, <em>dispersion</em> in the outcome, or your <em>uncertainty</em>. This is a measure not just of the actual but of the <em>expected</em> disagreement between your estimate and the observed outcome.</p>
+<p>To make this a little more tangible and perhaps a little more relevant to you, think about how many hours of sleep you <em>tend</em> to get each night. Whatever it happens to be, this number defines your, shall we say, slumbering expectation. Obviously, this is going to be affected by a lot of variables, like the oceans of coffee you regularly consume, or the way time seems to drag you, despite your protestations, into unavoidable collisions with looming deadlines. Even without that knowledge, though, you can still get a pretty good sense of your sleep <em>habits</em> by looking just at your sleep <em>tendencies</em>.</p>
+<div class="figure" style="text-align: center"><span id="fig:sleep-pattern"></span>
+<img src="22-univariate_description_files/figure-html/sleep-pattern-1.png" alt="Observed hours of sleep per night over the last thirty days, relative to the expectation of seven hours of sleep per night." width="624" />
+<p class="caption">
+Figure 13.2: Observed hours of sleep per night over the last thirty days, relative to the expectation of seven hours of sleep per night.
+</p>
+</div>
+<p>You can even use that expectation to measure variability in the length of “great nature’s second course,” to quote one of the more infamous regicides. If you know, for example, that you tend to get seven hours of sleep each night, and you conveniently - at least for our purposes - recorded your hours of sleep over the last 30 days, your sleep pattern might look like that shown in Fig <a href="univariate-description.html#fig:sleep-pattern">13.2</a>. From these observations, you can see that your un-waking life tends to last between five and nine hours (nine blessed hours!) each night. This then allows you to formulate an expectation about your error, that it tends to be two hours more or two hours less than your expectation. We can actually say even more about your expected error, but we’re building up to that!</p>
+<p>Just note for now all that you have already gleaned from these simple observations. In particular, you now have the makings of an empirical model. On the one hand, you have your expectation about the outcome, which you have identified with its central tendency. And, on the other hand, you have your expectation of the error, or uncertainty. Because these descriptions involve a single random variable, you have just engaged in what we will refer to as <strong>univariate description</strong>, defined as the building of a model of an outcome in terms of its central tendency and variability. Framed in terms of our fundamental formula</p>
 <p><span class="math display">\[ y = E[y] + \epsilon \]</span>
 you have just specified that</p>
 <ul>
@@ -472,7 +475,9 @@ you have just specified that</p>
 </li>
 <li><span class="math inline">\(\epsilon \sim\)</span> variability.</li>
 </ul>
-<p>Obviously, this is going to take some unpacking, which we’ll turn to now. Along the way, we’ll talk about how to calculate these values and how to visualize them in R.</p>
+<p>Obviously, this is going to take some unpacking.</p>
+<p>Before we get to that, however, we need to emphasize two important limitations of these very simple univariate models, both owing to the fact that the models describe a <em>sample</em> consisting of a <em>single variable</em>. First, because they describe a sample, they can only <em>approximate</em> the true central tendency and variability of the <em>population</em>. And second, because the sample consists of a single variable, the models cannot in any meaningful sense <em>explain</em> variability in the outcome. Why, you might wonder, did I sleep two more hours than expected that one Monday last month? Answering with “because that’s what I did,” while technically true, is not terribly informative. One might even describe it as being <em>viciously circular</em>. As we will learn later on, it also lacks <em>generality</em>, meaning I cannot use it to form an expectation about what will happen the <em>next time</em> I go to sleep.</p>
+<p>That being said, univariate models offer us some powerful tools for getting a handle on our data. They’ll also play an important role in how we evaluate more complex multivariate models later on, where the goal really is to explain variability in a population, so let’s dive into just how exactly we generate these descriptions.</p>
 
 <div class="rmdwarning">
 Instead of using <span class="math inline">\(y\)</span> as our variable, we are going to switch to using <span class="math inline">\(x\)</span>, as it is common when covering these topics to use that notation. However, nothing hangs on this, and if it helps, you can simply imagine that all the <span class="math inline">\(x\)</span>’s are actually <span class="math inline">\(y\)</span>’s.
@@ -481,12 +486,17 @@ Instead of using <span class="math inline">\(y\)</span> as our variable, we are 
 </div>
 <div id="central-tendency" class="section level2">
 <h2><span class="header-section-number">13.2</span> Central tendency</h2>
-<p>For continuous and discrete numeric data, the most common measures of central tendency are the mean and the median.</p>
+<p>The two most common measures of central tendency are the mean and the median. Their slightly less popular sibling is the mode, which is typically reserved for categorical data.</p>
 <div id="mean" class="section level3">
 <h3><span class="header-section-number">13.2.1</span> Mean</h3>
+<p>If you recall, we are defining our expectation for an outcome, <span class="math inline">\(x\)</span>, in terms of its central tendency. In this case, we measure the central tendency using the mean, hence our expectation is:</p>
 <p><span class="math display">\[ E[x] = \mu \]</span></p>
-<p>where <span class="math inline">\(\mu\)</span> is the <strong>population mean</strong>.</p>
-<p><span class="math inline">\(\bar{x}\)</span> = sample mean</p>
+<p>where <span class="math inline">\(\mu\)</span> is the <strong>population mean</strong>. Given the practical limitations of ever measuring this value directly, we must estimate it using the <strong>sample mean</strong>, by convention denoted <span class="math inline">\(\bar{x}\)</span>. Suppose, for instance, we did a study of the sleep behavior of college students on US campuses, using a phone app to measure various aspects of their sleep through a normal semester. To keep this simple, we’ll assume a sample size of ten. And the primary outcome we are measuring is hours of sleep per night.</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="univariate-description.html#cb151-1"></a>x &lt;-<span class="st"> </span><span class="kw">sample</span>(population, <span class="dt">size =</span> <span class="dv">10</span>)</span>
+<span id="cb151-2"><a href="univariate-description.html#cb151-2"></a></span>
+<span id="cb151-3"><a href="univariate-description.html#cb151-3"></a>x</span>
+<span id="cb151-4"><a href="univariate-description.html#cb151-4"></a><span class="co">##  [1] 6.96 7.53 5.04 7.65 9.70 5.97 8.04 5.84 5.94 6.26</span></span></code></pre></div>
+<p>Assuming that these are independent outcomes (that no student in our study affected the sleep habits of any other student in the study), we can measure the sample mean with this simple formula:</p>
 <p><span class="math display">\[ \bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_{i} \]</span></p>
 <p>where <span class="math inline">\(n\)</span> is the size of the sample and each <span class="math inline">\(x_{i}\)</span> is a value of an individual <span class="math inline">\(i\)</span> in the sample.</p>
 
@@ -494,24 +504,35 @@ Instead of using <span class="math inline">\(y\)</span> as our variable, we are 
 The sample mean, <span class="math inline">\(\bar{x}\)</span>, and the population mean, <span class="math inline">\(\mu\)</span>, are calculated using the same function - it’s just the average after all, but with slightly different notation. Where <span class="math inline">\(\bar{x}\)</span> uses small <span class="math inline">\(n\)</span> to denote the total number of individuals in a <em>sample</em>, <span class="math inline">\(\mu\)</span> uses big <span class="math inline">\(N\)</span> to denote the total number of individuals in a <em>population</em>.
 </div>
 
-<p>x = {7, 6, 8, 1, 1}</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="univariate-description.html#cb151-1"></a><span class="co"># number of observations in the sample</span></span>
-<span id="cb151-2"><a href="univariate-description.html#cb151-2"></a>n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</span>
-<span id="cb151-3"><a href="univariate-description.html#cb151-3"></a></span>
-<span id="cb151-4"><a href="univariate-description.html#cb151-4"></a><span class="co"># sum of the observations</span></span>
-<span id="cb151-5"><a href="univariate-description.html#cb151-5"></a>Ex &lt;-<span class="st"> </span><span class="kw">sum</span>(x)</span>
-<span id="cb151-6"><a href="univariate-description.html#cb151-6"></a></span>
-<span id="cb151-7"><a href="univariate-description.html#cb151-7"></a><span class="co"># mean of the sample</span></span>
-<span id="cb151-8"><a href="univariate-description.html#cb151-8"></a>(<span class="dv">1</span><span class="op">/</span>n) <span class="op">*</span><span class="st"> </span>Ex</span>
-<span id="cb151-9"><a href="univariate-description.html#cb151-9"></a><span class="co">## [1] 4.6</span></span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="univariate-description.html#cb152-1"></a><span class="co"># number of observations in the sample</span></span>
+<span id="cb152-2"><a href="univariate-description.html#cb152-2"></a>n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</span>
+<span id="cb152-3"><a href="univariate-description.html#cb152-3"></a></span>
+<span id="cb152-4"><a href="univariate-description.html#cb152-4"></a><span class="co"># sum of the observations</span></span>
+<span id="cb152-5"><a href="univariate-description.html#cb152-5"></a>Ex &lt;-<span class="st"> </span><span class="kw">sum</span>(x)</span>
+<span id="cb152-6"><a href="univariate-description.html#cb152-6"></a></span>
+<span id="cb152-7"><a href="univariate-description.html#cb152-7"></a><span class="co"># mean of the sample</span></span>
+<span id="cb152-8"><a href="univariate-description.html#cb152-8"></a>(<span class="dv">1</span><span class="op">/</span>n) <span class="op">*</span><span class="st"> </span>Ex</span>
+<span id="cb152-9"><a href="univariate-description.html#cb152-9"></a><span class="co">## [1] 6.893</span></span></code></pre></div>
 <p>This can be done more compactly with the <code>mean()</code> function provided by base R.</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="univariate-description.html#cb152-1"></a><span class="kw">mean</span>(x)</span>
-<span id="cb152-2"><a href="univariate-description.html#cb152-2"></a><span class="co">## [1] 4.6</span></span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="univariate-description.html#cb153-1"></a><span class="kw">mean</span>(x)</span>
+<span id="cb153-2"><a href="univariate-description.html#cb153-2"></a><span class="co">## [1] 6.893</span></span></code></pre></div>
+<p>This sample mean is our estimate of the population mean, it is the number of hours of sleep we expect a <em>typical</em> college student to get. Of course, other details about a student might inform on whether they get more or less sleep than expected. You don’t have to look all that hard for the usual suspects:</p>
+<ul>
+<li>diet: are they, perhaps, subsisting on cheetos and soda?,<br />
+</li>
+<li>exercise: or lack thereof?,</li>
+<li>stress: are they working two jobs? late on rent?, facing important deadlines?,</li>
+<li>disease: are they sick or otherwise unwell?.</li>
+</ul>
+<p>These are all critical factors that will affect the amount of sleep an individual is getting. I’m sure you can come up with more with a little thought. Unfortunately, our study - our overly simplistic study - didn’t give us that information! All we know is the amount of sleep per night reported in our sample, and that is the only basis we have for forming any expectation about the amount of sleep a random college student should get on any given night. But, don’t let that get you down! Even if we had those other variables available and wanted to use them to explain some of that variation around the mean, we would still need the mean to do it!</p>
 <p>Note that you will on occasion encounter variables that include missing or <code>NA</code> values. Because we do not know those values, we cannot <em>technically</em> know the mean of the variable. The function <code>mean()</code> registers this fact by returning <code>NA</code> in such cases. To avoid this, and to calculate the mean of the <em>known</em> values of the variable, we can specify the parameter <code>na.rm = TRUE</code>, which means “remove the NA values before computing the value of the variable.”</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="univariate-description.html#cb153-1"></a><span class="kw">mean</span>(x_NA)</span>
-<span id="cb153-2"><a href="univariate-description.html#cb153-2"></a><span class="co">## [1] NA</span></span>
-<span id="cb153-3"><a href="univariate-description.html#cb153-3"></a><span class="kw">mean</span>(x_NA, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb153-4"><a href="univariate-description.html#cb153-4"></a><span class="co">## [1] 4.6</span></span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="univariate-description.html#cb154-1"></a>x_NA</span>
+<span id="cb154-2"><a href="univariate-description.html#cb154-2"></a><span class="co">##  [1] 6.96 5.04   NA 8.04 5.94 7.65 9.70   NA   NA 7.53 5.97 5.84 6.26   NA</span></span>
+<span id="cb154-3"><a href="univariate-description.html#cb154-3"></a><span class="kw">mean</span>(x_NA)</span>
+<span id="cb154-4"><a href="univariate-description.html#cb154-4"></a><span class="co">## [1] NA</span></span>
+<span id="cb154-5"><a href="univariate-description.html#cb154-5"></a><span class="kw">mean</span>(x_NA, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb154-6"><a href="univariate-description.html#cb154-6"></a><span class="co">## [1] 6.893</span></span></code></pre></div>
+<p><img src="22-univariate_description_files/figure-html/unnamed-chunk-11-1.png" width="192" style="display: block; margin: auto;" /></p>
 </div>
 <div id="median" class="section level3">
 <h3><span class="header-section-number">13.2.2</span> Median</h3>
@@ -523,39 +544,48 @@ med(x) =
 \end{cases} 
 \]</span></p>
 <p><strong>Odd number of observations</strong></p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="univariate-description.html#cb154-1"></a><span class="co"># sort the value from lowest to highest</span></span>
-<span id="cb154-2"><a href="univariate-description.html#cb154-2"></a>x &lt;-<span class="st"> </span><span class="kw">sort</span>(x_odd)</span>
-<span id="cb154-3"><a href="univariate-description.html#cb154-3"></a></span>
-<span id="cb154-4"><a href="univariate-description.html#cb154-4"></a><span class="co"># count the number of values</span></span>
-<span id="cb154-5"><a href="univariate-description.html#cb154-5"></a>n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</span>
-<span id="cb154-6"><a href="univariate-description.html#cb154-6"></a></span>
-<span id="cb154-7"><a href="univariate-description.html#cb154-7"></a><span class="co"># find the middle position</span></span>
-<span id="cb154-8"><a href="univariate-description.html#cb154-8"></a>i &lt;-<span class="st"> </span>(n <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb154-9"><a href="univariate-description.html#cb154-9"></a></span>
-<span id="cb154-10"><a href="univariate-description.html#cb154-10"></a><span class="co"># now retrieve the value at that position</span></span>
-<span id="cb154-11"><a href="univariate-description.html#cb154-11"></a>x[i]</span>
-<span id="cb154-12"><a href="univariate-description.html#cb154-12"></a><span class="co">## [1] 176.1204</span></span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="univariate-description.html#cb155-1"></a><span class="co"># sort the value from lowest to highest</span></span>
+<span id="cb155-2"><a href="univariate-description.html#cb155-2"></a>x &lt;-<span class="st"> </span><span class="kw">sort</span>(x_odd)</span>
+<span id="cb155-3"><a href="univariate-description.html#cb155-3"></a></span>
+<span id="cb155-4"><a href="univariate-description.html#cb155-4"></a><span class="co"># count the number of values</span></span>
+<span id="cb155-5"><a href="univariate-description.html#cb155-5"></a>n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</span>
+<span id="cb155-6"><a href="univariate-description.html#cb155-6"></a></span>
+<span id="cb155-7"><a href="univariate-description.html#cb155-7"></a><span class="co"># find the middle position</span></span>
+<span id="cb155-8"><a href="univariate-description.html#cb155-8"></a>i &lt;-<span class="st"> </span>(n <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb155-9"><a href="univariate-description.html#cb155-9"></a></span>
+<span id="cb155-10"><a href="univariate-description.html#cb155-10"></a><span class="co"># now retrieve the value at that position</span></span>
+<span id="cb155-11"><a href="univariate-description.html#cb155-11"></a>x[i]</span>
+<span id="cb155-12"><a href="univariate-description.html#cb155-12"></a><span class="co">## [1] 176.3583</span></span></code></pre></div>
 <p>But, there’s actually a function for this in R.</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="univariate-description.html#cb155-1"></a><span class="kw">median</span>(x_odd)</span>
-<span id="cb155-2"><a href="univariate-description.html#cb155-2"></a><span class="co">## [1] 176.1204</span></span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="univariate-description.html#cb156-1"></a><span class="kw">median</span>(x_odd)</span>
+<span id="cb156-2"><a href="univariate-description.html#cb156-2"></a><span class="co">## [1] 176.3583</span></span></code></pre></div>
 <p><strong>Even number of observations</strong></p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="univariate-description.html#cb156-1"></a>x &lt;-<span class="st"> </span><span class="kw">sort</span>(x_even)</span>
-<span id="cb156-2"><a href="univariate-description.html#cb156-2"></a></span>
-<span id="cb156-3"><a href="univariate-description.html#cb156-3"></a>n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</span>
-<span id="cb156-4"><a href="univariate-description.html#cb156-4"></a></span>
-<span id="cb156-5"><a href="univariate-description.html#cb156-5"></a>i_left &lt;-<span class="st"> </span>n<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb156-6"><a href="univariate-description.html#cb156-6"></a>i_right &lt;-<span class="st"> </span>i_left <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb156-7"><a href="univariate-description.html#cb156-7"></a></span>
-<span id="cb156-8"><a href="univariate-description.html#cb156-8"></a><span class="co"># now we find the value half way between </span></span>
-<span id="cb156-9"><a href="univariate-description.html#cb156-9"></a><span class="co"># the center left and center right positions</span></span>
-<span id="cb156-10"><a href="univariate-description.html#cb156-10"></a>(x[i_left] <span class="op">+</span><span class="st"> </span>x[i_right])<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb156-11"><a href="univariate-description.html#cb156-11"></a><span class="co">## [1] 174.0568</span></span>
-<span id="cb156-12"><a href="univariate-description.html#cb156-12"></a><span class="kw">median</span>(x)</span>
-<span id="cb156-13"><a href="univariate-description.html#cb156-13"></a><span class="co">## [1] 174.0568</span></span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="univariate-description.html#cb157-1"></a>x &lt;-<span class="st"> </span><span class="kw">sort</span>(x_even)</span>
+<span id="cb157-2"><a href="univariate-description.html#cb157-2"></a></span>
+<span id="cb157-3"><a href="univariate-description.html#cb157-3"></a>n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</span>
+<span id="cb157-4"><a href="univariate-description.html#cb157-4"></a></span>
+<span id="cb157-5"><a href="univariate-description.html#cb157-5"></a>i_left &lt;-<span class="st"> </span>n<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb157-6"><a href="univariate-description.html#cb157-6"></a>i_right &lt;-<span class="st"> </span>i_left <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb157-7"><a href="univariate-description.html#cb157-7"></a></span>
+<span id="cb157-8"><a href="univariate-description.html#cb157-8"></a><span class="co"># now we find the value half way between </span></span>
+<span id="cb157-9"><a href="univariate-description.html#cb157-9"></a><span class="co"># the center left and center right positions</span></span>
+<span id="cb157-10"><a href="univariate-description.html#cb157-10"></a>(x[i_left] <span class="op">+</span><span class="st"> </span>x[i_right])<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb157-11"><a href="univariate-description.html#cb157-11"></a><span class="co">## [1] 180.1667</span></span>
+<span id="cb157-12"><a href="univariate-description.html#cb157-12"></a><span class="kw">median</span>(x)</span>
+<span id="cb157-13"><a href="univariate-description.html#cb157-13"></a><span class="co">## [1] 180.1667</span></span></code></pre></div>
+</div>
+<div id="mode" class="section level3">
+<h3><span class="header-section-number">13.2.3</span> Mode</h3>
 </div>
 </div>
 <div id="variability" class="section level2">
 <h2><span class="header-section-number">13.3</span> Variability</h2>
+<div class="figure" style="text-align: center"><span id="fig:expected-error"></span>
+<img src="22-univariate_description_files/figure-html/expected-error-1.png" alt="Expected error in sleep pattern." width="624" />
+<p class="caption">
+Figure 13.3: Expected error in sleep pattern.
+</p>
+</div>
 <p>All samples are discrete, regardless of the nature of the population random variable!</p>
 <div id="variance" class="section level3">
 <h3><span class="header-section-number">13.3.1</span> Variance</h3>
@@ -563,36 +593,18 @@ med(x) =
 <p><span class="math inline">\(\sigma^{2}\)</span> = population variance</p>
 <p><span class="math inline">\(s^{2}\)</span> = sample variance</p>
 <p>For discrete variables, the population variance is given by:</p>
-<p><span class="math display">\[ \sigma^{2} = \sum_{i=1}^{N} p_{i}(x_{i}-\mu)^{2} \]</span>
-For continuous variables, the population variance is given by:</p>
-<p><span class="math display">\[ \sigma^{2} = \int p(x_{i})dx\;(x_{i}-\mu)^{2} \]</span>
-where the expression <span class="math inline">\(p(x_{i})dx\)</span> defines the probability that the observed value of <span class="math inline">\(x\)</span> falls in the range <span class="math inline">\(dx\)</span>.</p>
+<p><span class="math display">\[ \sigma^{2} = \frac{1}{N} \sum_{i=1}^{N} (x_{i}-\mu)^{2} \]</span></p>
 <p>Sample variance is <em>always</em> discrete, hence we define the sample variance as</p>
 <p><span class="math display">\[ s^{2} = \frac{1}{n-1} \sum_{i=1}^{n} (x_{i} - \bar{x})^{2} \]</span></p>
 </div>
 <div id="standard-deviation" class="section level3">
 <h3><span class="header-section-number">13.3.2</span> Standard deviation</h3>
 </div>
-<div id="quantiles" class="section level3">
-<h3><span class="header-section-number">13.3.3</span> Quantiles</h3>
 </div>
-</div>
-<div id="categorical-data" class="section level2">
-<h2><span class="header-section-number">13.4</span> Categorical Data</h2>
-<div id="mode" class="section level3">
-<h3><span class="header-section-number">13.4.1</span> Mode</h3>
-</div>
-<div id="counts-and-proportions" class="section level3">
-<h3><span class="header-section-number">13.4.2</span> Counts and proportions</h3>
+<div id="quantiles" class="section level2">
+<h2><span class="header-section-number">13.4</span> Quantiles</h2>
 
 </div>
-</div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="9">
-<li id="fn9"><p>I know, I know. The actual variance according to the binomial distribution is <span class="math inline">\(np(1-p)\)</span>, in this case <span class="math inline">\((100*0.66)(1-0.66)\)</span>, which is around 22.2. I’m working up to that in the most natural and intuitive way I can, even if it involves some falsehoods along the way. Something, something, Kahlil Gibran.<a href="univariate-description.html#fnref9" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
             </section>
 

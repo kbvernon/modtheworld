@@ -558,7 +558,7 @@ str(my_list)
 ## List of 4
 ##  $ A: int [1:4] 1 2 3 4
 ##  $ B: num [1:5] 1.1 0.2 3.1 4 5.2
-##  $ C: chr [1:3] "a" "b" "c"
+##  $ C: chr [1:3] "a" "b" ...
 ##  $ D: logi [1:2] TRUE TRUE
 ```
 
@@ -582,8 +582,8 @@ str(my_dataframe)
 ## 'data.frame':	5 obs. of  4 variables:
 ##  $ A: int  1 2 3 4 5
 ##  $ B: num  1.1 0.2 3.1 4 5.2
-##  $ C: chr  "a" "b" "c" "d" ...
-##  $ D: logi  TRUE TRUE FALSE FALSE TRUE
+##  $ C: chr  "a" "b" ...
+##  $ D: logi  TRUE TRUE FALSE ...
 ```
 
 The big differences here are, first, that `str()` tells you that it has provided the structure of a data.frame, and, second, that it doesn't bother to specify the dimensions of each vector in the data.frame, instead describing the number of rows (or observations) and columns (or variables). This is because of the super-restriction on data.frames, namely, that each column have the same length.

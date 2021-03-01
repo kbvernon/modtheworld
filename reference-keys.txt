@@ -16,7 +16,9 @@ fig:r-menagerie
 fig:14-file-paths
 fig:unnamed-chunk-9
 fig:14-directory-structure
-fig:outcome-squares
+fig:balls-and-urn
+fig:sleep-pattern
+fig:expected-error
 intro
 who-is-this-bookdown-for
 why-this-bookdown-project
@@ -165,13 +167,11 @@ overview-7
 central-tendency
 mean
 median
+mode
 variability
 variance
 standard-deviation
 quantiles
-categorical-data
-mode
-counts-and-proportions
 probability-distributions
 inference-tests
 multivariate-description
