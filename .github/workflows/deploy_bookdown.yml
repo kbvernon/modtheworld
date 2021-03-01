@@ -16,7 +16,7 @@ jobs:
       - name: Install rmarkdown
         run: Rscript -e 'install.packages(c("rmarkdown","bookdown"))'
       - name: Install other packages
-        run: Rscript -e 'install.packages(c("dplyr", "ggplot2", "here", "knitr", "kableExtra", "gifski", "tidyr"))'
+        run: Rscript -e 'install.packages(c("dplyr", "ggplot2", "here", "knitr", "kableExtra", "gifski", "tidyr", "viridis"))'
       - name: Render Book
         run: Rscript -e 'bookdown::render_book("index.Rmd", quiet = TRUE)'
       - uses: actions/upload-artifact@v1
