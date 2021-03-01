@@ -21,7 +21,7 @@ insert_intro(
 
 As a way of priming you for the topics we'll cover here, consider this somewhat bland adaptation of an already bland scenario. You have six balls, with four of them being red, two gray, as shown in Fig. \@ref(fig:balls-and-urn). You can think of these balls as being the result of an _experiment_, with the outcome of interest being their color. Let's stipulate, as well, that you have no information about _why_ they are these colors. You don't know, for example, that the author has a preference for dark reds and grays.    
 
-```{r balls-and-urn, echo = FALSE, out.width = "40%", fig.cap = "Colored balls and urn. Outcome of an unknown process."}
+```{r balls-and-urn, echo = FALSE, out.width = "50%", fig.cap = "Colored balls and urn. Outcome of an unknown process."}
 
 knitr::include_graphics("images/balls_and_urn.png")
 
@@ -114,7 +114,7 @@ Instead of using $y$ as our variable, we are going to switch to using $x$, as it
 
 ## Central tendency
 
-The two most common measures of central tendency are the mean and the median. Their slightly less popular sibling is the mode, which is typically reserved for categorical data. 
+Central tendency, otherwise known as the location of a variable or its first moment, refers to the expected value of a variable. The two most common measures of it are the mean and the median. Their slightly less popular cousin is the mode, which is typically reserved for categorical data. 
 
 ### Mean
 
@@ -325,7 +325,7 @@ The mode is a measure of the most frequent value in a data set. Of all the measu
 
 ## Variability
 
-```{r expected-error, echo = FALSE, fig.height = 4, fig.width = 6.5, fig.cap = "Expected error in hours of sleep per night for college students."}
+```{r expected-error, eval = FALSE, echo = FALSE, fig.height = 4, fig.width = 6.5, fig.cap = "Expected error in hours of sleep per night for college students."}
 
 probs <- data.frame(xmin = rep(-10, 4),
                     xmax = rep(40, 4),
@@ -364,22 +364,103 @@ ggplot() +
 
 ```
 
+Variability, otherwise known as dispersion, uncertainty, or the second moment of a variable, refers to its expected error. There are two primary measures of variability, the variance and the standard deviation. Before, we get to those, however, let's think a little bit about what we mean by expected error. There are two parts to this, the _expectation_ and the _error_. The error is easy enough to explain. As we learned already, it's the difference between the observed and the expected outcome. That is,
+
+$$ \epsilon = y - E[y] $$
+
+where the expectation is defined by the sample mean, $E[y] = \bar{x}$. Here is how that looks in R using our college sleep data:
+
+```{r}
+
+# get sample mean
+xbar <- mean(x)
+
+# calculate errors (epsilon, e)
+errors <- (x - xbar)
+
+```
+
+Now, what about the _expectation_ of the errors? We already have the idea of expected value, which we identified with the central tendency, typically the mean of the observations. As a first approximation then, we might try to measure variability using the mean of the errors: 
+
+$$ \frac{1}{n} \sum_{i=1}^{n} (x - \bar{x}) $$
+
+Let's try that approach with our sleep data.
+
+```{r, render = function(x, options) {print(round(x, digits = 3))}}
+
+# number of errors
+n_errors <- length(errors)
+
+# calculate mean of errors
+sum(errors) / n_errors
+
+```
+
+It's zero! But, why? Let's look at the way the actual values fall out relative to the mean, as shown in Fig. \@ref(fig:center-mass).  
+
+```{r center-mass, echo = FALSE, fig.width = 3.3, fig.height = 2, fig.cap = "Center of mass of college sleep data."}
+
+set.seed(20210228)
+
+yn <- runif(length(x), -0.15, 0.15)
+
+xbar <- mean(x)
+
+new_df <- data.frame(hours = x, 
+                     yn = yn,
+                     xend = xbar)
+
+ggplot(new_df) +
+  geom_segment(aes(hours, yn, xend = xend, yend = yn),
+               color = "gray", 
+               alpha = 0.75) +
+  geom_point(aes(hours, yn), 
+             size = 2.75,
+             color = "#5c5c5c") +
+  annotate(geom = "segment",
+           x = xbar,
+           y = -0.25,
+           xend = xbar,
+           yend = 0.25,
+           color = "darkred", 
+           size = 0.8) +
+  annotate(geom = "text", 
+           x = xbar, 
+           y = 0.35, 
+           label = "paste(bar(x))", 
+           size = 4,
+           parse = TRUE) +
+  theme_bw() + 
+  theme(legend.position = "none",
+        panel.grid = element_blank(),
+        panel.border = element_rect(color = wee_gray, fill = NA),
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank()) +
+  xlim(ymin, ymax) +
+  ylim(-0.4, 0.4) +
+  labs(x = "Hours of sleep", y = "")
+
+```
+
+Now, let's have a look at the sum of the errors above the mean (errors greater than zero) and the sum of the errors below the mean (errors less than zero):
+
+```{r}
+
+sum(errors[errors < 0])
+
+sum(errors[errors > 0])
+
+```
+
+They're the same, but with different signs! That means when you sum all of them together, you get zero! Hence, dividing by the number of observations, $n$, still returns zero as the mean of the errors. While that is technically correct, it is not terribly informative, especially when what we want is not just the _difference_ but the _distance_ between the observed and expected, which is always positive. Now, how do we get that? The standard solution is to square the errors first, then divide by the number of observations. This is known as the __variance__.  
+
 
 ### Variance
 
-The expected amount of difference between (the square of) the observed and the mean values.
-
-$\sigma^{2}$ = population variance
-
-$s^{2}$ = sample variance
-
-
-For discrete variables, the population variance is given by:
+To be precise, variance is defined as the expected amount of difference between the square of errors. For discrete variables, the population variance, $\sigma^{2}$, is given by:
 
 $$ \sigma^{2} = \frac{1}{N} \sum_{i=1}^{N} (x_{i}-\mu)^{2} $$
-
-
-The sample variance as
+The sample variance, $s^{2}$, is then defined as:
 
 $$ s^{2} = \frac{1}{n-1} \sum_{i=1}^{n} (x_{i} - \bar{x})^{2} $$
 

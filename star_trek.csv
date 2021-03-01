@@ -1,0 +1,598 @@
+"","year","series","episode","rating","votes"
+"1",1967,"The Original Series","Space Seed",8.8,3833
+"2",1967,"The Original Series","A Taste of Armageddon",8.1,2927
+"3",1967,"The Original Series","The City on the Edge of Forever",9.3,4639
+"4",1967,"The Original Series","Mirror, Mirror",9.1,3611
+"5",1968,"The Original Series","Return to Tomorrow",7.6,2296
+"6",1968,"The Original Series","The Enterprise Incident",8.5,2697
+"7",1989,"The Next Generation","The Measure Of A Man",9.2,4400
+"8",1990,"The Next Generation","Yesterday's Enterprise",9.2,4260
+"9",1990,"The Next Generation","The Offspring",8.5,3250
+"10",1990,"The Next Generation","Sarek",8.3,2693
+"11",1990,"The Next Generation","The Best of Both Worlds",9.4,4154
+"12",1990,"The Next Generation","The Best of Both Worlds Part II",9.3,3915
+"13",1992,"The Next Generation","The Inner Light",9.5,5947
+"14",1992,"The Next Generation","Chain Of Command, Part II",8.9,2826
+"15",1993,"The Next Generation","Tapestry",8.9,3084
+"16",1994,"The Next Generation","All Good Things...",9.2,7826
+"17",1993,"Deep Space Nine","Duet",9.1,2560
+"18",1995,"Deep Space Nine","The Way Of The Warrior",9.1,2062
+"19",1995,"Deep Space Nine","The Visitor",9.2,2993
+"20",1996,"Deep Space Nine","Hard Time",8.4,1618
+"21",1996,"Deep Space Nine","Nor The Battle To The Strong",7.7,1436
+"22",1996,"Deep Space Nine","Rapture",7.3,1346
+"23",1997,"Deep Space Nine","Call To Arms",9.1,1598
+"24",1998,"Deep Space Nine","In The Pale Moonlight",9.5,2926
+"25",1998,"Deep Space Nine","It's Only A Paper Moon",8.3,1576
+"26",1999,"Deep Space Nine","Inter Arma Enim Silent Leges",8.4,1386
+"27",1999,"Deep Space Nine","Tacking Into The Wind",8.8,1313
+"28",1995,"Voyager","Jetrel",7.3,1448
+"29",1996,"Voyager","Death Wish",8.4,1675
+"30",1996,"Voyager","Tuvix",7.7,1708
+"31",1996,"Voyager","Basics, Part II",8,1379
+"32",1997,"Voyager","Distant Origin",8.6,1656
+"33",1997,"Voyager","Scorpion, Part II",9,1776
+"34",1999,"Voyager","Course: Oblivion",7.7,1472
+"35",2000,"Voyager","Blink Of An Eye",9.1,2304
+"36",2001,"Voyager","Lineage",7.1,1223
+"37",1966,"The Menagerie","Part I",8.4,3352
+"38",1966,"The Menagerie","Part II",8.2,3244
+"39",1966,"The Original Series","Balance of Terror",8.9,3920
+"40",1967,"The Original Series","Arena",8,3156
+"41",1967,"The Original Series","The Return of the Archons",7.2,2705
+"42",1967,"The Original Series","This Side of Paradise",7.9,2854
+"43",1967,"The Original Series","The Devil in the Dark",8.4,3079
+"44",1967,"The Original Series","Errand of Mercy",8.2,2822
+"45",1967,"The Original Series","Journey to Babel",8.6,2811
+"46",1967,"The Original Series","The Trouble with Tribbles",8.9,3511
+"47",1968,"The Original Series","The Ultimate Computer",8.1,2398
+"48",1968,"The Original Series","The Paradise Syndrome",6.8,2328
+"49",1968,"The Original Series","Day of the Dove",7.9,2319
+"50",1968,"The Original Series","Plato's Stepchildren",6.6,2235
+"51",1969,"The Original Series","Let That Be Your Last Battlefield",7.3,2251
+"52",1969,"The Original Series","Turnabout Intruder",6.9,2099
+"53",1987,"The Next Generation","Where No One Has Gone Before",7.6,3311
+"54",1988,"The Next Generation","Datalore",7.7,2970
+"55",1989,"The Next Generation","A Matter Of Honor",8.1,2836
+"56",1989,"The Next Generation","Q Who",9,3605
+"57",1989,"The Next Generation","The Ensigns of Command",7.5,2617
+"58",1989,"The Next Generation","The Survivors",7.7,2859
+"59",1989,"The Next Generation","Who Watches The Watchers",8.1,3105
+"60",1990,"The Next Generation","Deja Q",8.6,3023
+"61",1990,"The Next Generation","Sins of The Father",8.3,2638
+"62",1990,"The Next Generation","The Most Toys",7.7,2520
+"63",1990,"The Next Generation","Family",8.4,3112
+"64",1990,"The Next Generation","Reunion",8.4,2619
+"65",1991,"The Next Generation","The Wounded",8.2,2535
+"66",1991,"The Next Generation","Clues",8.3,2735
+"67",1991,"The Next Generation","First Contact",8.2,2605
+"68",1991,"The Next Generation","The Drumhead",8.4,2899
+"69",1991,"The Next Generation","Redemption",8.5,2409
+"70",1991,"The Next Generation","Redemption II",8.5,2433
+"71",1992,"The Next Generation","I Borg",8.8,3055
+"72",1992,"The Next Generation","Chain Of Command, Part I",8.4,2587
+"73",1993,"The Next Generation","Descent",8.2,2163
+"74",1993,"The Next Generation","Gambit, Part I",7.9,2137
+"75",1993,"The Next Generation","Gambit, Part II",8,2129
+"76",1994,"The Next Generation","Thine Own Self",7.9,2144
+"77",1993,"Deep Space Nine","Emissary",7.6,3571
+"78",1994,"Deep Space Nine","The Wire",8.3,1618
+"79",1994,"Deep Space Nine","The Collaborator",7.1,1408
+"80",1994,"Deep Space Nine","The Jem'Hadar",8.5,1627
+"81",1994,"Deep Space Nine","The Search, Part I",8.4,1612
+"82",1994,"Deep Space Nine","The Search, Part II",8.3,1591
+"83",1994,"Deep Space Nine","Second Skin",8,1544
+"84",1994,"Deep Space Nine","Defiant",8.1,1598
+"85",1995,"Deep Space Nine","Life Support",6.8,1379
+"86",1995,"Deep Space Nine","The Die Is Cast",9,1741
+"87",1995,"Deep Space Nine","The Adversary",8.3,1464
+"88",1995,"Deep Space Nine","Rejoined",7.1,1563
+"89",1995,"Deep Space Nine","Our Man Bashir",8,1621
+"90",1996,"Deep Space Nine","Homefront",8.4,1543
+"91",1996,"Deep Space Nine","Paradise Lost",8.4,1535
+"92",1996,"Deep Space Nine","Return To Grace",7.9,1400
+"93",1996,"Deep Space Nine","Looking For Par'Mach In All The Wrong Places",7.7,1489
+"94",1996,"Deep Space Nine","Trials And Tribble-ations",9.4,2820
+"95",1996,"Deep Space Nine","Things Past",7.5,1391
+"96",1997,"Deep Space Nine","For The Uniform",8,1460
+"97",1997,"Deep Space Nine","In Purgatory's Shadow",8.9,1607
+"98",1997,"Deep Space Nine","By Inferno's Light",9,1613
+"99",1997,"Deep Space Nine","A Time To Stand",8.6,1487
+"100",1997,"Deep Space Nine","Rocks And Shoals",8.6,1574
+"101",1997,"Deep Space Nine","Favor The Bold",8.7,1473
+"102",1997,"Deep Space Nine","Sacrifice Of Angels",9.1,1692
+"103",1998,"Deep Space Nine","Waltz",7.9,1428
+"104",1998,"Deep Space Nine","Far Beyond The Stars",8.9,2532
+"105",1998,"Deep Space Nine","Tears Of The Prophets",8.4,1366
+"106",1998,"Deep Space Nine","Treachery, Faith And The Great River",8.3,1377
+"107",1998,"Deep Space Nine","The Siege Of AR-558",8.7,1707
+"108",1999,"Deep Space Nine","Chimera",7.3,1245
+"109",1999,"Deep Space Nine","Strange Bedfellows",8,1204
+"110",1999,"Deep Space Nine","The Changing Face Of Evil",8.5,1268
+"111",1995,"Voyager","Maneuvers",7.2,1317
+"112",1996,"Voyager","Meld",8,1505
+"113",1996,"Voyager","Dreadnought",7.7,1423
+"114",1996,"Voyager","Lifesigns",7.6,1399
+"115",1996,"Voyager","Investigations",7.7,1357
+"116",1996,"Voyager","Deadlock",8.3,1569
+"117",1996,"Voyager","Remember",7.1,1297
+"118",1997,"Voyager","Unity",7.9,1342
+"119",1997,"Voyager","Darkling",6.4,1209
+"120",1997,"Voyager","Real Life",7.4,1376
+"121",1997,"Voyager","Scorpion",9,1788
+"122",1997,"Voyager","Nemesis",7,1410
+"123",1998,"Voyager","Message In A Bottle",8.8,1826
+"124",1998,"Voyager","Living Witness",8.8,1826
+"125",1998,"Voyager","Demon",7.3,1285
+"126",1998,"Voyager","One",8.2,1401
+"127",1999,"Voyager","Latent Image",8.4,1541
+"128",1998,"Voyager","Drone",8.7,1743
+"129",1998,"Voyager","Counterpoint",8,1466
+"130",1999,"Voyager","Someone To Watch Over Me",8.2,1496
+"131",1999,"Voyager","Relativity",8.6,1548
+"132",1999,"Voyager","Tinker Tenor Doctor Spy",8.6,1675
+"133",1999,"Voyager","One Small Step",7.8,1362
+"134",1999,"Voyager","Pathfinder",8.5,1559
+"135",2000,"Voyager","Memorial",7.1,1247
+"136",2000,"Voyager","Imperfection",7.8,1293
+"137",2001,"Voyager","Repentance",7.4,1218
+"138",2001,"Voyager","Endgame",8.6,2002
+"139",1966,"The Original Series","Where No Man Has Gone Before",7.8,4790
+"140",1966,"The Original Series","The Naked Time",7.9,3647
+"141",1966,"The Original Series","The Enemy Within",7.7,3477
+"142",1966,"The Original Series","The Corbomite Maneuver",8.1,3402
+"143",1966,"The Original Series","The Conscience of the King",7.2,2942
+"144",1967,"The Original Series","Tomorrow Is Yesterday",8,3013
+"145",1967,"The Original Series","Court Martial",7.5,2793
+"146",1967,"The Original Series","Operation - Annihilate!",7.6,2555
+"147",1967,"The Original Series","Amok Time",8.7,3338
+"148",1967,"The Original Series","The Changeling",7.7,2564
+"149",1967,"The Original Series","I, Mudd",7.4,2613
+"150",1967,"The Original Series","Metamorphosis",7.3,2527
+"151",1967,"The Original Series","Obsession",7.3,2289
+"152",1967,"The Original Series","Wolf in the Fold",7.4,2399
+"153",1968,"The Original Series","A Private Little War",6.9,2273
+"154",1968,"The Original Series","Patterns of Force",7.6,2404
+"155",1968,"The Original Series","By Any Other Name",7.6,2349
+"156",1968,"The Original Series","Bread and Circuses",7.2,2291
+"157",1968,"The Original Series","And the Children Shall Lead",5.2,2376
+"158",1968,"The Original Series","Is There in Truth No Beauty?",7,2217
+"159",1968,"The Original Series","The Tholian Web",8.1,2348
+"160",1969,"The Original Series","Whom Gods Destroy",7,2099
+"161",1969,"The Original Series","The Cloud Minders",7.1,2061
+"162",1969,"The Original Series","All Our Yesterdays",8.3,2401
+"163",1988,"The Next Generation","11001001",7.5,2932
+"164",1988,"The Next Generation","Heart of Glory",7.3,2577
+"165",1988,"The Next Generation","Symbiosis",7,2587
+"166",1988,"The Next Generation","Conspiracy",8.2,3027
+"167",1988,"The Next Generation","The Child",5.8,2797
+"168",1988,"The Next Generation","Elementary, Dear Data",8.2,3108
+"169",1989,"The Next Generation","Loud As A Whisper",6.5,2528
+"170",1989,"The Next Generation","Contagion",7.7,2528
+"171",1989,"The Next Generation","Time Squared",7.6,2645
+"172",1989,"The Next Generation","The Emissary",7.6,2601
+"173",1989,"The Next Generation","Peak Performance",7.8,2540
+"174",1989,"The Next Generation","The Bonding",6.7,2440
+"175",1989,"The Next Generation","Booby Trap",7.5,2506
+"176",1989,"The Next Generation","The Enemy",7.9,2507
+"177",1990,"The Next Generation","The Defector",8.5,2891
+"178",1990,"The Next Generation","The Hunted",7.5,2489
+"179",1990,"The Next Generation","Hollow Pursuits",7.8,2516
+"180",1990,"The Next Generation","Brothers",7.9,2528
+"181",1990,"The Next Generation","Suddenly Human",6.5,2336
+"182",1990,"The Next Generation","Remember Me",7.9,2690
+"183",1990,"The Next Generation","Legacy",6.8,2287
+"184",1990,"The Next Generation","Future Imperfect",7.9,2559
+"185",1990,"The Next Generation","Final Mission",6.9,2303
+"186",1991,"The Next Generation","Data's Day",8.2,2684
+"187",1991,"The Next Generation","Devil's Due",7.3,2422
+"188",1991,"The Next Generation","Galaxy's Child",7.1,2265
+"189",1991,"The Next Generation","The Nth Degree",8.1,2477
+"190",1991,"The Next Generation","Half a Life",7.3,2316
+"191",1991,"The Next Generation","The Host",6.5,2174
+"192",1991,"The Next Generation","The Mind's Eye",7.8,2216
+"193",1991,"The Next Generation","Darmok",8.7,3616
+"194",1991,"The Next Generation","Ensign Ro",7.9,2381
+"195",1991,"The Next Generation","Silicon Avatar",7.2,2212
+"196",1991,"The Next Generation","Disaster",8,2537
+"197",1991,"The Next Generation","The Game",7.5,2502
+"198",1991,"The Next Generation","Unification I",8.3,2500
+"199",1991,"The Next Generation","Unification II",8.4,2486
+"200",1992,"The Next Generation","Hero Worship",6.7,2106
+"201",1992,"The Next Generation","The Masterpiece Society",6.8,2077
+"202",1992,"The Next Generation","Conundrum",8.3,2518
+"203",1992,"The Next Generation","Power Play",7.4,2159
+"204",1992,"The Next Generation","Ethics",7.3,2179
+"205",1992,"The Next Generation","The Outcast",6.8,2371
+"206",1992,"The Next Generation","The First Duty",7.9,2353
+"207",1992,"The Next Generation","The Next Phase",8.4,2423
+"208",1992,"The Next Generation","Time's Arrow",8.5,2565
+"209",1992,"The Next Generation","Time's Arrow, Part II",8.3,2574
+"210",1992,"The Next Generation","Schisms",7.6,2231
+"211",1992,"The Next Generation","The Quality of Life",7.5,2081
+"212",1993,"The Next Generation","Face Of The Enemy",8,2291
+"213",1993,"The Next Generation","Starship Mine",8,2305
+"214",1993,"The Next Generation","Lessons",7.6,2260
+"215",1993,"The Next Generation","Frame of Mind",8.3,2415
+"216",1993,"The Next Generation","Timescape",8.7,2398
+"217",1993,"The Next Generation","Descent, Part II",7.9,2204
+"218",1993,"The Next Generation","Phantasms",7.7,2106
+"219",1993,"The Next Generation","Inheritance",7.6,2042
+"220",1993,"The Next Generation","Parallels",8.9,2711
+"221",1994,"The Next Generation","The Pegasus",8.6,2403
+"222",1994,"The Next Generation","Lower Decks",8.8,2869
+"223",1994,"The Next Generation","Preemptive Strike",8,2006
+"224",1993,"Deep Space Nine","Past Prologue",7.1,1872
+"225",1993,"Deep Space Nine","A Man Alone",6.9,1825
+"226",1993,"Deep Space Nine","Babel",7,1788
+"227",1993,"Deep Space Nine","Dax",7.2,1740
+"228",1993,"Deep Space Nine","The Passenger",6.4,1643
+"229",1993,"Deep Space Nine","The Forsaken",7,1543
+"230",1993,"Deep Space Nine","In The Hands Of The Prophets",7.8,1658
+"231",1993,"Deep Space Nine","The Homecoming",7.7,1634
+"232",1993,"Deep Space Nine","The Circle",7.7,1605
+"233",1993,"Deep Space Nine","The Siege",7.9,1609
+"234",1993,"Deep Space Nine","Necessary Evil",8.2,1692
+"235",1993,"Deep Space Nine","Second Sight",6.3,1493
+"236",1994,"Deep Space Nine","Whispers",8.3,1722
+"237",1994,"Deep Space Nine","Profit And Loss",7.3,1469
+"238",1994,"Deep Space Nine","Blood Oath",8,1667
+"239",1994,"Deep Space Nine","The Maquis, Part I",7.9,1524
+"240",1994,"Deep Space Nine","The Maquis, Part II",7.9,1503
+"241",1994,"Deep Space Nine","The House Of Quark",8.1,1645
+"242",1994,"Deep Space Nine","Equilibrium",6.8,1412
+"243",1995,"Deep Space Nine","Past Tense, Part I",8,1626
+"244",1995,"Deep Space Nine","Past Tense, Part II",8.1,1604
+"245",1995,"Deep Space Nine","Heart Of Stone",7.4,1425
+"246",1995,"Deep Space Nine","Destiny",7.5,1400
+"247",1995,"Deep Space Nine","Visionary",7.9,1451
+"248",1995,"Deep Space Nine","Through The Looking Glass",7.6,1419
+"249",1995,"Deep Space Nine","Improbable Cause",8.7,1647
+"250",1995,"Deep Space Nine","Facets",7.3,1366
+"251",1995,"Deep Space Nine","Indiscretion",7.8,1464
+"252",1996,"Deep Space Nine","Crossfire",7.3,1383
+"253",1996,"Deep Space Nine","Bar Association",7.5,1416
+"254",1996,"Deep Space Nine","For The Cause",7.9,1398
+"255",1996,"Deep Space Nine","The Quickening",7.7,1391
+"256",1996,"Deep Space Nine","Body Parts",7.6,1372
+"257",1996,"Deep Space Nine","Broken Link",8.3,1397
+"258",1996,"Deep Space Nine","Apocalypse Rising",8.4,1491
+"259",1996,"Deep Space Nine","The Assignment",7.4,1344
+"260",1996,"Deep Space Nine","The Ascent",7.6,1382
+"261",1997,"Deep Space Nine","The Begotten",7.9,1413
+"262",1997,"Deep Space Nine","Doctor Bashir, I Presume",7.9,1446
+"263",1997,"Deep Space Nine","Blaze Of Glory",7.6,1299
+"264",1997,"Deep Space Nine","Sons And Daughters",7.1,1339
+"265",1997,"Deep Space Nine","Behind The Lines",8,1361
+"266",1997,"Deep Space Nine","You Are Cordially Invited",7.5,1403
+"267",1997,"Deep Space Nine","Statistical Probabilities",7.7,1422
+"268",1998,"Deep Space Nine","The Magnificent Ferengi",8.2,1575
+"269",1998,"Deep Space Nine","Change Of Heart",7.2,1305
+"270",1998,"Deep Space Nine","Wrongs Darker Than Death Or Night",6.9,1284
+"271",1998,"Deep Space Nine","Inquisition",8.3,1456
+"272",1998,"Deep Space Nine","The Reckoning",7.2,1279
+"273",1998,"Deep Space Nine","The Sound Of Her Voice",7.6,1357
+"274",1998,"Deep Space Nine","Image In The Sand",7.7,1371
+"275",1998,"Deep Space Nine","Shadows And Symbols",8,1384
+"276",1999,"Deep Space Nine","Field Of Fire",6.8,1244
+"277",1999,"Deep Space Nine","Badda-Bing, Badda-Bang",7.7,1437
+"278",1999,"Deep Space Nine","Penumbra",7.6,1190
+"279",1999,"Deep Space Nine","When It Rains...",8.3,1205
+"280",1999,"Deep Space Nine","Extreme Measures",7.8,1241
+"281",1999,"Deep Space Nine","The Dogs Of War",8.4,1260
+"282",1999,"Deep Space Nine","What You Leave Behind",9,1801
+"283",1995,"Voyager","Prime Factors",7.4,1521
+"284",1995,"Voyager","State Of Flux",7.7,1478
+"285",1995,"Voyager","Heroes And Demons",6.8,1505
+"286",1995,"Voyager","Cathexis",6.8,1397
+"287",1995,"Voyager","Persistence Of Vision",6.9,1344
+"288",1995,"Voyager","Cold Fire",7.2,1340
+"289",1995,"Voyager","Resistance",7.1,1369
+"290",1996,"Voyager","Prototype",7.6,1434
+"291",1996,"Voyager","Innocence",6.8,1391
+"292",1996,"Voyager","The Thaw",7.3,1621
+"293",1996,"Voyager","Resolutions",7.4,1358
+"294",1996,"Voyager","Basics, Part I",7.9,1352
+"295",1996,"Voyager","Future's End",8.4,1625
+"296",1996,"Voyager","Future's End, Part II",8.3,1545
+"297",1996,"Voyager","The Q And The Grey",7.3,1383
+"298",1997,"Voyager","Coda",7.1,1300
+"299",1997,"Voyager","Blood Fever",7.3,1293
+"300",1997,"Voyager","Before And After",7.8,1372
+"301",1997,"Voyager","Displaced",7.6,1231
+"302",1997,"Voyager","Worst Case Scenario",8.2,1370
+"303",1997,"Voyager","The Gift",8.1,1491
+"304",1997,"Voyager","Day Of Honor",7.5,1310
+"305",1997,"Voyager","Mortal Coil",6.9,1296
+"306",1998,"Voyager","Infinite Regress",7.8,1379
+"307",1998,"Voyager","The Omega Directive",7.6,1355
+"308",1998,"Voyager","Hope And Fear",8.2,1358
+"309",1998,"Voyager","Night",7.9,1408
+"310",1998,"Voyager","Extreme Risk",6.9,1267
+"311",1998,"Voyager","Timeless",8.8,1835
+"312",1999,"Voyager","Bride Of Chaotica!",7.5,1490
+"313",1999,"Voyager","Gravity",7.4,1306
+"314",1999,"Voyager","Bliss",7.9,1347
+"315",1999,"Voyager","Dark Frontier",8.6,1533
+"316",1999,"Voyager","Warhead",7.2,1203
+"317",1999,"Voyager","Equinox",8.5,1384
+"318",1999,"Voyager","Equinox, Part II",8.3,1445
+"319",1999,"Voyager","Survival Instinct",7.7,1306
+"320",1999,"Voyager","Riddles",7.5,1282
+"321",2000,"Voyager","Virtuoso",7.3,1351
+"322",2000,"Voyager","Ashes To Ashes",7.1,1260
+"323",2000,"Voyager","Child's Play",7.7,1275
+"324",2000,"Voyager","Muse",6.9,1259
+"325",2000,"Voyager","Life Line",8.3,1360
+"326",2000,"Voyager","Unimatrix Zero",8.1,1257
+"327",2000,"Voyager","Unimatrix Zero Part II",8.1,1314
+"328",2000,"Voyager","Critical Care",7.9,1258
+"329",2000,"Voyager","Body And Soul",8.1,1347
+"330",2000,"Voyager","Flesh And Blood",7.7,1231
+"331",2001,"Voyager","Shattered",8.3,1433
+"332",2001,"Voyager","Prophecy",7.4,1189
+"333",2001,"Voyager","The Void",8.1,1290
+"334",2001,"Voyager","Workforce",7.8,1227
+"335",2001,"Voyager","Workforce, Part II",7.9,1205
+"336",2001,"Voyager","Human Error",7.4,1149
+"337",2001,"Voyager","Homestead",7.8,1258
+"338",2001,"Voyager","Renaissance Man",7.6,1189
+"339",1997,"Voyager","Scientific Method",8.1,1428
+"340",1995,"Voyager","Eye Of The Needle",8.3,1737
+"341",1986,"The Original Series","The Cage",7.7,5342
+"342",1966,"The Original Series","Charlie X",7.1,3884
+"343",1966,"The Original Series","Dagger of the Mind",7.5,3035
+"344",1967,"The Original Series","The Galileo Seven",7.7,2989
+"345",1967,"The Original Series","Who Mourns for Adonais?",7.2,2809
+"346",1967,"The Original Series","The Doomsday Machine",8.8,3200
+"347",1967,"The Original Series","Catspaw",6.3,2504
+"348",1967,"The Original Series","The Deadly Years",7.4,2384
+"349",1968,"The Original Series","The Gamesters of Triskelion",7.1,2440
+"350",1968,"The Original Series","The Immunity Syndrome",7.6,2296
+"351",1968,"Assignment","Earth",7.6,2559
+"352",1968,"The Original Series","Spectre of the Gun",7.3,2350
+"353",1968,"The Original Series","For the World Is Hollow and I Have Touched the Sky",7.2,2160
+"354",1968,"The Original Series","Wink of an Eye",7.4,2149
+"355",1969,"The Original Series","Requiem for Methuselah",7.4,2227
+"356",1969,"The Original Series","The Savage Curtain",6.7,2079
+"357",1987,"The Next Generation","Encounter at Farpoint",7,5703
+"358",1987,"The Next Generation","The Naked Now",6.6,3384
+"359",1987,"The Next Generation","The Battle",6.9,2756
+"360",1987,"The Next Generation","Hide And Q",7,2893
+"361",1988,"The Next Generation","Too Short A Season",6.1,2601
+"362",1988,"The Next Generation","When The Bough Breaks",6.4,2556
+"363",1988,"The Next Generation","Home Soil",6.9,2538
+"364",1988,"The Next Generation","Coming of Age",7.2,2628
+"365",1988,"The Next Generation","Skin Of Evil",6.9,2852
+"366",1988,"The Next Generation","We'll Always Have Paris",6.6,2497
+"367",1988,"The Next Generation","The Neutral Zone",7.5,2747
+"368",1988,"The Next Generation","Where Silence Has Lease",7.1,2634
+"369",1989,"The Next Generation","The Schizoid Man",7,2511
+"370",1989,"The Next Generation","Unnatural Selection",6.5,2431
+"371",1989,"The Next Generation","Samaritan Snare",6.6,2381
+"372",1989,"The Next Generation","Evolution",6.6,2461
+"373",1989,"The Next Generation","The Vengeance Factor",6.5,2279
+"374",1990,"The Next Generation","The High Ground",6.8,2352
+"375",1990,"The Next Generation","A Matter of Perspective",6.8,2357
+"376",1990,"The Next Generation","Allegiance",7.5,2426
+"377",1990,"The Next Generation","Captain's Holiday",7.3,2520
+"378",1990,"The Next Generation","Tin Man",7.3,2394
+"379",1990,"The Next Generation","Transfigurations",7,2230
+"380",1990,"The Next Generation","The Loss",6,2230
+"381",1991,"The Next Generation","Night Terrors",7.2,2301
+"382",1991,"The Next Generation","Identity Crisis",6.8,2166
+"383",1991,"The Next Generation","In Theory",7.2,2221
+"384",1991,"The Next Generation","A Matter Of Time",7.3,2220
+"385",1992,"The Next Generation","New Ground",6.5,2038
+"386",1992,"The Next Generation","Violations",6.3,2032
+"387",1992,"The Next Generation","Cause And Effect",9,3357
+"388",1992,"The Next Generation","The Perfect Mate",7.4,2382
+"389",1992,"The Next Generation","Man Of The People",5.7,2023
+"390",1992,"The Next Generation","Relics",8.6,2778
+"391",1992,"The Next Generation","True Q",7.5,2249
+"392",1992,"The Next Generation","Rascals",7.4,2313
+"393",1993,"The Next Generation","Ship In A Bottle",8.6,2591
+"394",1993,"The Next Generation","Birthright, Part I",7.7,2103
+"395",1993,"The Next Generation","Birthright, Part II",7.4,2086
+"396",1993,"The Next Generation","The Chase",8.1,2390
+"397",1993,"The Next Generation","Suspicions",7.1,1980
+"398",1993,"The Next Generation","Rightful Heir",7.3,1919
+"399",1993,"The Next Generation","Second Chances",7.6,2075
+"400",1993,"The Next Generation","Interface",6.3,1885
+"401",1993,"The Next Generation","Dark Page",6.4,2063
+"402",1993,"The Next Generation","Attached",7.5,2038
+"403",1994,"The Next Generation","Homeward",7.1,1946
+"404",1994,"The Next Generation","Masks",6,2131
+"405",1994,"The Next Generation","Eye of the Beholder",6.7,1906
+"406",1994,"The Next Generation","Firstborn",6.9,1832
+"407",1994,"The Next Generation","Bloodlines",6.6,1788
+"408",1993,"Deep Space Nine","Captive Pursuit",7.7,1841
+"409",1993,"Deep Space Nine","Q-Less",6.9,1775
+"410",1993,"Deep Space Nine","Vortex",7.1,1614
+"411",1993,"Deep Space Nine","Battle Lines",6.7,1606
+"412",1993,"Deep Space Nine","The Storyteller",6.1,1627
+"413",1993,"Deep Space Nine","Progress",6.9,1611
+"414",1993,"Deep Space Nine","If Wishes Were Horses",6.5,1584
+"415",1993,"Deep Space Nine","Dramatis Personae",7.1,1541
+"416",1993,"Deep Space Nine","Invasive Procedures",6.9,1538
+"417",1993,"Deep Space Nine","Melora",6.5,1560
+"418",1993,"Deep Space Nine","Rules Of Aquisition",7.5,1580
+"419",1993,"Deep Space Nine","Sanctuary",6.5,1507
+"420",1994,"Deep Space Nine","Armageddon Game",7.5,1508
+"421",1994,"Deep Space Nine","Paradise",6.7,1601
+"422",1994,"Deep Space Nine","Shadowplay",7.4,1516
+"423",1994,"Deep Space Nine","Playing God",6.5,1424
+"424",1994,"Deep Space Nine","Crossover",8,1589
+"425",1994,"Deep Space Nine","Tribunal",7.6,1450
+"426",1994,"Deep Space Nine","The Abandoned",7,1401
+"427",1994,"Deep Space Nine","Civil Defense",8,1577
+"428",1995,"Deep Space Nine","Distant Voices",6.6,1406
+"429",1995,"Deep Space Nine","Explorers",7.4,1468
+"430",1995,"Deep Space Nine","Family Business",7.3,1401
+"431",1995,"Deep Space Nine","Shakaar",7,1332
+"432",1995,"Deep Space Nine","Hippocratic Oath",7.8,1497
+"433",1995,"Deep Space Nine","Starship Down",7.8,1457
+"434",1995,"Deep Space Nine","Little Green Men",8.6,1844
+"435",1995,"Deep Space Nine","The Sword Of Kahless",7.1,1412
+"436",1996,"Deep Space Nine","Sons Of Mogh",7.4,1370
+"437",1996,"Deep Space Nine","Accession",7.2,1330
+"438",1996,"Deep Space Nine","Shattered Mirror",7.3,1341
+"439",1996,"Deep Space Nine","To The Death",8.2,1448
+"440",1996,"Deep Space Nine","The Ship",8,1501
+"441",1997,"Deep Space Nine","A Simple Investigation",6.7,1311
+"442",1997,"Deep Space Nine","Soldiers Of The Empire",7.8,1348
+"443",1997,"Deep Space Nine","Empok Nor",7.9,1375
+"444",1998,"Deep Space Nine","One Little Ship",7.8,1417
+"445",1998,"Deep Space Nine","His Way",7.6,1498
+"446",1998,"Deep Space Nine","Valiant",7.1,1389
+"447",1998,"Deep Space Nine","Time's Orphan",6.3,1348
+"448",1998,"Deep Space Nine","Afterimage",7.3,1281
+"449",1998,"Deep Space Nine","Take Me Out To The Holosuite",7.6,1544
+"450",1998,"Deep Space Nine","Once More Unto The Breach",7.7,1313
+"451",1998,"Deep Space Nine","Covenant",6.8,1259
+"452",1999,"Deep Space Nine","Prodigal Daughter",6.4,1227
+"453",1999,"Deep Space Nine","'Til Death Do Us Part",7.6,1176
+"454",1995,"Voyager","Caretaker",7.6,3345
+"455",1995,"Voyager","Parallax",7.3,1694
+"456",1995,"Voyager","Time And Again",7.2,1654
+"457",1995,"Voyager","Phage",7.2,1584
+"458",1995,"Voyager","Ex Post Facto",6.7,1513
+"459",1995,"Voyager","Emanations",6.8,1503
+"460",1995,"Voyager","Faces",7.3,1483
+"461",1995,"Voyager","Learning Curve",7.2,1411
+"462",1995,"Voyager","The 37's",7.4,1653
+"463",1995,"Voyager","Projections",8,1590
+"464",1995,"Voyager","Parturition",6.5,1337
+"465",1995,"Voyager","Tattoo",6.3,1397
+"466",1996,"Voyager","Alliances",7.3,1312
+"467",1996,"Voyager","Flashback",7.9,1497
+"468",1996,"Voyager","The Chute",6.8,1285
+"469",1996,"Voyager","The Swarm",7.3,1262
+"470",1996,"Voyager","Warlord",6.8,1304
+"471",1997,"Voyager","Fair Trade",6.8,1206
+"472",1997,"Voyager","Alter Ego",6.8,1254
+"473",1997,"Voyager","Revulsion",7.4,1321
+"474",1997,"Voyager","The Raven",7.6,1323
+"475",1997,"Voyager","Year Of Hell",8.9,1794
+"476",1997,"Voyager","Year Of Hell, Part II",8.8,1698
+"477",1997,"Voyager","Random Thoughts",6.9,1258
+"478",1998,"Voyager","Waking Moments",7.7,1287
+"479",1998,"Voyager","Hunters",7.8,1275
+"480",1998,"Voyager","Prey",8.1,1318
+"481",1998,"Voyager","The Killing Game, Part II",7.8,1351
+"482",1998,"Voyager","Vis À Vis",6.7,1171
+"483",1998,"Voyager","Unforgettable",6.4,1276
+"484",1998,"Voyager","In The Flesh",7.9,1453
+"485",1998,"Voyager","Nothing Human",7.3,1320
+"486",1998,"Voyager","Thirty Days",7.3,1282
+"487",1999,"Voyager","The Disease",6.8,1277
+"488",1999,"Voyager","Think Tank",7.7,1337
+"489",1999,"Voyager","11:59",6.6,1310
+"490",1999,"Voyager","Barge Of The Dead",6.4,1288
+"491",1999,"Voyager","Alice",6.5,1256
+"492",1999,"Voyager","Dragon's Teeth",7.7,1286
+"493",1999,"Voyager","The Voyager Conspiracy",7.6,1317
+"494",2000,"Voyager","Fair Haven",6.3,1323
+"495",2000,"Voyager","Tsunkatse",7.2,1310
+"496",2000,"Voyager","Live Fast And Prosper",7.3,1189
+"497",2000,"Voyager","The Haunting Of Deck Twelve",7.2,1177
+"498",2000,"Voyager","Drive",7.2,1200
+"499",2000,"Voyager","Repression",6.8,1148
+"500",2000,"Voyager","Inside Man",7.5,1188
+"501",2001,"Voyager","Q2",7.4,1255
+"502",2001,"Voyager","Author, Author",8,1275
+"503",1966,"The Original Series","The Man Trap",7.3,4131
+"504",1966,"The Original Series","Miri",7,3220
+"505",1968,"The Original Series","Spock's Brain",5.7,2525
+"506",1968,"The Original Series","The Empath",6.6,2262
+"507",1968,"The Original Series","Elaan of Troyius",7.1,2175
+"508",1969,"The Original Series","The Mark of Gideon",6.5,2053
+"509",1987,"The Next Generation","Lonely Among Us",6.3,2748
+"510",1987,"The Next Generation","Justice",6,2950
+"511",1987,"The Next Generation","Haven",6.3,2705
+"512",1988,"The Next Generation","The Big Goodbye",7.4,2873
+"513",1988,"The Next Generation","Angel One",5.7,2730
+"514",1988,"The Next Generation","The Arsenal of Freedom",7.2,2627
+"515",1988,"The Next Generation","The Outrageous Okona",6.3,2677
+"516",1989,"The Next Generation","The Dauphin",6.2,2567
+"517",1989,"The Next Generation","The Royale",6.7,2654
+"518",1989,"The Next Generation","The Icarus Factor",6.3,2320
+"519",1989,"The Next Generation","Pen Pals",6.8,2477
+"520",1989,"The Next Generation","Up The Long Ladder",6.3,2503
+"521",1989,"The Next Generation","The Price",6.3,2365
+"522",1990,"The Next Generation","Ménage à Troi",6.6,2286
+"523",1991,"The Next Generation","Qpid",7.3,2395
+"524",1992,"The Next Generation","Cost Of Living",6.2,2032
+"525",1992,"The Next Generation","Imaginary Friend",6,2065
+"526",1992,"The Next Generation","Realm Of Fear",7.3,2108
+"527",1992,"The Next Generation","A Fistful of Datas",7.6,2278
+"528",1993,"The Next Generation","Liaisons",6.7,1939
+"529",1993,"The Next Generation","Force of Nature",6.4,1951
+"530",1994,"The Next Generation","Journey's End",6.4,2037
+"531",1994,"The Next Generation","Emergence",6.7,1841
+"532",1993,"Deep Space Nine","Cardassians",7.6,1593
+"533",1994,"Deep Space Nine","Rivals",6.6,1457
+"534",1994,"Deep Space Nine","The Alternate",6.8,1453
+"535",1994,"Deep Space Nine","Meridian",5.7,1487
+"536",1994,"Deep Space Nine","Fascination",6.3,1448
+"537",1996,"Deep Space Nine","The Muse",5.7,1390
+"538",1996,"Deep Space Nine","Let He Who Is Without Sin...",5.6,1457
+"539",1997,"Deep Space Nine","Business As Usual",7.3,1302
+"540",1997,"Deep Space Nine","Ties Of Blood And Water",7.3,1277
+"541",1996,"Voyager","False Profits",6.7,1380
+"542",1997,"Deep Space Nine","Ferengi Love Songs",6.8,1269
+"543",1997,"Deep Space Nine","Children Of Time",8.1,1560
+"544",1997,"Deep Space Nine","In The Cards",7.9,1388
+"545",1997,"Deep Space Nine","Resurrection",5.8,1293
+"546",1998,"Deep Space Nine","Honor Among Thieves",7.4,1351
+"547",1999,"Deep Space Nine","The Emperor's New Cloak",6.5,1225
+"548",1995,"Voyager","Initiations",6.6,1409
+"549",1995,"Voyager","Non Sequitur",6.9,1447
+"550",1995,"Voyager","Twisted",7.1,1430
+"551",1997,"Voyager","Rise",6.9,1217
+"552",1997,"Voyager","Favorite Son",6.1,1262
+"553",1997,"Voyager","Concerning Flight",6.9,1264
+"554",1998,"Voyager","Retrospect",6.8,1302
+"555",1998,"Voyager","The Killing Game",7.8,1414
+"556",1998,"Voyager","Once Upon A Time",6.3,1287
+"557",1999,"Voyager","Juggernaut",6.9,1166
+"558",2000,"Voyager","Collective",7.4,1258
+"559",2000,"Voyager","Spirit Folk",6.3,1266
+"560",2000,"Voyager","Good Shepherd",7.3,1248
+"561",2000,"Voyager","Nightingale",6.7,1124
+"562",2001,"Voyager","Friendship One",7.2,1162
+"563",2001,"Voyager","Natural Law",7.2,1154
+"564",1966,"The Original Series","What Are Little Girls Made Of?",7.5,3251
+"565",1966,"The Original Series","Shore Leave",7.5,3117
+"566",1967,"The Original Series","Friday's Child",6.9,2374
+"567",1968,"The Original Series","A Piece of the Action",7.8,2672
+"568",1968,"The Original Series","The Omega Glory",6.2,2378
+"569",1969,"The Original Series","The Lights of Zetar",6.2,1979
+"570",1987,"The Next Generation","The Last Outpost",6.3,3042
+"571",1989,"The Next Generation","Manhunt",6.1,2374
+"572",1993,"The Next Generation","Aquiel",6.1,2007
+"573",1994,"The Next Generation","Genesis",7.2,2158
+"574",1993,"Deep Space Nine","Move Along Home",6,1791
+"575",1993,"Deep Space Nine","The Nagus",7.1,1639
+"576",1995,"Deep Space Nine","Prophet Motive",6.9,1350
+"577",1998,"Deep Space Nine","Who Mourns For Morn?",7.7,1429
+"578",1998,"Deep Space Nine","Chrysalis",7.1,1329
+"579",1995,"Voyager","Elogium",6,1408
+"580",2000,"Voyager","Fury",6.3,1250
+"581",1967,"The Original Series","The Squire of Gothos",7.3,2914
+"582",1967,"The Original Series","The Apple",6.4,2466
+"583",1969,"The Original Series","That Which Survives",6.6,2011
+"584",1969,"The Original Series","The Way to Eden",5.5,2373
+"585",1987,"The Next Generation","Code of Honor",5.2,3258
+"586",1994,"The Next Generation","Sub Rosa",4.8,2315
+"587",1996,"Deep Space Nine","Rules Of Engagement",7.4,1409
+"588",1997,"Deep Space Nine","The Darkness And The Light",7,1338
+"589",1998,"Deep Space Nine","Profit And Lace",5.9,1398
+"590",1996,"Voyager","Threshold",5.3,1685
+"591",1996,"Voyager","Sacred Ground",6,1421
+"592",1999,"Voyager","The Fight",5.2,1344
+"593",1966,"The Original Series","Mudd's Women",6.8,3394
+"594",1967,"The Original Series","The Alternative Factor",5.8,2738
+"595",1989,"The Next Generation","Shades of Gray",3.3,2933
+"596",1995,"Voyager","The Cloud",6.6,1542
+"597",1996,"Voyager","Macrocosm",7.3,1312
