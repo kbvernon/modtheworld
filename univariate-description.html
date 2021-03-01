@@ -457,8 +457,8 @@ NONE
 Figure 13.1: Colored balls and urn. Outcome of an unknown process.
 </p>
 </div>
-<p>As part of this thought experiment, suppose we plop them in a jar, shake it up, then have you select one at random. Without looking, what color do you expect to draw? The answer, I hope, is red. Why? Because there are more of them! So, you are more <em>likely</em> to draw red just by chance. Now, think about what you just did. Lacking any information about how this particular outcome came to be, you still managed to form a pretty reasonable expectation about it solely on the basis of the value it <em>tends</em> toward or is <em>more likely to take</em>. This value of the outcome is commonly referred to as its <strong>central tendency</strong>, though you will sometimes hear it described as the <em>location</em> of your data. As the name suggests, this is the value around which observations of your outcome tend to cluster.</p>
-<p>Fortunately, that is not the <em>only</em> information we can extract from this scenario, for suppose now that we had you repeat this exercise, say, a hundred times, replacing the ball each time. How often do you think, having guessed red, that gray would actually be the color to come up? Roughly a third of the time, right? And, why is that? Because the <em>proportion</em> of squares that are gray is one-third! That is to say, in spite of your expectation, and just by chance, you should draw a gray ball one-third of the time. Thus, you have won this additional bit of new knowledge, a precise, quantitative expectation about your own error, otherwise known as <strong>variability</strong>, <em>dispersion</em> in the outcome, or your <em>uncertainty</em>. This is a measure not just of the actual but of the <em>expected</em> disagreement between your estimate and the observed outcome.</p>
+<p>As part of this thought experiment, suppose we plop them in a jar, shake it up, then have you select one at random. Without looking, what color do you expect to draw? The answer, I hope, is red. Why? Because there are more of them! So, you are more <em>likely</em> to draw red just by chance. Now, think about what you just did. Lacking any information about how this particular outcome came to be, you still managed to form a pretty reasonable expectation about it solely on the basis of the value it <em>tends</em> toward or is <em>more likely to take</em>. This value of the outcome is commonly referred to as its <strong>central tendency</strong>, though you will sometimes hear it described as the <em>location</em> or the <em>first moment</em> of some data. As the name suggests, this is the value around which observations of your outcome tend to cluster.</p>
+<p>Fortunately, that is not the <em>only</em> information we can extract from this scenario, for suppose now that we had you repeat this exercise, say, a hundred times, replacing the ball each time. How often do you think, having guessed red, that gray would actually be the color to come up? Roughly a third of the time, right? And, why is that? Because the proportion of balls that are gray is one-third! That is to say, in spite of your expectation, and just by chance, you should draw a gray ball one-third of the time. Thus, you have won this additional bit of new knowledge, a precise, quantitative expectation about your own error, otherwise known as <strong>variability</strong>, <em>dispersion</em> in the outcome, or your <em>uncertainty</em>, also commonly referred to as the <em>second moment</em> of your data. This is a measure not just of the actual but of the <em>expected</em> disagreement between your estimate and the observed outcome.</p>
 <p>To make this a little more tangible and perhaps a little more relevant to you, think about how many hours of sleep you <em>tend</em> to get each night. Whatever it happens to be, this number defines your, shall we say, slumbering expectation. Obviously, this is going to be affected by a lot of variables, like the oceans of coffee you regularly consume, or the way time seems to drag you, despite your protestations, into unavoidable collisions with looming deadlines. Even without that knowledge, though, you can still get a pretty good sense of your sleep <em>habits</em> by looking just at your sleep <em>tendencies</em>.</p>
 <div class="figure" style="text-align: center"><span id="fig:sleep-pattern"></span>
 <img src="22-univariate_description_files/figure-html/sleep-pattern-1.png" alt="Observed hours of sleep per night over the last thirty days, relative to the expectation of seven hours of sleep per night." width="624" />
@@ -466,7 +466,7 @@ Figure 13.1: Colored balls and urn. Outcome of an unknown process.
 Figure 13.2: Observed hours of sleep per night over the last thirty days, relative to the expectation of seven hours of sleep per night.
 </p>
 </div>
-<p>You can even use that expectation to measure variability in the length of “great nature’s second course,” to quote one of the more infamous regicides. If you know, for example, that you tend to get seven hours of sleep each night, and you conveniently - at least for our purposes - recorded your hours of sleep over the last 30 days, your sleep pattern might look like that shown in Fig <a href="univariate-description.html#fig:sleep-pattern">13.2</a>. From these observations, you can see that your un-waking life tends to last between five and nine hours (nine blessed hours!) each night. This then allows you to formulate an expectation about your error, that it tends to be two hours more or two hours less than your expectation. We can actually say even more about your expected error, but we’re building up to that!</p>
+<p>You can even use that expectation to measure variability in the length of “great nature’s second course.”<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> If you know, for example, that you tend to get seven hours of sleep each night, and you conveniently - at least for our purposes - recorded your hours of sleep over the last 30 days, your sleep pattern might look like that shown in Fig <a href="univariate-description.html#fig:sleep-pattern">13.2</a>. From these observations, you can see that your un-waking life tends to last between five and nine hours (nine blessed hours!) each night. This then allows you to formulate an expectation about your error, that it tends to be two hours more or two hours less than your typical night of sleep. We can actually say even more about your expected error, but we’re building up to that!</p>
 <p>Just note for now all that you have already gleaned from these simple observations. In particular, you now have the makings of an empirical model. On the one hand, you have your expectation about the outcome, which you have identified with its central tendency. And, on the other hand, you have your expectation of the error, or uncertainty. Because these descriptions involve a single random variable, you have just engaged in what we will refer to as <strong>univariate description</strong>, defined as the building of a model of an outcome in terms of its central tendency and variability. Framed in terms of our fundamental formula</p>
 <p><span class="math display">\[ y = E[y] + \epsilon \]</span>
 you have just specified that</p>
@@ -475,8 +475,8 @@ you have just specified that</p>
 </li>
 <li><span class="math inline">\(\epsilon \sim\)</span> variability.</li>
 </ul>
-<p>Obviously, this is going to take some unpacking.</p>
-<p>Before we get to that, however, we need to emphasize two important limitations of these very simple univariate models, both owing to the fact that the models describe a <em>sample</em> consisting of a <em>single variable</em>. First, because they describe a sample, they can only <em>approximate</em> the true central tendency and variability of the <em>population</em>. And second, because the sample consists of a single variable, the models cannot in any meaningful sense <em>explain</em> variability in the outcome. Why, you might wonder, did I sleep two more hours than expected that one Monday last month? Answering with “because that’s what I did,” while technically true, is not terribly informative. One might even describe it as being <em>viciously circular</em>. As we will learn later on, it also lacks <em>generality</em>, meaning I cannot use it to form an expectation about what will happen the <em>next time</em> I go to sleep.</p>
+<p>Note that both the central tendency and the variability are single values (scalars in R-speak). Specifically, they are <em>statistics</em> that summarize properties of your sample, in this case the value the sample tends to take and the error around that value. Clearly, these are some complex ideas, so this is going to take some unpacking.</p>
+<p>Before we get to that, however, we need to emphasize two important limitations of these very simple univariate models, both owing to the fact that the models describe a <em>sample</em> consisting of a <em>single variable</em>. First, because they describe a sample, they can only <em>approximate</em> the true central tendency and variability of the <em>population</em>. And second, because the sample consists of a single variable, the models cannot in any meaningful sense <em>explain</em> variability in the outcome. Why, you might wonder, did I sleep two more hours than expected that one Monday last month? Answering with “because that’s what I did,” while technically true, is not terribly informative.</p>
 <p>That being said, univariate models offer us some powerful tools for getting a handle on our data. They’ll also play an important role in how we evaluate more complex multivariate models later on, where the goal really is to explain variability in a population, so let’s dive into just how exactly we generate these descriptions.</p>
 
 <div class="rmdwarning">
@@ -491,19 +491,20 @@ Instead of using <span class="math inline">\(y\)</span> as our variable, we are 
 <h3><span class="header-section-number">13.2.1</span> Mean</h3>
 <p>If you recall, we are defining our expectation for an outcome, <span class="math inline">\(x\)</span>, in terms of its central tendency. In this case, we measure the central tendency using the mean, hence our expectation is:</p>
 <p><span class="math display">\[ E[x] = \mu \]</span></p>
-<p>where <span class="math inline">\(\mu\)</span> is the <strong>population mean</strong>. Given the practical limitations of ever measuring this value directly, we must estimate it using the <strong>sample mean</strong>, by convention denoted <span class="math inline">\(\bar{x}\)</span>. Suppose, for instance, we did a study of the sleep behavior of college students on US campuses, using a phone app to measure various aspects of their sleep through a normal semester. To keep this simple, we’ll assume a sample size of ten. And the primary outcome we are measuring is hours of sleep per night.</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="univariate-description.html#cb151-1"></a>x &lt;-<span class="st"> </span><span class="kw">sample</span>(population, <span class="dt">size =</span> <span class="dv">10</span>)</span>
-<span id="cb151-2"><a href="univariate-description.html#cb151-2"></a></span>
-<span id="cb151-3"><a href="univariate-description.html#cb151-3"></a>x</span>
-<span id="cb151-4"><a href="univariate-description.html#cb151-4"></a><span class="co">##  [1] 6.96 7.53 5.04 7.65 9.70 5.97 8.04 5.84 5.94 6.26</span></span></code></pre></div>
-<p>Assuming that these are independent outcomes (that no student in our study affected the sleep habits of any other student in the study), we can measure the sample mean with this simple formula:</p>
+<p>where <span class="math inline">\(\mu\)</span> is the <strong>population mean</strong>. Given the practical limitations of ever measuring this value directly, we must estimate it using the <strong>sample mean</strong>, by convention denoted <span class="math inline">\(\bar{x}\)</span> and defined as the sum of the sample values divided by the number of values (the average, in other words). As a simple formula, that is:</p>
 <p><span class="math display">\[ \bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_{i} \]</span></p>
-<p>where <span class="math inline">\(n\)</span> is the size of the sample and each <span class="math inline">\(x_{i}\)</span> is a value of an individual <span class="math inline">\(i\)</span> in the sample.</p>
+<p>where <span class="math inline">\(n\)</span> is the number of values and each <span class="math inline">\(x_{i}\)</span> is a value of an individual <span class="math inline">\(i\)</span> in the sample.</p>
 
 <div class="rmdnote">
 The sample mean, <span class="math inline">\(\bar{x}\)</span>, and the population mean, <span class="math inline">\(\mu\)</span>, are calculated using the same function - it’s just the average after all, but with slightly different notation. Where <span class="math inline">\(\bar{x}\)</span> uses small <span class="math inline">\(n\)</span> to denote the total number of individuals in a <em>sample</em>, <span class="math inline">\(\mu\)</span> uses big <span class="math inline">\(N\)</span> to denote the total number of individuals in a <em>population</em>.
 </div>
 
+<p>Suppose we did a study of the sleep behavior of college students on US campuses, using a phone app to measure various aspects of their sleep through a normal semester. To keep this simple, we’ll assume a sample size of ten. And the primary outcome we are measuring is hours of sleep per night.</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="univariate-description.html#cb151-1"></a>x &lt;-<span class="st"> </span><span class="kw">sample</span>(population, <span class="dt">size =</span> <span class="dv">10</span>)</span>
+<span id="cb151-2"><a href="univariate-description.html#cb151-2"></a></span>
+<span id="cb151-3"><a href="univariate-description.html#cb151-3"></a>x</span>
+<span id="cb151-4"><a href="univariate-description.html#cb151-4"></a><span class="co">##  [1] 6.96 7.53 5.04 7.65 9.70 5.97 8.04 5.84 5.94 6.26</span></span></code></pre></div>
+<p>Using our simple equation, we can calculate the mean of this sample using the following R code:</p>
 <div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="univariate-description.html#cb152-1"></a><span class="co"># number of observations in the sample</span></span>
 <span id="cb152-2"><a href="univariate-description.html#cb152-2"></a>n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</span>
 <span id="cb152-3"><a href="univariate-description.html#cb152-3"></a></span>
@@ -513,18 +514,18 @@ The sample mean, <span class="math inline">\(\bar{x}\)</span>, and the populatio
 <span id="cb152-7"><a href="univariate-description.html#cb152-7"></a><span class="co"># mean of the sample</span></span>
 <span id="cb152-8"><a href="univariate-description.html#cb152-8"></a>(<span class="dv">1</span><span class="op">/</span>n) <span class="op">*</span><span class="st"> </span>Ex</span>
 <span id="cb152-9"><a href="univariate-description.html#cb152-9"></a><span class="co">## [1] 6.893</span></span></code></pre></div>
-<p>This can be done more compactly with the <code>mean()</code> function provided by base R.</p>
+<p>We can also write that more compactly using the <code>mean()</code> function.</p>
 <div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="univariate-description.html#cb153-1"></a><span class="kw">mean</span>(x)</span>
 <span id="cb153-2"><a href="univariate-description.html#cb153-2"></a><span class="co">## [1] 6.893</span></span></code></pre></div>
 <p>This sample mean is our estimate of the population mean, it is the number of hours of sleep we expect a <em>typical</em> college student to get. Of course, other details about a student might inform on whether they get more or less sleep than expected. You don’t have to look all that hard for the usual suspects:</p>
 <ul>
-<li>diet: are they, perhaps, subsisting on cheetos and soda?,<br />
+<li>diet: are they, perhaps, subsisting on cheetos and soda?<br />
 </li>
-<li>exercise: or lack thereof?,</li>
-<li>stress: are they working two jobs? late on rent?, facing important deadlines?,</li>
-<li>disease: are they sick or otherwise unwell?.</li>
+<li>exercise: or lack thereof?</li>
+<li>stress: are they working two jobs? late on rent? facing important deadlines?</li>
+<li>disease: are they sick or otherwise unwell?</li>
 </ul>
-<p>These are all critical factors that will affect the amount of sleep an individual is getting. I’m sure you can come up with more with a little thought. Unfortunately, our study - our overly simplistic study - didn’t give us that information! All we know is the amount of sleep per night reported in our sample, and that is the only basis we have for forming any expectation about the amount of sleep a random college student should get on any given night. But, don’t let that get you down! Even if we had those other variables available and wanted to use them to explain some of that variation around the mean, we would still need the mean to do it!</p>
+<p>These are all critical factors that will affect the amount of sleep an individual is getting. I’m sure you can add to this list with a little thought. Unfortunately, our study - our overly simplistic study - didn’t give us that information! All we know is the amount of sleep per night reported in our sample, so that is the only basis we have for forming any expectation about the amount of sleep a random college student should get on any given night. But, don’t let that get you down! Even if we had those other variables available and wanted to use them to explain some of that variation around the mean, we would still, obviously, need the sample mean to do it!</p>
 <p>Note that you will on occasion encounter variables that include missing or <code>NA</code> values. Because we do not know those values, we cannot <em>technically</em> know the mean of the variable. The function <code>mean()</code> registers this fact by returning <code>NA</code> in such cases. To avoid this, and to calculate the mean of the <em>known</em> values of the variable, we can specify the parameter <code>na.rm = TRUE</code>, which means “remove the NA values before computing the value of the variable.”</p>
 <div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="univariate-description.html#cb154-1"></a>x_NA</span>
 <span id="cb154-2"><a href="univariate-description.html#cb154-2"></a><span class="co">##  [1] 6.96 5.04   NA 8.04 5.94 7.65 9.70   NA   NA 7.53 5.97 5.84 6.26   NA</span></span>
@@ -532,10 +533,12 @@ The sample mean, <span class="math inline">\(\bar{x}\)</span>, and the populatio
 <span id="cb154-4"><a href="univariate-description.html#cb154-4"></a><span class="co">## [1] NA</span></span>
 <span id="cb154-5"><a href="univariate-description.html#cb154-5"></a><span class="kw">mean</span>(x_NA, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb154-6"><a href="univariate-description.html#cb154-6"></a><span class="co">## [1] 6.893</span></span></code></pre></div>
-<p><img src="22-univariate_description_files/figure-html/unnamed-chunk-11-1.png" width="192" style="display: block; margin: auto;" /></p>
+<p>You will sometimes hear the mean referred to as the <em>center of mass</em> for a set of data because it divides that data into two sets of equal mass. You can thus visualize it as a fulcrum, like on a playground see-saw (or any other lever, really), with your observations piled up on either side so that they are perfectly balanced. Thinking about it this way makes it easier to see how the mean can be sensitive to outliers. That’s because as one or more values get bigger and bigger (or smaller and smaller), you have to shift more and more of your observations to one side to counteract the mass of those outliers. Take, for example, income inequality in the United States, something we seem to excel at as a country, for better or worse - just worse, really. The center of mass of US income in 2018 was right around $90,000 a year. It will perhaps come as no surprise to you that most Americans, more than half, made way, way, way less than that. Or, to put that in slightly different terms, a tenth of all income flowed to the top one percent, and nearly half of all income went to the top twenty percent! Meaning, 20% of the populace brings home an income (has a mass) relatively equal to the other 80%! The consequence, of course, is that using the mean will severely over-estimate the real income of a substantial portion of the population.</p>
+<p>We, therefore, need another way of looking at the central tendency of a variable like income that is less sensitive to these outliers. So, let’s talk about the concept of a median!</p>
 </div>
 <div id="median" class="section level3">
 <h3><span class="header-section-number">13.2.2</span> Median</h3>
+<p>The median is the <em>middle</em> value of a variable, or the point that divides its values in half, meaning half the observations are less than this value and half are greater than it. Because it divides the data in this way, finding it requires ordering values of a variable from least to greatest, then looking for the halfway point, that <em>position</em> in the data, and then identifying the value of the variable <em>there</em>. The median is that value. This is slightly complicated by the fact that an exact solution will depend on whether a variable contains an even or an odd number of observations, for when the variable has an even number of observations, the median is not the value of an observation but the value halfway between two observations.</p>
 <p><span class="math display">\[ 
 med(x) =
 \begin{cases}
@@ -543,50 +546,60 @@ med(x) =
   \frac{1}{2}\left(x\left[i = \frac{n}{2}\right] + x\left[i = \frac{n}{2}+1\right]\right) &amp; \text{if n is even} 
 \end{cases} 
 \]</span></p>
+<p>This set of equations might be a little intimidating for the uninitiated, but it actually uses some syntax we learned for indexing vectors in R, specifically the bracket operator, <code>[</code>, with <span class="math inline">\(x\)</span> being the vector that is subset:</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="univariate-description.html#cb155-1"></a>x[i]</span></code></pre></div>
+<p>Thinking about it this way, the procedure really just boils down to two steps: first, find the position <span class="math inline">\(i\)</span> in your data; then, use <span class="math inline">\(i\)</span> to index <span class="math inline">\(x\)</span>. If the data is even, of course, you’ll have to find two positions, get the values there, then find the value halfway between them. Let’s walk through an example with our college sleep data. First, note that it has an even number of observations, specifically ten, so for demonstration purposes we’ll need to remove one value to get an odd number.</p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="univariate-description.html#cb156-1"></a>x_even &lt;-<span class="st"> </span>x</span>
+<span id="cb156-2"><a href="univariate-description.html#cb156-2"></a></span>
+<span id="cb156-3"><a href="univariate-description.html#cb156-3"></a>x_odd &lt;-<span class="st"> </span>x[<span class="op">-</span><span class="kw">length</span>(x)] <span class="co"># remove the last number</span></span></code></pre></div>
+<p>Now, let’s look at our two scenarios.</p>
 <p><strong>Odd number of observations</strong></p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="univariate-description.html#cb155-1"></a><span class="co"># sort the value from lowest to highest</span></span>
-<span id="cb155-2"><a href="univariate-description.html#cb155-2"></a>x &lt;-<span class="st"> </span><span class="kw">sort</span>(x_odd)</span>
-<span id="cb155-3"><a href="univariate-description.html#cb155-3"></a></span>
-<span id="cb155-4"><a href="univariate-description.html#cb155-4"></a><span class="co"># count the number of values</span></span>
-<span id="cb155-5"><a href="univariate-description.html#cb155-5"></a>n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</span>
-<span id="cb155-6"><a href="univariate-description.html#cb155-6"></a></span>
-<span id="cb155-7"><a href="univariate-description.html#cb155-7"></a><span class="co"># find the middle position</span></span>
-<span id="cb155-8"><a href="univariate-description.html#cb155-8"></a>i &lt;-<span class="st"> </span>(n <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb155-9"><a href="univariate-description.html#cb155-9"></a></span>
-<span id="cb155-10"><a href="univariate-description.html#cb155-10"></a><span class="co"># now retrieve the value at that position</span></span>
-<span id="cb155-11"><a href="univariate-description.html#cb155-11"></a>x[i]</span>
-<span id="cb155-12"><a href="univariate-description.html#cb155-12"></a><span class="co">## [1] 176.3583</span></span></code></pre></div>
-<p>But, there’s actually a function for this in R.</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="univariate-description.html#cb156-1"></a><span class="kw">median</span>(x_odd)</span>
-<span id="cb156-2"><a href="univariate-description.html#cb156-2"></a><span class="co">## [1] 176.3583</span></span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="univariate-description.html#cb157-1"></a><span class="co"># sort values from lowest to highest</span></span>
+<span id="cb157-2"><a href="univariate-description.html#cb157-2"></a>x_odd &lt;-<span class="st"> </span><span class="kw">sort</span>(x_odd)</span>
+<span id="cb157-3"><a href="univariate-description.html#cb157-3"></a></span>
+<span id="cb157-4"><a href="univariate-description.html#cb157-4"></a>x_odd</span>
+<span id="cb157-5"><a href="univariate-description.html#cb157-5"></a><span class="co">## [1] 5.04 5.84 5.94 5.97 6.96 7.53 7.65 8.04 9.70</span></span>
+<span id="cb157-6"><a href="univariate-description.html#cb157-6"></a><span class="co"># count the number of values</span></span>
+<span id="cb157-7"><a href="univariate-description.html#cb157-7"></a>n &lt;-<span class="st"> </span><span class="kw">length</span>(x_odd)</span>
+<span id="cb157-8"><a href="univariate-description.html#cb157-8"></a></span>
+<span id="cb157-9"><a href="univariate-description.html#cb157-9"></a><span class="co"># find the middle position</span></span>
+<span id="cb157-10"><a href="univariate-description.html#cb157-10"></a>i &lt;-<span class="st"> </span>(n <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb157-11"><a href="univariate-description.html#cb157-11"></a></span>
+<span id="cb157-12"><a href="univariate-description.html#cb157-12"></a><span class="co"># now retrieve the value at that position</span></span>
+<span id="cb157-13"><a href="univariate-description.html#cb157-13"></a>x_odd[i]</span>
+<span id="cb157-14"><a href="univariate-description.html#cb157-14"></a><span class="co">## [1] 6.96</span></span></code></pre></div>
+<p>Voila! The median! Simple, right? Well, actually, it’s even simpler than you thought, for there’s an R function for that.</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="univariate-description.html#cb158-1"></a><span class="kw">median</span>(x_odd)</span>
+<span id="cb158-2"><a href="univariate-description.html#cb158-2"></a><span class="co">## [1] 6.96</span></span></code></pre></div>
 <p><strong>Even number of observations</strong></p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="univariate-description.html#cb157-1"></a>x &lt;-<span class="st"> </span><span class="kw">sort</span>(x_even)</span>
-<span id="cb157-2"><a href="univariate-description.html#cb157-2"></a></span>
-<span id="cb157-3"><a href="univariate-description.html#cb157-3"></a>n &lt;-<span class="st"> </span><span class="kw">length</span>(x)</span>
-<span id="cb157-4"><a href="univariate-description.html#cb157-4"></a></span>
-<span id="cb157-5"><a href="univariate-description.html#cb157-5"></a>i_left &lt;-<span class="st"> </span>n<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb157-6"><a href="univariate-description.html#cb157-6"></a>i_right &lt;-<span class="st"> </span>i_left <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb157-7"><a href="univariate-description.html#cb157-7"></a></span>
-<span id="cb157-8"><a href="univariate-description.html#cb157-8"></a><span class="co"># now we find the value half way between </span></span>
-<span id="cb157-9"><a href="univariate-description.html#cb157-9"></a><span class="co"># the center left and center right positions</span></span>
-<span id="cb157-10"><a href="univariate-description.html#cb157-10"></a>(x[i_left] <span class="op">+</span><span class="st"> </span>x[i_right])<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb157-11"><a href="univariate-description.html#cb157-11"></a><span class="co">## [1] 180.1667</span></span>
-<span id="cb157-12"><a href="univariate-description.html#cb157-12"></a><span class="kw">median</span>(x)</span>
-<span id="cb157-13"><a href="univariate-description.html#cb157-13"></a><span class="co">## [1] 180.1667</span></span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="univariate-description.html#cb159-1"></a>x_even &lt;-<span class="st"> </span><span class="kw">sort</span>(x_even)</span>
+<span id="cb159-2"><a href="univariate-description.html#cb159-2"></a></span>
+<span id="cb159-3"><a href="univariate-description.html#cb159-3"></a>n &lt;-<span class="st"> </span><span class="kw">length</span>(x_even)</span>
+<span id="cb159-4"><a href="univariate-description.html#cb159-4"></a></span>
+<span id="cb159-5"><a href="univariate-description.html#cb159-5"></a>i_left &lt;-<span class="st"> </span>n<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb159-6"><a href="univariate-description.html#cb159-6"></a>i_right &lt;-<span class="st"> </span>i_left <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb159-7"><a href="univariate-description.html#cb159-7"></a></span>
+<span id="cb159-8"><a href="univariate-description.html#cb159-8"></a><span class="co"># now we find the value half way between </span></span>
+<span id="cb159-9"><a href="univariate-description.html#cb159-9"></a><span class="co"># the center left and center right positions</span></span>
+<span id="cb159-10"><a href="univariate-description.html#cb159-10"></a>(x_even[i_left] <span class="op">+</span><span class="st"> </span>x_even[i_right])<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb159-11"><a href="univariate-description.html#cb159-11"></a><span class="co">## [1] 6.61</span></span>
+<span id="cb159-12"><a href="univariate-description.html#cb159-12"></a><span class="co"># but again, simpler this way</span></span>
+<span id="cb159-13"><a href="univariate-description.html#cb159-13"></a><span class="kw">median</span>(x_even)</span>
+<span id="cb159-14"><a href="univariate-description.html#cb159-14"></a><span class="co">## [1] 6.61</span></span></code></pre></div>
 </div>
 <div id="mode" class="section level3">
 <h3><span class="header-section-number">13.2.3</span> Mode</h3>
+<p>The mode is a measure of the most frequent value in a data set. Of all the measures of central tendency, it is unique in that it can be applied to categorical data. For example, the mode of the colored balls in Fig. <a href="univariate-description.html#fig:balls-and-urn">13.1</a> is <em>red</em>, as that is the value that occurs most often. On occasion, the mode may also apply to a discrete variable. For instance, the mode of the vector <code>c(2, 3, 3, 4, 5)</code> is 3, since it occurs twice and the other values only once. Technically, the mode can be used to describe continuous variables, too, though how often do you expect a number like 42.291092847123452667 to occur in your data? That is to say, for continuous data it is highly unlikely that any two values will ever be <em>exactly</em> the same; hence, it is also unlikely for such data to have a mode.</p>
 </div>
 </div>
 <div id="variability" class="section level2">
 <h2><span class="header-section-number">13.3</span> Variability</h2>
 <div class="figure" style="text-align: center"><span id="fig:expected-error"></span>
-<img src="22-univariate_description_files/figure-html/expected-error-1.png" alt="Expected error in sleep pattern." width="624" />
+<img src="22-univariate_description_files/figure-html/expected-error-1.png" alt="Expected error in hours of sleep per night for college students." width="624" />
 <p class="caption">
-Figure 13.3: Expected error in sleep pattern.
+Figure 13.3: Expected error in hours of sleep per night for college students.
 </p>
 </div>
-<p>All samples are discrete, regardless of the nature of the population random variable!</p>
 <div id="variance" class="section level3">
 <h3><span class="header-section-number">13.3.1</span> Variance</h3>
 <p>The expected amount of difference between (the square of) the observed and the mean values.</p>
@@ -594,7 +607,7 @@ Figure 13.3: Expected error in sleep pattern.
 <p><span class="math inline">\(s^{2}\)</span> = sample variance</p>
 <p>For discrete variables, the population variance is given by:</p>
 <p><span class="math display">\[ \sigma^{2} = \frac{1}{N} \sum_{i=1}^{N} (x_{i}-\mu)^{2} \]</span></p>
-<p>Sample variance is <em>always</em> discrete, hence we define the sample variance as</p>
+<p>The sample variance as</p>
 <p><span class="math display">\[ s^{2} = \frac{1}{n-1} \sum_{i=1}^{n} (x_{i} - \bar{x})^{2} \]</span></p>
 </div>
 <div id="standard-deviation" class="section level3">
@@ -603,8 +616,19 @@ Figure 13.3: Expected error in sleep pattern.
 </div>
 <div id="quantiles" class="section level2">
 <h2><span class="header-section-number">13.4</span> Quantiles</h2>
+<p>median</p>
+<p>quartiles = divide into four
+quentiles = five
+deciles = ten
+percentiles = 100</p>
 
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="9">
+<li id="fn9"><p>A line from Macbeth I am using because I don’t want to say the word ‘sleep’ five hundred times…<a href="univariate-description.html#fnref9" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 
