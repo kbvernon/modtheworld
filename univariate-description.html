@@ -24,7 +24,7 @@
 <meta name="author" content="Kenneth Blake Vernon" />
 
 
-<meta name="date" content="2021-03-01" />
+<meta name="date" content="2021-03-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -330,7 +330,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.3.1" data-path="univariate-description.html"><a href="univariate-description.html#variance"><i class="fa fa-check"></i><b>13.3.1</b> Variance</a></li>
 <li class="chapter" data-level="13.3.2" data-path="univariate-description.html"><a href="univariate-description.html#standard-deviation"><i class="fa fa-check"></i><b>13.3.2</b> Standard deviation</a></li>
 </ul></li>
-<li class="chapter" data-level="13.4" data-path="univariate-description.html"><a href="univariate-description.html#quantiles"><i class="fa fa-check"></i><b>13.4</b> Quantiles</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="probability-distributions.html"><a href="probability-distributions.html"><i class="fa fa-check"></i><b>14</b> Probability Distributions</a></li>
 <li class="chapter" data-level="15" data-path="inference-tests.html"><a href="inference-tests.html"><i class="fa fa-check"></i><b>15</b> Inference Tests</a></li>
@@ -486,7 +485,7 @@ Instead of using <span class="math inline">\(y\)</span> as our variable, we are 
 </div>
 <div id="central-tendency" class="section level2">
 <h2><span class="header-section-number">13.2</span> Central tendency</h2>
-<p>Central tendency, otherwise known as the location of a variable or its first moment, refers to the expected value of a variable. The two most common measures of it are the mean and the median. Their slightly less popular cousin is the mode, which is typically reserved for categorical data.</p>
+<p>The two most common measures of central tendency are the mean and the median. Their slightly less popular cousin is the mode, which is typically reserved for categorical data.</p>
 <div id="mean" class="section level3">
 <h3><span class="header-section-number">13.2.1</span> Mean</h3>
 <p>If you recall, we are defining our expectation for an outcome, <span class="math inline">\(x\)</span>, in terms of its central tendency. In this case, we measure the central tendency using the mean, hence our expectation is:</p>
@@ -590,65 +589,94 @@ med(x) =
 <div id="mode" class="section level3">
 <h3><span class="header-section-number">13.2.3</span> Mode</h3>
 <p>The mode is a measure of the most frequent value in a data set. Of all the measures of central tendency, it is unique in that it can be applied to categorical data. For example, the mode of the colored balls in Fig. <a href="univariate-description.html#fig:balls-and-urn">13.1</a> is <em>red</em>, as that is the value that occurs most often. On occasion, the mode may also apply to a discrete variable. For instance, the mode of the vector <code>c(2, 3, 3, 4, 5)</code> is 3, since it occurs twice and the other values only once. Technically, the mode can be used to describe continuous variables, too, though how often do you expect a number like 42.291092847123452667 to occur in your data? That is to say, for continuous data it is highly unlikely that any two values will ever be <em>exactly</em> the same; hence, it is also unlikely for such data to have a mode.</p>
+<p>Unfortunately, R does not have a native function for computing the mode, but we can get around that with some other tools R does offer.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> As an example, let’s say we’re working with a vector of color values for our balls from above.</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="univariate-description.html#cb160-1"></a>balls &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;gray&quot;</span>, <span class="st">&quot;gray&quot;</span>)</span>
+<span id="cb160-2"><a href="univariate-description.html#cb160-2"></a></span>
+<span id="cb160-3"><a href="univariate-description.html#cb160-3"></a><span class="co"># get the unique values</span></span>
+<span id="cb160-4"><a href="univariate-description.html#cb160-4"></a>ball_colors &lt;-<span class="st"> </span><span class="kw">unique</span>(balls)</span>
+<span id="cb160-5"><a href="univariate-description.html#cb160-5"></a></span>
+<span id="cb160-6"><a href="univariate-description.html#cb160-6"></a><span class="co"># count the number of each</span></span>
+<span id="cb160-7"><a href="univariate-description.html#cb160-7"></a>counts &lt;-<span class="st"> </span><span class="kw">tabulate</span>(<span class="kw">match</span>(balls, ball_colors))</span>
+<span id="cb160-8"><a href="univariate-description.html#cb160-8"></a></span>
+<span id="cb160-9"><a href="univariate-description.html#cb160-9"></a><span class="co"># pick color with largest count</span></span>
+<span id="cb160-10"><a href="univariate-description.html#cb160-10"></a>ball_colors[counts <span class="op">==</span><span class="st"> </span><span class="kw">max</span>(counts)]</span>
+<span id="cb160-11"><a href="univariate-description.html#cb160-11"></a><span class="co">## [1] &quot;red&quot;</span></span></code></pre></div>
+<p>Don’t worry, there’s a - I was going to say snowball’s chance in Texas, but… - anyway, you probably won’t ever have to do this. It’s solely for demonstration.</p>
 </div>
 </div>
 <div id="variability" class="section level2">
 <h2><span class="header-section-number">13.3</span> Variability</h2>
-<p>Variability, otherwise known as dispersion, uncertainty, or the second moment of a variable, refers to its expected error. There are two primary measures of variability, the variance and the standard deviation. Before, we get to those, however, let’s think a little bit about what we mean by expected error. There are two parts to this, the <em>expectation</em> and the <em>error</em>. The error is easy enough to explain. As we learned already, it’s the difference between the observed and the expected outcome. That is,</p>
-<p><span class="math display">\[ \epsilon = y - E[y] \]</span></p>
-<p>where the expectation is defined by the sample mean, <span class="math inline">\(E[y] = \bar{x}\)</span>. Here is how that looks in R using our college sleep data:</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="univariate-description.html#cb160-1"></a><span class="co"># get sample mean</span></span>
-<span id="cb160-2"><a href="univariate-description.html#cb160-2"></a>xbar &lt;-<span class="st"> </span><span class="kw">mean</span>(x)</span>
-<span id="cb160-3"><a href="univariate-description.html#cb160-3"></a></span>
-<span id="cb160-4"><a href="univariate-description.html#cb160-4"></a><span class="co"># calculate errors (epsilon, e)</span></span>
-<span id="cb160-5"><a href="univariate-description.html#cb160-5"></a>errors &lt;-<span class="st"> </span>(x <span class="op">-</span><span class="st"> </span>xbar)</span></code></pre></div>
+<p>Variability, otherwise known as dispersion, uncertainty, or the second moment of a variable, refers to the expected error of a variable. But, what exactly does “expected error” mean? The error is easy enough to explain. As we learned already, it’s the difference between the actual values and the expected values:</p>
+<span class="math display">\[ \epsilon = y - E[y] \]</span>
+
+<div class="rmdwarning">
+<strong>Errors vs Residuals</strong>. Strictly speaking, you should refer to <span class="math inline">\(\epsilon\)</span> as the <strong>error</strong> term <em>only when</em> the expectation is defined by the population mean, <span class="math inline">\(E[y]=\mu\)</span>. When the expectation is defined by the sample mean, <span class="math inline">\(E[y]=\bar{x}\)</span>, the differences are referred to as <strong>residuals</strong>.
+</div>
+
+<p>Here is how you calculate the residuals in our college sleep data:</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="univariate-description.html#cb161-1"></a><span class="co"># get sample mean</span></span>
+<span id="cb161-2"><a href="univariate-description.html#cb161-2"></a>xbar &lt;-<span class="st"> </span><span class="kw">mean</span>(x)</span>
+<span id="cb161-3"><a href="univariate-description.html#cb161-3"></a></span>
+<span id="cb161-4"><a href="univariate-description.html#cb161-4"></a><span class="co"># calculate errors (epsilon, e)</span></span>
+<span id="cb161-5"><a href="univariate-description.html#cb161-5"></a>residuals &lt;-<span class="st"> </span>(x <span class="op">-</span><span class="st"> </span>xbar)</span></code></pre></div>
 <p>Now, what about the <em>expectation</em> of the errors? We already have the idea of expected value, which we identified with the central tendency, typically the mean of the observations. As a first approximation then, we might try to measure variability using the mean of the errors:</p>
 <p><span class="math display">\[ \frac{1}{n} \sum_{i=1}^{n} (x - \bar{x}) \]</span></p>
-<p>Let’s try that approach with our sleep data.</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="univariate-description.html#cb161-1"></a><span class="co"># number of errors</span></span>
-<span id="cb161-2"><a href="univariate-description.html#cb161-2"></a>n_errors &lt;-<span class="st"> </span><span class="kw">length</span>(errors)</span>
-<span id="cb161-3"><a href="univariate-description.html#cb161-3"></a></span>
-<span id="cb161-4"><a href="univariate-description.html#cb161-4"></a><span class="co"># calculate mean of errors</span></span>
-<span id="cb161-5"><a href="univariate-description.html#cb161-5"></a><span class="kw">sum</span>(errors) <span class="op">/</span><span class="st"> </span>n_errors</span>
-<span id="cb161-6"><a href="univariate-description.html#cb161-6"></a><span class="co">## [1] 0</span></span></code></pre></div>
+<p>In R, that’s:</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="univariate-description.html#cb162-1"></a><span class="co"># number of residuals</span></span>
+<span id="cb162-2"><a href="univariate-description.html#cb162-2"></a>n_residuals &lt;-<span class="st"> </span><span class="kw">length</span>(residuals)</span>
+<span id="cb162-3"><a href="univariate-description.html#cb162-3"></a></span>
+<span id="cb162-4"><a href="univariate-description.html#cb162-4"></a><span class="co"># calculate mean of residuals</span></span>
+<span id="cb162-5"><a href="univariate-description.html#cb162-5"></a><span class="kw">sum</span>(residuals) <span class="op">/</span><span class="st"> </span>n_residuals</span>
+<span id="cb162-6"><a href="univariate-description.html#cb162-6"></a><span class="co">## [1] 0</span></span></code></pre></div>
 <p>It’s zero! But, why? Let’s look at the way the actual values fall out relative to the mean, as shown in Fig. <a href="univariate-description.html#fig:center-mass">13.3</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:center-mass"></span>
-<img src="22-univariate_description_files/figure-html/center-mass-1.png" alt="Center of mass of college sleep data." width="316.8" />
+<img src="22-univariate_description_files/figure-html/center-mass-1.png" alt="Center of mass and residuals of college sleep data." width="316.8" />
 <p class="caption">
-Figure 13.3: Center of mass of college sleep data.
+Figure 13.3: Center of mass and residuals of college sleep data.
 </p>
 </div>
-<p>Now, let’s have a look at the sum of the errors above the mean (errors greater than zero) and the sum of the errors below the mean (errors less than zero):</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="univariate-description.html#cb162-1"></a><span class="kw">sum</span>(errors[errors <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>])</span>
-<span id="cb162-2"><a href="univariate-description.html#cb162-2"></a><span class="co">## [1] -5.415</span></span>
-<span id="cb162-3"><a href="univariate-description.html#cb162-3"></a><span class="kw">sum</span>(errors[errors <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>])</span>
-<span id="cb162-4"><a href="univariate-description.html#cb162-4"></a><span class="co">## [1] 5.415</span></span></code></pre></div>
-<p>They’re the same, but with different signs! That means when you sum all of them together, you get zero! Hence, dividing by the number of observations, <span class="math inline">\(n\)</span>, still returns zero as the mean of the errors. While that is technically correct, it is not terribly informative, especially when what we want is not just the <em>difference</em> but the <em>distance</em> between the observed and expected, which is always positive. Now, how do we get that? The standard solution is to square the errors first, then divide by the number of observations. This is known as the <strong>variance</strong>.</p>
+<p>Now, let’s compare the sum of the residuals above the mean (residuals greater than zero) and the sum of the residuals below the mean (residuals less than zero):</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="univariate-description.html#cb163-1"></a><span class="kw">sum</span>(residuals[residuals <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>])</span>
+<span id="cb163-2"><a href="univariate-description.html#cb163-2"></a><span class="co">## [1] -5.415</span></span>
+<span id="cb163-3"><a href="univariate-description.html#cb163-3"></a><span class="kw">sum</span>(residuals[residuals <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>])</span>
+<span id="cb163-4"><a href="univariate-description.html#cb163-4"></a><span class="co">## [1] 5.415</span></span></code></pre></div>
+<p>They’re the same, just with different signs. That means when you sum all of them together, you get zero! Hence, dividing by the number of observations, <span class="math inline">\(n\)</span>, still returns zero as the mean of the residuals. How do we fix this? Consider the fact that what we want is not just the <em>difference</em> between the observed and the expected but the <em>distance</em> between them, which is always positive. Now, how do we get that? The standard solution is to square the residuals before dividing by the number of observations. This is known as the <strong>variance</strong>.</p>
 <div id="variance" class="section level3">
 <h3><span class="header-section-number">13.3.1</span> Variance</h3>
-<p>To be precise, variance is defined as the expected amount of difference between the square of errors. For discrete variables, the population variance, <span class="math inline">\(\sigma^{2}\)</span>, is given by:</p>
+<p>To be precise, variance is defined as the mean squared difference between the observed and the expected values. For discrete variables, the population variance, <span class="math inline">\(\sigma^{2}\)</span>, is given by:</p>
 <p><span class="math display">\[ \sigma^{2} = \frac{1}{N} \sum_{i=1}^{N} (x_{i}-\mu)^{2} \]</span>
 The sample variance, <span class="math inline">\(s^{2}\)</span>, is then defined as:</p>
-<p><span class="math display">\[ s^{2} = \frac{1}{n-1} \sum_{i=1}^{n} (x_{i} - \bar{x})^{2} \]</span></p>
+<p><span class="math display">\[ s^{2} = \frac{1}{n-1} \sum_{i=1}^{n} (x_{i} - \bar{x})^{2} \]</span>
+Notice the denominator is now <span class="math inline">\(n-1\)</span>, not just <span class="math inline">\(n\)</span>. Subtracting one from <span class="math inline">\(n\)</span> is known as Bessel’s correction. It is a way of addressing the fact that the sample variance tends to underestimate the population variance. When it is included, the resulting statistic is referred to as the <em>unbiased sample variance</em>.</p>
+<p>Let’s compute this statistic for our college sleep sample.</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="univariate-description.html#cb164-1"></a><span class="kw">sum</span>(residuals<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(n_residuals <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</span>
+<span id="cb164-2"><a href="univariate-description.html#cb164-2"></a><span class="co">## [1] 1.876</span></span></code></pre></div>
+<p>As with the other statistics we calculated, you do not have to do this all manually in R. Instead, you can use the <code>var()</code> function.</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="univariate-description.html#cb165-1"></a><span class="kw">var</span>(x)</span>
+<span id="cb165-2"><a href="univariate-description.html#cb165-2"></a><span class="co">## [1] 1.876</span></span></code></pre></div>
+<p>But, what exactly is this value? If you recall, the variable we are describing is <em>hours per night</em> of sleep. Since we squared the difference between the observed and expected values of that variable, the variance is now in units of <em>squared hours per night</em>, which is - like what even is that really? It is hard to interpret, and harder still to mesh with our original data. To address this issue, it is common to take the square root of the variance. The resulting value is known as the standard deviation.</p>
 </div>
 <div id="standard-deviation" class="section level3">
 <h3><span class="header-section-number">13.3.2</span> Standard deviation</h3>
-</div>
-</div>
-<div id="quantiles" class="section level2">
-<h2><span class="header-section-number">13.4</span> Quantiles</h2>
-<p>median</p>
-<p>quartiles = divide into four
-quentiles = five
-deciles = ten
-percentiles = 100</p>
+<p>The population standard deviation, <span class="math inline">\(\sigma\)</span>, is the square root of the population variance, <span class="math inline">\(\sigma^{2}\)</span>, and the sample standard deviation, <span class="math inline">\(s\)</span>, is the square root of the unbiased sample variance, <span class="math inline">\(s^{2}\)</span>. Formally,</p>
+<p><span class="math display">\[
+\sigma = \sqrt{\sigma^{2}} \\
+s = \sqrt{s^{2}}
+\]</span>
+Again, the sample standard deviation is only an estimate of the population standard deviation. Here is the calculation by hand and with the base R <code>sd()</code> function.</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="univariate-description.html#cb166-1"></a><span class="kw">sqrt</span>(<span class="kw">var</span>(x))</span>
+<span id="cb166-2"><a href="univariate-description.html#cb166-2"></a><span class="co">## [1] 1.37</span></span>
+<span id="cb166-3"><a href="univariate-description.html#cb166-3"></a><span class="kw">sd</span>(x)</span>
+<span id="cb166-4"><a href="univariate-description.html#cb166-4"></a><span class="co">## [1] 1.37</span></span></code></pre></div>
 
+</div>
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="9">
 <li id="fn9"><p>A line from Macbeth I am using because I don’t want to say the word ‘sleep’ five hundred times…<a href="univariate-description.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p><a href="https://stackoverflow.com/questions/2547402/how-to-find-the-statistical-mode">https://stackoverflow.com/questions/2547402/how-to-find-the-statistical-mode</a><a href="univariate-description.html#fnref10" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

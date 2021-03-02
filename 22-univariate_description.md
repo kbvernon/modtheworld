@@ -130,7 +130,7 @@ That being said, univariate models offer us some powerful tools for getting a ha
 
 ## Central tendency
 
-Central tendency, otherwise known as the location of a variable or its first moment, refers to the expected value of a variable. The two most common measures of it are the mean and the median. Their slightly less popular cousin is the mode, which is typically reserved for categorical data. 
+The two most common measures of central tendency are the mean and the median. Their slightly less popular cousin is the mode, which is typically reserved for categorical data. 
 
 ### Mean
 
@@ -294,16 +294,36 @@ median(x_even)
 
 The mode is a measure of the most frequent value in a data set. Of all the measures of central tendency, it is unique in that it can be applied to categorical data. For example, the mode of the colored balls in Fig. \@ref(fig:balls-and-urn) is _red_, as that is the value that occurs most often. On occasion, the mode may also apply to a discrete variable. For instance, the mode of the vector `c(2, 3, 3, 4, 5)` is 3, since it occurs twice and the other values only once. Technically, the mode can be used to describe continuous variables, too, though how often do you expect a number like 42.291092847123452667 to occur in your data? That is to say, for continuous data it is highly unlikely that any two values will ever be _exactly_ the same; hence, it is also unlikely for such data to have a mode.
 
+Unfortunately, R does not have a native function for computing the mode, but we can get around that with some other tools R does offer.^[[https://stackoverflow.com/questions/2547402/how-to-find-the-statistical-mode](https://stackoverflow.com/questions/2547402/how-to-find-the-statistical-mode)] As an example, let's say we're working with a vector of color values for our balls from above.
+
+
+```r
+balls <- c("red", "red", "red", "red", "gray", "gray")
+
+# get the unique values
+ball_colors <- unique(balls)
+
+# count the number of each
+counts <- tabulate(match(balls, ball_colors))
+
+# pick color with largest count
+ball_colors[counts == max(counts)]
+## [1] "red"
+```
+
+Don't worry, there's a - I was going to say snowball's chance in Texas, but... - anyway, you probably won't ever have to do this. It's solely for demonstration.  
+
 
 ## Variability
 
 
 
-Variability, otherwise known as dispersion, uncertainty, or the second moment of a variable, refers to its expected error. There are two primary measures of variability, the variance and the standard deviation. Before, we get to those, however, let's think a little bit about what we mean by expected error. There are two parts to this, the _expectation_ and the _error_. The error is easy enough to explain. As we learned already, it's the difference between the observed and the expected outcome. That is,
+Variability, otherwise known as dispersion, uncertainty, or the second moment of a variable, refers to the expected error of a variable. But, what exactly does "expected error" mean? The error is easy enough to explain. As we learned already, it's the difference between the actual values and the expected values:
 
 $$ \epsilon = y - E[y] $$
+\BeginKnitrBlock{rmdwarning}<div class="rmdwarning">__Errors vs Residuals__. Strictly speaking, you should refer to $\epsilon$ as the __error__ term _only when_ the expectation is defined by the population mean, $E[y]=\mu$. When the expectation is defined by the sample mean, $E[y]=\bar{x}$, the differences are referred to as __residuals__.</div>\EndKnitrBlock{rmdwarning}
 
-where the expectation is defined by the sample mean, $E[y] = \bar{x}$. Here is how that looks in R using our college sleep data:
+Here is how you calculate the residuals in our college sleep data:
 
 
 ```r
@@ -311,67 +331,89 @@ where the expectation is defined by the sample mean, $E[y] = \bar{x}$. Here is h
 xbar <- mean(x)
 
 # calculate errors (epsilon, e)
-errors <- (x - xbar)
+residuals <- (x - xbar)
 ```
 
 Now, what about the _expectation_ of the errors? We already have the idea of expected value, which we identified with the central tendency, typically the mean of the observations. As a first approximation then, we might try to measure variability using the mean of the errors: 
 
 $$ \frac{1}{n} \sum_{i=1}^{n} (x - \bar{x}) $$
 
-Let's try that approach with our sleep data.
+In R, that's:
 
 
 ```r
-# number of errors
-n_errors <- length(errors)
+# number of residuals
+n_residuals <- length(residuals)
 
-# calculate mean of errors
-sum(errors) / n_errors
+# calculate mean of residuals
+sum(residuals) / n_residuals
 ## [1] 0
 ```
 
 It's zero! But, why? Let's look at the way the actual values fall out relative to the mean, as shown in Fig. \@ref(fig:center-mass).  
 
 <div class="figure" style="text-align: center">
-<img src="22-univariate_description_files/figure-html/center-mass-1.png" alt="Center of mass of college sleep data." width="316.8" />
-<p class="caption">(\#fig:center-mass)Center of mass of college sleep data.</p>
+<img src="22-univariate_description_files/figure-html/center-mass-1.png" alt="Center of mass and residuals of college sleep data." width="316.8" />
+<p class="caption">(\#fig:center-mass)Center of mass and residuals of college sleep data.</p>
 </div>
 
-Now, let's have a look at the sum of the errors above the mean (errors greater than zero) and the sum of the errors below the mean (errors less than zero):
+Now, let's compare the sum of the residuals above the mean (residuals greater than zero) and the sum of the residuals below the mean (residuals less than zero):
 
 
 ```r
-sum(errors[errors < 0])
+sum(residuals[residuals < 0])
 ## [1] -5.415
-sum(errors[errors > 0])
+sum(residuals[residuals > 0])
 ## [1] 5.415
 ```
 
-They're the same, but with different signs! That means when you sum all of them together, you get zero! Hence, dividing by the number of observations, $n$, still returns zero as the mean of the errors. While that is technically correct, it is not terribly informative, especially when what we want is not just the _difference_ but the _distance_ between the observed and expected, which is always positive. Now, how do we get that? The standard solution is to square the errors first, then divide by the number of observations. This is known as the __variance__.  
+They're the same, just with different signs. That means when you sum all of them together, you get zero! Hence, dividing by the number of observations, $n$, still returns zero as the mean of the residuals. How do we fix this? Consider the fact that what we want is not just the _difference_ between the observed and the expected but the _distance_ between them, which is always positive. Now, how do we get that? The standard solution is to square the residuals before dividing by the number of observations. This is known as the __variance__.  
 
 
 ### Variance
 
-To be precise, variance is defined as the expected amount of difference between the square of errors. For discrete variables, the population variance, $\sigma^{2}$, is given by:
+To be precise, variance is defined as the mean squared difference between the observed and the expected values. For discrete variables, the population variance, $\sigma^{2}$, is given by:
 
 $$ \sigma^{2} = \frac{1}{N} \sum_{i=1}^{N} (x_{i}-\mu)^{2} $$
 The sample variance, $s^{2}$, is then defined as:
 
 $$ s^{2} = \frac{1}{n-1} \sum_{i=1}^{n} (x_{i} - \bar{x})^{2} $$
+Notice the denominator is now $n-1$, not just $n$. Subtracting one from $n$ is known as Bessel's correction. It is a way of addressing the fact that the sample variance tends to underestimate the population variance. When it is included, the resulting statistic is referred to as the _unbiased sample variance_.  
+
+Let's compute this statistic for our college sleep sample.
+
+
+```r
+sum(residuals^2) / (n_residuals - 1)
+## [1] 1.876
+```
+
+As with the other statistics we calculated, you do not have to do this all manually in R. Instead, you can use the `var()` function.
+
+
+```r
+var(x)
+## [1] 1.876
+```
+
+But, what exactly is this value? If you recall, the variable we are describing is _hours per night_ of sleep. Since we squared the difference between the observed and expected values of that variable, the variance is now in units of _squared hours per night_, which is - like what even is that really? It is hard to interpret, and harder still to mesh with our original data. To address this issue, it is common to take the square root of the variance. The resulting value is known as the standard deviation.
 
 
 ### Standard deviation
 
+The population standard deviation, $\sigma$, is the square root of the population variance, $\sigma^{2}$, and the sample standard deviation, $s$, is the square root of the unbiased sample variance, $s^{2}$. Formally,
+
+$$
+\sigma = \sqrt{\sigma^{2}} \\
+s = \sqrt{s^{2}}
+$$
+Again, the sample standard deviation is only an estimate of the population standard deviation. Here is the calculation by hand and with the base R `sd()` function.  
 
 
-
-## Quantiles
-
-median
-
-quartiles = divide into four
-quentiles = five
-deciles = ten
-percentiles = 100
-
+```r
+sqrt(var(x))
+## [1] 1.37
+sd(x)
+## [1] 1.37
+```
 

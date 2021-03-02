@@ -171,7 +171,6 @@ mode
 variability
 variance
 standard-deviation
-quantiles
 probability-distributions
 inference-tests
 multivariate-description
