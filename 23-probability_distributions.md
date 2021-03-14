@@ -1,1 +1,302 @@
 # Probability Distributions {#probability-distributions}
+
+
+
+<!-- include libraries -->
+
+
+
+<!-- kableExtra bootstrap css 
+https://haozhu233.github.io/kableExtra/bookdown/use-bootstrap-tables-in-gitbooks-epub.html
+-->
+
+
+
+
+<!-- knit_hook: collapse and strip white 
+this is a Blake hack -->
+
+
+
+<!-- knit_hook: collapse and print error red
+super hacky, see here: https://stackoverflow.com/a/54985678/7705429
+we'll need to be careful to not string four # together anywhere
+--->
+
+<script>
+$(document).ready(function() {
+  window.setTimeout(function() {
+    $(".co:contains('####')").css("color", "red");
+    var tmp = $(".co:contains('####')").text();
+    $(".co:contains('####')").text(tmp.replace("####", "##"));
+  }, 15);
+});
+</script>
+
+
+
+<!-- chunk options -->
+
+
+
+
+
+<!-- miscellaneous -->
+
+
+
+<!-- 
+make error messages closer to base R 
+https://github.com/hadley/adv-r/blob/master/common.R
+looks like it doesn't work because R no longer
+let's users override s3 methods, so I changed the s3 to "simpleError"
+-->
+
+
+
+
+
+
+## Overview
+
+<table class="table-intro table table-hover table-striped" style="margin-left: auto; margin-right: auto;">
+<tbody>
+  <tr>
+   <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Goal__ </td>
+   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> To learn how to model variability using probability distributions. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __tl;dr__ </td>
+   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Outcomes__ </td>
+   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> Here, you will learn about<br><ol>
+<li>probability,</li>
+<li>quantiles and boxplots,</li>
+<li>histograms,</li>
+<li>probability mass functions</li>
+<li>probability density functions, and</li>
+<li>density plots.</li>
+</ol> </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Datasets__ </td>
+   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> NONE </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Requirements__ </td>
+   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> NONE </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;"> __Further Reading__ </td>
+   <td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;"> NONE </td>
+  </tr>
+</tbody>
+</table>
+
+Our general formula is 
+
+$$ y = E[y] + \epsilon $$
+
+Here, we are going to delve a little deeper into our disturbance term, $\epsilon$. In particular, we want to think about how we would build a model of it. To lay our cards on the table, we want to define our expectation in terms of the population mean:
+
+$$ E[y] = \mu $$
+
+Then, if we subtract this expectation, we can model our uncertainty, $\epsilon$, as a probability distribution with a mean of zero and standard deviation, $\sigma^{2}$.
+
+$$ \epsilon \sim N(0, \sigma^{2}) $$
+
+This then allows us to rewrite our simple model above:
+
+$$ y = E[y] + \epsilon,\;\;\; \epsilon \sim N(0, \sigma^{2})  $$
+
+You can read this as saying, "Our model of the outcome, $y$, includes our expectation, $E[y]$, plus some error, $\epsilon$, which should be normally distributed." Of course, to really get a feel for what this means, we need to talk about probability and probability distributions. First, though, let's define our terms.   
+
+## Vocabulary
+
+* A __random experiment__ is any process that produces a definite outcome that cannot be predicted with certainty. These may be intentional, as in a lab setting, or unintentional, as in nature.  
+
+* An __outcome__, $(x)$, is a possible result of a random experiment. In an experiment involving the tossing of a coin, for example, an outcome might be coming-up-heads. 
+
+* A __sample space__ is the set of all possible outcomes of an experiment. In our coin tossing experiment, the sample space would be {heads, tails}. 
+
+* A __random variable__, $(X)$, is a variable whose numerical values depend on possible outcomes of an experiment. For example, we might define $(X)$ as a random variable whose values depend on tosses of a coin. 
+$$
+X = 
+  \begin{cases}
+     1 & \text{if heads} \\\\
+     0 & \text{if tails}
+  \end{cases}
+$$
+  You can read that as saying, "The random variable $X$ equals one if the coin comes up heads and zero if the coin comes up tails."  
+
+* Every outcome or value of a random variable has a __probability__ of occurring, sometimes denoted $P(X=x)$ or just $P(x)$. In either case, you can read this as saying "The probability of the random variable $X$ taking the value $x$ is $P$." For example, in tossing a fair coin, the probability of coming-up-heads is $P(X=1)=0.5$ or just $P(\text{heads})=0.5$. Again, you can read that as saying "The probability of the random variable $X$ taking the value 1 is 0.5" or, to put that in a way where people won't look at you funny, "The probability of coming-up-heads is one-half."  
+
+* A __probability distribution__ describes the probabilities of the possible outcomes of an experiment. In a coin-toss experiment, the probability distribution is $P(\text{head})=0.5$ and $P(\text{tail})=0.5$, at least for a fair coin anyway. 
+
+
+### Probability Axioms
+
+1. The probability of an event or outcome $x$ must be non-negative.
+
+$$ P(x) \geq 0 $$
+
+2. The probabilities of all possible outcomes, $i = 1, 2, 3, ..., n$, must sum to one.
+
+$$ \sum_{i=1}^{n} P(x_{i}) = 1 $$
+
+3. The probability of two mutually exclusive events, $x_{1}$ and $x_{2}$, is the sum of their individual probabilities.  
+
+$$ P(x_{1}) + P(x_{2}) $$
+
+## Quantiles
+
+As a primer for thinking about probability distributions, let's talk first about quantiles. These provide a way of describing a sample, both its central tendency and variability, by defining break- or cut-points that divide the _range_ of observations in the sample into groups of equal size and, thus, of equal probability. They can also serve to divide up the range of _possible_ values of a random variable in the same way. For instance, if your experiment is to roll a six-sided dice, you have six possible outcomes {1, 2, 3, 4, 5, 6}. Some possible subdivisions of this set include:
+
+* two groups: {1, 2, 3} and {4, 5, 6},  
+* three groups: {1, 2}, {3, 4}, {5, 6}, and 
+* six groups: {1}, {2}, {3}, {4}, {5}, {6}.  
+
+For the groups in each case, they have the same probability, 0.5 in the first, 0.33 in the second, and 0.16 in the third.  
+
+Let's look at that first case, the one with two groups. Suppose we called the first group $A$ and the second $B$, so $A = \{1, 2, 3\}$ and $B = \{4, 5, 6\}$. These are equally probable groups, meaning a roll of the dice is equally likely to produce an event from group A as from group B, hence the probability for each group is $P(A)=0.5$ and $P(B)=0.5$. That is the probability distribution over those groups of possible outcomes. Note that the quantile in this case is 3.5. It is the cut-point that divides the outcomes in half, with each group below and above it being equally probable. You should already have a name for this value. It's the median! 
+
+Other important quantiles have their own names too. They are based on the number of groups that they create by dividing the data. The three you will encounter most often - and almost assuredly have encountered before! - are __quartiles__, __deciles__, and __percentiles__, which divide observations or outcomes into 4 groups, 10 groups, and 100 groups respectively. 
+
+Let's focus on quartiles here. To divide a sample or population into four equally-sized or equally-probable groups, we need three cut-points or quantiles for the data. One will serve to divide the data in half. The other two will serve to divide those halves into halves (or quarters). The one is the second-quartile, or the median of all the data. The other two are the first and third-quartiles, or the medians for the halved data. 
+
+To make this more concrete, suppose we have ten individuals and we know the distance in miles they commute to work everyday. 
+
+$$ \{1, 10, 15, 4, 7, 21, 6, 4, 23, 30\} $$
+
+As with the median itself, the first thing you have to do with calculating quartiles (or any quantiles, really) is to sort the data first!
+
+
+```r
+miles <- c(1, 10, 15, 4, 7, 21, 6, 4, 23, 30)
+
+miles <- sort(miles)
+
+miles
+##  [1]  1  4  4  6  7 10 15 21 23 30
+```
+
+Next, let's get the range of these data.
+
+
+```r
+min_miles <- min(miles)
+max_miles <- max(miles)
+
+rng <- c(min_miles, max_miles)
+
+# or, equivalently
+range(miles)
+## [1]  1 30
+```
+
+Now, we can find the median of the whole sample (i.e., the second-quartile), use that to divide our data into two smaller groups, and then find the medians of those two smaller groups (i.e., the first- and third-quartiles).
+
+
+```r
+# second quartile
+q2 <- median(miles)
+
+# first quartile -- divide lower half in two
+lower_half <- miles[miles < q2]
+q1 <- median(lower_half)
+
+# third quartile -- divide upper half in two
+upper_half <- miles[miles > q2]
+q3 <- median(upper_half)
+
+c(q1, q2, q3)
+## [1]  4.0  8.5 21.0
+```
+
+So, now we have these five pieces of information about our data:
+
+1. the minimum value is 1 mile,  
+2. the first-quartile is 4 miles,  
+2. the second quartile (or median) is 8.5 miles,  
+2. the third-quartile is 21 miles, and  
+2. the maximum value is 30 miles. 
+
+With this information, we can also define these four groups:  
+
+1. those who travel 1-4 miles,  
+2. those who travel 4-8.5 miles,  
+2. those who travel 8.5-21 miles, and  
+2. those who travel 21-30 miles. 
+
+If we were to draw an individual at random from this sample, that person would be equally likely to come from one of these four groups. In fact, because there are four groups, the actual probability of being from any one of them is 0.25. This is actually a really important idea that will help you understand probability distributions better, so let's dwell on it for a moment. Note, first, that what we have just done is to assign a probability of an observation falling within a narrowly defined range of our data. For instance, the probability of a driver's commute falling between 1 and 4 miles is $P(1 < X < 4) = 0.25$. We can also assign probabilities to other ranges, too, like the probability of falling between the first and third quartile, which is $P(4 < X < 21) = 0.5$. This is known as the __interquartile range__ and is actually an application of our third probability axiom above. For the probability of falling into the range of 3-8.5 is 0.25 and the probability of falling into the range of 8.5-21 is also 0.25, and 0.25 + 0.25 is 0.50.
+
+We can visualize the ranges of our data and the quartiles using a __box plot__. The base R function for this is, helpfully, `boxplot()`. 
+
+
+```r
+boxplot(miles, horizontal = TRUE)
+```
+
+<img src="23-probability_distributions_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" />
+
+Let's deconstruct this plot a little, as it will not only help you to interpret figures like this one, but will also help to elaborate one additional idea inherent to quantiles.  
+
+<img src="23-probability_distributions_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" />
+
+A few features of this figure are worth noting. First, the range of values below the second-quartile (Q2) is smaller than the range of values above it. That is, the range 1-8.5 miles is narrower than the range of 8.5-30 miles. This won't always be the case, but it can happen and is informative. It is a function of the fact that quantiles divide the data into groups of equal size. In this case, the median (Q2) divides the data in half. The fact that the range is greater to the right suggests that there are some relatively large values in our data. 
+Second, If we were to randomly sample an individual from this group, the probability that the person selected commutes less than the first-quartile distance (less than 4.0 miles) is 0.25. That is, $P(X < 4.0)=0.25$ or 25%. The probability of the driver's commute being less than the second-quartile or median (less than 8.5 miles) is $P(X < 8.5)=0.5$ or 50%. The probability of a commute being less than the third quartile is similarly $P(X < 21.0)=0.75$ or 75%, and finally below the maximum value is $P(X < 30)=1.0$ or 100%. This is perilously close to the concept of a __cumulative probability distribution__.  
+
+This is also helps understand how R computes quantiles with the `quantile()` function.
+
+
+```r
+quantile(miles)
+##   0%  25%  50%  75% 100% 
+##  1.0  4.5  8.5 19.5 30.0
+```
+
+You see that by default it assumes you want the quartiles, but we can specify others. We simply need to provide to the quantile function the cumulative probabilities.
+
+
+```r
+quantile(miles, probs = c(0, 0.2, 0.4, 0.6, 0.8, 1))
+##   0%  20%  40%  60%  80% 100% 
+##  1.0  4.0  6.6 12.0 21.4 30.0
+```
+
+
+
+## Histograms
+
+
+## Probability Mass Functions
+
+in R: d, p, q, r functions
+
+### Bernoulli
+
+
+### Binomial
+
+
+### Poisson
+
+
+## Probability Density Functions
+
+### Uniform
+
+### Gaussian
+
+<!--
+For continuous variables, the population variance is given by:
+
+$$ \sigma^{2} = \int p(x_{i})dx\;(x_{i}-\mu)^{2} $$
+where the expression $p(x_{i})dx$ defines the probability that the observed value of $x$ falls in the range $dx$. 
+
+-->
+
+
+

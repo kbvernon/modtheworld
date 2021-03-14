@@ -24,7 +24,7 @@
 <meta name="author" content="Kenneth Blake Vernon" />
 
 
-<meta name="date" content="2021-03-02" />
+<meta name="date" content="2021-03-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -331,7 +331,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.3.2" data-path="univariate-description.html"><a href="univariate-description.html#standard-deviation"><i class="fa fa-check"></i><b>13.3.2</b> Standard deviation</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="probability-distributions.html"><a href="probability-distributions.html"><i class="fa fa-check"></i><b>14</b> Probability Distributions</a></li>
+<li class="chapter" data-level="14" data-path="probability-distributions.html"><a href="probability-distributions.html"><i class="fa fa-check"></i><b>14</b> Probability Distributions</a><ul>
+<li class="chapter" data-level="14.1" data-path="probability-distributions.html"><a href="probability-distributions.html#overview-8"><i class="fa fa-check"></i><b>14.1</b> Overview</a></li>
+<li class="chapter" data-level="14.2" data-path="probability-distributions.html"><a href="probability-distributions.html#vocabulary"><i class="fa fa-check"></i><b>14.2</b> Vocabulary</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="probability-distributions.html"><a href="probability-distributions.html#probability-axioms"><i class="fa fa-check"></i><b>14.2.1</b> Probability Axioms</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="probability-distributions.html"><a href="probability-distributions.html#quantiles"><i class="fa fa-check"></i><b>14.3</b> Quantiles</a></li>
+<li class="chapter" data-level="14.4" data-path="probability-distributions.html"><a href="probability-distributions.html#histograms"><i class="fa fa-check"></i><b>14.4</b> Histograms</a></li>
+<li class="chapter" data-level="14.5" data-path="probability-distributions.html"><a href="probability-distributions.html#probability-mass-functions"><i class="fa fa-check"></i><b>14.5</b> Probability Mass Functions</a><ul>
+<li class="chapter" data-level="14.5.1" data-path="probability-distributions.html"><a href="probability-distributions.html#bernoulli"><i class="fa fa-check"></i><b>14.5.1</b> Bernoulli</a></li>
+<li class="chapter" data-level="14.5.2" data-path="probability-distributions.html"><a href="probability-distributions.html#binomial"><i class="fa fa-check"></i><b>14.5.2</b> Binomial</a></li>
+<li class="chapter" data-level="14.5.3" data-path="probability-distributions.html"><a href="probability-distributions.html#poisson"><i class="fa fa-check"></i><b>14.5.3</b> Poisson</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="probability-distributions.html"><a href="probability-distributions.html#probability-density-functions"><i class="fa fa-check"></i><b>14.6</b> Probability Density Functions</a><ul>
+<li class="chapter" data-level="14.6.1" data-path="probability-distributions.html"><a href="probability-distributions.html#uniform"><i class="fa fa-check"></i><b>14.6.1</b> Uniform</a></li>
+<li class="chapter" data-level="14.6.2" data-path="probability-distributions.html"><a href="probability-distributions.html#gaussian"><i class="fa fa-check"></i><b>14.6.2</b> Gaussian</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="15" data-path="inference-tests.html"><a href="inference-tests.html"><i class="fa fa-check"></i><b>15</b> Inference Tests</a></li>
 <li class="chapter" data-level="16" data-path="multivariate-description.html"><a href="multivariate-description.html"><i class="fa fa-check"></i><b>16</b> Multivariate Description</a></li>
 <li class="chapter" data-level="17" data-path="ols.html"><a href="ols.html"><i class="fa fa-check"></i><b>17</b> Linear Models</a></li>
@@ -360,7 +376,267 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="probability-distributions" class="section level1">
 <h1><span class="header-section-number">Chapter 14</span> Probability Distributions</h1>
+<!-- include libraries -->
+<!-- kableExtra bootstrap css 
+https://haozhu233.github.io/kableExtra/bookdown/use-bootstrap-tables-in-gitbooks-epub.html
+-->
+<!-- knit_hook: collapse and strip white 
+this is a Blake hack -->
+<!-- knit_hook: collapse and print error red
+super hacky, see here: https://stackoverflow.com/a/54985678/7705429
+we'll need to be careful to not string four # together anywhere
+--->
+<script>
+$(document).ready(function() {
+  window.setTimeout(function() {
+    $(".co:contains('####')").css("color", "red");
+    var tmp = $(".co:contains('####')").text();
+    $(".co:contains('####')").text(tmp.replace("####", "##"));
+  }, 15);
+});
+</script>
+<!-- chunk options -->
+<!-- miscellaneous -->
+<!-- 
+make error messages closer to base R 
+https://github.com/hadley/adv-r/blob/master/common.R
+looks like it doesn't work because R no longer
+let's users override s3 methods, so I changed the s3 to "simpleError"
+-->
+<div id="overview-8" class="section level2">
+<h2><span class="header-section-number">14.1</span> Overview</h2>
+<table class="table-intro table table-hover table-striped" style="margin-left: auto; margin-right: auto;">
+<tbody>
+<tr>
+<td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;">
+<strong>Goal</strong>
+</td>
+<td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
+To learn how to model variability using probability distributions.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;">
+<strong>tl;dr</strong>
+</td>
+<td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;">
+<strong>Outcomes</strong>
+</td>
+<td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
+Here, you will learn about<br>
+<ol>
+<li>
+probability,
+</li>
+<li>
+quantiles and boxplots,
+</li>
+<li>
+histograms,
+</li>
+<li>
+probability mass functions
+</li>
+<li>
+probability density functions, and
+</li>
+<li>
+density plots.
+</li>
+</ol>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;">
+<strong>Datasets</strong>
+</td>
+<td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
+NONE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;">
+<strong>Requirements</strong>
+</td>
+<td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
+NONE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;border: 0 solid transparent; padding-right: 0px; vertical-align: top;">
+<strong>Further Reading</strong>
+</td>
+<td style="text-align:left;border: 0 solid transparent; padding-left: 9px; text-align: justify; text-justify: inter-word;">
+NONE
+</td>
+</tr>
+</tbody>
+</table>
+<p>Our general formula is</p>
+<p><span class="math display">\[ y = E[y] + \epsilon \]</span></p>
+<p>Here, we are going to delve a little deeper into our disturbance term, <span class="math inline">\(\epsilon\)</span>. In particular, we want to think about how we would build a model of it. To lay our cards on the table, we want to define our expectation in terms of the population mean:</p>
+<p><span class="math display">\[ E[y] = \mu \]</span></p>
+<p>Then, if we subtract this expectation, we can model our uncertainty, <span class="math inline">\(\epsilon\)</span>, as a probability distribution with a mean of zero and standard deviation, <span class="math inline">\(\sigma^{2}\)</span>.</p>
+<p><span class="math display">\[ \epsilon \sim N(0, \sigma^{2}) \]</span></p>
+<p>This then allows us to rewrite our simple model above:</p>
+<p><span class="math display">\[ y = E[y] + \epsilon,\;\;\; \epsilon \sim N(0, \sigma^{2})  \]</span></p>
+<p>You can read this as saying, “Our model of the outcome, <span class="math inline">\(y\)</span>, includes our expectation, <span class="math inline">\(E[y]\)</span>, plus some error, <span class="math inline">\(\epsilon\)</span>, which should be normally distributed.” Of course, to really get a feel for what this means, we need to talk about probability and probability distributions. First, though, let’s define our terms.</p>
+</div>
+<div id="vocabulary" class="section level2">
+<h2><span class="header-section-number">14.2</span> Vocabulary</h2>
+<ul>
+<li><p>A <strong>random experiment</strong> is any process that produces a definite outcome that cannot be predicted with certainty. These may be intentional, as in a lab setting, or unintentional, as in nature.</p></li>
+<li><p>An <strong>outcome</strong>, <span class="math inline">\((x)\)</span>, is a possible result of a random experiment. In an experiment involving the tossing of a coin, for example, an outcome might be coming-up-heads.</p></li>
+<li><p>A <strong>sample space</strong> is the set of all possible outcomes of an experiment. In our coin tossing experiment, the sample space would be {heads, tails}.</p></li>
+<li><p>A <strong>random variable</strong>, <span class="math inline">\((X)\)</span>, is a variable whose numerical values depend on possible outcomes of an experiment. For example, we might define <span class="math inline">\((X)\)</span> as a random variable whose values depend on tosses of a coin.
+<span class="math display">\[
+X = 
+\begin{cases}
+   1 &amp; \text{if heads} \\\\
+   0 &amp; \text{if tails}
+\end{cases}
+\]</span>
+You can read that as saying, “The random variable <span class="math inline">\(X\)</span> equals one if the coin comes up heads and zero if the coin comes up tails.”</p></li>
+<li><p>Every outcome or value of a random variable has a <strong>probability</strong> of occurring, sometimes denoted <span class="math inline">\(P(X=x)\)</span> or just <span class="math inline">\(P(x)\)</span>. In either case, you can read this as saying “The probability of the random variable <span class="math inline">\(X\)</span> taking the value <span class="math inline">\(x\)</span> is <span class="math inline">\(P\)</span>.” For example, in tossing a fair coin, the probability of coming-up-heads is <span class="math inline">\(P(X=1)=0.5\)</span> or just <span class="math inline">\(P(\text{heads})=0.5\)</span>. Again, you can read that as saying “The probability of the random variable <span class="math inline">\(X\)</span> taking the value 1 is 0.5” or, to put that in a way where people won’t look at you funny, “The probability of coming-up-heads is one-half.”</p></li>
+<li><p>A <strong>probability distribution</strong> describes the probabilities of the possible outcomes of an experiment. In a coin-toss experiment, the probability distribution is <span class="math inline">\(P(\text{head})=0.5\)</span> and <span class="math inline">\(P(\text{tail})=0.5\)</span>, at least for a fair coin anyway.</p></li>
+</ul>
+<div id="probability-axioms" class="section level3">
+<h3><span class="header-section-number">14.2.1</span> Probability Axioms</h3>
+<ol style="list-style-type: decimal">
+<li>The probability of an event or outcome <span class="math inline">\(x\)</span> must be non-negative.</li>
+</ol>
+<p><span class="math display">\[ P(x) \geq 0 \]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>The probabilities of all possible outcomes, <span class="math inline">\(i = 1, 2, 3, ..., n\)</span>, must sum to one.</li>
+</ol>
+<p><span class="math display">\[ \sum_{i=1}^{n} P(x_{i}) = 1 \]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>The probability of two mutually exclusive events, <span class="math inline">\(x_{1}\)</span> and <span class="math inline">\(x_{2}\)</span>, is the sum of their individual probabilities.</li>
+</ol>
+<p><span class="math display">\[ P(x_{1}) + P(x_{2}) \]</span></p>
+</div>
+</div>
+<div id="quantiles" class="section level2">
+<h2><span class="header-section-number">14.3</span> Quantiles</h2>
+<p>As a primer for thinking about probability distributions, let’s talk first about quantiles. These provide a way of describing a sample, both its central tendency and variability, by defining break- or cut-points that divide the <em>range</em> of observations in the sample into groups of equal size and, thus, of equal probability. They can also serve to divide up the range of <em>possible</em> values of a random variable in the same way. For instance, if your experiment is to roll a six-sided dice, you have six possible outcomes {1, 2, 3, 4, 5, 6}. Some possible subdivisions of this set include:</p>
+<ul>
+<li>two groups: {1, 2, 3} and {4, 5, 6},<br />
+</li>
+<li>three groups: {1, 2}, {3, 4}, {5, 6}, and</li>
+<li>six groups: {1}, {2}, {3}, {4}, {5}, {6}.</li>
+</ul>
+<p>For the groups in each case, they have the same probability, 0.5 in the first, 0.33 in the second, and 0.16 in the third.</p>
+<p>Let’s look at that first case, the one with two groups. Suppose we called the first group <span class="math inline">\(A\)</span> and the second <span class="math inline">\(B\)</span>, so <span class="math inline">\(A = \{1, 2, 3\}\)</span> and <span class="math inline">\(B = \{4, 5, 6\}\)</span>. These are equally probable groups, meaning a roll of the dice is equally likely to produce an event from group A as from group B, hence the probability for each group is <span class="math inline">\(P(A)=0.5\)</span> and <span class="math inline">\(P(B)=0.5\)</span>. That is the probability distribution over those groups of possible outcomes. Note that the quantile in this case is 3.5. It is the cut-point that divides the outcomes in half, with each group below and above it being equally probable. You should already have a name for this value. It’s the median!</p>
+<p>Other important quantiles have their own names too. They are based on the number of groups that they create by dividing the data. The three you will encounter most often - and almost assuredly have encountered before! - are <strong>quartiles</strong>, <strong>deciles</strong>, and <strong>percentiles</strong>, which divide observations or outcomes into 4 groups, 10 groups, and 100 groups respectively.</p>
+<p>Let’s focus on quartiles here. To divide a sample or population into four equally-sized or equally-probable groups, we need three cut-points or quantiles for the data. One will serve to divide the data in half. The other two will serve to divide those halves into halves (or quarters). The one is the second-quartile, or the median of all the data. The other two are the first and third-quartiles, or the medians for the halved data.</p>
+<p>To make this more concrete, suppose we have ten individuals and we know the distance in miles they commute to work everyday.</p>
+<p><span class="math display">\[ \{1, 10, 15, 4, 7, 21, 6, 4, 23, 30\} \]</span></p>
+<p>As with the median itself, the first thing you have to do with calculating quartiles (or any quantiles, really) is to sort the data first!</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="probability-distributions.html#cb167-1"></a>miles &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">21</span>, <span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">23</span>, <span class="dv">30</span>)</span>
+<span id="cb167-2"><a href="probability-distributions.html#cb167-2"></a></span>
+<span id="cb167-3"><a href="probability-distributions.html#cb167-3"></a>miles &lt;-<span class="st"> </span><span class="kw">sort</span>(miles)</span>
+<span id="cb167-4"><a href="probability-distributions.html#cb167-4"></a></span>
+<span id="cb167-5"><a href="probability-distributions.html#cb167-5"></a>miles</span>
+<span id="cb167-6"><a href="probability-distributions.html#cb167-6"></a><span class="co">##  [1]  1  4  4  6  7 10 15 21 23 30</span></span></code></pre></div>
+<p>Next, let’s get the range of these data.</p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="probability-distributions.html#cb168-1"></a>min_miles &lt;-<span class="st"> </span><span class="kw">min</span>(miles)</span>
+<span id="cb168-2"><a href="probability-distributions.html#cb168-2"></a>max_miles &lt;-<span class="st"> </span><span class="kw">max</span>(miles)</span>
+<span id="cb168-3"><a href="probability-distributions.html#cb168-3"></a></span>
+<span id="cb168-4"><a href="probability-distributions.html#cb168-4"></a>rng &lt;-<span class="st"> </span><span class="kw">c</span>(min_miles, max_miles)</span>
+<span id="cb168-5"><a href="probability-distributions.html#cb168-5"></a></span>
+<span id="cb168-6"><a href="probability-distributions.html#cb168-6"></a><span class="co"># or, equivalently</span></span>
+<span id="cb168-7"><a href="probability-distributions.html#cb168-7"></a><span class="kw">range</span>(miles)</span>
+<span id="cb168-8"><a href="probability-distributions.html#cb168-8"></a><span class="co">## [1]  1 30</span></span></code></pre></div>
+<p>Now, we can find the median of the whole sample (i.e., the second-quartile), use that to divide our data into two smaller groups, and then find the medians of those two smaller groups (i.e., the first- and third-quartiles).</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="probability-distributions.html#cb169-1"></a><span class="co"># second quartile</span></span>
+<span id="cb169-2"><a href="probability-distributions.html#cb169-2"></a>q2 &lt;-<span class="st"> </span><span class="kw">median</span>(miles)</span>
+<span id="cb169-3"><a href="probability-distributions.html#cb169-3"></a></span>
+<span id="cb169-4"><a href="probability-distributions.html#cb169-4"></a><span class="co"># first quartile -- divide lower half in two</span></span>
+<span id="cb169-5"><a href="probability-distributions.html#cb169-5"></a>lower_half &lt;-<span class="st"> </span>miles[miles <span class="op">&lt;</span><span class="st"> </span>q2]</span>
+<span id="cb169-6"><a href="probability-distributions.html#cb169-6"></a>q1 &lt;-<span class="st"> </span><span class="kw">median</span>(lower_half)</span>
+<span id="cb169-7"><a href="probability-distributions.html#cb169-7"></a></span>
+<span id="cb169-8"><a href="probability-distributions.html#cb169-8"></a><span class="co"># third quartile -- divide upper half in two</span></span>
+<span id="cb169-9"><a href="probability-distributions.html#cb169-9"></a>upper_half &lt;-<span class="st"> </span>miles[miles <span class="op">&gt;</span><span class="st"> </span>q2]</span>
+<span id="cb169-10"><a href="probability-distributions.html#cb169-10"></a>q3 &lt;-<span class="st"> </span><span class="kw">median</span>(upper_half)</span>
+<span id="cb169-11"><a href="probability-distributions.html#cb169-11"></a></span>
+<span id="cb169-12"><a href="probability-distributions.html#cb169-12"></a><span class="kw">c</span>(q1, q2, q3)</span>
+<span id="cb169-13"><a href="probability-distributions.html#cb169-13"></a><span class="co">## [1]  4.0  8.5 21.0</span></span></code></pre></div>
+<p>So, now we have these five pieces of information about our data:</p>
+<ol style="list-style-type: decimal">
+<li>the minimum value is 1 mile,<br />
+</li>
+<li>the first-quartile is 4 miles,<br />
+</li>
+<li>the second quartile (or median) is 8.5 miles,<br />
+</li>
+<li>the third-quartile is 21 miles, and<br />
+</li>
+<li>the maximum value is 30 miles.</li>
+</ol>
+<p>With this information, we can also define these four groups:</p>
+<ol style="list-style-type: decimal">
+<li>those who travel 1-4 miles,<br />
+</li>
+<li>those who travel 4-8.5 miles,<br />
+</li>
+<li>those who travel 8.5-21 miles, and<br />
+</li>
+<li>those who travel 21-30 miles.</li>
+</ol>
+<p>If we were to draw an individual at random from this sample, that person would be equally likely to come from one of these four groups. In fact, because there are four groups, the actual probability of being from any one of them is 0.25. This is actually a really important idea that will help you understand probability distributions better, so let’s dwell on it for a moment. Note, first, that what we have just done is to assign a probability of an observation falling within a narrowly defined range of our data. For instance, the probability of a driver’s commute falling between 1 and 4 miles is <span class="math inline">\(P(1 &lt; X &lt; 4) = 0.25\)</span>. We can also assign probabilities to other ranges, too, like the probability of falling between the first and third quartile, which is <span class="math inline">\(P(4 &lt; X &lt; 21) = 0.5\)</span>. This is known as the <strong>interquartile range</strong> and is actually an application of our third probability axiom above. For the probability of falling into the range of 3-8.5 is 0.25 and the probability of falling into the range of 8.5-21 is also 0.25, and 0.25 + 0.25 is 0.50.</p>
+<p>We can visualize the ranges of our data and the quartiles using a <strong>box plot</strong>. The base R function for this is, helpfully, <code>boxplot()</code>.</p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="probability-distributions.html#cb170-1"></a><span class="kw">boxplot</span>(miles, <span class="dt">horizontal =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="23-probability_distributions_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Let’s deconstruct this plot a little, as it will not only help you to interpret figures like this one, but will also help to elaborate one additional idea inherent to quantiles.</p>
+<p><img src="23-probability_distributions_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>A few features of this figure are worth noting. First, the range of values below the second-quartile (Q2) is smaller than the range of values above it. That is, the range 1-8.5 miles is narrower than the range of 8.5-30 miles. This won’t always be the case, but it can happen and is informative. It is a function of the fact that quantiles divide the data into groups of equal size. In this case, the median (Q2) divides the data in half. The fact that the range is greater to the right suggests that there are some relatively large values in our data.
+Second, If we were to randomly sample an individual from this group, the probability that the person selected commutes less than the first-quartile distance (less than 4.0 miles) is 0.25. That is, <span class="math inline">\(P(X &lt; 4.0)=0.25\)</span> or 25%. The probability of the driver’s commute being less than the second-quartile or median (less than 8.5 miles) is <span class="math inline">\(P(X &lt; 8.5)=0.5\)</span> or 50%. The probability of a commute being less than the third quartile is similarly <span class="math inline">\(P(X &lt; 21.0)=0.75\)</span> or 75%, and finally below the maximum value is <span class="math inline">\(P(X &lt; 30)=1.0\)</span> or 100%. This is perilously close to the concept of a <strong>cumulative probability distribution</strong>.</p>
+<p>This is also helps understand how R computes quantiles with the <code>quantile()</code> function.</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="probability-distributions.html#cb171-1"></a><span class="kw">quantile</span>(miles)</span>
+<span id="cb171-2"><a href="probability-distributions.html#cb171-2"></a><span class="co">##   0%  25%  50%  75% 100% </span></span>
+<span id="cb171-3"><a href="probability-distributions.html#cb171-3"></a><span class="co">##  1.0  4.5  8.5 19.5 30.0</span></span></code></pre></div>
+<p>You see that by default it assumes you want the quartiles, but we can specify others. We simply need to provide to the quantile function the cumulative probabilities.</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="probability-distributions.html#cb172-1"></a><span class="kw">quantile</span>(miles, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="dv">1</span>))</span>
+<span id="cb172-2"><a href="probability-distributions.html#cb172-2"></a><span class="co">##   0%  20%  40%  60%  80% 100% </span></span>
+<span id="cb172-3"><a href="probability-distributions.html#cb172-3"></a><span class="co">##  1.0  4.0  6.6 12.0 21.4 30.0</span></span></code></pre></div>
+</div>
+<div id="histograms" class="section level2">
+<h2><span class="header-section-number">14.4</span> Histograms</h2>
+</div>
+<div id="probability-mass-functions" class="section level2">
+<h2><span class="header-section-number">14.5</span> Probability Mass Functions</h2>
+<p>in R: d, p, q, r functions</p>
+<div id="bernoulli" class="section level3">
+<h3><span class="header-section-number">14.5.1</span> Bernoulli</h3>
+</div>
+<div id="binomial" class="section level3">
+<h3><span class="header-section-number">14.5.2</span> Binomial</h3>
+</div>
+<div id="poisson" class="section level3">
+<h3><span class="header-section-number">14.5.3</span> Poisson</h3>
+</div>
+</div>
+<div id="probability-density-functions" class="section level2">
+<h2><span class="header-section-number">14.6</span> Probability Density Functions</h2>
+<div id="uniform" class="section level3">
+<h3><span class="header-section-number">14.6.1</span> Uniform</h3>
+</div>
+<div id="gaussian" class="section level3">
+<h3><span class="header-section-number">14.6.2</span> Gaussian</h3>
+<!--
+For continuous variables, the population variance is given by:
 
+$$ \sigma^{2} = \int p(x_{i})dx\;(x_{i}-\mu)^{2} $$
+where the expression $p(x_{i})dx$ defines the probability that the observed value of $x$ falls in the range $dx$. 
+
+-->
+
+</div>
+</div>
 </div>
             </section>
 
