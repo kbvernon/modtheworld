@@ -245,10 +245,10 @@ Let's deconstruct this plot a little, as it will not only help you to interpret 
 
 <img src="23-probability_distributions_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" />
 
-A few features of this figure are worth noting. First, the range of values below the second-quartile (Q2) is smaller than the range of values above it. That is, the range 1-8.5 miles is narrower than the range of 8.5-30 miles. This won't always be the case, but it can happen and is informative. It is a function of the fact that quantiles divide the data into groups of equal size. In this case, the median (Q2) divides the data in half. The fact that the range is greater to the right suggests that there are some relatively large values in our data. 
+A few features of this figure are worth noting. First, the range of values below the second-quartile (Q2) is smaller than the range of values above it. That is, the range 1-8.5 miles is narrower than the range of 8.5-30 miles. This won't always be the case, but it can happen and is informative. It is a function of the fact that quantiles divide the data into groups of equal size. In this case, the median (Q2) divides the data in half. The fact that the range is greater to the right suggests that there are some relatively large values in our data.   
 Second, If we were to randomly sample an individual from this group, the probability that the person selected commutes less than the first-quartile distance (less than 4.0 miles) is 0.25. That is, $P(X < 4.0)=0.25$ or 25%. The probability of the driver's commute being less than the second-quartile or median (less than 8.5 miles) is $P(X < 8.5)=0.5$ or 50%. The probability of a commute being less than the third quartile is similarly $P(X < 21.0)=0.75$ or 75%, and finally below the maximum value is $P(X < 30)=1.0$ or 100%. This is perilously close to the concept of a __cumulative probability distribution__.  
 
-This is also helps understand how R computes quantiles with the `quantile()` function.
+This should also help clarify how R computes quantiles with the `quantile()` function.
 
 
 ```r
